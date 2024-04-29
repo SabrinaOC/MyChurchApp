@@ -10,26 +10,37 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
+      <ion-title size="large">{{ folder }}</ion-title> 
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
     <div style=" display: flex; justify-content: center;">
       <div style="width: 70%;">
-        <form action="">
+        <form [formGroup]="form">
           <ion-list>
             <ion-item>
-              <ion-input label="Titulo" labelPlacement="floating" placeholder="Escribe el titulo"></ion-input>
+              <ion-input label="Titulo" labelPlacement="floating" placeholder="Escribe el titulo" formControlName="title"></ion-input>
             </ion-item>
           </ion-list>
           <ion-item>
-            <ion-select label="Floating label" label-placement="floating">
+            <ion-select label="Predicador" label-placement="floating" formControlName="idSpeaker">
               @for (speaker of speakerList; track speaker.id) {
                 <ion-select-option [value]="speaker.id">{{ speaker.name }}</ion-select-option>
               }
             </ion-select>
           </ion-item>
+          <ion-list>
+            <ion-item>
+              <ion-input label="Url" labelPlacement="floating" placeholder="Escribe la url" formControlName="url"></ion-input>
+              <!-- @if (this.form.get('url')?.dirty && this.form.get('url')?.hasError) {
+                <ng-container>
+                  <div style="color: red;">Campo requerido</div>
+                </ng-container>
+              } -->
+            </ion-item>
+          </ion-list>
+          <ion-button (click)="addMessage()">Add</ion-button>
         </form>
       </div>
 
