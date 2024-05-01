@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { NewMessage } from '../model/interfaces';
 import { RestService } from '../services/rest.service';
 import { forkJoin } from 'rxjs';
@@ -20,13 +20,14 @@ export class AddMessagePage implements OnInit {
   datetime: any = Date.now()
   constructor(
               public restService: RestService,
-              private loading: LoadingController
+              private loading: LoadingController,
+              private toastCtrl: ToastController
   ) {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
       id_speaker: new FormControl(null, Validators.required),
       id_book: new FormControl(null),
-      date: new FormControl(null),
+      date: new FormControl(this.datetime),
       url: new FormControl(null, Validators.required),
     })
     
@@ -37,17 +38,34 @@ export class AddMessagePage implements OnInit {
   }
 
   async addMessage() {
-    let load = await this.loading.create()
     console.log('Enviar form => ', this.form.value)
     if(this.form.valid){
+      let load = await this.loading.create({
+        message: 'Guardando predicación'
+      })
+      load.present();
       const newMessage: NewMessage = this.form.value
       console.log('newMessage => ', newMessage)
-      this.restService.addNewMessage(newMessage).subscribe(res => {
+      this.restService.addNewMessage(newMessage).subscribe((res: any) => {
         console.log('RES insert message => ', res)
         load.dismiss()
         this.form.reset()
+        this.presentSnakbar('Predicación guardada con éxito')
+
       })
+    } else {
+      this.form.markAllAsTouched();
+      this.form.markAsDirty();
+      this.presentSnakbar('Formulario incorrecto')
     }
-    load.dismiss()
+  }
+
+  async presentSnakbar(msg: string) {
+    let snkbar = await this.toastCtrl.create({
+      message: msg,
+      duration: 2000
+    })
+
+    snkbar.present()
   }
 }

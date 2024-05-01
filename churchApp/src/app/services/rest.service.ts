@@ -27,7 +27,7 @@ export class RestService {
    * 
    */
   getAllBooks() {
-    this.http.get(environment.url + environment.services.book).subscribe((data: any) => {
+    this.http.get(environment.url + '/book').subscribe((data: any) => {
       this.bookList = data.data
     })
   }
