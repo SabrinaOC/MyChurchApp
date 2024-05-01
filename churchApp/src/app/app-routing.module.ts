@@ -4,12 +4,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/SubirPredicacion',
+    redirectTo: 'add-message',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'add-message',
+    loadChildren: () => import('./add-message/add-message.module').then( m => m.AddMessagePageModule)
+  },
+  {
+    path: 'message-list',
+    loadChildren: () => import('./message-list/message-list.module').then( m => m.MessageListPageModule)
   }
 ];
 

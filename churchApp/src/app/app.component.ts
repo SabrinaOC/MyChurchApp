@@ -1,18 +1,28 @@
 import { Component } from '@angular/core';
+import { RestService } from './services/rest.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Subir Predicación', url: '/folder/Subir Predicacion', icon: 'cloud-upload' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+
+  accountPages = [
+    {
+       title: 'Subir Predicación',
+       url: '/add-message',
+       ionicIcon: 'cloud-upload'
+    },
+    {
+       title: 'Predicaciones',
+       url: '/message-list',
+       ionicIcon: 'list-outline'
+    },
+  ]
+  constructor(
+              private restService: RestService
+  ) {
+    restService.getAllBooks()
+    restService.getAllSpeakers()
+  }
 }
