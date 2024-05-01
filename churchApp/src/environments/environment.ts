@@ -9,7 +9,8 @@ export const environment = {
 
   services: {
     message: '/message',
-    speaker: '/speaker'
+    speaker: '/speaker',
+    book: '/book'
   }
 };
 

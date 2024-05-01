@@ -1,8 +1,21 @@
+
+export interface Book {
+    id: number,
+    name: string,
+    description: string
+}
 export interface Message {
     id: number,
-    idSpeaker: number,
+    id_speaker: number,
     title: string,
-    url: string
+    url: string,
+    date: Date,
+    id_book: number
+}
+
+export interface Speaker {
+    id: number,
+    name: string
 }
 
 export type NewMessage = Omit<Message, 'id'>
