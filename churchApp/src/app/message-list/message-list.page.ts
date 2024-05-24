@@ -34,7 +34,10 @@ export class MessageListPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    let loading = await this.loadingController.create()
+    let loading = await this.loadingController.create({
+      message: 'Recuperando predicaciones...'
+    })
+    loading.present();
     console.log('ionViewWillEnter')
     this.restService.getAllMessages().subscribe((data: any) => {
       if(data) {
