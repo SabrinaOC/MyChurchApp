@@ -19,18 +19,6 @@ export class MessageListPage implements OnInit {
 
   ngOnInit() {
     
-    //TODO rm
-    this.platform.ready().then(() => {
-      this.isDesktop = this.platform.is('desktop')
-      console.log('isDesktop => ', this.isDesktop)
-    })
-
-    // this.restService.getAllMessages().subscribe((data: any) => {
-    //   if(data) {
-    //     this.messageList = data.data
-    //   }
-    //   console.log('allMessages => ', this.messageList)
-    // })
   }
 
   async ionViewWillEnter() {
@@ -41,29 +29,10 @@ export class MessageListPage implements OnInit {
     console.log('ionViewWillEnter')
     this.restService.getAllMessages().subscribe((data: any) => {
       if(data) {
-        this.messageList = data.data
+        this.messageList = data.messageList
       }
-      console.log('allMessages => ', this.messageList)
       loading.dismiss()
     })
-  }
-
-  /**
-   * 
-   * @param idBook 
-   * @returns 
-   */
-  filterBook(idBook: number) {
-    return this.restService.bookList.find(book => book.id == idBook)?.name
-  }
-
-  /**
-   * 
-   * @param idSpeaker 
-   * @returns 
-   */
-  filterSpeaker(idSpeaker: number) {
-    return this.restService.speakerList.find(speaker => speaker.id == idSpeaker)?.name
   }
 
 }

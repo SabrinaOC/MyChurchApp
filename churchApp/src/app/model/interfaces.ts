@@ -6,11 +6,13 @@ export interface Book {
 }
 export interface Message {
     id: number,
-    id_speaker: number,
+    // id_speaker: number,
     title: string,
     url: string,
     date: Date,
-    id_book: number
+    // id_book: number,
+    Speaker: Speaker,
+    Book: Book
 }
 
 export interface Speaker {
