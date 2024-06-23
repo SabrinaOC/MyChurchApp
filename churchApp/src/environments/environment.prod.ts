@@ -3,7 +3,8 @@ export const environment = {
   url: "https://mychurch.onrender.com",
 
   services: {
-    message: "/message",
-    speaker: "/speaker"
+    message: '/messages',
+    speaker: '/speakers',
+    book: '/books'
   }
 };
