@@ -1,10 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
-import { NewMessage } from '../model/interfaces';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Message, NewMessage } from '../model/interfaces';
 import { RestService } from '../services/rest.service';
-import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-message',
@@ -12,16 +10,13 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./add-message.page.scss'],
 })
 export class AddMessagePage implements OnInit {
-  public folder!: string;
-  private activatedRoute = inject(ActivatedRoute);
-  // speakerList!: any
-  form!: FormGroup
-  date: any = Date.now()
-  datetime: any = Date.now()
+  form!: FormGroup;
+  date: any = Date.now();
+  datetime: any = Date.now();
   constructor(
-              public restService: RestService,
-              private loading: LoadingController,
-              private toastCtrl: ToastController
+    public restService: RestService,
+    private loading: LoadingController,
+    private toastCtrl: ToastController
   ) {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
@@ -29,43 +24,60 @@ export class AddMessagePage implements OnInit {
       id_book: new FormControl(null),
       date: new FormControl(this.datetime),
       url: new FormControl(null, Validators.required),
-    })
-    
+    });
   }
 
   async ngOnInit() {
-
+    console.log('init');
+    
   }
 
   async addMessage() {
-    console.log('Enviar form => ', this.form.value)
-    if(this.form.valid){
+    if (this.form.valid) {
       let load = await this.loading.create({
-        message: 'Guardando predicación'
-      })
+        message: 'Guardando predicación',
+      });
       load.present();
-      const newMessage: NewMessage = this.form.value
-      console.log('newMessage => ', newMessage)
-      this.restService.addNewMessage(newMessage).subscribe((res: any) => {
-        console.log('RES insert message => ', res)
-        load.dismiss()
-        this.form.reset()
-        this.presentSnakbar('Predicación guardada con éxito')
-
-      })
+      const newMessage: NewMessage = this.normalizeTitle();
+      // console.log('newMessage => ', newMessage);
+      this.restService.addNewMessage(newMessage)
+      .subscribe({
+        next: (res: any) => {
+          console.log('RES insert message => ', res);
+          this.form.reset();
+          load.dismiss();
+          this.presentSnakbar('Predicación guardada con éxito')
+        },
+        error: (err: Error) => {
+          load.dismiss();
+          this.presentSnakbar(
+            'No se ha podido gaurdar la predicación. Vuelve a intentarlo en unos minutos'
+          );
+          console.log('ERROR: ', err)
+        },
+        complete: () => {
+        }
+      });
     } else {
       this.form.markAllAsTouched();
       this.form.markAsDirty();
-      this.presentSnakbar('Formulario incorrecto')
+      this.presentSnakbar('Formulario incorrecto');
     }
   }
 
   async presentSnakbar(msg: string) {
     let snkbar = await this.toastCtrl.create({
       message: msg,
-      duration: 2000
-    })
+      duration: 2000,
+    });
 
-    snkbar.present()
+    snkbar.present();
+  }
+
+  normalizeTitle(): Message {
+    let normalized: Message = this.form.value
+    let formTitle = normalized.title.toLowerCase()
+    normalized.normalized_title = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+    return normalized
   }
 }

@@ -23,6 +23,37 @@ export class MessageListPage implements OnInit {
   }
 
   async ionViewWillEnter() {
+    this.getAllMessages();
+  }
+
+  openUrl(targetUrl: string) {
+    AppLauncher.openUrl({url: targetUrl})
+  }
+
+  async searchInput(event: any) {
+    const query = event.target.value.toLowerCase();
+    if(query && query != '' && query.length > 0) {
+      let loading = await this.loadingController.create({
+        message: 'Recuperando predicaciones...'
+      })
+      loading.present();
+
+      console.log('BUSQUEDA: ', query)
+      this.restService.getMessagesByTitle(query).subscribe({
+        next: (val: any) => {
+          this.messageList = val.messageListMapped
+        },
+        error: (e) => {
+          console.log('ERROR ', e)
+        },
+        complete: () => {
+          loading.dismiss()
+        }
+      })
+    }
+  }
+
+  async getAllMessages() {
     let loading = await this.loadingController.create({
       message: 'Recuperando predicaciones...'
     })
@@ -34,10 +65,6 @@ export class MessageListPage implements OnInit {
       }
       loading.dismiss()
     })
-  }
-
-  openUrl(targetUrl: string) {
-    AppLauncher.openUrl({url: targetUrl})
   }
 
 }

@@ -43,7 +43,16 @@ export class RestService {
    * @returns
    */
   getAllMessages() {
-    return this.http.get(environment.url + environment.services.message);
+    return this.http.get(environment.url + environment.services.messages.message);
+  }
+
+  /**
+   * 
+   * @param searchedTitle 
+   * @returns 
+   */
+  getMessagesByTitle(searchedTitle: string) {
+    return this.http.get(environment.url + environment.services.messages.findByTitle, {params: {searchedTitle}}, );
   }
 
   /**
@@ -53,6 +62,6 @@ export class RestService {
    */
   addNewMessage(newMessage: NewMessage): Observable<any> {
     return this.http
-      .post(environment.url + environment.services.message, newMessage)
+      .post(environment.url + environment.services.messages.message, newMessage)
   }
 }

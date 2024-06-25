@@ -12,6 +12,7 @@ export interface Speaker {
 export interface Message {
     id: number,
     title: string,
+    normalized_title: string
     url: string,
     date: Date,
     speaker: Speaker,

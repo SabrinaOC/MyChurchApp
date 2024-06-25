@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-searchbar animated="true" placeholder="Buscar por título" show-clear-button="always" clear-icon="trash-bin" [debounce]="1000" (ionInput)="searchInput($event)" (ionClear)="getAllMessages();"></ion-searchbar>
   <div>
     @for (message of messageList; track $index) {
       <ion-card (click)="openUrl(message.url)">
