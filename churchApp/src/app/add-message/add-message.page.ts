@@ -1,8 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { Message, NewMessage } from '../model/interfaces';
 import { RestService } from '../services/rest.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-message',
@@ -16,7 +17,9 @@ export class AddMessagePage implements OnInit {
   constructor(
     public restService: RestService,
     private loading: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private alrtCtrl: AlertController,
+    private navCtrl: NavController
   ) {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
@@ -27,9 +30,13 @@ export class AddMessagePage implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     console.log('init');
     
+  }
+
+  ionViewWillEnter() {
+    this.checkPass()
   }
 
   async addMessage() {
@@ -79,5 +86,37 @@ export class AddMessagePage implements OnInit {
     let formTitle = normalized.title.toLowerCase()
     normalized.normalized_title = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
     return normalized
+  }
+
+  async checkPass(): Promise<void> {
+    let alert = await this.alrtCtrl.create({
+      header: 'Autorización',
+      inputs: [
+        {
+          type: 'password',
+          label: 'Introduce código de autenticación'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Salir',
+          handler: () => {
+            this.navCtrl.navigateForward('message-list')
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: (e) => {
+            console.log('ALERT = ', e)
+            if(e[0] != environment.config.pass) {
+              this.checkPass()
+            }
+          }
+        }
+      ],
+      backdropDismiss: false
+    })
+
+    alert.present()
   }
 }
