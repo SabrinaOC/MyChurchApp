@@ -34,7 +34,9 @@ export class MessageListPage implements OnInit {
     const query = event.target.value.toLowerCase();
     if(query && query != '' && query.length > 0) {
       let loading = await this.loadingController.create({
-        message: 'Recuperando predicaciones...'
+        message: 'Recuperando predicaciones...',
+        cssClass: 'custom-loading',
+        spinner: null,
       })
       loading.present();
 
@@ -55,7 +57,9 @@ export class MessageListPage implements OnInit {
 
   async getAllMessages() {
     let loading = await this.loadingController.create({
-      message: 'Recuperando predicaciones...'
+      message: 'Recuperando predicaciones...',
+      cssClass: 'custom-loading',
+      spinner: null,
     })
     loading.present();
     console.log('ionViewWillEnter')
