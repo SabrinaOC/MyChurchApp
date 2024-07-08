@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Message } from '../model/interfaces';
-import { RestService } from '../services/rest.service';
+import { Message } from '../../models/interfaces';
+import { RestService } from '../../services/rest.service';
 import { LoadingController } from '@ionic/angular';
 import { AppLauncher, AppLauncherPlugin } from '@capacitor/app-launcher';
 

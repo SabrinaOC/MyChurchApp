@@ -21,7 +21,7 @@ export class AppComponent {
     },
     {
       title: 'Configuración',
-      url: '',
+      url: '/settings',
       ionicIcon: 'settings-outline',
     },
   ];

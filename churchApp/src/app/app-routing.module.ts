@@ -9,12 +9,16 @@ const routes: Routes = [
   },
   {
     path: 'add-message',
-    loadChildren: () => import('./add-message/add-message.module').then( m => m.AddMessagePageModule)
+    loadChildren: () => import('./pages/add-message/add-message.module').then( m => m.AddMessagePageModule)
   },
   {
     path: 'message-list',
-    loadChildren: () => import('./message-list/message-list.module').then( m => m.MessageListPageModule)
+    loadChildren: () => import('./pages/message-list/message-list.module').then( m => m.MessageListPageModule)
+  },  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   }
+
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Book, NewMessage, Speaker } from '../model/interfaces';
+import { Book, NewMessage, Speaker } from '../models/interfaces';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({

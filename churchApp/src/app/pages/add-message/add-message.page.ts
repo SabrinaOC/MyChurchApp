@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
-import { Message, NewMessage } from '../model/interfaces';
-import { RestService } from '../services/rest.service';
+import { Message, NewMessage } from '../../models/interfaces';
+import { RestService } from '../../services/rest.service';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 @Component({
@@ -89,11 +89,13 @@ export class AddMessagePage {
       inputs: [
         {
           type: 'email',
-          label: 'Introduce el email autorizado'
+          label: 'Introduce el email autorizado',
+          placeholder: 'Email'
         },
         {
           type: 'password',
-          label: 'Introduce contraseña'
+          label: 'Introduce contraseña',
+          placeholder: 'Contraseña'
         }
       ],
       buttons: [
