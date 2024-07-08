@@ -3,14 +3,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { Message, NewMessage } from '../model/interfaces';
 import { RestService } from '../services/rest.service';
-import { environment } from 'src/environments/environment';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 @Component({
   selector: 'app-add-message',
   templateUrl: './add-message.page.html',
   styleUrls: ['./add-message.page.scss'],
 })
-export class AddMessagePage implements OnInit {
+export class AddMessagePage {
   form!: FormGroup;
   date: any = Date.now();
   datetime: any = Date.now();
@@ -30,13 +30,8 @@ export class AddMessagePage implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log('init');
-    
-  }
-
   ionViewWillEnter() {
-    this.checkPass()
+    this.checkIfPermissionNeeded()
   }
 
   async addMessage() {
@@ -93,8 +88,12 @@ export class AddMessagePage implements OnInit {
       header: 'Autorización',
       inputs: [
         {
+          type: 'email',
+          label: 'Introduce el email autorizado'
+        },
+        {
           type: 'password',
-          label: 'Introduce código de autenticación'
+          label: 'Introduce contraseña'
         }
       ],
       buttons: [
@@ -107,10 +106,22 @@ export class AddMessagePage implements OnInit {
         {
           text: 'Aceptar',
           handler: (e) => {
-            console.log('ALERT = ', e)
-            if(e[0] != environment.config.pass) {
-              this.checkPass()
-            }
+            let email = e[0]
+            let password = e[1]
+            // Initialize Firebase
+            let auth = getAuth();
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential: { user: any; }) => {
+              // Signed in 
+              const user = userCredential.user;
+              // console.log('logado. Usuario => ', user)
+              localStorage.setItem('USER_CREDENTIALS', user.accessToken)
+            })
+            .catch((error: { code: any; message: any; }) => {
+              // const errorCode = error.code;
+              // const errorMessage = error.message;
+              this.incorrectCredentialsModal()
+            });
           }
         }
       ],
@@ -118,5 +129,35 @@ export class AddMessagePage implements OnInit {
     })
 
     alert.present()
+  }
+
+  async incorrectCredentialsModal() {
+    let alert = await this.alrtCtrl.create({
+      header: 'No autorizado',
+      message: 'Usuario no autorizado. ¿Volver a introducir credenciales?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.checkPass();
+          }
+        },
+        {
+          text: 'Salir',
+          handler: () => {
+            this.navCtrl.navigateForward('message-list')
+          }
+        }
+      ],
+      backdropDismiss: false
+    });
+
+    alert.present();
+  }
+
+  checkIfPermissionNeeded() {
+    if(!localStorage.getItem('USER_CREDENTIALS')){
+      this.checkPass()
+    }
   }
 }
