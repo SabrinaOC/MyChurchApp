@@ -9,6 +9,59 @@
 
 <ion-content [fullscreen]="true">
   <ion-searchbar animated="true" placeholder="Buscar por título" show-clear-button="always" clear-icon="trash-bin" [debounce]="1000" (ionInput)="searchInput($event)" (ionClear)="getAllMessages();"></ion-searchbar>
+  <!-- filtros -->
+    <div class="filtros">
+      <div button id="open-modal" class="action">
+        <span>Filtros</span>
+        <ion-icon name="options-outline" size="large"></ion-icon>
+      </div>
+      <ion-modal trigger="open-modal">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="cancel()">Cancelar</ion-button>
+              </ion-buttons>
+              <ion-title>Filtrar</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content class="ion-padding">
+            <form [formGroup]="filterForm">
+              <ion-item>
+                <ion-select
+                  label="Predicador"
+                  label-placement="floating"
+                  formControlName="speaker"
+                >
+                  @for (speaker of this.restService.speakerList ; track speaker.id) {
+                  <ion-select-option [value]="speaker.id"
+                    >{{ speaker.name }}</ion-select-option
+                  >
+                  }
+                </ion-select>
+              </ion-item>
+              <ion-item>
+                <ion-select
+                  label="Libro"
+                  label-placement="floating"
+                  formControlName="book"
+                >
+                  @for (book of this.restService.bookList ; track book.id) {
+                  <ion-select-option [value]="book.id"
+                    >{{ book.name }}</ion-select-option
+                  >
+                  }
+                </ion-select>
+              </ion-item>
+            </form>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </div>
+  <!-- fin filtros  -->
   <div>
     @for (message of messageList; track $index) {
       <ion-card (click)="openUrl(message.url)">
@@ -29,6 +82,12 @@
           </div>
         </ion-card-content>
       </ion-card>
+    }
+
+    @if (messageList && messageList.length < 1) {
+      <div class="noResult">
+        No se han encontrado resultados
+      </div>
     }
   </div>
 </ion-content>

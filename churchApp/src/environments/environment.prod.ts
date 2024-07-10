@@ -5,7 +5,8 @@ export const environment = {
   services: {
     messages: {
       message: '/messages',
-      findByTitle: '/messages/title'
+      findByTitle: '/messages/title',
+      filter: '/messages/filter'
     },
     speaker: '/speakers',
     book: '/books'

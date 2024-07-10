@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Message } from '../../models/interfaces';
+import { Component, ViewChild } from '@angular/core';
+import { Message, MessageFilterOpt } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { LoadingController } from '@ionic/angular';
-import { AppLauncher, AppLauncherPlugin } from '@capacitor/app-launcher';
+import { IonModal, LoadingController } from '@ionic/angular';
+import { AppLauncher } from '@capacitor/app-launcher';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-message-list',
@@ -10,16 +11,23 @@ import { AppLauncher, AppLauncherPlugin } from '@capacitor/app-launcher';
   styleUrls: ['./message-list.page.scss'],
 })
 
-export class MessageListPage implements OnInit {
+export class MessageListPage {
   messageList!: Message[]
   isDesktop: boolean = false;
+  filterForm!: FormGroup;
+  @ViewChild(IonModal) modal!: IonModal;
   constructor(
-              private restService: RestService,
+              public restService: RestService,
               private loadingController: LoadingController,
-  ) { }
-
-  ngOnInit() {
-    console.log('init')
+              private formBuilder: FormBuilder
+  ) { 
+    this.filterForm = this.formBuilder.group({
+      speaker: new FormControl(null),
+      book: new FormControl(null),
+      testament: new FormControl(null),
+      dateFrom: new FormControl(null),
+      dateTo: new FormControl(null),
+    })
   }
 
   async ionViewWillEnter() {
@@ -69,6 +77,47 @@ export class MessageListPage implements OnInit {
       }
       loading.dismiss()
     })
+  }
+
+  async searchFilter() {
+      let loading = await this.loadingController.create({})
+      loading.present();
+
+      let filtrosBusqueda: MessageFilterOpt = this.filterForm.value
+      
+
+      // console.log('BUSQUEDA: ', this.removeNullUndefined(filtrosBusqueda))
+      this.restService.getMessagesByFilterOptions(this.removeNullUndefined(filtrosBusqueda)).subscribe({
+        next: (val: any) => {
+          this.messageList = val.messageListMapped
+        },
+        error: (e) => {
+          console.log('ERROR ', e)
+        },
+        complete: () => {
+          this.filterForm.reset()
+          loading.dismiss()
+        }
+      })
+    
+  }
+
+  removeNullUndefined(obj: any): any {
+    return Object.keys(obj).reduce((acc, key) => {
+      if (obj[key] !== null && obj[key] !== undefined) {
+        acc[key] = obj[key];
+      }
+      return acc;
+    }, {} as any);
+  }
+
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  confirm() {
+    this.modal.dismiss(null, 'confirm');
+    this.searchFilter();
   }
 
 }

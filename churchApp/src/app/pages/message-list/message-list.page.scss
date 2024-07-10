@@ -1,4 +1,22 @@
 .flexSB {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filtros {
+  display: flex;
+  justify-content: end;
+  padding-right: 8px;
+
+  .action {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+.noResult {
+  justify-content: center;
+  display: flex;
+  padding-top: 60px;
 }

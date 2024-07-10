@@ -5,6 +5,11 @@ export interface Book {
     description: string
 }
 
+export interface Testament {
+    id: number,
+    name: string
+}
+
 export interface Speaker {
     id: number,
     name: string
@@ -20,3 +25,11 @@ export interface Message {
 }
 
 export type NewMessage = Omit<Message, 'id'>
+
+export interface MessageFilterOpt {
+    speaker: number,
+    book: number,
+    testament: number,
+    dateFrom: Date,
+    dateTo: Date
+}
