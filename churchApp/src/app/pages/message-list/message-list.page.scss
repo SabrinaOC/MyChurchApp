@@ -3,6 +3,11 @@
   justify-content: space-between;
 }
 
+.divFiltros {
+  display: flex;
+  justify-content: space-between;
+}
+
 .filtros {
   display: flex;
   justify-content: end;
@@ -15,8 +20,21 @@
   }
 }
 
+.btnResetFilters {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .noResult {
   justify-content: center;
   display: flex;
   padding-top: 60px;
+}
+
+.refresh {
+  justify-content: center;
+  display: flex;
+  font-size: small;
+  font-style: italic;
+  margin-top: 7px;
 }

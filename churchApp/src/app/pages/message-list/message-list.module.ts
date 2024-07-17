@@ -8,13 +8,14 @@ import { MessageListPageRoutingModule } from './message-list-routing.module';
 
 import { MessageListPage } from './message-list.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     MessageListPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [MessageListPage]
 })

@@ -15,6 +15,7 @@ export class MessageListPage {
   messageList!: Message[]
   isDesktop: boolean = false;
   filterForm!: FormGroup;
+  datetime!: Date;
   @ViewChild(IonModal) modal!: IonModal;
   constructor(
               public restService: RestService,
@@ -95,7 +96,7 @@ export class MessageListPage {
           console.log('ERROR ', e)
         },
         complete: () => {
-          this.filterForm.reset()
+          this.resetFiltros();
           loading.dismiss()
         }
       })
@@ -118,6 +119,19 @@ export class MessageListPage {
   confirm() {
     this.modal.dismiss(null, 'confirm');
     this.searchFilter();
+  }
+
+  resetFiltros() {
+    this.filterForm.reset();
+  }
+
+  refresh(event: any) {
+    this.restService.getAllMessages().subscribe((data: any) => {
+      if(data) {
+        this.messageList = data.messageListMapped
+      }
+      event.target.complete();
+    })
   }
 
 }

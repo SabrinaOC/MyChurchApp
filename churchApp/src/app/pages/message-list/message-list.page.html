@@ -1,15 +1,33 @@
 <ion-header [translucent]="true">
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-        <ion-title>Predicaciones</ion-title>
+    <ion-title>Predicaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-searchbar animated="true" placeholder="Buscar por título" show-clear-button="always" clear-icon="trash-bin" [debounce]="1000" (ionInput)="searchInput($event)" (ionClear)="getAllMessages();"></ion-searchbar>
+  <ion-searchbar
+    animated="true"
+    placeholder="Buscar por título"
+    show-clear-button="always"
+    clear-icon="close-outline"
+    [debounce]="1000"
+    (ionInput)="searchInput($event)"
+    (ionClear)="getAllMessages();"
+  ></ion-searchbar>
+  <!-- refresher -->
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!-- filtros -->
+  <div class="divFiltros">
+    <div style="padding-left: 8px; font-size: small;
+    font-style: italic;
+    margin-top: 7px;">
+      <!-- <span>(Desliza para recargar y borrar filtros)</span> -->
+    </div>
     <div class="filtros">
       <div button id="open-modal" class="action">
         <span>Filtros</span>
@@ -24,7 +42,9 @@
               </ion-buttons>
               <ion-title>Filtrar</ion-title>
               <ion-buttons slot="end">
-                <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+                <ion-button (click)="confirm()" [strong]="true"
+                  >Confirmar</ion-button
+                >
               </ion-buttons>
             </ion-toolbar>
           </ion-header>
@@ -36,7 +56,8 @@
                   label-placement="floating"
                   formControlName="speaker"
                 >
-                  @for (speaker of this.restService.speakerList ; track speaker.id) {
+                  @for (speaker of this.restService.speakerList ; track
+                  speaker.id) {
                   <ion-select-option [value]="speaker.id"
                     >{{ speaker.name }}</ion-select-option
                   >
@@ -56,38 +77,102 @@
                   }
                 </ion-select>
               </ion-item>
+              <!-- fecha desde -->
+              <ion-item id="date" style="width: 100%">
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                  "
+                >
+                  <div style="display: flex; gap: 14px">
+                    <ion-label>Fecha</ion-label>
+                    <ion-icon name="calendar-outline"></ion-icon>
+                  </div>
+                  <div>
+                    <ion-input
+                      style="margin-left: auto"
+                      [value]="filterForm.get('dateFrom')?.value | date: 'dd.MM.yyyy'"
+                    ></ion-input>
+                  </div>
+                </div>
+                <ion-popover trigger="date">
+                  <ng-template>
+                    <ion-datetime
+                      presentation="date"
+                      formControlName="dateFrom"
+                      size="cover"
+                      firstDayOfWeek="1"
+                    ></ion-datetime>
+                  </ng-template>
+                </ion-popover>
+              </ion-item>
+              <!-- FIN fecha desde -->
+              <!-- opcion fecha fin -->
+              <!-- @if (filterForm.get('dateFrom')?.value) {
+                  <ion-item id="dateTo" style="width: 100%;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%">
+                      <div style="display: flex; gap: 14px;">
+                        <ion-label>Fecha hasta</ion-label>
+                        <ion-icon name="calendar-outline"></ion-icon>
+                      </div>
+                      <div>
+                        <ion-input style="margin-left: auto;" [value]="filterForm.get('dateTo')?.value | date: 'dd.MM.yyyy'"></ion-input>
+                      </div>
+                    </div>
+                    <ion-popover trigger="dateTo">
+                      <ng-template>
+                        <ion-datetime
+                          presentation="date"
+                          formControlName="dateTo"
+                          size="cover"
+                          firstDayOfWeek="1"
+                          [min]="filterForm.get('dateTo')?.value"
+                        ></ion-datetime>
+                      </ng-template>
+                    </ion-popover>
+                  </ion-item>
+                } -->
+              <div class="btnResetFilters">
+                <ion-button fill="clear" (click)="resetFiltros();"
+                  >Limpiar filtros
+                  <ion-icon name="trash-outline" slot="end"></ion-icon>
+                </ion-button>
+              </div>
             </form>
           </ion-content>
         </ng-template>
       </ion-modal>
     </div>
+  </div>
   <!-- fin filtros  -->
   <div>
     @for (message of messageList; track $index) {
-      <ion-card (click)="openUrl(message.url)">
-        <ion-card-header>
-          <ion-card-title>{{ message.title }}</ion-card-title>
-          <ion-card-subtitle>
-            <div class="flexSB">
-              <div>{{ message.book.name}}</div>
-              <div>{{ message.date| date:'dd/MM/yyyy' }}</div>
-            </div>
-          </ion-card-subtitle>
-        </ion-card-header>
-      
-        <ion-card-content>
+    <ion-card (click)="openUrl(message.url)">
+      <ion-card-header>
+        <ion-card-title>{{ message.title }}</ion-card-title>
+        <ion-card-subtitle>
           <div class="flexSB">
-            <ion-text>{{ message.speaker.name }}</ion-text>
-            <a [href]="message.url"><ion-icon name="headset-outline"></ion-icon></a>
+            <div>{{ message.book.name}}</div>
+            <div>{{ message.date| date:'dd/MM/yyyy' }}</div>
           </div>
-        </ion-card-content>
-      </ion-card>
-    }
+        </ion-card-subtitle>
+      </ion-card-header>
 
-    @if (messageList && messageList.length < 1) {
-      <div class="noResult">
-        No se han encontrado resultados
-      </div>
+      <ion-card-content>
+        <div class="flexSB">
+          <ion-text>{{ message.speaker.name }}</ion-text>
+          <a [href]="message.url"
+            ><ion-icon name="headset-outline"></ion-icon
+          ></a>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    } @if (messageList && messageList.length < 1) {
+    <div class="noResult">No se han encontrado resultados</div>
+    <div class="refresh">(Desliza para recargar)</div>
     }
   </div>
 </ion-content>
