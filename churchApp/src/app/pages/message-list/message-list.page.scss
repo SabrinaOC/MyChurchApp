@@ -1,6 +1,11 @@
 .flexSB {
   display: flex;
   justify-content: space-between;
+
+  div {
+    display: flex;
+    gap: 12px;
+  }
 }
 
 .divFiltros {

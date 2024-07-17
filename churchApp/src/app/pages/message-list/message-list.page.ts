@@ -52,7 +52,7 @@ export class MessageListPage {
       console.log('BUSQUEDA: ', query)
       this.restService.getMessagesByTitle(query).subscribe({
         next: (val: any) => {
-          this.messageList = val.messageListMapped
+          this.updateMessageList(val.messageListMapped)
         },
         error: (e) => {
           console.log('ERROR ', e)
@@ -74,7 +74,7 @@ export class MessageListPage {
     console.log('ionViewWillEnter')
     this.restService.getAllMessages().subscribe((data: any) => {
       if(data) {
-        this.messageList = data.messageListMapped
+        this.updateMessageList(data.messageListMapped)
       }
       loading.dismiss()
     })
@@ -90,7 +90,7 @@ export class MessageListPage {
       // console.log('BUSQUEDA: ', this.removeNullUndefined(filtrosBusqueda))
       this.restService.getMessagesByFilterOptions(this.removeNullUndefined(filtrosBusqueda)).subscribe({
         next: (val: any) => {
-          this.messageList = val.messageListMapped
+          this.updateMessageList(val.messageListMapped)
         },
         error: (e) => {
           console.log('ERROR ', e)
@@ -128,10 +128,66 @@ export class MessageListPage {
   refresh(event: any) {
     this.restService.getAllMessages().subscribe((data: any) => {
       if(data) {
-        this.messageList = data.messageListMapped
+        this.updateMessageList(data.messageListMapped)
       }
       event.target.complete();
     })
   }
 
+  markAsListened(message: Message, event: any) {
+    event.stopPropagation()
+    //localStorage to track lilstened messages
+    let listened = localStorage.getItem('listened');
+    // console.log('listened => ', listened)
+    if(listened === null) {
+      localStorage.setItem('listened', `${message.id}`)
+    } else {
+      listened += `, ${message.id}`
+      localStorage.setItem('listened', listened)
+
+    }
+    
+    this.updateMessageList(this.messageList)
+  }
+
+  removeFromListened(message: Message, event: any) {
+    event.stopPropagation()
+    let listened = localStorage.getItem('listened');
+    let arr1 = listened?.split(',')
+    let arr = [...new Set(arr1)]
+    const removed = arr.filter(element => parseInt(element) !== message.id);
+
+    localStorage.setItem('listened', removed.toString())
+
+    this.resetListenedBeforeMark()
+    this.checkIfAlreadyListened()
+  }
+
+  checkIfAlreadyListened() {
+    let listened = localStorage.getItem('listened');
+    
+    let arr1 = listened?.split(',')
+    let arr = [...new Set(arr1)]
+    // console.log('localStorage : ', arr)
+    this.messageList.forEach((message: Message )=> {
+        arr?.forEach(element => {
+          // console.log('element => ', element, '\tMessage => ', message.id)
+          if(parseInt(element) === message.id) {
+            // console.log('COINCIDENCIAAAAAAAAAAAAAAAAAAAAAAAA')
+            message.listened = true;
+          }
+        })
+    })
+  }
+
+  updateMessageList(lista: any) {
+    this.messageList = lista;
+    this.checkIfAlreadyListened()
+  }
+
+  resetListenedBeforeMark() {
+    this.messageList.forEach(msg => {
+      msg.listened = false;
+    })
+  }
 }
