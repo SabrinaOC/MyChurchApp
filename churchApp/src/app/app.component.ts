@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RestService } from './services/rest.service';
 import { initializeApp } from "firebase/app";
 import { environment } from 'src/environments/environment';
+import { Platform } from '@ionic/angular';
+import { App } from '@capacitor/app';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -25,11 +27,29 @@ export class AppComponent {
       ionicIcon: 'settings-outline',
     },
   ];
-  constructor(private restService: RestService) {
-    restService.getAllBooks();
-    restService.getAllSpeakers();
+  constructor(private restService: RestService,
+    private platform: Platform
+  ) {
+    this.restService.getAllBooks();
+    this.restService.getAllSpeakers();
+
     // Initialize Firebase
     initializeApp(environment.firebaseConfig);
+    this.initialize()
+  }
+
+  initialize() {
+    this.platform.ready().then(() => {
+      this.handleBackButton();
+    });
+  }
+
+  handleBackButton() {
+    document.addEventListener('ionBackButton', (ev: any) => {
+      ev.detail.register(10, () => {
+        App.exitApp(); // Cierra la aplicación
+      });
+    });
   }
 
 }
