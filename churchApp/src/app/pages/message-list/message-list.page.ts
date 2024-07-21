@@ -4,6 +4,7 @@ import { RestService } from '../../services/rest.service';
 import { IonModal, LoadingController } from '@ionic/angular';
 import { AppLauncher } from '@capacitor/app-launcher';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-message-list',
@@ -189,5 +190,16 @@ export class MessageListPage {
     this.messageList.forEach(msg => {
       msg.listened = false;
     })
+  }
+
+  async shareMessage(message: Message, event: any) {
+    event.stopPropagation()
+
+    await Share.share({
+      title: `${message.title}`,
+      text: 'Escucha esta predicación',
+      url: `${message.url}`,
+      // dialogTitle: 'Share with buddies',
+    });
   }
 }

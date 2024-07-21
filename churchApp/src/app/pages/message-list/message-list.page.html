@@ -165,20 +165,22 @@
         <div class="flexSB">
           <ion-text>{{ message.speaker.name }}</ion-text>
           <div>
-            <a [href]="message.url"
+            <!-- <a [href]="message.url"
               ><ion-icon name="headset-outline"></ion-icon
-            ></a>
+            ></a> -->
             @if(message.listened) {
-              <ion-icon name="close-outline" color="warning" (click)="removeFromListened(message, $event)"></ion-icon>
+              <ion-icon name="remove-circle-outline" style="color: #cbb04c;" (click)="removeFromListened(message, $event)"></ion-icon>
             } @else {
-              <ion-icon name="checkmark-done-outline" color="success" (click)="markAsListened(message, $event)"></ion-icon>
+              <ion-icon name="play-circle-outline" style="color: #339f51;" (click)="markAsListened(message, $event)"></ion-icon>
             }
+            <ion-icon name="share-social-outline" color="primary" (click)="shareMessage(message, $event)"></ion-icon>
 
           </div>
         </div>
       </ion-card-content>
       @if(message.listened) {
-        <ion-progress-bar value="100"></ion-progress-bar>
+        <!-- style="background: #b26123 !important;" -->
+        <ion-progress-bar value="100" class="my-progress-bar"></ion-progress-bar>
       }
     </ion-card>
     } @if (messageList && messageList.length < 1) {
