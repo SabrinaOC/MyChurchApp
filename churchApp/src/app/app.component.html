@@ -12,7 +12,34 @@
             {{p.title}}
           </ion-label>
         </ion-item>
+       
       </ion-menu-toggle>
+      <ion-item  button (click)="isVisible = !isVisible">
+        <ion-icon slot="start" name="headset-outline"></ion-icon>
+        <ion-label>
+          Escuchar
+        </ion-label>
+        <ion-icon slot="end" name="{{ !isVisible ? 'chevron-down-outline' : 'chevron-up-outline'}}"></ion-icon>
+      </ion-item>
+      @if(isVisible) {
+
+        <ion-menu-toggle>
+          <ion-list style="padding-left: 20px;">
+            <ion-item [routerLink]="['/message-list']" button>
+              <!-- <ion-icon slot="start" name="book-outline"></ion-icon> -->
+              <ion-label>
+                Predicaciones
+              </ion-label>
+            </ion-item>
+            <ion-item [routerLink]="['/message-list']" button>
+              <!-- <ion-icon slot="start" name="book-outline"></ion-icon> -->
+              <ion-label>
+                Curso membresía
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-menu-toggle>
+      }
     </ion-list>
   </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

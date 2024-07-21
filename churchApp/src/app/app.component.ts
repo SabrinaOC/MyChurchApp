@@ -10,12 +10,13 @@ import { App } from '@capacitor/app';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  isVisible: boolean = false;
   accountPages = [
-    {
-      title: 'Predicaciones',
-      url: '/message-list',
-      ionicIcon: 'list-outline',
-    },
+    // {
+    //   title: 'Predicaciones',
+    //   url: '/message-list',
+    //   ionicIcon: 'list-outline',
+    // },
     {
       title: 'Gestión contenido',
       url: '/add-message',
