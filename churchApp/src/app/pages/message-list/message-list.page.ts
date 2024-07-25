@@ -201,9 +201,9 @@ export class MessageListPage {
 
     await Share.share({
       title: `${message.title}`,
-      text: 'Escucha esta predicación',
+      text: `*${message.title}*. Te invito a escuchar esta predicación`,
       url: `${message.url}`,
-      // dialogTitle: 'Share with buddies',
+      // dialogTitle: `${message.title}`,
     });
   }
 }

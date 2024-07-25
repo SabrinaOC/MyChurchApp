@@ -1,0 +1,17 @@
+# npx trapeze run config.yaml --android-project android
+vars:
+  BUNDLE_ID:
+    default: io.my.church
+  PACKAGE_NAME:
+    default: io.my.church
+
+platforms:
+  android:
+    packageName: $PACKAGE_NAME
+    versionName: 1.0.3
+    versionCode: 100103
+
+    res:
+      - path: drawable
+        file: icon.png
+        source: ./resources/icon.png
