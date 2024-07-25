@@ -46,15 +46,16 @@ ion-loading.custom-loading {
     .loading-wrapper {
         background: transparent url("assets/icons/heartbeat-logo.gif")no-repeat center;
         background-size: 110px 110px;
-        padding-top: 36px;
-        padding-bottom: 36px;
+        padding: 40px;
         border-radius: 0.8rem;
+        box-shadow: none;
     }
 
     .loading-content {
         color: var(--ion-color-dark);
+        background:rgba(116, 117, 129, 0.25); 
         -webkit-box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
         -moz-box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
-        box-shadow: 10px 10px 78px 0px var(--ion-color-dark);;
+        box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
     }
 }

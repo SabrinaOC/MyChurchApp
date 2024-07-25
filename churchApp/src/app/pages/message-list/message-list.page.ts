@@ -82,7 +82,11 @@ export class MessageListPage {
   }
 
   async searchFilter() {
-      let loading = await this.loadingController.create({})
+      let loading = await this.loadingController.create({
+        message: 'Aplicando filtros...',
+        cssClass: 'custom-loading',
+        spinner: null,
+      })
       loading.present();
 
       let filtrosBusqueda: MessageFilterOpt = this.filterForm.value
