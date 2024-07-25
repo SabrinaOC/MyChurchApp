@@ -45,5 +45,9 @@
 }
 
 .my-progress-bar {
-  --progress-background: #b26123;
+  --progress-background: var(--ion-color-primary);
+}
+
+ion-icon {
+  cursor: pointer;
 }
