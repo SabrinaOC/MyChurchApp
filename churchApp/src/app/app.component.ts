@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { environment } from 'src/environments/environment';
 import { Platform } from '@ionic/angular';
 import { App } from '@capacitor/app';
+import { CoreProvider } from './services/core';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -28,14 +29,17 @@ export class AppComponent {
     },
   ];
   constructor(private restService: RestService,
-    private platform: Platform
+    private platform: Platform,
+    public core: CoreProvider
   ) {
     this.restService.getAllBooks();
     this.restService.getAllSpeakers();
 
     // Initialize Firebase
     initializeApp(environment.firebaseConfig);
-    this.initialize()
+    this.initialize();
+
+    this.core.detectPrefersTheme();
   }
 
   initialize() {
