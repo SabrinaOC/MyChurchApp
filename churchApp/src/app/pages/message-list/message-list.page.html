@@ -16,17 +16,20 @@
     [debounce]="1000"
     (ionInput)="searchInput($event)"
     (ionClear)="getAllMessages();"
+    [(ngModel)]="searchQuery"
   ></ion-searchbar>
   <!-- refresher -->
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <!-- filtros -->
   <div class="divFiltros">
-    <div style="padding-left: 8px; font-size: small;
-    font-style: italic;
-    margin-top: 7px;">
-      <!-- <span>(Desliza para recargar y borrar filtros)</span> -->
+    <div style="padding-left: 8px; font-size: small; margin-top: 7px; display: flex; justify-content: space-around; margin-bottom: 7px;">
+        <ion-radio-group [value]="rbSelected" style="display: flex; font-size: small; gap: 16px;" (ionFocus)="rbSelection($event)">
+          <ion-radio value="listened" labelPlacement="end">Escuchadas</ion-radio><br>
+          <ion-radio value="pending" labelPlacement="end">Pendientes</ion-radio><br>
+          <ion-radio value="all" labelPlacement="end">Todas</ion-radio><br>
+        </ion-radio-group>
     </div>
     <div class="filtros">
       <div button id="open-modal" class="action">

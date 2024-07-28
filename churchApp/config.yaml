@@ -8,8 +8,8 @@ vars:
 platforms:
   android:
     packageName: $PACKAGE_NAME
-    versionName: 1.2.0
-    versionCode: 100200
+    versionName: 1.2.1
+    versionCode: 100201
 
     res:
       - path: drawable

@@ -5,6 +5,7 @@ import { IonModal, LoadingController } from '@ionic/angular';
 import { AppLauncher } from '@capacitor/app-launcher';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Share } from '@capacitor/share';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-message-list',
@@ -18,6 +19,9 @@ export class MessageListPage {
   filterForm!: FormGroup;
   datetime!: Date;
   @ViewChild(IonModal) modal!: IonModal;
+  rbSelected: string = 'all';
+  backupListForRbFilter!: Message[];
+  searchQuery: string = '';
   constructor(
               public restService: RestService,
               private loadingController: LoadingController,
@@ -54,6 +58,7 @@ export class MessageListPage {
       this.restService.getMessagesByTitle(query).subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
+          this.rbSelection(this.rbSelected)
         },
         error: (e) => {
           console.log('ERROR ', e)
@@ -183,8 +188,15 @@ export class MessageListPage {
           }
         })
     })
+
+    if(this.rbSelected === 'all') {
+      this.backupListForRbFilter = _.cloneDeep(this.messageList);
+    }
   }
 
+  /**
+   * Función centralizada para gestionar actualización de la lista de predicaciones mostradas
+   */
   updateMessageList(lista: any) {
     this.messageList = lista;
     this.checkIfAlreadyListened()
@@ -205,5 +217,21 @@ export class MessageListPage {
       url: `${message.url}`,
       // dialogTitle: `${message.title}`,
     });
+  }
+
+  rbSelection(event: any) {
+    this.rbSelected = event.target.value
+
+    // actualizamos lista con este filtro
+    if(this.rbSelected === 'all') {
+      this.messageList = this.backupListForRbFilter;
+    } else if (this.rbSelected === 'listened') {
+      this.messageList = this.backupListForRbFilter.filter(msg => msg.listened && msg.listened === true)
+    } else if (this.rbSelected === 'pending') {
+      this.messageList = this.backupListForRbFilter.filter(msg => !(msg.listened && msg.listened === true))
+    }
+
+    //actualizamos visualizacion de lista
+    this.updateMessageList(this.messageList)
   }
 }
