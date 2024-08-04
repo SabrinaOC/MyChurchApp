@@ -82,7 +82,7 @@ export class MessageListPage {
       if(data) {
         this.updateMessageList(data.messageListMapped)
       }
-      loading.dismiss()
+      // loading.dismiss()
     })
   }
 
