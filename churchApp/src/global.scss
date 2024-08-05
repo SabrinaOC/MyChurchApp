@@ -59,3 +59,11 @@ ion-loading.custom-loading {
         box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
     }
 }
+
+body.light-theme {
+    .loading-content {
+        -webkit-box-shadow: 10px 10px 78px 0px var(--ion-color-light);
+        -moz-box-shadow: 10px 10px 78px 0px var(--ion-color-light);
+        box-shadow: 10px 10px 78px 0px var(--ion-color-light);
+    }
+}

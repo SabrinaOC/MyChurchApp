@@ -176,14 +176,14 @@
             } @else {
               <ion-icon name="play-circle-outline" style="color: #339f51;" (click)="markAsListened(message, $event)"></ion-icon>
             }
-            <ion-icon name="share-social-outline" style="color: #0054e9;" (click)="shareMessage(message, $event)"></ion-icon>
+            <ion-icon name="share-social-outline" style="color: #4d8dff;" (click)="shareMessage(message, $event)"></ion-icon>
 
           </div>
         </div>
       </ion-card-content>
       @if(message.listened) {
         <!-- style="background: #b26123 !important;" -->
-        <ion-progress-bar value="100" class="my-progress-bar"></ion-progress-bar>
+        <ion-progress-bar value="100" class="my-progress-bar animate-progress" ></ion-progress-bar>
       }
     </ion-card>
     } @if (messageList && messageList.length < 1) {
