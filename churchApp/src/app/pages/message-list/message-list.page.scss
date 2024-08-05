@@ -49,6 +49,26 @@
   --progress-background: var(--ion-color-primary);
 }
 
+.animate-progress {
+  animation-duration: 2.5s;
+  animation-name: fillPB;
+}
+
+@keyframes fillPB {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+// .mp::part(progress) {
+//   transform: scaleX(0.8);
+// }
+
+
 ion-icon {
   cursor: pointer;
 }
