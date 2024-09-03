@@ -1,0 +1,23 @@
+<!-- PROPUESTAS USANDO LA ETIQUETA <audio> -->
+<!-- https://drive.google.com/uc?export=view&id=FILE_ID -->
+<!-- https://drive.google.com/uc?export=download&id=FILE_ID -->
+<!-- https://drive.google.com/file/d/106o2phBSdFMnDbBPfg2UisnxwAF-tPHd/view?usp=drive_link -->
+<!-- <audio controls>
+        <source src="https://drive.google.com/uc?export=view&id=106o2phBSdFMnDbBPfg2UisnxwAF-tPHd" type="audio/mpeg">
+      </audio> -->
+
+@if (message) {
+<div class="audio-player">
+  <ion-card>
+    <ion-card-header>
+      {{message.title}}
+    </ion-card-header>
+    <ion-card-content>
+      <div class="ion-justify-content-center">
+        <iframe src=" https://drive.google.com/file/d/106o2phBSdFMnDbBPfg2UisnxwAF-tPHd/preview" frameborder="0"
+          width="340" height="50"></iframe>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</div>
+}

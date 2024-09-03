@@ -15,6 +15,7 @@ import * as _ from 'lodash';
 
 export class MessageListPage {
   messageList!: Message[]
+  selectedMessage: Message | null = null;
   isDesktop: boolean = false;
   filterForm!: FormGroup;
   datetime!: Date;
@@ -42,6 +43,10 @@ export class MessageListPage {
 
   openUrl(targetUrl: string) {
     AppLauncher.openUrl({url: targetUrl})
+  }
+
+  selectMessage(message: Message) {
+    this.selectedMessage = message;
   }
 
   async searchInput(event: any) {

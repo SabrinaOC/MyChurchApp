@@ -153,7 +153,8 @@
   <!-- fin filtros  -->
   <div>
     @for (message of messageList; track $index) {
-    <ion-card (click)="openUrl(message.url)">
+    <!-- <ion-card (click)="openUrl(message.url)"> -->
+    <ion-card (click)="selectMessage(message)">
       <ion-card-header>
         <ion-card-title>{{ message.title }}</ion-card-title>
         <ion-card-subtitle>
@@ -191,4 +192,8 @@
     <div class="refresh">(Desliza para recargar)</div>
     }
   </div>
+
+  @if (selectedMessage) {
+    <app-mini-audio-player [message]="selectedMessage"></app-mini-audio-player>
+  }
 </ion-content>
