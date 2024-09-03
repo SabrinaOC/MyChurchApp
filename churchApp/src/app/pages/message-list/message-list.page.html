@@ -176,8 +176,11 @@
             } @else {
               <ion-icon name="play-circle-outline" style="color: #339f51;" (click)="markAsListened(message, $event)"></ion-icon>
             }
+            <ion-icon name="arrow-down-circle-outline" color="secondary" (click)="downloadMessage(message, $event)"></ion-icon>            
+            <!-- <a [href]="message.url" class="btn" target="_blank" [download]="message.url">
+              <ion-icon name="arrow-down-circle-outline" color="danger"></ion-icon>         
+            </a> -->
             <ion-icon name="share-social-outline" style="color: #4d8dff;" (click)="shareMessage(message, $event)"></ion-icon>
-
           </div>
         </div>
       </ion-card-content>

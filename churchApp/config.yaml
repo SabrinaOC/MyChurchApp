@@ -8,8 +8,14 @@ vars:
 platforms:
   android:
     packageName: $PACKAGE_NAME
-    versionName: 1.2.1
-    versionCode: 100201
+    versionName: 1.3.1
+    versionCode: 100301
+    manifest:
+      - file: AndroidManifest.xml
+        target: manifest/application
+        inject:
+          <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+          <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     res:
       - path: drawable

@@ -3,5 +3,8 @@
   "integrations": {
     "capacitor": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxy": {
+    "config": "proxy.conf.json"
+  }
 }

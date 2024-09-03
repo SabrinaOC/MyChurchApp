@@ -1,11 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
 import { Message, MessageFilterOpt } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { IonModal, LoadingController } from '@ionic/angular';
+import { IonModal, LoadingController, Platform } from '@ionic/angular';
 import { AppLauncher } from '@capacitor/app-launcher';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
+import { CoreProvider } from 'src/app/services/core';
+// import { HTTP } from '@ionic-native/http/ngx';
+// import {File} from '@ionic-native/file/ngx';
+import { Http } from '@capacitor-community/http';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
 @Component({
   selector: 'app-message-list',
@@ -25,7 +30,9 @@ export class MessageListPage {
   constructor(
               public restService: RestService,
               private loadingController: LoadingController,
-              private formBuilder: FormBuilder
+              private formBuilder: FormBuilder,
+              public core: CoreProvider,
+              private platform: Platform
   ) { 
     this.filterForm = this.formBuilder.group({
       speaker: new FormControl(null),
@@ -41,7 +48,7 @@ export class MessageListPage {
   }
 
   openUrl(targetUrl: string) {
-    AppLauncher.openUrl({url: targetUrl})
+    AppLauncher.openUrl({url: targetUrl, })
   }
 
   async searchInput(event: any) {
@@ -233,5 +240,150 @@ export class MessageListPage {
 
     //actualizamos visualizacion de lista
     this.updateMessageList(this.messageList)
+  }
+
+
+
+  async downloadMessage(message: Message, event: any) {
+    event.stopPropagation();
+
+    const alert = await this.core.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: `Descargar predicación`, //${message.title.trim()}
+      message: 'Si haces click en aceptar, la predicación se descargará en su dispositivo',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log(message);
+            // const newBlob = new Blob([response], { type: "audio/mp3" });
+            // const data = window.URL.createObjectURL(newBlob);
+            // const link = document.createElement("a");
+            // link.href = data;
+            // link.download = message.normalized_title; // set a name for the file
+            // link.click();
+
+            //------------------------------------
+            // let headers = new HttpHeaders();
+            // headers = headers.set('Accept', 'application/mp3');
+            // console.log(headers, message.url);
+
+            // return this.http.get(message.url, {headers, responseType: 'blob'});
+
+            //------------------------------------
+            // FileSaver.saveAs(message.url, message.title + '.mp3');
+
+            //------------------------------------
+            // const fileId: string = message.url.substring(message.url.indexOf("/d/") + 3, message.url.indexOf("/view"));
+            // const url: string = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            // console.log(url);
+
+            // this.openUrl(url);
+
+            // const a = document.createElement('a');
+            // a.href = url;
+            // a.target = "_blank";
+            // a.download = message.title.trim() + ".mp3"; // Nombre predeterminado del archivo
+            // a.click();
+
+            //------------------------------------
+            // let headers = new HttpHeaders();
+            // headers = headers.set('Accept', 'audio/mpeg');
+            // this.http.get(url, { headers, responseType: 'blob' }).subscribe((blob) => {
+            //   // Crea un enlace temporal para descargar el archivo
+            //   const a = document.createElement('a');
+            //   const objectUrl = URL.createObjectURL(blob);
+            //   a.href = objectUrl;
+            //   a.download = message.title.trim() + ".mp3"; // Nombre predeterminado del archivo
+            //   a.click();
+            //   URL.revokeObjectURL(objectUrl); // Limpia la URL del objeto
+            // });
+
+            //------------------------------------
+
+            const fileId: string = message.url.substring(message.url.indexOf("/d/") + 3, message.url.indexOf("/view"));
+            const url: string = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            const fileName: string = message.title.trim() + ".mp3";
+            console.log(url);
+
+            if (this.platform.is('desktop')) {
+              console.log("desktop");
+
+              const a = document.createElement('a');
+              a.href = url;
+              a.target = "_blank";
+              a.download = fileName // Nombre predeterminado del archivo
+              a.click();
+
+            } else { //Mobile
+              console.log("mobile");
+              // this.http.downloadFile(url, {}, {}, this.file.dataDirectory + message.title.trim() + ".mp3").then(res => {
+              //   console.log(res);
+              // }).catch(err => {
+              //   console.error(err);
+              // })
+              this.downloadFile(url, fileName);
+            }
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            alert.dismiss('cancel');
+          }
+        },
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async downloadFile(downloadUrl: string, fileName: string) {
+    try {
+      // // Realiza la solicitud para obtener el archivo
+      // const response = await Http.request({
+      //   method: 'GET',
+      //   // url: downloadUrl,
+      //   // url: "https://www.uco.es/investigacion/portal/images/documentos/programa-propio/CandidatosBOUCOProv6_19.pdf",
+      //   url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+      //   // responseType: 'blob' // Especifica que esperas un binario
+      // });
+      
+      // console.log('Tipo de respuesta:', response.headers['Content-Type']);
+      // console.log(response);
+      const proxyUrl: string = 'https://cors-anywhere.herokuapp.com/';
+      // const response = await fetch(proxyUrl + encodeURIComponent('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'), { headers: { 'Access-Control-Allow-Origin': '*' } });
+      const response = await fetch(downloadUrl);
+      console.log(response);
+
+      const blob = await response.blob();
+      console.log(blob);
+
+      if (blob) {
+        // Convierte el blob a un Base64
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = async () => {
+          const base64data = reader.result as string;
+    
+          // Guarda el archivo en el sistema de archivos
+          const savedFile = await Filesystem.writeFile({
+            path: fileName, // Nombre con el que se guardará el archivo
+            data: base64data.split(',')[1], // Remover la parte 'data:' del base64
+            directory: Directory.Documents, // Directorio donde se guardará el archivo
+            encoding: Encoding.UTF8,
+          });
+    
+          console.log('Archivo guardado en:', savedFile.uri);
+        };
+      } else {
+        console.error(response, 'No se recibió ningún dato en la respuesta');
+      }
+    } catch (error) {
+      console.error('Error descargando el archivo:', error);
+      console.error('Detalles del error:', JSON.stringify(error));
+    }
   }
 }

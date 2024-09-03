@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,9 @@ import { Injectable } from '@angular/core';
 export class CoreProvider {
   public theme: 'dark' | 'light' = 'dark';
 
-  constructor() { }
+  constructor(
+    public readonly alertCtrl: AlertController,
+  ) { }
 
   public detectPrefersTheme() {
     let currentTheme: string | null = localStorage.getItem("theme");

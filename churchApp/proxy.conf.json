@@ -1,0 +1,10 @@
+{
+    "/drive": {
+        "target": "https://drive.google.com",
+        "secure": true,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/drive": ""
+        }
+    }
+}
