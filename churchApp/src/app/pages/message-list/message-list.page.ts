@@ -45,7 +45,7 @@ export class MessageListPage {
     AppLauncher.openUrl({url: targetUrl})
   }
 
-  selectMessage(message: Message) {
+  selectMessage(message: Message | null) {
     this.selectedMessage = message;
   }
 
