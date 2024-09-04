@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MessageListPageRoutingModule } from './message-list-routing.module';
 
 import { MessageListPage } from './message-list.page';
-import { MiniAudioPlayerComponent } from 'src/app/components/mini-audio-player/mini-audio-player.component';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 @NgModule({
@@ -17,7 +17,8 @@ import { MiniAudioPlayerComponent } from 'src/app/components/mini-audio-player/m
     IonicModule,
     MessageListPageRoutingModule,
     ReactiveFormsModule,
+    ComponentsModule
   ],
-  declarations: [MessageListPage, MiniAudioPlayerComponent]
+  declarations: [MessageListPage]
 })
 export class MessageListPageModule {}

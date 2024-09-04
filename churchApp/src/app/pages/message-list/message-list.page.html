@@ -173,11 +173,11 @@
               ><ion-icon name="headset-outline"></ion-icon
             ></a> -->
             @if(message.listened) {
-              <ion-icon name="remove-circle-outline" style="color: #cbb04c;" (click)="removeFromListened(message, $event)"></ion-icon>
+              <ion-icon name="remove-circle-outline" style="color: #cbb04c; padding: 3px;" (click)="removeFromListened(message, $event)"></ion-icon>
             } @else {
-              <ion-icon name="play-circle-outline" style="color: #339f51;" (click)="markAsListened(message, $event)"></ion-icon>
+              <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;" (click)="markAsListened(message, $event)"></ion-icon>
             }
-            <ion-icon name="share-social-outline" style="color: #4d8dff;" (click)="shareMessage(message, $event)"></ion-icon>
+            <ion-icon name="share-social-outline" style="color: #4d8dff; padding: 3px;" (click)="shareMessage(message, $event)"></ion-icon>
 
           </div>
         </div>
@@ -194,6 +194,8 @@
   </div>
 
   @if (selectedMessage) {
-    <app-mini-audio-player [message]="selectedMessage"></app-mini-audio-player>
+      <div style="margin-top: 26vh;"></div>
+
+      <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)"></app-mini-audio-player>
   }
 </ion-content>

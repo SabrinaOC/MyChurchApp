@@ -1,4 +1,13 @@
-.audio-player {
+ion-card {
+    border-radius: 15px;
+    background: rgba($color: #b26123, $alpha: 0.9);
+
+    ion-card-header {
+        padding-bottom: 0;
+    }
+}
+
+#audio-player {
     position: fixed;
     bottom: 0;
     width: 70%;
@@ -8,6 +17,79 @@
     border-radius: 20px;
 }
 
-ion-card {
-    border-radius: 15px;
+@media (width < 550px) {
+    #audio-player {
+        width: 100%;
+    }
+}
+
+
+.appearAudioPlayer {
+    animation: appearAudioPlayerAnimation 0.7s;
+}
+
+@keyframes appearAudioPlayerAnimation {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.disappearAudioPlayer {
+    animation: disappearAudioPlayerAnimation 0.7s;
+}
+
+@keyframes disappearAudioPlayerAnimation {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+}
+
+iframe {
+    border-radius: 10px;
+
+    ::ng-deep {
+        .ndfHFb-c4YZDc-TvD9Pc-qnnXGd {
+            background-color: white;
+        }
+    }
+}
+
+
+.invertColors {
+    filter: invert(1);
+}
+
+
+.close-icon {
+    font-size: 15px;
+    color: white;
+}
+
+.title {
+    color: white;
+    font-size: 17px;
+}
+
+.speaker {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 7px;
+    color: white;
+
+    ion-icon {
+        margin-right: 5px;
+    }
 }
