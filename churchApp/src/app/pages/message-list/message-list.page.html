@@ -167,7 +167,11 @@
 
       <ion-card-content>
         <div class="flexSB">
-          <ion-text>{{ message.speaker.name }}</ion-text>
+          @if (message.speaker.id === 5) {
+            <ion-text>{{ message.note }}</ion-text>
+          } @else {
+            <ion-text>{{ message.speaker.name }}</ion-text>
+          }
           <div>
             <!-- <a [href]="message.url"
               ><ion-icon name="headset-outline"></ion-icon

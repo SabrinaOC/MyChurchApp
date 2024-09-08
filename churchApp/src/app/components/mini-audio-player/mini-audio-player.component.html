@@ -23,7 +23,11 @@
     <ion-card-content>
       <div class="speaker">
         <ion-icon name="person-circle-outline" size="medium"></ion-icon>
-        <span>{{message.speaker.name}}</span>
+        @if (message.speaker.id === 5) {
+          <span>{{message.note}}</span>
+        } @else {
+          <span>{{message.speaker.name}}</span>
+        }
       </div>
       <div style="display: flex; justify-content: center;">
         <iframe [src]="message.url | driveLink" frameborder="0" width="340"
