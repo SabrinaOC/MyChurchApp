@@ -194,8 +194,9 @@
   </div>
 
   @if (selectedMessage) {
-      <div style="margin-top: 26vh;"></div>
+      <div style="margin-top: 24vh;"></div>
 
-      <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)"></app-mini-audio-player>
+      <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)" (touchstart)="preventRefresher($event)"></app-mini-audio-player>
   }
+
 </ion-content>
