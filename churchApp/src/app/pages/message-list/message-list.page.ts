@@ -73,7 +73,8 @@ export class MessageListPage {
       this.restService.getMessagesByTitle(query).subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
-          this.rbSelection(this.rbSelected)
+          // this.rbSelection(this.rbSelected)
+          this.updateListRdBtn()
         },
         error: (e) => {
           console.log('ERROR ', e)
@@ -237,6 +238,10 @@ export class MessageListPage {
   rbSelection(event: any) {
     this.rbSelected = event.target.value
 
+    this.updateListRdBtn()
+  }
+
+  updateListRdBtn() {
     // actualizamos lista con este filtro
     if(this.rbSelected === 'all') {
       this.messageList = this.backupListForRbFilter;

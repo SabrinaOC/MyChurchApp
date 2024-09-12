@@ -15,7 +15,7 @@
     clear-icon="close-outline"
     [debounce]="1000"
     (ionInput)="searchInput($event)"
-    (ionClear)="getAllMessages();"
+    (ionClear)="getAllMessages(); rbSelected = 'all'"
     [(ngModel)]="searchQuery"
   ></ion-searchbar>
   <!-- refresher -->
