@@ -153,7 +153,8 @@
   <!-- fin filtros  -->
   <div>
     @for (message of messageList; track $index) {
-    <ion-card (click)="openUrl(message.url)">
+    <!-- <ion-card (click)="openUrl(message.url)"> -->
+    <ion-card (click)="selectMessage(message)">
       <ion-card-header>
         <ion-card-title>{{ message.title }}</ion-card-title>
         <ion-card-subtitle>
@@ -166,17 +167,21 @@
 
       <ion-card-content>
         <div class="flexSB">
-          <ion-text>{{ message.speaker.name }}</ion-text>
+          @if (message.speaker.id === 5) {
+            <ion-text>{{ message.note }}</ion-text>
+          } @else {
+            <ion-text>{{ message.speaker.name }}</ion-text>
+          }
           <div>
             <!-- <a [href]="message.url"
               ><ion-icon name="headset-outline"></ion-icon
             ></a> -->
             @if(message.listened) {
-              <ion-icon name="remove-circle-outline" style="color: #cbb04c;" (click)="removeFromListened(message, $event)"></ion-icon>
+              <ion-icon name="remove-circle-outline" style="color: #cbb04c; padding: 3px;" (click)="removeFromListened(message, $event)"></ion-icon>
             } @else {
-              <ion-icon name="play-circle-outline" style="color: #339f51;" (click)="markAsListened(message, $event)"></ion-icon>
+              <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;" (click)="markAsListened(message, $event)"></ion-icon>
             }
-            <ion-icon name="share-social-outline" style="color: #4d8dff;" (click)="shareMessage(message, $event)"></ion-icon>
+            <ion-icon name="share-social-outline" style="color: #4d8dff; padding: 3px;" (click)="shareMessage(message, $event)"></ion-icon>
 
           </div>
         </div>
@@ -191,4 +196,11 @@
     <div class="refresh">(Desliza para recargar)</div>
     }
   </div>
+
+  @if (selectedMessage) {
+      <div style="margin-top: 24vh;"></div>
+
+      <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)" (touchstart)="preventRefresher($event)"></app-mini-audio-player>
+  }
+
 </ion-content>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MessageListPageRoutingModule } from './message-list-routing.module';
 
 import { MessageListPage } from './message-list.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MessageListPage } from './message-list.page';
     IonicModule,
     MessageListPageRoutingModule,
     ReactiveFormsModule,
+    ComponentsModule
   ],
   declarations: [MessageListPage]
 })

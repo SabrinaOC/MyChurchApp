@@ -1,0 +1,39 @@
+<!-- PROPUESTAS USANDO LA ETIQUETA <audio> -->
+<!-- https://drive.google.com/uc?export=view&id=FILE_ID -->
+<!-- https://drive.google.com/uc?export=download&id=FILE_ID -->
+<!-- https://drive.google.com/file/d/106o2phBSdFMnDbBPfg2UisnxwAF-tPHd/view?usp=drive_link -->
+<!-- <audio controls>
+        <source src="https://drive.google.com/uc?export=view&id=106o2phBSdFMnDbBPfg2UisnxwAF-tPHd" type="audio/mpeg">
+      </audio> -->
+
+@if (message) {
+<div #audioPlayer id="audio-player" class="appearAudioPlayer">
+  <ion-card>
+    <ion-card-header>
+      <ion-row>
+        <ion-col size="11" class="ion-align-self-start">
+          <span class="title">{{message.title}}</span>
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon name="close-outline" class="close-icon" size="large" (click)="closeAudioPlayer()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="speaker">
+        <ion-icon name="person-circle-outline" size="medium"></ion-icon>
+        @if (message.speaker.id === 5) {
+          <span>{{message.note}}</span>
+        } @else {
+          <span>{{message.speaker.name}}</span>
+        }
+      </div>
+      <div style="display: flex; justify-content: center;">
+        <iframe [src]="message.url | driveLink" frameborder="0" width="340" height="50"
+          [class.invertColors]="core.theme === 'light'" allow="autoplay"></iframe>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</div>
+}

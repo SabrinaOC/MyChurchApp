@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { Message, MessageFilterOpt } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { IonModal, LoadingController } from '@ionic/angular';
@@ -15,6 +15,7 @@ import * as _ from 'lodash';
 
 export class MessageListPage {
   messageList!: Message[]
+  selectedMessage: Message | null = null;
   isDesktop: boolean = false;
   filterForm!: FormGroup;
   datetime!: Date;
@@ -25,7 +26,8 @@ export class MessageListPage {
   constructor(
               public restService: RestService,
               private loadingController: LoadingController,
-              private formBuilder: FormBuilder
+              private formBuilder: FormBuilder,
+              private cdRef: ChangeDetectorRef
   ) { 
     this.filterForm = this.formBuilder.group({
       speaker: new FormControl(null),
@@ -42,6 +44,19 @@ export class MessageListPage {
 
   openUrl(targetUrl: string) {
     AppLauncher.openUrl({url: targetUrl})
+  }
+
+  selectMessage(message: Message | null) {
+      this.selectedMessage = message;
+      this.cdRef.detectChanges(); //Force detecting changes
+  }
+
+  /**
+   * Prevent refreshing page when swiping down mini-audio-player component
+   * @param event 
+   */
+  preventRefresher(event: TouchEvent) {
+    event.stopPropagation();
   }
 
   async searchInput(event: any) {
