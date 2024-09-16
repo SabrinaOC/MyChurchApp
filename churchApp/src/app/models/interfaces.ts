@@ -23,7 +23,8 @@ export interface Message {
     speaker: Speaker,
     book: Book,
     listened: Boolean,
-    note: string
+    note: string,
+    messageType: MessageType
 }
 
 export type NewMessage = Omit<Message, 'id'>
@@ -34,4 +35,9 @@ export interface MessageFilterOpt {
     testament: number,
     dateFrom: Date,
     dateTo: Date
+}
+
+export interface MessageType {
+    id: number,
+    description: string
 }

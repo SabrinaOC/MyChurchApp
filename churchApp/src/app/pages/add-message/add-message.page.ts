@@ -27,11 +27,25 @@ export class AddMessagePage {
       id_book: new FormControl(null),
       date: new FormControl(this.datetime),
       url: new FormControl(null, Validators.required),
+      id_message_type: new FormControl(null, Validators.required),
+      note: new FormControl(null)
     });
   }
 
   ionViewWillEnter() {
     this.checkIfPermissionNeeded()
+    this.form.get('id_speaker')?.valueChanges.subscribe(value => {
+      console.log('speaker CHANGED => ', value)
+      if(value) {
+        if(value === 5) {
+          this.form.get('note')?.setValidators(Validators.required)
+          this.form.get('note')?.updateValueAndValidity()
+        } else {
+          this.form.get('note')?.setValidators(null)
+          this.form.get('note')?.updateValueAndValidity()
+        }      
+      }
+    })
   }
 
   async addMessage() {
