@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Book, NewMessage, Speaker } from '../models/interfaces';
+import { Book, MessageType, NewMessage, Speaker } from '../models/interfaces';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -10,6 +10,8 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class RestService {
   public bookList!: Book[];
   public speakerList!: Speaker[];
+  public messageTypeList!: MessageType[];
+  
   constructor(private http: HttpClient) {}
 
   //SPEAKERS
@@ -35,6 +37,17 @@ export class RestService {
       .subscribe((data: any) => {
         this.bookList = data.bookList;
       });
+  }
+  
+  //MESSAGE TYPES
+  /**
+   * 
+   * @returns 
+   */
+  getAllMessageTypes() {
+    this.http.get(environment.url + environment.services.messageTypes).subscribe((data: any) => {
+      this.messageTypeList = data.messageTypeList;
+    });
   }
 
   //MESSAGES

@@ -22,6 +22,19 @@
       </ion-list>
       <ion-item>
         <ion-select
+          label="Tipo mensaje"
+          label-placement="floating"
+          formControlName="id_message_type"
+        >
+          @for (msgType of this.restService.messageTypeList ; track msgType.id) {
+          <ion-select-option [value]="msgType.id"
+            >{{ msgType.description }}</ion-select-option
+          >
+          }
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-select
           label="Predicador"
           label-placement="floating"
           formControlName="id_speaker"
@@ -33,6 +46,16 @@
           }
         </ion-select>
       </ion-item>
+      @if(this.form.get('id_speaker')?.value === 5) {
+        <ion-item>
+          <ion-input
+            label="Nombre predicacor invitado"
+            labelPlacement="floating"
+            placeholder=""
+            formControlName="note"
+          ></ion-input>
+        </ion-item>
+      }
       <ion-item>
         <ion-select
           label="Libro"
@@ -81,6 +104,6 @@
         </ion-item>
       </ion-list>
     </form>
-    <ion-button (click)="addMessage()" expand="block">Añadir</ion-button>
+    <ion-button (click)="addMessage()" expand="block" style="color: white;">Añadir</ion-button>
   </ion-card>
 </ion-content>
