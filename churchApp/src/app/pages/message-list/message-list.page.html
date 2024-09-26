@@ -154,46 +154,53 @@
   <div>
     @for (message of messageList; track $index) {
     <!-- <ion-card (click)="openUrl(message.url)"> -->
-    <ion-card (click)="selectMessage(message)">
-      <ion-card-header>
-        <ion-card-title>{{ message.title }}</ion-card-title>
-        <ion-card-subtitle>
+    <div [class.highlightedCard]="message.isNew">
+      <!-- <div style="position: relative;"> -->
+      <!-- <div class="highlightedCard"></div> -->
+      <ion-card (click)="selectMessage(message)" class="caard">
+        <ion-card-header>
+          <ion-card-title>{{ message.title }}</ion-card-title>
+          <ion-card-subtitle>
+            <div class="flexSB">
+              <div>{{ message.book.name}}</div>
+              <div>{{ message.date| date:'dd/MM/yyyy' }}</div>
+            </div>
+          </ion-card-subtitle>
+        </ion-card-header>
+  
+        <ion-card-content>
           <div class="flexSB">
-            <div>{{ message.book.name}}</div>
-            <div>{{ message.date| date:'dd/MM/yyyy' }}</div>
-          </div>
-        </ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        <div class="flexSB">
-          @if (message.speaker.id === 5) {
+            @if (message.speaker.id === 5) {
             <ion-text>{{ message.note }}</ion-text>
-          } @else {
-            <ion-text>{{ message.speaker.name }}</ion-text>
-          }
-          <div>
-            <!-- <a [href]="message.url"
-              ><ion-icon name="headset-outline"></ion-icon
-            ></a> -->
-            @if(message.listened) {
-              <ion-icon name="remove-circle-outline" style="color: #cbb04c; padding: 3px;" (click)="removeFromListened(message, $event)"></ion-icon>
             } @else {
-              <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;" (click)="markAsListened(message, $event)"></ion-icon>
+            <ion-text>{{ message.speaker.name }}</ion-text>
             }
-            <ion-icon name="share-social-outline" style="color: #4d8dff; padding: 3px;" (click)="shareMessage(message, $event)"></ion-icon>
-
+            <div>
+              <!-- <a [href]="message.url"
+                ><ion-icon name="headset-outline"></ion-icon
+              ></a> -->
+              @if(message.listened) {
+              <ion-icon name="remove-circle-outline" style="color: #cbb04c; padding: 3px;"
+                (click)="removeFromListened(message, $event)"></ion-icon>
+              } @else {
+              <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;"
+                (click)="markAsListened(message, $event)"></ion-icon>
+              }
+              <ion-icon name="share-social-outline" style="color: #4d8dff; padding: 3px;"
+                (click)="shareMessage(message, $event)"></ion-icon>
+  
+            </div>
           </div>
-        </div>
-      </ion-card-content>
-      @if(message.listened) {
+        </ion-card-content>
+        @if(message.listened) {
         <!-- style="background: #b26123 !important;" -->
-        <ion-progress-bar value="100" class="my-progress-bar animate-progress" ></ion-progress-bar>
-      }
-    </ion-card>
-    } @if (messageList && messageList.length < 1) {
-    <div class="noResult">No se han encontrado resultados</div>
-    <div class="refresh">(Desliza para recargar)</div>
+        <ion-progress-bar value="100" class="my-progress-bar animate-progress"></ion-progress-bar>
+        }
+      </ion-card>
+    </div>
+    } @if (messageList && messageList.length < 1) { 
+      <div class="noResult">No se han encontrado resultados</div>
+      <div div class="refresh">(Desliza para recargar)</div>
     }
   </div>
 

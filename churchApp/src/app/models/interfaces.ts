@@ -23,7 +23,9 @@ export interface Message {
     speaker: Speaker,
     book: Book,
     listened: Boolean,
-    note: string
+    note: string,
+    isNew: Boolean,
+    createdAt: Date,
 }
 
 export type NewMessage = Omit<Message, 'id'>

@@ -72,3 +72,81 @@
 ion-icon {
   cursor: pointer;
 }
+
+
+
+.highlightedCard {
+  margin-bottom: 10px;
+  outline-width: 1px;
+  outline-offset: 0;
+  outline-color: var(--ion-color-primary);
+  outline-style: solid;
+  animation: animateOutline 2s ease infinite;
+}
+
+@keyframes animateOutline {
+  0% {
+    outline-width: 1px;
+    outline-offset: 0;
+    outline-color: rgba(0, 130, 206, 0);
+  }
+
+  10% {
+    outline-color: var(--ion-color-primary);
+  }
+
+  /* The animation finishes at 50% */
+  50% {
+    outline-width: 7px;
+    outline-offset: 4px;
+    outline-color: rgba(0, 130, 206, 0);
+  }
+
+  100% {
+    outline-width: 7px;
+    outline-offset: 4px;
+    outline-color: rgba(102, 102, 102, 0);
+  }
+}
+
+
+.highlightedCard2 {
+  position: absolute;
+  top: -5px;
+  left: 5px;
+  right: 5px;
+  bottom: -5px;
+  border: 4px solid transparent;
+  border-radius: 5px;
+  animation: borderPulse 2s infinite ease-in-out;
+  z-index: 0;
+  /* Coloca el borde detrás de la tarjeta */
+  border-color: var(--ion-color-primary);
+}
+
+/* Animación */
+@keyframes borderPulse {
+  0% {
+    border-width: 5px;
+  }
+
+  // 50% {
+  //   border-width: 10px;
+  // }
+
+  100% {
+    border-width: 20px;
+  }
+}
+
+.caard {
+  position: relative;
+  // background-color: white;
+  // padding: 20px;
+  // border-radius: 10px;
+  // box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  /* Coloca la tarjeta sobre el borde animado */
+}
+
+
