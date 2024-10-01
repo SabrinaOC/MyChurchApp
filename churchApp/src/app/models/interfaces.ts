@@ -24,6 +24,8 @@ export interface Message {
     book: Book,
     listened: Boolean,
     note: string,
+    isNew: Boolean,
+    createdAt: Date,
     messageType: MessageType
 }
 

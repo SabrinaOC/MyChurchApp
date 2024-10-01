@@ -72,3 +72,60 @@
 ion-icon {
   cursor: pointer;
 }
+
+
+
+.highlightedCard {
+  margin-bottom: 10px;
+  outline-width: 1px;
+  outline-offset: 0;
+  outline-color: var(--ion-color-primary);
+  outline-style: solid;
+  animation: animateOutline 2s ease infinite;
+}
+
+@keyframes animateOutline {
+  0% {
+    outline-width: 1px;
+    outline-offset: 0;
+    outline-color: rgba(0, 130, 206, 0);
+  }
+
+  10% {
+    outline-color: var(--ion-color-primary);
+  }
+
+  /* The animation finishes at 50% */
+  50% {
+    outline-width: 7px;
+    outline-offset: 4px;
+    outline-color: rgba(0, 130, 206, 0);
+  }
+
+  100% {
+    outline-width: 7px;
+    outline-offset: 4px;
+    outline-color: rgba(102, 102, 102, 0);
+  }
+}
+
+.heartBeatLetters {
+  margin-top: -25px;
+  width: 130px;
+  top: 35px;
+  right: 50px;
+  z-index: 999;
+  text-align: right;
+  font-family: 'IndieFlower', sans-serif;
+  font-weight: 800;
+  color: var(--ion-color-primary);
+  position: relative;
+  rotate: -17deg;
+  animation: beat 1s infinite alternate;
+}
+
+@keyframes beat {
+  to {
+    transform: scale(1.3);
+  }
+}

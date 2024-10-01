@@ -210,12 +210,36 @@ export class MessageListPage {
     }
   }
 
+  checkIfIsNewMessage() {
+    let newMessage: boolean = false;
+
+    this.messageList.forEach((message: Message) => {      
+      // Get the current date and the creation date of the message
+      let currentDate: number = new Date().getTime(); //Time in unix
+      // We add days to that date to compare in that range with the current one
+      let messageDate: number = new Date(message.createdAt).setDate(new Date(message.createdAt).getDate() + 3);
+            
+      if (messageDate > currentDate) {
+        message.isNew = true;
+        newMessage = true;
+      } else {
+        message.isNew = false;
+      }
+    });
+
+    // Order list by isNew property
+    if (newMessage) {
+      this.messageList.sort((a, b) => Number(b.isNew) - Number(a.isNew));
+    }
+  }
+
   /**
    * Función centralizada para gestionar actualización de la lista de predicaciones mostradas
    */
   updateMessageList(lista: any) {
     this.messageList = lista;
-    this.checkIfAlreadyListened()
+    this.checkIfAlreadyListened();
+    this.checkIfIsNewMessage();
   }
 
   resetListenedBeforeMark() {
