@@ -34,6 +34,8 @@ export class AppComponent {
   ) {
     this.restService.getAllBooks();
     this.restService.getAllSpeakers();
+    this.restService.getAllMessageTypes();
+
 
     // Initialize Firebase
     initializeApp(environment.firebaseConfig);

@@ -26,6 +26,7 @@ export interface Message {
     note: string,
     isNew: Boolean,
     createdAt: Date,
+    messageType: MessageType
 }
 
 export type NewMessage = Omit<Message, 'id'>
@@ -36,4 +37,9 @@ export interface MessageFilterOpt {
     testament: number,
     dateFrom: Date,
     dateTo: Date
+}
+
+export interface MessageType {
+    id: number,
+    description: string
 }
