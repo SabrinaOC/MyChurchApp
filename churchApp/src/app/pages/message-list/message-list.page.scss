@@ -109,44 +109,23 @@ ion-icon {
   }
 }
 
-
-.highlightedCard2 {
-  position: absolute;
-  top: -5px;
-  left: 5px;
-  right: 5px;
-  bottom: -5px;
-  border: 4px solid transparent;
-  border-radius: 5px;
-  animation: borderPulse 2s infinite ease-in-out;
-  z-index: 0;
-  /* Coloca el borde detrás de la tarjeta */
-  border-color: var(--ion-color-primary);
-}
-
-/* Animación */
-@keyframes borderPulse {
-  0% {
-    border-width: 5px;
-  }
-
-  // 50% {
-  //   border-width: 10px;
-  // }
-
-  100% {
-    border-width: 20px;
-  }
-}
-
-.caard {
+.heartBeatLetters {
+  margin-top: -25px;
+  width: 130px;
+  top: 35px;
+  right: 50px;
+  z-index: 999;
+  text-align: right;
+  font-family: 'IndieFlower', sans-serif;
+  font-weight: 800;
+  color: var(--ion-color-primary);
   position: relative;
-  // background-color: white;
-  // padding: 20px;
-  // border-radius: 10px;
-  // box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  /* Coloca la tarjeta sobre el borde animado */
+  rotate: -17deg;
+  animation: beat 1s infinite alternate;
 }
 
-
+@keyframes beat {
+  to {
+    transform: scale(1.3);
+  }
+}

@@ -213,10 +213,10 @@ export class MessageListPage {
   checkIfIsNewMessage() {
     let newMessage: boolean = false;
 
-    this.messageList.forEach((message: Message) => {
+    this.messageList.forEach((message: Message) => {      
       // Get the current date and the creation date of the message
       let currentDate: number = new Date().getTime(); //Time in unix
-      // 
+      // We add days to that date to compare in that range with the current one
       let messageDate: number = new Date(message.createdAt).setDate(new Date(message.createdAt).getDate() + 3);
             
       if (messageDate > currentDate) {

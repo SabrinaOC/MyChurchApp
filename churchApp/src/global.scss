@@ -36,6 +36,10 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
+@font-face {
+    font-family: 'IndieFlower';
+    src: url('./assets/fonts/IndieFlower-Regular.ttf') format('truetype');
+}
 
 ion-icon {
     font-size: 22px;
