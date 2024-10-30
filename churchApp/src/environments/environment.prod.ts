@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  url: "https://sabriojea-mychurch-api.k8s.arsahosting.com",
+  url: "https://sabriojea-mychurch-api.k8s.arsahosting.net",
 
   services: {
     messages: {
