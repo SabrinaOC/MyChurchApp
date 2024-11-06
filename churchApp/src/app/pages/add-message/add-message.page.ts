@@ -28,7 +28,9 @@ export class AddMessagePage {
       date: new FormControl(this.datetime),
       url: new FormControl(null, Validators.required),
       id_message_type: new FormControl(null, Validators.required),
-      note: new FormControl(null)
+      note: new FormControl(null),
+      questions: new FormControl(null),
+      verses: new FormControl(null)
     });
   }
 
@@ -55,11 +57,9 @@ export class AddMessagePage {
       });
       load.present();
       const newMessage: NewMessage = this.normalizeTitle();
-      // console.log('newMessage => ', newMessage);
       this.restService.addNewMessage(newMessage)
       .subscribe({
         next: (res: any) => {
-          console.log('RES insert message => ', res);
           this.form.reset();
           load.dismiss();
           this.presentSnakbar('Predicación guardada con éxito')

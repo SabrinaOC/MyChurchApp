@@ -6,7 +6,6 @@ export const environment = {
   production: false,
 
   // url: 'http://localhost:3000',
-  // url: 'https://mychurch.onrender.com',
   url: 'https://sabriojea-mychurch-api.k8s.arsahosting.net',
 
   services: {

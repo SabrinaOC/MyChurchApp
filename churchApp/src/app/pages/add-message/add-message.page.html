@@ -103,6 +103,18 @@
               } -->
         </ion-item>
       </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-textarea label="Versículos"
+          label-placement="floating" formControlName="verses"></ion-textarea>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-item>
+          <ion-textarea label="Preguntas"
+          label-placement="floating" placeholder="Escribe cuestiones relacionadas con la predicación" formControlName="questions"></ion-textarea>
+        </ion-item>
+      </ion-list>
     </form>
     <ion-button (click)="addMessage()" expand="block" style="color: white;">Añadir</ion-button>
   </ion-card>
