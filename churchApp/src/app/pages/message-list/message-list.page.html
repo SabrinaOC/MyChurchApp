@@ -187,7 +187,9 @@
               }
               <ion-icon name="share-social-outline" style="color: #4d8dff; padding: 3px;"
                 (click)="shareMessage(message, $event)"></ion-icon>
-    
+              <ion-popover #sharePopover [isOpen]="isOpenSharePopover" (didDismiss)="isOpenSharePopover = false" triggerAction="click">
+              </ion-popover>
+
             </div>
           </div>
         </ion-card-content>

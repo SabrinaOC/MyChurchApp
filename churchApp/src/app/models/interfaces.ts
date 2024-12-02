@@ -26,7 +26,8 @@ export interface Message {
     note: string,
     isNew: Boolean,
     createdAt: Date,
-    messageType: MessageType
+    messageType: MessageType,
+    questions: string
 }
 
 export type NewMessage = Omit<Message, 'id'>
