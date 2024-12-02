@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class CoreProvider {
   public theme: 'dark' | 'light' = 'dark';
 
-  constructor() { }
+  constructor(public toastCtrl: ToastController) { }
 
   public detectPrefersTheme() {
     let currentTheme: string | null = localStorage.getItem("theme");

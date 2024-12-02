@@ -45,7 +45,7 @@ export class RestService {
    * @returns 
    */
   getAllMessageTypes() {
-    this.http.get(environment.url + environment.services.messageTypes).subscribe((data: any) => {
+    this.http.get(environment.url + environment.services?.messageTypes).subscribe((data: any) => {
       this.messageTypeList = data.messageTypeList;
     });
   }

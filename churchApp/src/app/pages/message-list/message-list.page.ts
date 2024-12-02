@@ -5,7 +5,9 @@ import { IonModal, LoadingController } from '@ionic/angular';
 import { AppLauncher } from '@capacitor/app-launcher';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Share } from '@capacitor/share';
+// import { KeepAwake } from '@capacitor-community/keep-awake';
 import * as _ from 'lodash';
+import { CoreProvider } from 'src/app/services/core';
 
 @Component({
   selector: 'app-message-list',
@@ -23,7 +25,9 @@ export class MessageListPage {
   rbSelected: string = 'all';
   backupListForRbFilter!: Message[];
   searchQuery: string = '';
+  interval: number = 0;
   constructor(
+              public core: CoreProvider,
               public restService: RestService,
               private loadingController: LoadingController,
               private formBuilder: FormBuilder,
@@ -47,8 +51,26 @@ export class MessageListPage {
   }
 
   selectMessage(message: Message | null) {
-      this.selectedMessage = message;
-      this.cdRef.detectChanges(); //Force detecting changes
+    this.selectedMessage = message;
+    this.cdRef.detectChanges(); //Force detecting changes
+    
+    // Enable Keep Awake
+    // if (this.selectedMessage != null) {
+    // //   await (await this.core.toastCtrl.create({
+    // //     message: "Se ha abierto la predicación.",
+    // //     duration: 5000
+    // //   })
+    // // ).present();
+    //   this.enableKeepAwake();
+    // } else {
+    //   this.disableKeepAwake();
+    // }
+
+    setInterval(() => {
+      console.log("Hola");
+      
+      document.body.click();
+    }, 300000)
   }
 
   /**
@@ -170,7 +192,6 @@ export class MessageListPage {
     } else {
       listened += `, ${message.id}`
       localStorage.setItem('listened', listened)
-
     }
     
     this.updateMessageList(this.messageList)
@@ -278,4 +299,11 @@ export class MessageListPage {
     //actualizamos visualizacion de lista
     this.updateMessageList(this.messageList)
   }
+
+  // async enableKeepAwake() {
+  //   await KeepAwake.keepAwake();
+  // }
+  // async disableKeepAwake() {
+  //   await KeepAwake.allowSleep();
+  // }
 }
