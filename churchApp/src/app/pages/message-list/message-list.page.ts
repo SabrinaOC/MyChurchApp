@@ -258,14 +258,21 @@ export class MessageListPage {
     event.stopPropagation()
 
     console.log(message);
-    
+
     if (message.questions != null) {
-      let popover = this.core.popoverCtrl.create({
-        cssClass: "",
-        backdropDismiss: true,
-        component: ShareOptionsPopoverComponent
+      const modal = await this.core.modalCtrl.create({
+        component: ShareOptionsPopoverComponent,
+        componentProps: {
+          message: message
+        }
       });
-      (await popover).present();
+      modal.onDidDismiss().then(d => {
+        if (d.data) {
+          console.log(d.data);
+          
+        }
+      });
+      await modal.present();
       
     } else {
       await Share.share({

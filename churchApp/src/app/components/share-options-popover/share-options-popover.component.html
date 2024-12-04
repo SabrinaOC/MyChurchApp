@@ -1,3 +1,18 @@
-<p>
-  share-options-popover works!
-</p>
+@if (message) {
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Elija el formato para compartir la predicación</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  @for (option of shareOptions.shareOptions; track option) {
+    <p>{{option}}</p>
+  }
+</ion-content>
+}

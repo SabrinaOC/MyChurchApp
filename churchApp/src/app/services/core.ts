@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { PopoverController } from '@ionic/angular';
 export class CoreProvider {
   public theme: 'dark' | 'light' = 'dark';
 
-  constructor(public popoverCtrl: PopoverController) { }
+  constructor(public modalCtrl: ModalController) { }
 
   public detectPrefersTheme() {
     let currentTheme: string | null = localStorage.getItem("theme");
