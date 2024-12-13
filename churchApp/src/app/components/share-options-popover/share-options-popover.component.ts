@@ -67,4 +67,7 @@ export class ShareOptionsPopoverComponent  implements OnInit {
     this.selectedIndex = i;
   }
 
+  updateOptionText(e: any, i: number) {
+    this.shareOptions[i].text = e.target.value;
+  }
 }

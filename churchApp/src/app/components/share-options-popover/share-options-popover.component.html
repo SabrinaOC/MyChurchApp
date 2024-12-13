@@ -19,16 +19,22 @@
     </ion-radio-group>
   </div>
 
-  <ion-input label="Título:" type="text" readonly="true" [value]="shareOptions[selectedIndex].title"></ion-input>
-  <ion-input label="Url:" type="url" [value]="shareOptions[selectedIndex].url"></ion-input>
   <ion-item>
-    <ion-label position="floating">Texto:</ion-label>
-    <ion-textarea
+    <ion-grid>      
+      <ion-label>Título:</ion-label>
+      <ion-input type="text" readonly="true" [value]="shareOptions[selectedIndex].title"></ion-input>
+      
+      <ion-label>Url:</ion-label>
+      <ion-input type="url" [value]="shareOptions[selectedIndex].url"></ion-input>
+      
+      <ion-label>Texto:</ion-label>
+      <ion-textarea (ionBlur)="updateOptionText($event, selectedIndex)"
       placeholder="Texto a compartir"
       [autoGrow]="true"
       [value]="shareOptions[selectedIndex].text"
-    >
-    </ion-textarea>
+      >
+      </ion-textarea>
+    </ion-grid>
   </ion-item>
 </ion-content>
 }
