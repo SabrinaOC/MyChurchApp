@@ -6,6 +6,7 @@ import { AppLauncher } from '@capacitor/app-launcher';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-message-list',
@@ -23,11 +24,15 @@ export class MessageListPage {
   rbSelected: string = 'all';
   backupListForRbFilter!: Message[];
   searchQuery: string = '';
+  isAuthUser: boolean = false;
+  navigationExtra: NavigationExtras = {};
+
   constructor(
               public restService: RestService,
               private loadingController: LoadingController,
               private formBuilder: FormBuilder,
-              private cdRef: ChangeDetectorRef
+              private cdRef: ChangeDetectorRef,
+              private router: Router
   ) { 
     this.filterForm = this.formBuilder.group({
       speaker: new FormControl(null),
@@ -40,6 +45,9 @@ export class MessageListPage {
 
   async ionViewWillEnter() {
     this.getAllMessages();
+    if(localStorage.getItem('USER_CREDENTIALS')){
+      this.isAuthUser = true;
+    }
   }
 
   openUrl(targetUrl: string) {
@@ -194,12 +202,9 @@ export class MessageListPage {
     
     let arr1 = listened?.split(',')
     let arr = [...new Set(arr1)]
-    // console.log('localStorage : ', arr)
     this.messageList.forEach((message: Message )=> {
         arr?.forEach(element => {
-          // console.log('element => ', element, '\tMessage => ', message.id)
           if(parseInt(element) === message.id) {
-            // console.log('COINCIDENCIAAAAAAAAAAAAAAAAAAAAAAAA')
             message.listened = true;
           }
         })
@@ -265,6 +270,9 @@ export class MessageListPage {
     this.updateListRdBtn()
   }
 
+  /**
+   * 
+   */
   updateListRdBtn() {
     // actualizamos lista con este filtro
     if(this.rbSelected === 'all') {
@@ -277,5 +285,16 @@ export class MessageListPage {
 
     //actualizamos visualizacion de lista
     this.updateMessageList(this.messageList)
+  }
+
+  /**
+   * 
+   * @param message 
+   */
+  editMessage(message: Message) {
+    // console.log('message selected = ', message)
+    this.navigationExtra.queryParams = message;
+    console.log('navigationExtra = ', this.navigationExtra)
+    this.router.navigate(['add-message'], this.navigationExtra)
   }
 }

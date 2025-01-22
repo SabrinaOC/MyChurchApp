@@ -92,4 +92,24 @@ export class RestService {
     return this.http
       .post(environment.url + environment.services.messages.message, newMessage)
   }
+
+  /**
+   *
+   * @param newMessage
+   * @returns
+   */
+  updateMessage(newMessage: NewMessage): Observable<any> {
+    return this.http
+      .put(environment.url + environment.services.messages.message, newMessage)
+  }
+
+  /**
+   *
+   * @param id
+   * @returns
+   */
+  deleteMessage(id: number): Observable<any> {
+    return this.http
+      .delete(environment.url + environment.services.messages.message, {body: id})
+  }
 }

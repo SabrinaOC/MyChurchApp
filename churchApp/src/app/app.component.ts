@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { RestService } from './services/rest.service';
 import { initializeApp } from "firebase/app";
 import { environment } from 'src/environments/environment';
-import { Platform } from '@ionic/angular';
-import { App } from '@capacitor/app';
+import { AlertController, Platform } from '@ionic/angular';
+import { App, AppInfo } from '@capacitor/app';
 import { CoreProvider } from './services/core';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -28,9 +29,12 @@ export class AppComponent {
       ionicIcon: 'settings-outline',
     },
   ];
+  isAuthorized!: boolean;
+  version!: string;
   constructor(private restService: RestService,
     private platform: Platform,
-    public core: CoreProvider
+    public core: CoreProvider,
+    private alrtCtrl: AlertController
   ) {
     this.restService.getAllBooks();
     this.restService.getAllSpeakers();
@@ -42,6 +46,12 @@ export class AppComponent {
     this.initialize();
 
     this.core.detectPrefersTheme();
+
+    App.getInfo().then(res => {
+      this.version = res.version
+    })
+
+    this.isAuthorized = localStorage.getItem('USER_CREDENTIALS') ? true : false;
   }
 
   initialize() {
@@ -56,6 +66,82 @@ export class AppComponent {
         App.exitApp(); // Cierra la aplicación
       });
     });
+  }
+
+  checkIfPermissionNeeded() {
+    if(!localStorage.getItem('USER_CREDENTIALS')){
+      this.checkPass()
+    }
+  }
+
+  async checkPass(): Promise<void> {
+    let alert = await this.alrtCtrl.create({
+      header: 'Autorización',
+      inputs: [
+        {
+          type: 'email',
+          label: 'Introduce el email autorizado',
+          placeholder: 'Email'
+        },
+        {
+          type: 'password',
+          label: 'Introduce contraseña',
+          placeholder: 'Contraseña'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Salir',
+          role: 'cancel'
+        },
+        {
+          text: 'Aceptar',
+          handler: (e) => {
+            let email = e[0]
+            let password = e[1]
+            // Initialize Firebase
+            let auth = getAuth();
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential: { user: any; }) => {
+              // Signed in 
+              const user = userCredential.user;
+              // console.log('logado. Usuario => ', user)
+              localStorage.setItem('USER_CREDENTIALS', user.accessToken)
+            })
+            .catch((error: { code: any; message: any; }) => {
+              // const errorCode = error.code;
+              // const errorMessage = error.message;
+              this.incorrectCredentialsModal()
+            });
+          }
+        }
+      ],
+      backdropDismiss: false
+    })
+
+    alert.present()
+  }
+
+  async incorrectCredentialsModal() {
+    let alert = await this.alrtCtrl.create({
+      header: 'No autorizado',
+      message: 'Usuario no autorizado. ¿Volver a introducir credenciales?',
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.checkPass();
+          }
+        },
+        {
+          text: 'Salir',
+          role: 'cancel'
+        }
+      ],
+      backdropDismiss: false
+    });
+
+    alert.present();
   }
 
 }
