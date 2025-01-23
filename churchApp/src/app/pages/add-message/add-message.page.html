@@ -116,6 +116,11 @@
         </ion-item>
       </ion-list>
     </form>
-    <ion-button (click)="addMessage()" expand="block" style="color: white;">Añadir</ion-button>
+    @if (editableMessage !== undefined) {
+      <ion-button (click)="addMessage()" expand="block" style="color: white;">Editar</ion-button>
+      <ion-button (click)="openAlert()" expand="block" style="color: white;" color="light">Eliminar</ion-button>
+    } @else {
+      <ion-button (click)="addMessage()" expand="block" style="color: white;">Añadir</ion-button>
+    }
   </ion-card>
 </ion-content>
