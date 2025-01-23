@@ -105,11 +105,11 @@ export class RestService {
 
   /**
    *
-   * @param id
+   * @param idMsg
    * @returns
    */
-  deleteMessage(id: number): Observable<any> {
+  deleteMessage(idMsg: number): Observable<any> {
     return this.http
-      .delete(environment.url + environment.services.messages.message, {body: id})
+      .delete(environment.url + environment.services.messages.message, { body: { id: idMsg} })
   }
 }

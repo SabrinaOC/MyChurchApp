@@ -68,13 +68,13 @@ export class AddMessagePage{
         //servicio editar
         const editMsg : Message = this.normalizeTitle();
         editMsg.id = this.editableMessage.id
-        console.log('Servicio editar- ', editMsg)
         this.restService.updateMessage(editMsg)
         .subscribe({
           next: (res: any) => {
             this.form.reset();
             load.dismiss();
             this.presentSnakbar('Predicación actualizada con éxito')
+            this.router.navigate(['message-list']);
           },
           error: (err: Error) => {
             load.dismiss();
@@ -220,19 +220,23 @@ export class AddMessagePage{
     this.form.get('id_book')?.reset(this.editableMessage?.['book']?.id);
 
     this.datetime = new Date(this.editableMessage?.['date']).getTime();
+
+    if(!this.editableMessage?.['date']) {
+      this.datetime = new Date().getTime()
+    }
   }
 
   async deleteMessage() {
-    console.log('ELIMINAR')
     let load = await this.loading.create({
-      message: 'Guardando predicación',
+      message: 'Eliminando predicación',
     });
     load.present();
     this.restService.deleteMessage(this.editableMessage.id).subscribe({
       next: (res: any) => {
         this.form.reset();
         load.dismiss();
-        this.presentSnakbar('Predicación guardada con éxito')
+        this.presentSnakbar('Predicación eliminada con éxito')
+        this.router.navigate(['message-list'])
       },
       error: (err: Error) => {
         load.dismiss();
