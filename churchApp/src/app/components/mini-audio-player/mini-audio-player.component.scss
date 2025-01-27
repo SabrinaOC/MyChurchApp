@@ -25,7 +25,7 @@ ion-card {
 
 
 .appearAudioPlayer {
-    animation: appearAudioPlayerAnimation 0.7s;
+    animation: appearAudioPlayerAnimation 1s;
 }
 
 @keyframes appearAudioPlayerAnimation {
@@ -41,7 +41,7 @@ ion-card {
 }
 
 .disappearAudioPlayer {
-    animation: disappearAudioPlayerAnimation 0.7s;
+    animation: disappearAudioPlayerAnimation 1s;
 }
 
 @keyframes disappearAudioPlayerAnimation {
@@ -55,16 +55,6 @@ ion-card {
         transform: translateY(100px);
     }
 }
-
-// iframe {
-//     border-radius: 10px;
-
-//     ::ng-deep {
-//         .ndfHFb-c4YZDc-TvD9Pc-qnnXGd {
-//             background-color: white;
-//         }
-//     }
-// }
 
 
 .invertColors {
