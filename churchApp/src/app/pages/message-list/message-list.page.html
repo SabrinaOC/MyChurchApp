@@ -158,7 +158,12 @@
       }
       <ion-card (click)="selectMessage(message)" [class.highlightedCard]="message.isNew && !message.listened">
         <ion-card-header>
-          <ion-card-title>{{ message.title }}</ion-card-title>
+          <div style="display: flex; justify-content: space-between;">
+            <ion-card-title>{{ message.title }}</ion-card-title>
+            @if (isAuthUser) {
+              <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(message)"></ion-icon>
+            }
+          </div>
           <ion-card-subtitle>
             <div class="flexSB">
               <div>{{ message.book.name}}</div>

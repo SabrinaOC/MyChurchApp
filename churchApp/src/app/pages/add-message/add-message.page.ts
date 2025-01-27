@@ -4,22 +4,27 @@ import { AlertController, LoadingController, NavController, ToastController } fr
 import { Message, NewMessage } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-message',
   templateUrl: './add-message.page.html',
   styleUrls: ['./add-message.page.scss'],
 })
-export class AddMessagePage {
+export class AddMessagePage{
   form!: FormGroup;
   date: any = Date.now();
   datetime: any = Date.now();
+  messageEdit!: Message;
+  editableMessage!: Message | any;
+
   constructor(
     public restService: RestService,
     private loading: LoadingController,
     private toastCtrl: ToastController,
     private alrtCtrl: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private router: Router,
   ) {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
@@ -32,12 +37,13 @@ export class AddMessagePage {
       questions: new FormControl(null),
       verses: new FormControl(null)
     });
+
+    this.getEditableMessage()
   }
 
   ionViewWillEnter() {
     this.checkIfPermissionNeeded()
     this.form.get('id_speaker')?.valueChanges.subscribe(value => {
-      console.log('speaker CHANGED => ', value)
       if(value) {
         if(value === 5) {
           this.form.get('note')?.setValidators(Validators.required)
@@ -47,7 +53,7 @@ export class AddMessagePage {
           this.form.get('note')?.updateValueAndValidity()
         }      
       }
-    })
+    });
   }
 
   async addMessage() {
@@ -57,23 +63,50 @@ export class AddMessagePage {
       });
       load.present();
       const newMessage: NewMessage = this.normalizeTitle();
-      this.restService.addNewMessage(newMessage)
-      .subscribe({
-        next: (res: any) => {
-          this.form.reset();
-          load.dismiss();
-          this.presentSnakbar('Predicación guardada con éxito')
-        },
-        error: (err: Error) => {
-          load.dismiss();
-          this.presentSnakbar(
-            'No se ha podido gaurdar la predicación. Vuelve a intentarlo en unos minutos'
-          );
-          console.log('ERROR: ', err)
-        },
-        complete: () => {
-        }
-      });
+      
+      if(this.editableMessage !== undefined) {
+        //servicio editar
+        const editMsg : Message = this.normalizeTitle();
+        editMsg.id = this.editableMessage.id
+        this.restService.updateMessage(editMsg)
+        .subscribe({
+          next: (res: any) => {
+            this.form.reset();
+            load.dismiss();
+            this.presentSnakbar('Predicación actualizada con éxito')
+            this.router.navigate(['message-list']);
+          },
+          error: (err: Error) => {
+            load.dismiss();
+            this.presentSnakbar(
+              'No se ha podido guardar la predicación. Vuelve a intentarlo en unos minutos'
+            );
+            console.log('ERROR: ', err)
+          },
+          complete: () => {
+          }
+        });
+      } else {
+        //servicio add
+        this.restService.addNewMessage(newMessage)
+        .subscribe({
+          next: (res: any) => {
+            this.form.reset();
+            load.dismiss();
+            this.presentSnakbar('Predicación guardada con éxito')
+          },
+          error: (err: Error) => {
+            load.dismiss();
+            this.presentSnakbar(
+              'No se ha podido guardar la predicación. Vuelve a intentarlo en unos minutos'
+            );
+            console.log('ERROR: ', err)
+          },
+          complete: () => {
+          }
+        });
+      }
+
     } else {
       this.form.markAllAsTouched();
       this.form.markAsDirty();
@@ -175,5 +208,61 @@ export class AddMessagePage {
     if(!localStorage.getItem('USER_CREDENTIALS')){
       this.checkPass()
     }
+  }
+
+  getEditableMessage() {
+    const queryParams = this.router.getCurrentNavigation()?.extras.queryParams;
+    this.editableMessage = queryParams;
+    
+    this.form.reset(this.editableMessage);
+    this.form.get('id_message_type')?.reset(this.editableMessage?.['messageType']?.id);
+    this.form.get('id_speaker')?.reset(this.editableMessage?.['speaker']?.id);
+    this.form.get('id_book')?.reset(this.editableMessage?.['book']?.id);
+
+    this.datetime = new Date(this.editableMessage?.['date']).getTime();
+
+    if(!this.editableMessage?.['date']) {
+      this.datetime = new Date().getTime()
+    }
+  }
+
+  async deleteMessage() {
+    let load = await this.loading.create({
+      message: 'Eliminando predicación',
+    });
+    load.present();
+    this.restService.deleteMessage(this.editableMessage.id).subscribe({
+      next: (res: any) => {
+        this.form.reset();
+        load.dismiss();
+        this.presentSnakbar('Predicación eliminada con éxito')
+        this.router.navigate(['message-list'])
+      },
+      error: (err: Error) => {
+        load.dismiss();
+        this.presentSnakbar(
+          'No se ha podido eliminar la predicación. Vuelve a intentarlo en unos minutos'
+        );
+        console.log('ERROR: ', err)
+      },
+      complete: () => {
+      }
+    });
+  }
+
+  async openAlert() {
+    let alert = await this.alrtCtrl.create({
+      message: 'Eliminar contenido',
+      buttons: [{
+        text: 'Aceptar',
+        handler: () => { this.deleteMessage() }
+      },
+      {
+        text: 'Cancelar',
+        role: 'cancel'
+      }]
+    })
+
+    alert.present();
   }
 }
