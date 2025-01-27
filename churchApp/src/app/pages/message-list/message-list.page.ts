@@ -257,8 +257,6 @@ export class MessageListPage {
   async shareMessage(message: Message, event: any) {
     event.stopPropagation()
 
-    console.log(message);
-
     if (message.questions != null) {
       const modal = await this.core.modalCtrl.create({
         component: ShareOptionsPopoverComponent,
@@ -268,8 +266,8 @@ export class MessageListPage {
       });
       modal.onDidDismiss().then(d => {
         if (d.data) {
-          console.log(d.data);
-          
+          // console.log(d.data);
+          Share.share(d.data);
         }
       });
       await modal.present();
@@ -277,7 +275,7 @@ export class MessageListPage {
     } else {
       await Share.share({
         title: `${message.title}`,
-        text: `*${message.title}*. Te invito a escuchar esta predicación`,
+        text: `*${message.title}*. \nTe invito a escuchar esta predicación.`,
         url: `${message.url}`,
         // dialogTitle: `${message.title}`,
       });

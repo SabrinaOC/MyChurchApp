@@ -1,7 +1,7 @@
 @if (message) {
 <ion-header>
   <ion-toolbar>
-    <ion-title class="ion-text-center">Elija el formato para compartir la predicación</ion-title>
+    <ion-title class="ion-text-center">Elija el formato para compartir</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cancel()">
         <ion-icon name="close-outline"></ion-icon>
@@ -14,27 +14,32 @@
   <div id="options" class="ion-justify-content-around">
     <ion-radio-group [value]="selectedIndex">
       @for (option of shareOptions; track $index) {
-        <ion-radio [value]="$index" labelPlacement="end" (ionFocus)="selectOption($index)">{{option.format}}</ion-radio>
+      <ion-radio [value]="$index" labelPlacement="end" (ionFocus)="selectOption($index)">{{option.format}}</ion-radio>
       }
     </ion-radio-group>
   </div>
 
-  <ion-item>
-    <ion-grid>      
-      <ion-label>Título:</ion-label>
-      <ion-input type="text" readonly="true" [value]="shareOptions[selectedIndex].title"></ion-input>
-      
-      <ion-label>Url:</ion-label>
-      <ion-input type="url" [value]="shareOptions[selectedIndex].url"></ion-input>
-      
-      <ion-label>Texto:</ion-label>
-      <ion-textarea (ionBlur)="updateOptionText($event, selectedIndex)"
-      placeholder="Texto a compartir"
-      [autoGrow]="true"
-      [value]="shareOptions[selectedIndex].text"
-      >
-      </ion-textarea>
-    </ion-grid>
-  </ion-item>
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <ion-input label="Título:" labelPlacement="floating" type="text" readonly="true" [value]="shareOptions[selectedIndex].title"></ion-input>
+      </ion-item>
+        
+      <ion-item>
+        <ion-input label="Url:" labelPlacement="floating" type="url" [value]="shareOptions[selectedIndex].url"></ion-input>
+      </ion-item>
+        
+      <ion-item>
+        <ion-textarea label="Texto:" labelPlacement="floating" (ionBlur)="updateOptionText($event, selectedIndex)" placeholder="Texto a compartir" [autoGrow]="true" [value]="shareOptions[selectedIndex].text">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item>
+          <ion-button (click)="accept()" style="color: white;">Aceptar</ion-button>
+          <ion-button (click)="cancel()" style="color: white;">Cancelar</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  
 </ion-content>
 }

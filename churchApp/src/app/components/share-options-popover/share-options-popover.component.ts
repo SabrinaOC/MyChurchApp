@@ -3,6 +3,13 @@ import { ShareOptions } from '@capacitor/share';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 
+interface ShareOpts {
+  format?: string,
+  title: string,
+  text: string,
+  url: string
+}
+
 @Component({
   selector: 'app-share-options-popover',
   templateUrl: './share-options-popover.component.html',
@@ -10,11 +17,11 @@ import { CoreProvider } from 'src/app/services/core';
 })
 export class ShareOptionsPopoverComponent  implements OnInit {
 
-  shareOptions = [
+  shareOptions: ShareOpts[] = [
     {
       format: "Formato simple",
       title: "@Title",
-      text: "*@Title*. Te invito a escuchar esta predicación",
+      text: "*@Title*. \nTe invito a escuchar esta predicación.",
       url: "@Url",
       // dialogTitle: `${message.title}`,
     },
@@ -44,6 +51,11 @@ export class ShareOptionsPopoverComponent  implements OnInit {
 
   cancel() {
     return this.core.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  accept() {
+    delete this.shareOptions[this.selectedIndex].format;
+    return this.core.modalCtrl.dismiss(this.shareOptions[this.selectedIndex]);
   }
 
   /**
