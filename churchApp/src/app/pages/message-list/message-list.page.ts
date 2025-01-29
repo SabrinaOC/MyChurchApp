@@ -55,10 +55,6 @@ export class MessageListPage {
     }
   }
 
-  openUrl(targetUrl: string) {
-    AppLauncher.openUrl({url: targetUrl})
-  }
-
   selectMessage(message: Message | null) {
       this.selectedMessage = message;
       this.cdRef.detectChanges(); //Force detecting changes
@@ -107,11 +103,18 @@ export class MessageListPage {
     })
     loading.present();
     console.log('ionViewWillEnter')
-    this.restService.getAllMessages().subscribe((data: any) => {
-      if(data) {
-        this.updateMessageList(data.messageListMapped)
+    this.restService.getAllMessages().subscribe({
+      next: (data: any) => {
+        if(data) {
+          this.updateMessageList(data.messageListMapped)
+        }
+        
+        loading.dismiss()
+      },
+      error: (err: any) => {
+        console.error(err)
+        loading.dismiss()
       }
-      loading.dismiss()
     })
   }
 
@@ -314,10 +317,11 @@ export class MessageListPage {
    * 
    * @param message 
    */
-  editMessage(message: Message) {
-    // console.log('message selected = ', message)
+  editMessage(message: Message, event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    
     this.navigationExtra.queryParams = message;
-    console.log('navigationExtra = ', this.navigationExtra)
     this.router.navigate(['add-message'], this.navigationExtra)
   }
 }

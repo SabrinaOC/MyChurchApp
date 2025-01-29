@@ -161,7 +161,7 @@
           <div style="display: flex; justify-content: space-between;">
             <ion-card-title>{{ message.title }}</ion-card-title>
             @if (isAuthUser) {
-              <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(message)"></ion-icon>
+              <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(message, $event)"></ion-icon>
             }
           </div>
           <ion-card-subtitle>

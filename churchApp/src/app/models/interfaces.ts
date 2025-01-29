@@ -27,6 +27,7 @@ export interface Message {
     isNew: Boolean,
     createdAt: Date,
     messageType: MessageType,
+    mimetype: string
     questions: string
 }
 

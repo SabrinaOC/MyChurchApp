@@ -16,7 +16,8 @@ export const environment = {
     },
     speaker: '/speakers',
     book: '/books',
-    messageTypes: '/messageTypes'
+    messageTypes: '/messageTypes',
+    audioFiles: '/audioFiles'
   },
 
   firebaseConfig: {
