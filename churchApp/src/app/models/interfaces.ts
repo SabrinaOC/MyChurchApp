@@ -28,6 +28,7 @@ export interface Message {
     createdAt: Date,
     messageType: MessageType,
     mimetype: string
+    questions: string
 }
 
 export type NewMessage = Omit<Message, 'id'>

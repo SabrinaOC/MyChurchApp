@@ -6,6 +6,8 @@ import { AppLauncher } from '@capacitor/app-launcher';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
+import { CoreProvider } from 'src/app/services/core';
+import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -24,10 +26,13 @@ export class MessageListPage {
   rbSelected: string = 'all';
   backupListForRbFilter!: Message[];
   searchQuery: string = '';
+
+  isOpenSharePopover: boolean = false;
   isAuthUser: boolean = false;
   navigationExtra: NavigationExtras = {};
 
   constructor(
+              public core: CoreProvider,
               public restService: RestService,
               private loadingController: LoadingController,
               private formBuilder: FormBuilder,
@@ -259,12 +264,30 @@ export class MessageListPage {
   async shareMessage(message: Message, event: any) {
     event.stopPropagation()
 
-    await Share.share({
-      title: `${message.title}`,
-      text: `*${message.title}*. Te invito a escuchar esta predicación`,
-      url: `${message.url}`,
-      // dialogTitle: `${message.title}`,
-    });
+    if (message.questions != null) {
+      const modal = await this.core.modalCtrl.create({
+        component: ShareOptionsPopoverComponent,
+        componentProps: {
+          message: message
+        }
+      });
+      modal.onDidDismiss().then(d => {
+        if (d.data) {
+          // console.log(d.data);
+          Share.share(d.data);
+        }
+      });
+      await modal.present();
+      
+    } else {
+      await Share.share({
+        title: `${message.title}`,
+        text: `*${message.title}*. \nTe invito a escuchar esta predicación.`,
+        url: `${message.url}`,
+        // dialogTitle: `${message.title}`,
+      });
+    }
+
   }
 
   rbSelection(event: any) {
