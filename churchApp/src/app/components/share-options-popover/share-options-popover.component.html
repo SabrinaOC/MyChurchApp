@@ -1,18 +1,18 @@
 @if (message) {
 <ion-header>
   <ion-toolbar>
-    <ion-title class="ion-text-center">Elija el formato para compartir</ion-title>
-    <ion-buttons slot="end">
+    <ion-title class="ion-text-center">Compartir</ion-title>
+    <!-- <ion-buttons slot="end">
       <ion-button (click)="cancel()">
         <ion-icon name="close-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="options" class="ion-justify-content-around">
-    <ion-radio-group [value]="selectedIndex">
+    <ion-radio-group [value]="selectedIndex" class="custom-radio-button-group">
       @for (option of shareOptions; track $index) {
       <ion-radio [value]="$index" labelPlacement="end" (ionFocus)="selectOption($index)">{{option.format}}</ion-radio>
       }
@@ -26,7 +26,7 @@
       </ion-item>
         
       <ion-item>
-        <ion-input label="Url:" labelPlacement="floating" type="url" [value]="shareOptions[selectedIndex].url"></ion-input>
+        <ion-input label="Url:" labelPlacement="floating" type="url" [value]="shareOptions[selectedIndex].url" disabled="true"></ion-input>
       </ion-item>
         
       <ion-item>
@@ -34,11 +34,9 @@
         </ion-textarea>
       </ion-item>
 
-      <ion-item>
-          <ion-button (click)="accept()" style="color: white;">Aceptar</ion-button>
-          <ion-button (click)="cancel()" style="color: white;">Cancelar</ion-button>
-      </ion-item>
     </ion-list>
+    <ion-button (click)="accept()" expand="block" style="color: white;">Aceptar</ion-button>
+    <ion-button (click)="cancel()" expand="block" style="color: white;" color="light">Cancelar</ion-button>
   </ion-card>
   
 </ion-content>
