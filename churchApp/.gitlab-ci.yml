@@ -1,0 +1,12 @@
+stages:
+  - deploy
+
+deploy_to_github:
+  stage: deploy
+  script:
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/own-projects2155520/MyChurchApp.git
+    - cd your-repository
+    - git remote add github https://github.com/SabrinaOC/MyChurchApp.git
+    - git push --force github main
+  only:
+    - main
