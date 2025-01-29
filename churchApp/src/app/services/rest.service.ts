@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Book, MessageType, NewMessage, Speaker } from '../models/interfaces';
+import { Book, Message, MessageType, NewMessage, Speaker } from '../models/interfaces';
 import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -111,5 +111,19 @@ export class RestService {
   deleteMessage(idMsg: number): Observable<any> {
     return this.http
       .delete(environment.url + environment.services.messages.message, { body: { id: idMsg} })
+  }
+
+  /**
+   * 
+   * @param msg 
+   * @returns 
+   */
+  downloadAudioFile(msg: Message): Observable<any> {
+    return this.http
+      .get(environment.url + environment.services.audioFiles, {
+        headers: { 'Accept': 'audio/mpeg' },
+        responseType: 'blob',
+        params: { url: msg.url, title: msg.title, mimetype: msg.mimetype}
+      })
   }
 }
