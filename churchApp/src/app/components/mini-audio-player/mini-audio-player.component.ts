@@ -12,6 +12,7 @@ import { RestService } from 'src/app/services/rest.service';
 export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnChanges {
   @Input() public message!: Message | null;
   @Output() public closing: EventEmitter<any> = new EventEmitter();
+  @Output() public finish: EventEmitter<any> = new EventEmitter();
   @ViewChild("audioPlayer") audioPlayer!: ElementRef<HTMLElement>;
 
   close: boolean = false;
@@ -80,5 +81,9 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
         }
       })
     }
+  }
+
+  endedAudio() {
+    this.finish.emit();
   }
 }

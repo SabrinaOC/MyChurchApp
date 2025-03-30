@@ -11,10 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './add-message.page.html',
   styleUrls: ['./add-message.page.scss'],
 })
-export class AddMessagePage{
+export class AddMessagePage implements OnInit {
   form!: FormGroup;
-  date: any = Date.now();
-  datetime: any = Date.now();
+  datetime: any = Date();
   messageEdit!: Message;
   editableMessage!: Message | any;
 
@@ -23,7 +22,7 @@ export class AddMessagePage{
     private loading: LoadingController,
     private toastCtrl: ToastController,
     private alrtCtrl: AlertController,
-    private navCtrl: NavController,
+    public navCtrl: NavController,
     private router: Router,
   ) {
     this.form = new FormGroup({
@@ -39,6 +38,10 @@ export class AddMessagePage{
     });
 
     this.getEditableMessage()
+  }
+
+  ngOnInit(): void {
+    this.datetime = new Date().toISOString();
   }
 
   ionViewWillEnter() {
