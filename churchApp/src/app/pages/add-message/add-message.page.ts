@@ -17,6 +17,8 @@ export class AddMessagePage implements OnInit {
   messageEdit!: Message;
   editableMessage!: Message | any;
 
+  editMode: boolean = false;
+
   constructor(
     public restService: RestService,
     private loading: LoadingController,
@@ -227,6 +229,9 @@ export class AddMessagePage implements OnInit {
     if(!this.editableMessage?.['date']) {
       this.datetime = new Date().getTime()
     }
+
+    //Set edit mode variable
+    this.editMode = this.editableMessage?.title ? true : false;
   }
 
   async deleteMessage() {
