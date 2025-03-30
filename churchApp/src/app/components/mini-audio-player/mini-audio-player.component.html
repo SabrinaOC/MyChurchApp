@@ -33,12 +33,12 @@
         <!-- <iframe [src]="message.url | driveLink" frameborder="0" width="340" height="50"
           [class.invertColors]="core.theme === 'light'" allow="autoplay"></iframe> -->
           @if (audioUrl) {
-            <audio controls [class.invertColors]="core.theme === 'light'" autoplay>
+            <audio controls [class.invertColors]="core.theme === 'light'" autoplay id="audio" (ended)="endedAudio()">
               <source [src]="audioUrl" type="audio/mpeg">
             </audio>
           } @else {
             <div id="cargando-div">
-              <ion-label>Cargando el audio</ion-label>
+              <ion-label>Cargando el audio &nbsp;</ion-label>
               <ion-spinner name="dots" color="dark"></ion-spinner>
             </div>
           }
