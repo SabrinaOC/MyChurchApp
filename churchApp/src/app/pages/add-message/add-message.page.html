@@ -105,8 +105,16 @@
       </ion-list>
       <ion-list>
         <ion-item>
-          <ion-textarea label="Versículos" autoGrow="true"
-          label-placement="floating" formControlName="verses"></ion-textarea>
+          <!-- <ion-textarea label="Versículos" autoGrow="true"
+          label-placement="floating" formControlName="verses"></ion-textarea> -->
+          
+          <ion-button (click)="showSimpleVerseSelector()">{{selectedBook}}</ion-button>
+          <ion-popover [isOpen]="showVerseSelector" (didDismiss)="showVerseSelector = false">
+            <ng-template>
+              <app-simple-verse-selector ></app-simple-verse-selector>
+            </ng-template>
+          </ion-popover>
+          <!-- <app-simple-verse-selector ></app-simple-verse-selector> -->
         </ion-item>
       </ion-list>
       <ion-list>

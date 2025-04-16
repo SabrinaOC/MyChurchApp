@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddMessagePageRoutingModule } from './add-message-routing.module';
 
 import { AddMessagePage } from './add-message.page';
+import { ComponentsModule } from "../../components/components.module";
 
 @NgModule({
   imports: [
@@ -14,8 +15,9 @@ import { AddMessagePage } from './add-message.page';
     FormsModule,
     IonicModule,
     AddMessagePageRoutingModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    ComponentsModule
+],
   declarations: [AddMessagePage]
 })
 export class AddMessagePageModule {}

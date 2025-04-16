@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import jsonBible from '../../assets/bible.json'
 
 @Injectable({
   providedIn: 'root'
@@ -55,4 +56,30 @@ export class CoreProvider {
     }
   }
 
+  public getAllBibleBooks(): string[] {
+    let books: string[] = Object.keys(jsonBible['Antiguo Testamento']).concat(Object.keys(jsonBible['Nuevo Testamento']))
+
+    return books;
+  }
+
+  public getChapterCount(bookName: string): number | null {
+    for (const testament of Object.values(jsonBible)) {
+      if (bookName in testament) {
+        const chapters = Object.keys((testament as any)[bookName]);
+        return chapters.length;
+      }
+    }
+    return null; // Not found book
+  }
+
+  public getVerses(bookName: string, chapter: number): number | null {
+    for (const testament of Object.values(jsonBible)) {
+      if (bookName in testament) {
+        const book = (testament as any)[bookName];
+        const verses = book[chapter];
+        return verses ?? null;
+      }
+    }
+    return null; // Book or chapter not found
+  }
 }

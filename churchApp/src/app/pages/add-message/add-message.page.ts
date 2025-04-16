@@ -5,6 +5,7 @@ import { Message, NewMessage } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ActivatedRoute, Router } from '@angular/router';
+import { CoreProvider } from 'src/app/services/core';
 
 @Component({
   selector: 'app-add-message',
@@ -25,6 +26,7 @@ export class AddMessagePage{
     private alrtCtrl: AlertController,
     private navCtrl: NavController,
     private router: Router,
+    public core: CoreProvider
   ) {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
@@ -38,7 +40,7 @@ export class AddMessagePage{
       verses: new FormControl(null)
     });
 
-    this.getEditableMessage()
+    this.getEditableMessage();
   }
 
   ionViewWillEnter() {
@@ -205,9 +207,9 @@ export class AddMessagePage{
   }
 
   checkIfPermissionNeeded() {
-    if(!localStorage.getItem('USER_CREDENTIALS')){
-      this.checkPass()
-    }
+    // if(!localStorage.getItem('USER_CREDENTIALS')){
+    //   this.checkPass()
+    // }
   }
 
   getEditableMessage() {
@@ -264,5 +266,13 @@ export class AddMessagePage{
     })
 
     alert.present();
+  }
+
+  selectedBook: string = "Selecciona libro";
+  showVerseSelector: boolean = false;
+  showSimpleVerseSelector() {
+    this.showVerseSelector = true;
+    console.log(this.showVerseSelector);
+    
   }
 }

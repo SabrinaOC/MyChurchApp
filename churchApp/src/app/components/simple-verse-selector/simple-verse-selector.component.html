@@ -1,0 +1,39 @@
+@if (!selectedBook) {
+  <p>Seleccione libro:</p>
+<ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterOptions()" placeholder="Buscar libro..."></ion-searchbar>
+
+<ion-list>
+  @for (book of filteredBooks; track book) {
+  <ion-item (click)="selectBook(book)">
+    {{book}}
+  </ion-item>
+  }
+</ion-list>
+
+} @else {
+
+  @if (selectedChapter === 0) {
+    <div class="badge">
+      <ion-badge>{{selectedBook}}</ion-badge>
+    </div>
+
+    <ion-item>Seleccione capítulo:</ion-item>
+    <ion-list>
+      @for (i of generateRange(chapters); track $index) {
+        <ion-item (click)="selectChapter(i)">{{i}}</ion-item>
+      }
+    </ion-list>
+
+  } @else {
+    <div class="badge">
+      <ion-badge>{{selectedBook}} {{selectedChapter}}</ion-badge>
+    </div>
+
+    <ion-item>Seleccione versículo:</ion-item>
+    <ion-list>
+      @for (i of generateRange(verses); track $index) {
+        <ion-item>{{i}}</ion-item>
+      }
+    </ion-list>
+  }
+}
