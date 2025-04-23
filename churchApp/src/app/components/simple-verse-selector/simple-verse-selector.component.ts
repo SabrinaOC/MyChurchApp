@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
 import { CoreProvider } from 'src/app/services/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { CoreProvider } from 'src/app/services/core';
   templateUrl: './simple-verse-selector.component.html',
   styleUrls: ['./simple-verse-selector.component.scss'],
 })
-export class SimpleVerseSelectorComponent  implements OnInit {
+export class SimpleVerseSelectorComponent {
 
   books: string[] = this.core.getAllBibleBooks()
   filteredBooks: string[] = [...this.books]; // Lista filtrada
@@ -15,18 +16,16 @@ export class SimpleVerseSelectorComponent  implements OnInit {
 
   chapters: number = 0;
   selectedChapter: number = 0;
+  selectedVerse: number = 0;
+  selectedRange: number = 0;
 
   verses: number = 0;
 
-  constructor(public core: CoreProvider) { }
+  @Output() public verse: EventEmitter<any> = new EventEmitter();
 
-  ngOnInit() {
-    console.log("");    
-  }
+  constructor(public core: CoreProvider, private popoverCtrl: PopoverController) { }
 
   filterOptions() {
-    console.log("Filtrando...");
-    
     this.filteredBooks = this.books.filter(book =>
       book.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
@@ -44,7 +43,21 @@ export class SimpleVerseSelectorComponent  implements OnInit {
     this.verses = this.core.getVerses(this.selectedBook, this.selectedChapter) ?? 0;
   }
 
-  generateRange(n: number): number[] {
-    return Array.from({ length: n }, (_, i) => i + 1);
+  selectRange(range: number) {
+    this.selectedRange = range;
+    console.log(this.selectedRange);
+    this.chooseVerse();
+  }
+
+  generateRange(start: number, end: number): number[] {
+    return Array.from({ length: end - start }, (_, i) => i + start + 1);
+  }
+
+
+  chooseVerse() {
+    let verse = `${this.selectedBook} ${this.selectedChapter}:${this.selectedVerse}${this.selectedRange === 0 ? "" : "-" + this.selectedRange}`;
+
+    // this.verse.emit(verse);
+    this.popoverCtrl.dismiss(verse);
   }
 }

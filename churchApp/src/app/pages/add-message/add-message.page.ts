@@ -1,11 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, PopoverController, ToastController } from '@ionic/angular';
 import { Message, NewMessage } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreProvider } from 'src/app/services/core';
+import { SimpleVerseSelectorComponent } from 'src/app/components/simple-verse-selector/simple-verse-selector.component';
 
 @Component({
   selector: 'app-add-message',
@@ -19,12 +20,16 @@ export class AddMessagePage{
   messageEdit!: Message;
   editableMessage!: Message | any;
 
+  verses = new Map<number, string>();
+  newVerseId: number = 0;
+
   constructor(
     public restService: RestService,
     private loading: LoadingController,
     private toastCtrl: ToastController,
     private alrtCtrl: AlertController,
     private navCtrl: NavController,
+    private popoverCtrl: PopoverController,
     private router: Router,
     public core: CoreProvider
   ) {
@@ -268,11 +273,28 @@ export class AddMessagePage{
     alert.present();
   }
 
-  selectedBook: string = "Selecciona libro";
-  showVerseSelector: boolean = false;
-  showSimpleVerseSelector() {
-    this.showVerseSelector = true;
-    console.log(this.showVerseSelector);
-    
+
+  async showSimpleVerseSelector() {
+    const popover = await this.popoverCtrl.create({
+      component: SimpleVerseSelectorComponent,
+      translucent: true,
+      cssClass: 'verse-selector-popover',
+    });
+  
+    await popover.present();
+  
+    const { data } = await popover.onDidDismiss();
+    if (data) {
+      this.verses.set(this.newVerseId, data);
+      this.newVerseId++;
+    }
+  }
+
+  versesArray(): [number, string][] {
+    return Array.from(this.verses.entries());
+  }
+
+  removeVerse(verseId: number) {
+    this.verses.delete(verseId);
   }
 }

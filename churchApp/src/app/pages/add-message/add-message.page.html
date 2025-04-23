@@ -108,13 +108,16 @@
           <!-- <ion-textarea label="Versículos" autoGrow="true"
           label-placement="floating" formControlName="verses"></ion-textarea> -->
           
-          <ion-button (click)="showSimpleVerseSelector()">{{selectedBook}}</ion-button>
-          <ion-popover [isOpen]="showVerseSelector" (didDismiss)="showVerseSelector = false">
-            <ng-template>
-              <app-simple-verse-selector ></app-simple-verse-selector>
-            </ng-template>
-          </ion-popover>
-          <!-- <app-simple-verse-selector ></app-simple-verse-selector> -->
+          <ion-button (click)="showSimpleVerseSelector()" class="ion-margin-end">Seleccionar libro</ion-button>
+          <div>
+            @for (verse of versesArray(); track $index) {
+              <ion-badge class="badge-verse">
+                <span>{{verse[1]}}</span>
+                <ion-icon class="ion-align-items-center" name="close" size="small" (click)="removeVerse(verse[0])"></ion-icon>
+              </ion-badge>
+            }
+          </div>
+
         </ion-item>
       </ion-list>
       <ion-list>
