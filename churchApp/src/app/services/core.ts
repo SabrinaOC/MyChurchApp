@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController, ToastController } from '@ionic/angular';
 import jsonBible from '../../assets/bible.json'
 
 @Injectable({
@@ -8,7 +8,7 @@ import jsonBible from '../../assets/bible.json'
 export class CoreProvider {
   public theme: 'dark' | 'light' = 'dark';
 
-  constructor(public modalCtrl: ModalController) { }
+  constructor(public modalCtrl: ModalController, public toastCtrl: ToastController) { }
 
   public detectPrefersTheme() {
     let currentTheme: string | null = localStorage.getItem("theme");
@@ -81,5 +81,50 @@ export class CoreProvider {
       }
     }
     return null; // Book or chapter not found
+  }
+
+  public verseExists(ref: string): boolean {
+    const match = ref.trim().match(/^([\w\sáéíóúÁÉÍÓÚñÑ]+)\s+(\d+):(\d+)(?:-(\d+))?$/);
+  
+    if (!match) return false;
+  
+    const [, book, chapterStr, startVerseStr, endVerseStr] = match;
+    const chapter = parseInt(chapterStr, 10);
+    const startVerse = parseInt(startVerseStr, 10);
+    const endVerse = endVerseStr ? parseInt(endVerseStr, 10) : startVerse;
+  
+    for (const testament of Object.values(jsonBible)) {
+      if (book in testament) {
+        const bookData = (testament as any)[book];
+        const totalVerses = bookData[chapter];
+  
+        return (
+          totalVerses !== undefined &&
+          startVerse >= 1 &&
+          endVerse >= startVerse &&
+          endVerse <= totalVerses
+        );
+      }
+    }
+  
+    return false;
+  }
+
+
+
+  public async adviceToast(color: string, message: string) {
+    await (await this.toastCtrl.create({
+      message: message,
+      duration: 4000,
+      cssClass: 'productToast',
+      color: color,
+      buttons: [
+        {
+          icon: 'close-outline',
+          role: 'cancel',
+          handler: () => { this.toastCtrl.dismiss() }
+        }
+      ]
+    })).present();
   }
 }

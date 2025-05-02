@@ -45,7 +45,6 @@ export class SimpleVerseSelectorComponent {
 
   selectRange(range: number) {
     this.selectedRange = range;
-    console.log(this.selectedRange);
     this.chooseVerse();
   }
 

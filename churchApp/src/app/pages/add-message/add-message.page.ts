@@ -20,6 +20,7 @@ export class AddMessagePage{
   messageEdit!: Message;
   editableMessage!: Message | any;
 
+  manuallyAddedVerses: string = "";
   verses = new Map<number, string>();
   newVerseId: number = 0;
 
@@ -296,5 +297,41 @@ export class AddMessagePage{
 
   removeVerse(verseId: number) {
     this.verses.delete(verseId);
+  }
+
+  addVersesManually() {    
+    let wrongVerses: string[] = [];
+    let verses: string[] = this.manuallyAddedVerses.split(";");
+    
+    if (verses.length === 0) {
+      return
+    }
+
+    verses.forEach((verse) => {
+      if (this.core.verseExists(verse)) {
+        console.log("Correct: " + verse);
+        
+        this.verses.set(this.newVerseId, verse);
+        this.newVerseId++;
+
+      } else {
+        console.log("Incorrect: " + verse);
+        wrongVerses.push(verse);
+      }
+    });
+
+    if (wrongVerses.length > 0) {
+      let strError: string = "";
+      
+      if (wrongVerses.length === 1) {
+        strError = "El versículo introducido manualmente no existe en la Biblia";
+      } else {
+        strError = "Algunos versículos introducidos manualmente no existen en la Biblia";
+      }
+
+      this.core.adviceToast("danger", strError);
+    }
+
+    this.manuallyAddedVerses = "";
   }
 }

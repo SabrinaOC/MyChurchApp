@@ -9,63 +9,37 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <form [formGroup]="form">
+    <form [formGroup]="form" #expandedInput>
       <ion-list>
         <ion-item>
-          <ion-input
-            label="Título"
-            labelPlacement="floating"
-            placeholder="Escribe el título"
-            formControlName="title"
-          ></ion-input>
+          <ion-input label="Título" labelPlacement="floating" placeholder="Escribe el título"
+            formControlName="title"></ion-input>
         </ion-item>
       </ion-list>
       <ion-item>
-        <ion-select
-          label="Tipo mensaje"
-          label-placement="floating"
-          formControlName="id_message_type"
-        >
+        <ion-select label="Tipo mensaje" label-placement="floating" formControlName="id_message_type">
           @for (msgType of this.restService.messageTypeList ; track msgType.id) {
-          <ion-select-option [value]="msgType.id"
-            >{{ msgType.description }}</ion-select-option
-          >
+          <ion-select-option [value]="msgType.id">{{ msgType.description }}</ion-select-option>
           }
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-select
-          label="Predicador"
-          label-placement="floating"
-          formControlName="id_speaker"
-        >
+        <ion-select label="Predicador" label-placement="floating" formControlName="id_speaker">
           @for (speaker of this.restService.speakerList ; track speaker.id) {
-          <ion-select-option [value]="speaker.id"
-            >{{ speaker.name }}</ion-select-option
-          >
+          <ion-select-option [value]="speaker.id">{{ speaker.name }}</ion-select-option>
           }
         </ion-select>
       </ion-item>
       @if(this.form.get('id_speaker')?.value === 5) {
-        <ion-item>
-          <ion-input
-            label="Nombre predicador invitado"
-            labelPlacement="floating"
-            placeholder=""
-            formControlName="note"
-          ></ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-input label="Nombre predicador invitado" labelPlacement="floating" placeholder=""
+          formControlName="note"></ion-input>
+      </ion-item>
       }
       <ion-item>
-        <ion-select
-          label="Libro"
-          label-placement="floating"
-          formControlName="id_book"
-        >
+        <ion-select label="Libro" label-placement="floating" formControlName="id_book">
           @for (book of this.restService.bookList ; track book.id) {
-          <ion-select-option [value]="book.id"
-            >{{ book.name }}</ion-select-option
-          >
+          <ion-select-option [value]="book.id">{{ book.name }}</ion-select-option>
           }
         </ion-select>
       </ion-item>
@@ -77,25 +51,16 @@
           </div>
           <ion-popover trigger="date">
             <ng-template>
-              <ion-datetime
-                presentation="date"
-                formControlName="date"
-                size="cover"
-                [(ngModel)]="datetime"
-                firstDayOfWeek="1"
-              ></ion-datetime>
+              <ion-datetime presentation="date" formControlName="date" size="cover" [(ngModel)]="datetime"
+                firstDayOfWeek="1"></ion-datetime>
             </ng-template>
           </ion-popover>
         </ion-item>
       </ion-item>
       <ion-list>
         <ion-item>
-          <ion-input
-            label="Url"
-            labelPlacement="floating"
-            placeholder="Escribe la url"
-            formControlName="url"
-          ></ion-input>
+          <ion-input label="Url" labelPlacement="floating" placeholder="Escribe la url"
+            formControlName="url"></ion-input>
           <!-- @if (this.form.get('url')?.dirty && this.form.get('url')?.hasError) {
                 <ng-container>
                   <div style="color: red;">Campo requerido</div>
@@ -103,35 +68,58 @@
               } -->
         </ion-item>
       </ion-list>
+
       <ion-list>
         <ion-item>
           <!-- <ion-textarea label="Versículos" autoGrow="true"
           label-placement="floating" formControlName="verses"></ion-textarea> -->
-          
-          <ion-button (click)="showSimpleVerseSelector()" class="ion-margin-end">Seleccionar libro</ion-button>
-          <div>
-            @for (verse of versesArray(); track $index) {
-              <ion-badge class="badge-verse">
-                <span>{{verse[1]}}</span>
-                <ion-icon class="ion-align-items-center" name="close" size="small" (click)="removeVerse(verse[0])"></ion-icon>
-              </ion-badge>
-            }
-          </div>
-
+          <ion-label>Libros</ion-label>
+          <ion-button (click)="expandedInput['expanded'] = !expandedInput['expanded']" fill="clear">
+            <ion-icon [name]="expandedInput['expanded'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+          </ion-button>
+          <ion-button (click)="showSimpleVerseSelector()">
+            Añadir &nbsp;<ion-icon name="book-outline"></ion-icon>
+          </ion-button>
         </ion-item>
+
+        @if (this.verses.size > 0) {
+          <ion-item>
+            <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
+              @for (verse of versesArray(); track $index) {
+              <div>
+                <ion-badge class="badge-verse">
+                  <span>{{verse[1]}}</span>
+                  <ion-icon class="ion-align-items-center" name="close" size="small"
+                    (click)="removeVerse(verse[0])"></ion-icon>
+                </ion-badge>
+              </div>
+              }
+            </div>
+          </ion-item>
+        }
+
+        @if (expandedInput['expanded']) {
+        <ion-item>
+          <ion-textarea [(ngModel)]="manuallyAddedVerses" [ngModelOptions]="{ standalone: true }" placeholder="Introduzca los versículos que desee se parados por puntos y comas (;)"></ion-textarea>
+          <ion-button (click)="addVersesManually()">Añadir</ion-button>
+        </ion-item>
+        }
+
       </ion-list>
+
       <ion-list>
         <ion-item>
-          <ion-textarea label="Preguntas" autoGrow="true"
-          label-placement="floating" placeholder="Escribe cuestiones relacionadas con la predicación" formControlName="questions"></ion-textarea>
+          <ion-textarea label="Preguntas" autoGrow="true" label-placement="floating"
+            placeholder="Escribe cuestiones relacionadas con la predicación" formControlName="questions"></ion-textarea>
         </ion-item>
       </ion-list>
     </form>
+    
     @if (editableMessage !== undefined) {
-      <ion-button (click)="addMessage()" expand="block" style="color: white;">Editar</ion-button>
-      <ion-button (click)="openAlert()" expand="block" style="color: white;" color="light">Eliminar</ion-button>
+    <ion-button (click)="addMessage()" expand="block">Editar</ion-button>
+    <ion-button (click)="openAlert()" expand="block" color="light">Eliminar</ion-button>
     } @else {
-      <ion-button (click)="addMessage()" expand="block" style="color: white;">Añadir</ion-button>
+    <ion-button (click)="addMessage()" expand="block">Añadir</ion-button>
     }
   </ion-card>
 </ion-content>
