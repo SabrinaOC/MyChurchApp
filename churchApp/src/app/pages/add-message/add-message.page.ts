@@ -233,7 +233,7 @@ export class AddMessagePage{
       this.datetime = new Date().getTime()
     }
 
-    this.manuallyAddedVerses = this.editableMessage?.notes;
+    this.manuallyAddedVerses = this.form.get('verses')?.value
     this.addVersesManually();
   }
 
