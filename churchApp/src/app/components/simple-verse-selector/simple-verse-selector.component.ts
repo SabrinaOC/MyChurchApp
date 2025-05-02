@@ -33,7 +33,7 @@ export class SimpleVerseSelectorComponent {
 
   selectBook(book: string) {
     this.selectedBook = book;
-    this.searchTerm = book; // Mostrar el valor seleccionado en la barra de búsqueda
+    this.searchTerm = book; // Show selected value at toolbar
     this.chapters = this.core.getChapterCount(this.selectedBook) ?? 0;
   }
 
@@ -56,7 +56,6 @@ export class SimpleVerseSelectorComponent {
   chooseVerse() {
     let verse = `${this.selectedBook} ${this.selectedChapter}:${this.selectedVerse}${this.selectedRange === 0 ? "" : "-" + this.selectedRange}`;
 
-    // this.verse.emit(verse);
     this.popoverCtrl.dismiss(verse);
   }
 }

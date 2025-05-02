@@ -213,9 +213,9 @@ export class AddMessagePage{
   }
 
   checkIfPermissionNeeded() {
-    // if(!localStorage.getItem('USER_CREDENTIALS')){
-    //   this.checkPass()
-    // }
+    if(!localStorage.getItem('USER_CREDENTIALS')){
+      this.checkPass()
+    }
   }
 
   getEditableMessage() {
@@ -232,6 +232,9 @@ export class AddMessagePage{
     if(!this.editableMessage?.['date']) {
       this.datetime = new Date().getTime()
     }
+
+    this.manuallyAddedVerses = this.editableMessage?.notes;
+    this.addVersesManually();
   }
 
   async deleteMessage() {

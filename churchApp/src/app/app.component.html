@@ -7,14 +7,14 @@
         <ion-label>Fernán Núñez<br> Comunidad Cristiana</ion-label>
       </ion-list-header>
       <ion-menu-toggle autoHide="false" *ngFor="let p of accountPages; let i = index">
-        <!-- @if (p.url !== '/add-message' || p.url === '/add-message' && isAuthorized) { -->
+        @if (p.url !== '/add-message' || p.url === '/add-message' && isAuthorized) {
           <ion-item [routerLink]="p.url" class="icon-container">
             <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''" [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
             <ion-label>
               {{p.title}}
             </ion-label>
           </ion-item>
-        <!-- } -->
+        }
       </ion-menu-toggle>
     </ion-list>
     <ion-footer>
