@@ -10,12 +10,15 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <form [formGroup]="form" #expandedInput>
+      <!-- TITLE -->
       <ion-list>
         <ion-item>
           <ion-input label="Título" labelPlacement="floating" placeholder="Escribe el título"
             formControlName="title"></ion-input>
         </ion-item>
       </ion-list>
+
+      <!-- MESSAGE TYPE -->
       <ion-item>
         <ion-select label="Tipo mensaje" label-placement="floating" formControlName="id_message_type">
           @for (msgType of this.restService.messageTypeList ; track msgType.id) {
@@ -23,6 +26,8 @@
           }
         </ion-select>
       </ion-item>
+
+      <!-- SPEAKER -->
       <ion-item>
         <ion-select label="Predicador" label-placement="floating" formControlName="id_speaker">
           @for (speaker of this.restService.speakerList ; track speaker.id) {
@@ -36,6 +41,8 @@
           formControlName="note"></ion-input>
       </ion-item>
       }
+
+      <!-- BOOK -->
       <ion-item>
         <ion-select label="Libro" label-placement="floating" formControlName="id_book">
           @for (book of this.restService.bookList ; track book.id) {
@@ -43,6 +50,8 @@
           }
         </ion-select>
       </ion-item>
+
+      <!-- DATE -->
       <ion-item>
         <ion-item id="date">
           <div style="display: flex; align-items: center">
@@ -57,6 +66,8 @@
           </ion-popover>
         </ion-item>
       </ion-item>
+
+      <!-- URL -->
       <ion-list>
         <ion-item>
           <ion-input label="Url" labelPlacement="floating" placeholder="Escribe la url"
@@ -69,6 +80,7 @@
         </ion-item>
       </ion-list>
 
+      <!-- VERSES -->
       <ion-list>
         <ion-item>
           <!-- <ion-textarea label="Versículos" autoGrow="true"
@@ -107,6 +119,7 @@
 
       </ion-list>
 
+      <!-- QUESTIONS -->
       <ion-list>
         <ion-item>
           <ion-textarea label="Preguntas" autoGrow="true" label-placement="floating"

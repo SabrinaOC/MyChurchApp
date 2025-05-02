@@ -288,6 +288,8 @@ export class AddMessagePage{
     if (data) {
       this.verses.set(this.newVerseId, data);
       this.newVerseId++;
+
+      this.versesToForm();
     }
   }
 
@@ -297,6 +299,8 @@ export class AddMessagePage{
 
   removeVerse(verseId: number) {
     this.verses.delete(verseId);
+
+    this.versesToForm();
   }
 
   addVersesManually() {    
@@ -309,13 +313,13 @@ export class AddMessagePage{
 
     verses.forEach((verse) => {
       if (this.core.verseExists(verse)) {
-        console.log("Correct: " + verse);
-        
+        // console.log("Correct: " + verse);
         this.verses.set(this.newVerseId, verse);
         this.newVerseId++;
 
+        this.versesToForm();
       } else {
-        console.log("Incorrect: " + verse);
+        // console.log("Incorrect: " + verse);
         wrongVerses.push(verse);
       }
     });
@@ -324,7 +328,7 @@ export class AddMessagePage{
       let strError: string = "";
       
       if (wrongVerses.length === 1) {
-        strError = "El versículo introducido manualmente no existe en la Biblia";
+        strError = "Uno de los versículos introducidos manualmente no existe en la Biblia: " + wrongVerses[0];
       } else {
         strError = "Algunos versículos introducidos manualmente no existen en la Biblia";
       }
@@ -333,5 +337,19 @@ export class AddMessagePage{
     }
 
     this.manuallyAddedVerses = "";
+  }
+
+  /**
+   * Assing selected verses to verses form value
+   */
+  versesToForm() {
+    let stringVerses: string = "";
+    this.verses.forEach((verse) => {
+      stringVerses += verse + ";";
+    });
+
+    stringVerses = stringVerses.endsWith(";") ? stringVerses.slice(0, stringVerses.length - 1) : stringVerses;
+
+    this.form.get('verses')?.setValue(stringVerses);  
   }
 }
