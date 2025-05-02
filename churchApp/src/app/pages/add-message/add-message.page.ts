@@ -306,7 +306,11 @@ export class AddMessagePage{
     this.versesToForm();
   }
 
-  addVersesManually() {    
+  addVersesManually() {  
+    if (!this.manuallyAddedVerses) {
+      return
+    }
+      
     let wrongVerses: string[] = [];
     let verses: string[] = this.manuallyAddedVerses.split(";");
     
