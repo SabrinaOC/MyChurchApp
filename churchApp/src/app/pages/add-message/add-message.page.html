@@ -85,35 +85,36 @@
         <ion-item>
           <!-- <ion-textarea label="Versículos" autoGrow="true"
           label-placement="floating" formControlName="verses"></ion-textarea> -->
-          <ion-label>Libros</ion-label>
+          <ion-label>Versículos</ion-label>
           <ion-button (click)="expandedInput['expanded'] = !expandedInput['expanded']" fill="clear">
             <ion-icon [name]="expandedInput['expanded'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
           </ion-button>
           <ion-button (click)="showSimpleVerseSelector()">
-            Añadir &nbsp;<ion-icon name="book-outline"></ion-icon>
+            Seleccionar &nbsp;<ion-icon name="book-outline"></ion-icon>
           </ion-button>
         </ion-item>
 
-        @if (this.verses.size > 0) {
-          <ion-item>
-            <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
-              @for (verse of versesArray(); track $index) {
-              <div>
-                <ion-badge class="badge-verse">
-                  <span>{{verse[1]}}</span>
-                  <ion-icon class="ion-align-items-center" name="close" size="small"
-                    (click)="removeVerse(verse[0])"></ion-icon>
-                </ion-badge>
-              </div>
-              }
-            </div>
-          </ion-item>
-        }
-
         @if (expandedInput['expanded']) {
         <ion-item>
-          <ion-textarea [(ngModel)]="manuallyAddedVerses" [ngModelOptions]="{ standalone: true }" placeholder="Introduzca los versículos que desee se parados por puntos y comas (;)"></ion-textarea>
+          <ion-textarea [(ngModel)]="manuallyAddedVerses" [ngModelOptions]="{ standalone: true }"
+            placeholder="Introduzca los versículos que desee separados por punto y comas (;)"></ion-textarea>
           <ion-button (click)="addVersesManually()">Añadir</ion-button>
+        </ion-item>
+        }
+
+        @if (this.verses.size > 0) {
+        <ion-item  class="ion-margin-top">
+          <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
+            @for (verse of versesArray(); track $index) {
+            <div>
+              <ion-badge class="badge-verse">
+                <span>{{verse[1]}}</span>
+                <ion-icon class="ion-align-items-center" name="close" size="small"
+                  (click)="removeVerse(verse[0])"></ion-icon>
+              </ion-badge>
+            </div>
+            }
+          </div>
         </ion-item>
         }
 
@@ -127,7 +128,7 @@
         </ion-item>
       </ion-list>
     </form>
-    
+
     @if (editableMessage !== undefined) {
     <ion-button (click)="addMessage()" expand="block">Editar</ion-button>
     <ion-button (click)="openAlert()" expand="block" color="light">Eliminar</ion-button>
