@@ -10,3 +10,8 @@ ion-badge {
     display: flex;
     justify-content: center;
 }
+
+.light-badge {
+    background-color: var(--ion-color-dark);
+    color: var(--ion-color-light);
+}

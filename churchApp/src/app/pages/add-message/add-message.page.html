@@ -86,7 +86,7 @@
           <!-- <ion-textarea label="Versículos" autoGrow="true"
           label-placement="floating" formControlName="verses"></ion-textarea> -->
           <ion-label>Versículos</ion-label>
-          <ion-button (click)="expandedInput['expanded'] = !expandedInput['expanded']" fill="clear">
+          <ion-button [color]="core.theme" (click)="expandedInput['expanded'] = !expandedInput['expanded']" fill="clear">
             <ion-icon [name]="expandedInput['expanded'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
           </ion-button>
           <ion-button (click)="showSimpleVerseSelector()">

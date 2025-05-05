@@ -5,8 +5,7 @@
     <ion-title>Libro:</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterOptions()" placeholder="Buscar libro..."
-      class="ion-margin-top"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterOptions()" placeholder="Buscar libro..."></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -37,7 +36,7 @@
 
   <ion-toolbar>
     <div class="badge">
-      <ion-badge>{{selectedBook}}</ion-badge>
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -68,7 +67,7 @@
 
   <ion-toolbar>
     <div class="badge">
-      <ion-badge>{{selectedBook}} {{selectedChapter}}</ion-badge>
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}} {{selectedChapter}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -97,14 +96,13 @@
     <ion-buttons slot="end">
       <ion-button (click)="chooseVerse()">
         Saltar
-        <!-- <ion-icon name="arrow-back-circle"></ion-icon> -->
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
   <ion-toolbar>
     <div class="badge">
-      <ion-badge>{{selectedBook}} {{selectedChapter}}:{{selectedVerse}}</ion-badge>
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}} {{selectedChapter}}:{{selectedVerse}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>
