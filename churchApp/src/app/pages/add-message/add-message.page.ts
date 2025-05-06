@@ -13,23 +13,23 @@ import { SimpleVerseSelectorComponent } from 'src/app/components/simple-verse-se
   templateUrl: './add-message.page.html',
   styleUrls: ['./add-message.page.scss'],
 })
-export class AddMessagePage{
+export class AddMessagePage implements OnInit {
   form!: FormGroup;
-  date: any = Date.now();
-  datetime: any = Date.now();
+  datetime: any = Date();
   messageEdit!: Message;
   editableMessage!: Message | any;
 
   manuallyAddedVerses: string = "";
   verses = new Map<number, string>();
   newVerseId: number = 0;
+  editMode: boolean = false;
 
   constructor(
     public restService: RestService,
     private loading: LoadingController,
     private toastCtrl: ToastController,
     private alrtCtrl: AlertController,
-    private navCtrl: NavController,
+    public navCtrl: NavController,
     private popoverCtrl: PopoverController,
     private router: Router,
     public core: CoreProvider
@@ -47,6 +47,10 @@ export class AddMessagePage{
     });
 
     this.getEditableMessage();
+  }
+
+  ngOnInit(): void {
+    this.datetime = new Date().toISOString();
   }
 
   ionViewWillEnter() {
@@ -235,6 +239,8 @@ export class AddMessagePage{
 
     this.manuallyAddedVerses = this.form.get('verses')?.value
     this.addVersesManually();
+    //Set edit mode variable
+    this.editMode = this.editableMessage?.title ? true : false;
   }
 
   async deleteMessage() {

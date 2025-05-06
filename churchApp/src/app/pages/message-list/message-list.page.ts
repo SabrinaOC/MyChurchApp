@@ -177,7 +177,7 @@ export class MessageListPage {
   }
 
   markAsListened(message: Message, event: any) {
-    event.stopPropagation()
+    event?.stopPropagation()
     //localStorage to track lilstened messages
     let listened = localStorage.getItem('listened');
     // console.log('listened => ', listened)
