@@ -88,3 +88,9 @@ ion-card {
     display: flex;
     color: white;
 }
+
+.progress-bar {
+    height: 100%;
+    background: #2196F3;
+    transition: width 0.1s linear;
+  }

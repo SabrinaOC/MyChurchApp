@@ -7,7 +7,7 @@
       </audio> -->
 
 @if (message) {
-<div #audioPlayer id="audio-player" class="appearAudioPlayer">
+<div #audioPlayer id="audio-player" class="appearAudioPlayer" (click)="tapEvent()">
   <ion-card>
     <ion-card-header>
       <ion-row>
@@ -32,16 +32,17 @@
       <div style="display: flex; justify-content: center;">
         <!-- <iframe [src]="message.url | driveLink" frameborder="0" width="340" height="50"
           [class.invertColors]="core.theme === 'light'" allow="autoplay"></iframe> -->
-          @if (audioUrl) {
-            <audio controls [class.invertColors]="core.theme === 'light'" autoplay>
-              <source [src]="audioUrl" type="audio/mpeg">
+          <!-- @if (audioUrl) { -->
+            <audio controls [class.invertColors]="core.theme === 'light'" autoplay #audio>
+              <progress id="progressBar" [value]="progress" max="100"></progress>
+              <!-- <source [src]="audioUrl" type="audio/mpeg"> -->
             </audio>
-          } @else {
+          <!-- } @else {
             <div id="cargando-div">
               <ion-label>Cargando el audio</ion-label>
               <ion-spinner name="dots" color="dark"></ion-spinner>
             </div>
-          }
+          } -->
       </div>
     </ion-card-content>
   </ion-card>

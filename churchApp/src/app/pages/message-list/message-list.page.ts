@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
+import * as Constants from 'src/app/constants'
 
 @Component({
   selector: 'app-message-list',
@@ -58,6 +59,7 @@ export class MessageListPage {
   selectMessage(message: Message | null) {
       this.selectedMessage = message;
       this.cdRef.detectChanges(); //Force detecting changes
+      localStorage.setItem(Constants.AUDIO_FILE_ID, ''+this.selectedMessage?.id)
   }
 
   /**
@@ -323,5 +325,11 @@ export class MessageListPage {
     
     this.navigationExtra.queryParams = message;
     this.router.navigate(['add-message'], this.navigationExtra)
+  }
+
+  goToMessageInformation(navigate: boolean) {
+    if (navigate) {
+      this.router.navigate(['message-information'])
+    }
   }
 }
