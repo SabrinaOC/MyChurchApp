@@ -2,3 +2,16 @@ ion-textarea {
     max-height: 200px;
     overflow-y: auto;
 }
+
+.badge-verse {
+    color: white;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    border-radius: 25px;
+}
+
+ion-button {
+    color: white;
+}

@@ -1,0 +1,119 @@
+@if (!selectedBook) {
+  <!-- BOOK SELECTOR -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Libro:</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterOptions()" placeholder="Buscar libro..."></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    @for (book of filteredBooks; track book) {
+    <ion-item (click)="selectBook(book)">
+      {{book}}
+    </ion-item>
+    }
+  </ion-list>
+</ion-content>
+
+} @else {
+
+<!-- CHAPTER SELECTOR -->
+@if (selectedChapter === 0) {
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="selectedBook = ''">
+        <ion-icon name="arrow-back-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Capítulo:</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <div class="badge">
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}}</ion-badge>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    @for (i of generateRange(0, chapters); track $index) {
+    <ion-item (click)="selectChapter(i)">{{i}}</ion-item>
+    }
+  </ion-list>
+</ion-content>
+
+} @else {
+
+@if (selectedVerse === 0) {
+
+  <!-- VERSE SELECTOR -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="selectedChapter = 0">
+        <ion-icon name="arrow-back-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Versículo:</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <div class="badge">
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}} {{selectedChapter}}</ion-badge>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    @for (i of generateRange(0, verses); track $index) {
+    <ion-item (click)="selectedVerse = i">{{i}}</ion-item>
+    }
+  </ion-list>
+</ion-content>
+
+} @else {
+
+  <!-- VERSE RANGE SELECTOR -->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="selectedVerse = 0">
+        <ion-icon name="arrow-back-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Rango:</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="chooseVerse()">
+        Saltar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <div class="badge">
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}} {{selectedChapter}}:{{selectedVerse}}</ion-badge>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    @for (i of generateRange(selectedVerse, verses); track $index) {
+    <ion-item (click)="selectRange(i)">{{i}}</ion-item>
+    }
+  </ion-list>
+</ion-content>
+}
+}
+}

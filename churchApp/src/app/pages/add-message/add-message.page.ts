@@ -1,10 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, PopoverController, ToastController } from '@ionic/angular';
 import { Message, NewMessage } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ActivatedRoute, Router } from '@angular/router';
+import { CoreProvider } from 'src/app/services/core';
+import { SimpleVerseSelectorComponent } from 'src/app/components/simple-verse-selector/simple-verse-selector.component';
 
 @Component({
   selector: 'app-add-message',
@@ -17,6 +19,9 @@ export class AddMessagePage implements OnInit {
   messageEdit!: Message;
   editableMessage!: Message | any;
 
+  manuallyAddedVerses: string = "";
+  verses = new Map<number, string>();
+  newVerseId: number = 0;
   editMode: boolean = false;
 
   constructor(
@@ -25,7 +30,9 @@ export class AddMessagePage implements OnInit {
     private toastCtrl: ToastController,
     private alrtCtrl: AlertController,
     public navCtrl: NavController,
+    private popoverCtrl: PopoverController,
     private router: Router,
+    public core: CoreProvider
   ) {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
@@ -39,7 +46,7 @@ export class AddMessagePage implements OnInit {
       verses: new FormControl(null)
     });
 
-    this.getEditableMessage()
+    this.getEditableMessage();
   }
 
   ngOnInit(): void {
@@ -230,6 +237,8 @@ export class AddMessagePage implements OnInit {
       this.datetime = new Date().getTime()
     }
 
+    this.manuallyAddedVerses = this.form.get('verses')?.value
+    this.addVersesManually();
     //Set edit mode variable
     this.editMode = this.editableMessage?.title ? true : false;
   }
@@ -272,5 +281,88 @@ export class AddMessagePage implements OnInit {
     })
 
     alert.present();
+  }
+
+
+  async showSimpleVerseSelector() {
+    const popover = await this.popoverCtrl.create({
+      component: SimpleVerseSelectorComponent,
+      translucent: true,
+      cssClass: 'verse-selector-popover',
+    });
+  
+    await popover.present();
+  
+    const { data } = await popover.onDidDismiss();
+    if (data) {
+      this.verses.set(this.newVerseId, data);
+      this.newVerseId++;
+
+      this.versesToForm();
+    }
+  }
+
+  versesArray(): [number, string][] {
+    return Array.from(this.verses.entries());
+  }
+
+  removeVerse(verseId: number) {
+    this.verses.delete(verseId);
+
+    this.versesToForm();
+  }
+
+  addVersesManually() {  
+    if (!this.manuallyAddedVerses) {
+      return
+    }
+      
+    let wrongVerses: string[] = [];
+    let verses: string[] = this.manuallyAddedVerses.split(";");
+    
+    if (verses.length === 0) {
+      return
+    }
+
+    verses.forEach((verse) => {
+      if (this.core.verseExists(verse)) {
+        // console.log("Correct: " + verse);
+        this.verses.set(this.newVerseId, verse);
+        this.newVerseId++;
+
+        this.versesToForm();
+      } else {
+        // console.log("Incorrect: " + verse);
+        wrongVerses.push(verse);
+      }
+    });
+
+    if (wrongVerses.length > 0) {
+      let strError: string = "";
+      
+      if (wrongVerses.length === 1) {
+        strError = "Uno de los versículos introducidos manualmente no existe en la Biblia: " + wrongVerses[0];
+      } else {
+        strError = "Algunos versículos introducidos manualmente no existen en la Biblia";
+      }
+
+      this.core.adviceToast("danger", strError);
+    }
+
+    this.manuallyAddedVerses = "";
+  }
+
+  /**
+   * Assing selected verses to verses form value
+   */
+  versesToForm() {
+    let stringVerses: string = "";
+    this.verses.forEach((verse) => {
+      stringVerses += verse + ";";
+    });
+
+    stringVerses = stringVerses.endsWith(";") ? stringVerses.slice(0, stringVerses.length - 1) : stringVerses;
+
+    this.form.get('verses')?.setValue(stringVerses);  
   }
 }
