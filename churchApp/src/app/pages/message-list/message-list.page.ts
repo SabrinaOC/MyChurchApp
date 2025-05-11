@@ -77,12 +77,11 @@ export class MessageListPage {
       })
       loading.present();
 
-      // this.restService.getMessagesByTitle(query)
       this.core.api.message.findByTitle({searchedTitle : query})
       .subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
-          // this.rbSelection(this.rbSelected)
+
           this.updateListRdBtn()
         },
         error: (e) => {
@@ -102,9 +101,7 @@ export class MessageListPage {
       spinner: null,
     })
     loading.present();
-    console.log('ionViewWillEnter')
     this.core.api.message.getAllMessages()
-    // this.restService.getAllMessages()
     .subscribe({
       next: (data: any) => {
         if(data) {
@@ -171,7 +168,6 @@ export class MessageListPage {
   }
 
   refresh(event: any) {
-    // this.restService.getAllMessages()
     this.core.api.message.getAllMessages()
     .subscribe((data: any) => {
       if(data) {
@@ -185,7 +181,6 @@ export class MessageListPage {
     event?.stopPropagation()
     //localStorage to track lilstened messages
     let listened = localStorage.getItem('listened');
-    // console.log('listened => ', listened)
     if(listened === null) {
       localStorage.setItem('listened', `${message.id}`)
     } else {

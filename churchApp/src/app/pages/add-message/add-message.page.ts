@@ -80,10 +80,8 @@ export class AddMessagePage implements OnInit {
         //servicio editar
         let editMsg : Message = this.form.value
         editMsg.normalizedTitle = this.normalizeTitle();
-        // const editMsg : Message = this.normalizeTitle();
         editMsg.id = this.editableMessage.id
-        // this.core.api.message.messagesPut(editMsg)
-        // this.restService.updateMessage(editMsg)
+        
         this.core.api.message.updateMessage({body: editMsg})
         .subscribe({
           next: (res: any) => {
@@ -106,7 +104,6 @@ export class AddMessagePage implements OnInit {
         let newMessage: NewMessage = this.form.value
         newMessage.normalizedTitle = this.normalizeTitle();
         //servicio add
-        // this.restService.addNewMessage(newMessage)
         this.core.api.message.addMessage({body: newMessage})
         .subscribe({
           next: (res: any) => {
@@ -264,7 +261,7 @@ export class AddMessagePage implements OnInit {
       message: 'Eliminando predicación',
     });
     load.present();
-    // this.restService.deleteMessage(this.editableMessage.id)
+    
     this.core.api.message.deleteMessage({ body: this.editableMessage.id })
     .subscribe({
       next: (res: any) => {

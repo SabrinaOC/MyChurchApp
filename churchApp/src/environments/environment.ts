@@ -8,18 +8,6 @@ export const environment = {
   // url: 'http://localhost:3000',
   url: 'https://sabriojea-mychurch-api.k8s.arsahosting.net',
 
-  // services: {
-  //   messages: {
-  //     message: '/messages',
-  //     findByTitle: '/messages/title',
-  //     filter: '/messages/filter'
-  //   },
-  //   speaker: '/speakers',
-  //   book: '/books',
-  //   messageTypes: '/messageTypes',
-  //   audioFiles: '/audioFiles'
-  // },
-
   firebaseConfig: {
     apiKey: "AIzaSyA7nq8Ns2qE_GPLR7MP5DAj4H5lLBcnBf0",
     authDomain: "mychurch-22315.firebaseapp.com",

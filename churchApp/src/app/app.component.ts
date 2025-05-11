@@ -51,9 +51,6 @@ export class AppComponent {
         this.restService.bookList = msgTypes.messageTypeList
       }
     })
-    // this.restService.getAllBooks();
-    // this.restService.getAllSpeakers();
-    // this.restService.getAllMessageTypes();
 
 
     // Initialize Firebase
