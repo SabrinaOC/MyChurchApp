@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AlertController, LoadingController, NavController, PopoverController, ToastController } from '@ionic/angular';
-import { Message, NewMessage } from '../../models/interfaces';
-import { RestService } from '../../services/rest.service';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from 'src/app/components/simple-verse-selector/simple-verse-selector.component';
+import { Message, NewMessage } from 'src/app/services/api/models';
+import { RestService } from 'src/app/services/rest.service';
 
 @Component({
   selector: 'app-add-message',
@@ -74,13 +74,15 @@ export class AddMessagePage implements OnInit {
         message: 'Guardando predicación',
       });
       load.present();
-      const newMessage: NewMessage = this.normalizeTitle();
+      // const newMessage: NewMessage = this.normalizeTitle();
       
       if(this.editableMessage !== undefined) {
         //servicio editar
-        const editMsg : Message = this.normalizeTitle();
+        let editMsg : Message = this.form.value
+        editMsg.normalizedTitle = this.normalizeTitle();
         editMsg.id = this.editableMessage.id
-        this.restService.updateMessage(editMsg)
+        
+        this.core.api.message.updateMessage({body: editMsg})
         .subscribe({
           next: (res: any) => {
             this.form.reset();
@@ -99,8 +101,10 @@ export class AddMessagePage implements OnInit {
           }
         });
       } else {
+        let newMessage: NewMessage = this.form.value
+        newMessage.normalizedTitle = this.normalizeTitle();
         //servicio add
-        this.restService.addNewMessage(newMessage)
+        this.core.api.message.addMessage({body: newMessage})
         .subscribe({
           next: (res: any) => {
             this.form.reset();
@@ -135,11 +139,20 @@ export class AddMessagePage implements OnInit {
     snkbar.present();
   }
 
-  normalizeTitle(): Message {
+  normalizeTitle(): string {
     let normalized: Message = this.form.value
-    let formTitle = normalized.title.toLowerCase()
-    normalized.normalized_title = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
-    return normalized
+    let title: string = ''
+    if(normalized.title) {
+      let formTitle = normalized?.title.toLowerCase()
+      normalized.normalizedTitle = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+    }
+    return title
+    // let normalized: Message = this.form.value
+    // if(normalized.title) {
+    //   let formTitle = normalized?.title.toLowerCase()
+    //   normalized.normalizedTitle = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+    // }
+    // return normalized
   }
 
   async checkPass(): Promise<void> {
@@ -248,7 +261,9 @@ export class AddMessagePage implements OnInit {
       message: 'Eliminando predicación',
     });
     load.present();
-    this.restService.deleteMessage(this.editableMessage.id).subscribe({
+    
+    this.core.api.message.deleteMessage({ body: this.editableMessage.id })
+    .subscribe({
       next: (res: any) => {
         this.form.reset();
         load.dismiss();

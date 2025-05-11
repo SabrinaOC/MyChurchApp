@@ -36,9 +36,21 @@ export class AppComponent {
     public core: CoreProvider,
     private alrtCtrl: AlertController
   ) {
-    this.restService.getAllBooks();
-    this.restService.getAllSpeakers();
-    this.restService.getAllMessageTypes();
+    this.core.api.book.getAllBooks().subscribe({
+      next: (books: any) => {
+        this.restService.bookList = books.bookList
+      }
+    })
+    this.core.api.speaker.getAllSpeakers().subscribe({
+      next: (speakers: any) => {
+        this.restService.speakerList = speakers.speakerList
+      }
+    })
+    this.core.api.messageType.getMessageTypes().subscribe({
+      next: (msgTypes: any) => {
+        this.restService.bookList = msgTypes.messageTypeList
+      }
+    })
 
 
     // Initialize Firebase

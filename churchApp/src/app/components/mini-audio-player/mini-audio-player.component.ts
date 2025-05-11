@@ -71,7 +71,9 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
 
   getaudioFromServer() {
     if(this.message) {
-      this.restService.downloadAudioFile(this.message).subscribe({
+      this.restService.downloadAudioFile(this.message)
+      // this.core.api.audio.getAudio(this.message)
+      .subscribe({
         next: (response: Blob) => {
           // Convertimos el blob en una URL para el elemento de audio
           this.audioUrl = URL.createObjectURL(response);

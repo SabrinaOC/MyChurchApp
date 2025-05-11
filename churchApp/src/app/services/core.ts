@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ModalController, PopoverController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import jsonBible from '../../assets/bible.json'
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,11 @@ import jsonBible from '../../assets/bible.json'
 export class CoreProvider {
   public theme: 'dark' | 'light' = 'dark';
 
-  constructor(public modalCtrl: ModalController, public toastCtrl: ToastController) { }
+  constructor(
+    public modalCtrl: ModalController,
+    public toastCtrl: ToastController,
+    public api: ApiService
+  ) { }
 
   public detectPrefersTheme() {
     let currentTheme: string | null = localStorage.getItem("theme");
@@ -109,8 +114,6 @@ export class CoreProvider {
   
     return false;
   }
-
-
 
   public async adviceToast(color: string, message: string) {
     await (await this.toastCtrl.create({
