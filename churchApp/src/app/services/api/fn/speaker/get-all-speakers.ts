@@ -8,15 +8,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Book } from '../../models/book';
+import { Speaker } from '../../models/speaker';
 
-export interface BooksGet$Params {
+export interface GetAllSpeakers$Params {
 }
 
-export function booksGet(http: HttpClient, rootUrl: string, params?: BooksGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-'bookList'?: Array<Book>;
+export function getAllSpeakers(http: HttpClient, rootUrl: string, params?: GetAllSpeakers$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+'speakerList'?: Array<Speaker>;
 }>> {
-  const rb = new RequestBuilder(rootUrl, booksGet.PATH, 'get');
+  const rb = new RequestBuilder(rootUrl, getAllSpeakers.PATH, 'get');
   if (params) {
   }
 
@@ -26,10 +26,10 @@ export function booksGet(http: HttpClient, rootUrl: string, params?: BooksGet$Pa
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
       return r as StrictHttpResponse<{
-      'bookList'?: Array<Book>;
+      'speakerList'?: Array<Speaker>;
       }>;
     })
   );
 }
 
-booksGet.PATH = '/books';
+getAllSpeakers.PATH = '/speakers';

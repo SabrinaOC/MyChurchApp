@@ -8,15 +8,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Speaker } from '../../models/speaker';
+import { Message } from '../../models/message';
 
-export interface SpeakersGet$Params {
+export interface GetAllMessages$Params {
 }
 
-export function speakersGet(http: HttpClient, rootUrl: string, params?: SpeakersGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-'speakerList'?: Array<Speaker>;
+export function getAllMessages(http: HttpClient, rootUrl: string, params?: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+'messageListMapped'?: Array<Message>;
 }>> {
-  const rb = new RequestBuilder(rootUrl, speakersGet.PATH, 'get');
+  const rb = new RequestBuilder(rootUrl, getAllMessages.PATH, 'get');
   if (params) {
   }
 
@@ -26,10 +26,10 @@ export function speakersGet(http: HttpClient, rootUrl: string, params?: Speakers
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
       return r as StrictHttpResponse<{
-      'speakerList'?: Array<Speaker>;
+      'messageListMapped'?: Array<Message>;
       }>;
     })
   );
 }
 
-speakersGet.PATH = '/speakers';
+getAllMessages.PATH = '/messages';

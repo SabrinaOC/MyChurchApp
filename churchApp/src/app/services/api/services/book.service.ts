@@ -12,8 +12,8 @@ import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
 import { Book } from '../models/book';
-import { booksGet } from '../fn/book/books-get';
-import { BooksGet$Params } from '../fn/book/books-get';
+import { getAllBooks } from '../fn/book/get-all-books';
+import { GetAllBooks$Params } from '../fn/book/get-all-books';
 
 @Injectable({ providedIn: 'root' })
 export class BookService extends BaseService {
@@ -21,8 +21,8 @@ export class BookService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `booksGet()` */
-  static readonly BooksGetPath = '/books';
+  /** Path part for operation `getAllBooks()` */
+  static readonly GetAllBooksPath = '/books';
 
   /**
    * Get a complete list of books.
@@ -30,14 +30,14 @@ export class BookService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `booksGet()` instead.
+   * To access only the response body, use `getAllBooks()` instead.
    *
    * This method doesn't expect any request body.
    */
-  booksGet$Response(params?: BooksGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  getAllBooks$Response(params?: GetAllBooks$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'bookList'?: Array<Book>;
 }>> {
-    return booksGet(this.http, this.rootUrl, params, context);
+    return getAllBooks(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -46,14 +46,14 @@ export class BookService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `booksGet$Response()` instead.
+   * To access the full response (for headers, for example), `getAllBooks$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  booksGet(params?: BooksGet$Params, context?: HttpContext): Observable<{
+  getAllBooks(params?: GetAllBooks$Params, context?: HttpContext): Observable<{
 'bookList'?: Array<Book>;
 }> {
-    return this.booksGet$Response(params, context).pipe(
+    return this.getAllBooks$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 'bookList'?: Array<Book>;
 }>): {

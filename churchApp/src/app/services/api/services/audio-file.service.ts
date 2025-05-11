@@ -11,8 +11,8 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { audioFilesGet } from '../fn/audio-file/audio-files-get';
-import { AudioFilesGet$Params } from '../fn/audio-file/audio-files-get';
+import { getAudio } from '../fn/audio-file/get-audio';
+import { GetAudio$Params } from '../fn/audio-file/get-audio';
 
 @Injectable({ providedIn: 'root' })
 export class AudioFileService extends BaseService {
@@ -20,8 +20,8 @@ export class AudioFileService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `audioFilesGet()` */
-  static readonly AudioFilesGetPath = '/audioFiles';
+  /** Path part for operation `getAudio()` */
+  static readonly GetAudioPath = '/audioFiles';
 
   /**
    * Get audio from url.
@@ -29,12 +29,12 @@ export class AudioFileService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `audioFilesGet()` instead.
+   * To access only the response body, use `getAudio()` instead.
    *
    * This method doesn't expect any request body.
    */
-  audioFilesGet$Response(params: AudioFilesGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Blob>> {
-    return audioFilesGet(this.http, this.rootUrl, params, context);
+  getAudio$Response(params: GetAudio$Params, context?: HttpContext): Observable<StrictHttpResponse<Blob>> {
+    return getAudio(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -43,12 +43,12 @@ export class AudioFileService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `audioFilesGet$Response()` instead.
+   * To access the full response (for headers, for example), `getAudio$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  audioFilesGet(params: AudioFilesGet$Params, context?: HttpContext): Observable<Blob> {
-    return this.audioFilesGet$Response(params, context).pipe(
+  getAudio(params: GetAudio$Params, context?: HttpContext): Observable<Blob> {
+    return this.getAudio$Response(params, context).pipe(
       map((r: StrictHttpResponse<Blob>): Blob => r.body)
     );
   }

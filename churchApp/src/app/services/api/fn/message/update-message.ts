@@ -8,15 +8,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { Message } from '../../models/message';
 
-export interface MessagesTitleGet$Params {
-  searchedTitle: string;
+export interface UpdateMessage$Params {
+      body: Message
 }
 
-export function messagesTitleGet(http: HttpClient, rootUrl: string, params: MessagesTitleGet$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
-  const rb = new RequestBuilder(rootUrl, messagesTitleGet.PATH, 'get');
+export function updateMessage(http: HttpClient, rootUrl: string, params: UpdateMessage$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+'status'?: string;
+}>> {
+  const rb = new RequestBuilder(rootUrl, updateMessage.PATH, 'put');
   if (params) {
-    rb.query('searchedTitle', params.searchedTitle, {});
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -24,9 +27,11 @@ export function messagesTitleGet(http: HttpClient, rootUrl: string, params: Mess
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<any>;
+      return r as StrictHttpResponse<{
+      'status'?: string;
+      }>;
     })
   );
 }
 
-messagesTitleGet.PATH = '/messages/title';
+updateMessage.PATH = '/messages';

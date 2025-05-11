@@ -11,9 +11,9 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { getMessageTypes } from '../fn/message-types/get-message-types';
+import { GetMessageTypes$Params } from '../fn/message-types/get-message-types';
 import { MessageType } from '../models/message-type';
-import { messageTypesGet } from '../fn/message-types/message-types-get';
-import { MessageTypesGet$Params } from '../fn/message-types/message-types-get';
 
 @Injectable({ providedIn: 'root' })
 export class MessageTypesService extends BaseService {
@@ -21,8 +21,8 @@ export class MessageTypesService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `messageTypesGet()` */
-  static readonly MessageTypesGetPath = '/messageTypes';
+  /** Path part for operation `getMessageTypes()` */
+  static readonly GetMessageTypesPath = '/messageTypes';
 
   /**
    * Get a list of all message types.
@@ -30,14 +30,14 @@ export class MessageTypesService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `messageTypesGet()` instead.
+   * To access only the response body, use `getMessageTypes()` instead.
    *
    * This method doesn't expect any request body.
    */
-  messageTypesGet$Response(params?: MessageTypesGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  getMessageTypes$Response(params?: GetMessageTypes$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'messageTypeList'?: Array<MessageType>;
 }>> {
-    return messageTypesGet(this.http, this.rootUrl, params, context);
+    return getMessageTypes(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -46,14 +46,14 @@ export class MessageTypesService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `messageTypesGet$Response()` instead.
+   * To access the full response (for headers, for example), `getMessageTypes$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  messageTypesGet(params?: MessageTypesGet$Params, context?: HttpContext): Observable<{
+  getMessageTypes(params?: GetMessageTypes$Params, context?: HttpContext): Observable<{
 'messageTypeList'?: Array<MessageType>;
 }> {
-    return this.messageTypesGet$Response(params, context).pipe(
+    return this.getMessageTypes$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 'messageTypeList'?: Array<MessageType>;
 }>): {

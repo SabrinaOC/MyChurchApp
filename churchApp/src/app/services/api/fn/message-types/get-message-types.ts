@@ -8,18 +8,16 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { NewMessage } from '../../models/new-message';
+import { MessageType } from '../../models/message-type';
 
-export interface MessagesPut$Params {
-      body: NewMessage
+export interface GetMessageTypes$Params {
 }
 
-export function messagesPut(http: HttpClient, rootUrl: string, params: MessagesPut$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-'status'?: string;
+export function getMessageTypes(http: HttpClient, rootUrl: string, params?: GetMessageTypes$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+'messageTypeList'?: Array<MessageType>;
 }>> {
-  const rb = new RequestBuilder(rootUrl, messagesPut.PATH, 'put');
+  const rb = new RequestBuilder(rootUrl, getMessageTypes.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -28,10 +26,10 @@ export function messagesPut(http: HttpClient, rootUrl: string, params: MessagesP
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
       return r as StrictHttpResponse<{
-      'status'?: string;
+      'messageTypeList'?: Array<MessageType>;
       }>;
     })
   );
 }
 
-messagesPut.PATH = '/messages';
+getMessageTypes.PATH = '/messageTypes';

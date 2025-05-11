@@ -9,18 +9,14 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface MessagesFilterGet$Params {
-  speaker?: number;
-  book?: number;
-  dateFrom?: Date;
+export interface FindByTitle$Params {
+  searchedTitle: string;
 }
 
-export function messagesFilterGet(http: HttpClient, rootUrl: string, params?: MessagesFilterGet$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
-  const rb = new RequestBuilder(rootUrl, messagesFilterGet.PATH, 'get');
+export function findByTitle(http: HttpClient, rootUrl: string, params: FindByTitle$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  const rb = new RequestBuilder(rootUrl, findByTitle.PATH, 'get');
   if (params) {
-    rb.query('speaker', params.speaker, {});
-    rb.query('book', params.book, {});
-    rb.query('dateFrom', params.dateFrom, {});
+    rb.query('searchedTitle', params.searchedTitle, {});
   }
 
   return http.request(
@@ -33,4 +29,4 @@ export function messagesFilterGet(http: HttpClient, rootUrl: string, params?: Me
   );
 }
 
-messagesFilterGet.PATH = '/messages/filter';
+findByTitle.PATH = '/messages/title';

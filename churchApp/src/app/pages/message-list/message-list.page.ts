@@ -2,14 +2,12 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { Message, MessageFilterOpt } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { IonModal, LoadingController } from '@ionic/angular';
-import { AppLauncher } from '@capacitor/app-launcher';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
-import { MessagesTitleGet$Params } from 'src/app/services/api/fn/message/messages-title-get';
 
 @Component({
   selector: 'app-message-list',
@@ -80,7 +78,7 @@ export class MessageListPage {
       loading.present();
 
       // this.restService.getMessagesByTitle(query)
-      this.core.api.message.messagesTitleGet({searchedTitle : query})
+      this.core.api.message.findByTitle({searchedTitle : query})
       .subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
@@ -105,7 +103,7 @@ export class MessageListPage {
     })
     loading.present();
     console.log('ionViewWillEnter')
-    this.core.api.message.messagesGet()
+    this.core.api.message.getAllMessages()
     // this.restService.getAllMessages()
     .subscribe({
       next: (data: any) => {
@@ -134,7 +132,7 @@ export class MessageListPage {
       
 
       // console.log('BUSQUEDA: ', this.removeNullUndefined(filtrosBusqueda))
-      this.core.api.message.messagesFilterGet(this.removeNullUndefined(filtrosBusqueda))
+      this.core.api.message.findByFilter(this.removeNullUndefined(filtrosBusqueda))
       .subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
@@ -173,8 +171,8 @@ export class MessageListPage {
   }
 
   refresh(event: any) {
-    this.restService.getAllMessages()
-    this.core.api.message.messagesGet()
+    // this.restService.getAllMessages()
+    this.core.api.message.getAllMessages()
     .subscribe((data: any) => {
       if(data) {
         this.updateMessageList(data.messageListMapped)

@@ -4,11 +4,11 @@
 
 export interface NewMessage {
   date: Date;
-  id_book: number;
-  id_message_type: number;
-  id_speaker: number;
+  idBook: number;
+  idMessageType: number;
+  idSpeaker: number;
   mimetype?: string;
-  normalized_title: string;
+  normalizedTitle: string;
   note?: string;
   questions?: string;
   title: string;

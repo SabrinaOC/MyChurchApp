@@ -8,16 +8,19 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { MessageType } from '../../models/message-type';
 
-export interface MessageTypesGet$Params {
+export interface DeleteMessage$Params {
+      body: {
+'id'?: number;
+}
 }
 
-export function messageTypesGet(http: HttpClient, rootUrl: string, params?: MessageTypesGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-'messageTypeList'?: Array<MessageType>;
+export function deleteMessage(http: HttpClient, rootUrl: string, params: DeleteMessage$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+'status'?: string;
 }>> {
-  const rb = new RequestBuilder(rootUrl, messageTypesGet.PATH, 'get');
+  const rb = new RequestBuilder(rootUrl, deleteMessage.PATH, 'delete');
   if (params) {
+    rb.body(params.body, 'application/json');
   }
 
   return http.request(
@@ -26,10 +29,10 @@ export function messageTypesGet(http: HttpClient, rootUrl: string, params?: Mess
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
       return r as StrictHttpResponse<{
-      'messageTypeList'?: Array<MessageType>;
+      'status'?: string;
       }>;
     })
   );
 }
 
-messageTypesGet.PATH = '/messageTypes';
+deleteMessage.PATH = '/messages';

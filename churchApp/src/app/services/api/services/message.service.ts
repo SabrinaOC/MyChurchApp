@@ -11,19 +11,19 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { addMessage } from '../fn/message/add-message';
+import { AddMessage$Params } from '../fn/message/add-message';
+import { deleteMessage } from '../fn/message/delete-message';
+import { DeleteMessage$Params } from '../fn/message/delete-message';
+import { findByFilter } from '../fn/message/find-by-filter';
+import { FindByFilter$Params } from '../fn/message/find-by-filter';
+import { findByTitle } from '../fn/message/find-by-title';
+import { FindByTitle$Params } from '../fn/message/find-by-title';
+import { getAllMessages } from '../fn/message/get-all-messages';
+import { GetAllMessages$Params } from '../fn/message/get-all-messages';
 import { Message } from '../models/message';
-import { messagesDelete } from '../fn/message/messages-delete';
-import { MessagesDelete$Params } from '../fn/message/messages-delete';
-import { messagesFilterGet } from '../fn/message/messages-filter-get';
-import { MessagesFilterGet$Params } from '../fn/message/messages-filter-get';
-import { messagesGet } from '../fn/message/messages-get';
-import { MessagesGet$Params } from '../fn/message/messages-get';
-import { messagesPost } from '../fn/message/messages-post';
-import { MessagesPost$Params } from '../fn/message/messages-post';
-import { messagesPut } from '../fn/message/messages-put';
-import { MessagesPut$Params } from '../fn/message/messages-put';
-import { messagesTitleGet } from '../fn/message/messages-title-get';
-import { MessagesTitleGet$Params } from '../fn/message/messages-title-get';
+import { updateMessage } from '../fn/message/update-message';
+import { UpdateMessage$Params } from '../fn/message/update-message';
 
 @Injectable({ providedIn: 'root' })
 export class MessageService extends BaseService {
@@ -31,8 +31,8 @@ export class MessageService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `messagesGet()` */
-  static readonly MessagesGetPath = '/messages';
+  /** Path part for operation `getAllMessages()` */
+  static readonly GetAllMessagesPath = '/messages';
 
   /**
    * Get a list of all messages.
@@ -40,14 +40,14 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `messagesGet()` instead.
+   * To access only the response body, use `getAllMessages()` instead.
    *
    * This method doesn't expect any request body.
    */
-  messagesGet$Response(params?: MessagesGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  getAllMessages$Response(params?: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'messageListMapped'?: Array<Message>;
 }>> {
-    return messagesGet(this.http, this.rootUrl, params, context);
+    return getAllMessages(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -56,14 +56,14 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `messagesGet$Response()` instead.
+   * To access the full response (for headers, for example), `getAllMessages$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  messagesGet(params?: MessagesGet$Params, context?: HttpContext): Observable<{
+  getAllMessages(params?: GetAllMessages$Params, context?: HttpContext): Observable<{
 'messageListMapped'?: Array<Message>;
 }> {
-    return this.messagesGet$Response(params, context).pipe(
+    return this.getAllMessages$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 'messageListMapped'?: Array<Message>;
 }>): {
@@ -72,8 +72,8 @@ export class MessageService extends BaseService {
     );
   }
 
-  /** Path part for operation `messagesPut()` */
-  static readonly MessagesPutPath = '/messages';
+  /** Path part for operation `updateMessage()` */
+  static readonly UpdateMessagePath = '/messages';
 
   /**
    * Update a message.
@@ -81,14 +81,14 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `messagesPut()` instead.
+   * To access only the response body, use `updateMessage()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  messagesPut$Response(params: MessagesPut$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  updateMessage$Response(params: UpdateMessage$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'status'?: string;
 }>> {
-    return messagesPut(this.http, this.rootUrl, params, context);
+    return updateMessage(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -97,14 +97,14 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `messagesPut$Response()` instead.
+   * To access the full response (for headers, for example), `updateMessage$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  messagesPut(params: MessagesPut$Params, context?: HttpContext): Observable<{
+  updateMessage(params: UpdateMessage$Params, context?: HttpContext): Observable<{
 'status'?: string;
 }> {
-    return this.messagesPut$Response(params, context).pipe(
+    return this.updateMessage$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 'status'?: string;
 }>): {
@@ -113,8 +113,8 @@ export class MessageService extends BaseService {
     );
   }
 
-  /** Path part for operation `messagesPost()` */
-  static readonly MessagesPostPath = '/messages';
+  /** Path part for operation `addMessage()` */
+  static readonly AddMessagePath = '/messages';
 
   /**
    * Insert a new message.
@@ -122,14 +122,14 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `messagesPost()` instead.
+   * To access only the response body, use `addMessage()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  messagesPost$Response(params: MessagesPost$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  addMessage$Response(params: AddMessage$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'status'?: string;
 }>> {
-    return messagesPost(this.http, this.rootUrl, params, context);
+    return addMessage(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -138,14 +138,14 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `messagesPost$Response()` instead.
+   * To access the full response (for headers, for example), `addMessage$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  messagesPost(params: MessagesPost$Params, context?: HttpContext): Observable<{
+  addMessage(params: AddMessage$Params, context?: HttpContext): Observable<{
 'status'?: string;
 }> {
-    return this.messagesPost$Response(params, context).pipe(
+    return this.addMessage$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 'status'?: string;
 }>): {
@@ -154,8 +154,8 @@ export class MessageService extends BaseService {
     );
   }
 
-  /** Path part for operation `messagesDelete()` */
-  static readonly MessagesDeletePath = '/messages';
+  /** Path part for operation `deleteMessage()` */
+  static readonly DeleteMessagePath = '/messages';
 
   /**
    * Delete a message.
@@ -163,14 +163,14 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `messagesDelete()` instead.
+   * To access only the response body, use `deleteMessage()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  messagesDelete$Response(params: MessagesDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  deleteMessage$Response(params: DeleteMessage$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'status'?: string;
 }>> {
-    return messagesDelete(this.http, this.rootUrl, params, context);
+    return deleteMessage(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -179,14 +179,14 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `messagesDelete$Response()` instead.
+   * To access the full response (for headers, for example), `deleteMessage$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  messagesDelete(params: MessagesDelete$Params, context?: HttpContext): Observable<{
+  deleteMessage(params: DeleteMessage$Params, context?: HttpContext): Observable<{
 'status'?: string;
 }> {
-    return this.messagesDelete$Response(params, context).pipe(
+    return this.deleteMessage$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 'status'?: string;
 }>): {
@@ -195,8 +195,8 @@ export class MessageService extends BaseService {
     );
   }
 
-  /** Path part for operation `messagesTitleGet()` */
-  static readonly MessagesTitleGetPath = '/messages/title';
+  /** Path part for operation `findByTitle()` */
+  static readonly FindByTitlePath = '/messages/title';
 
   /**
    * Filter messages by title.
@@ -204,12 +204,12 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `messagesTitleGet()` instead.
+   * To access only the response body, use `findByTitle()` instead.
    *
    * This method doesn't expect any request body.
    */
-  messagesTitleGet$Response(params: MessagesTitleGet$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
-    return messagesTitleGet(this.http, this.rootUrl, params, context);
+  findByTitle$Response(params: FindByTitle$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+    return findByTitle(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -218,18 +218,18 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `messagesTitleGet$Response()` instead.
+   * To access the full response (for headers, for example), `findByTitle$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  messagesTitleGet(params: MessagesTitleGet$Params, context?: HttpContext): Observable<any> {
-    return this.messagesTitleGet$Response(params, context).pipe(
+  findByTitle(params: FindByTitle$Params, context?: HttpContext): Observable<any> {
+    return this.findByTitle$Response(params, context).pipe(
       map((r: StrictHttpResponse<any>): any => r.body)
     );
   }
 
-  /** Path part for operation `messagesFilterGet()` */
-  static readonly MessagesFilterGetPath = '/messages/filter';
+  /** Path part for operation `findByFilter()` */
+  static readonly FindByFilterPath = '/messages/filter';
 
   /**
    * Filter messages by coincidence on any field.
@@ -237,12 +237,12 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `messagesFilterGet()` instead.
+   * To access only the response body, use `findByFilter()` instead.
    *
    * This method doesn't expect any request body.
    */
-  messagesFilterGet$Response(params?: MessagesFilterGet$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
-    return messagesFilterGet(this.http, this.rootUrl, params, context);
+  findByFilter$Response(params?: FindByFilter$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+    return findByFilter(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -251,12 +251,12 @@ export class MessageService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `messagesFilterGet$Response()` instead.
+   * To access the full response (for headers, for example), `findByFilter$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  messagesFilterGet(params?: MessagesFilterGet$Params, context?: HttpContext): Observable<any> {
-    return this.messagesFilterGet$Response(params, context).pipe(
+  findByFilter(params?: FindByFilter$Params, context?: HttpContext): Observable<any> {
+    return this.findByFilter$Response(params, context).pipe(
       map((r: StrictHttpResponse<any>): any => r.body)
     );
   }

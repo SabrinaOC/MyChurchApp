@@ -9,14 +9,14 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface AudioFilesGet$Params {
+export interface GetAudio$Params {
   url: string;
   title: string;
   mimetype: string;
 }
 
-export function audioFilesGet(http: HttpClient, rootUrl: string, params: AudioFilesGet$Params, context?: HttpContext): Observable<StrictHttpResponse<Blob>> {
-  const rb = new RequestBuilder(rootUrl, audioFilesGet.PATH, 'get');
+export function getAudio(http: HttpClient, rootUrl: string, params: GetAudio$Params, context?: HttpContext): Observable<StrictHttpResponse<Blob>> {
+  const rb = new RequestBuilder(rootUrl, getAudio.PATH, 'get');
   if (params) {
     rb.query('url', params.url, {});
     rb.query('title', params.title, {});
@@ -33,4 +33,4 @@ export function audioFilesGet(http: HttpClient, rootUrl: string, params: AudioFi
   );
 }
 
-audioFilesGet.PATH = '/audioFiles';
+getAudio.PATH = '/audioFiles';

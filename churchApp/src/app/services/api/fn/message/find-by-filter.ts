@@ -9,18 +9,18 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface MessagesDelete$Params {
-      body: {
-'id'?: number;
-}
+export interface FindByFilter$Params {
+  speaker?: number;
+  book?: number;
+  dateFrom?: Date;
 }
 
-export function messagesDelete(http: HttpClient, rootUrl: string, params: MessagesDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-'status'?: string;
-}>> {
-  const rb = new RequestBuilder(rootUrl, messagesDelete.PATH, 'delete');
+export function findByFilter(http: HttpClient, rootUrl: string, params?: FindByFilter$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  const rb = new RequestBuilder(rootUrl, findByFilter.PATH, 'get');
   if (params) {
-    rb.body(params.body, 'application/json');
+    rb.query('speaker', params.speaker, {});
+    rb.query('book', params.book, {});
+    rb.query('dateFrom', params.dateFrom, {});
   }
 
   return http.request(
@@ -28,11 +28,9 @@ export function messagesDelete(http: HttpClient, rootUrl: string, params: Messag
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<{
-      'status'?: string;
-      }>;
+      return r as StrictHttpResponse<any>;
     })
   );
 }
 
-messagesDelete.PATH = '/messages';
+findByFilter.PATH = '/messages/filter';

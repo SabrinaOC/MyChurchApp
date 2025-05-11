@@ -8,15 +8,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Message } from '../../models/message';
+import { Book } from '../../models/book';
 
-export interface MessagesGet$Params {
+export interface GetAllBooks$Params {
 }
 
-export function messagesGet(http: HttpClient, rootUrl: string, params?: MessagesGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-'messageListMapped'?: Array<Message>;
+export function getAllBooks(http: HttpClient, rootUrl: string, params?: GetAllBooks$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+'bookList'?: Array<Book>;
 }>> {
-  const rb = new RequestBuilder(rootUrl, messagesGet.PATH, 'get');
+  const rb = new RequestBuilder(rootUrl, getAllBooks.PATH, 'get');
   if (params) {
   }
 
@@ -26,10 +26,10 @@ export function messagesGet(http: HttpClient, rootUrl: string, params?: Messages
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
       return r as StrictHttpResponse<{
-      'messageListMapped'?: Array<Message>;
+      'bookList'?: Array<Book>;
       }>;
     })
   );
 }
 
-messagesGet.PATH = '/messages';
+getAllBooks.PATH = '/books';

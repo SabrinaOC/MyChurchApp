@@ -10,14 +10,14 @@ import { RequestBuilder } from '../../request-builder';
 
 import { NewMessage } from '../../models/new-message';
 
-export interface MessagesPost$Params {
+export interface AddMessage$Params {
       body: NewMessage
 }
 
-export function messagesPost(http: HttpClient, rootUrl: string, params: MessagesPost$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+export function addMessage(http: HttpClient, rootUrl: string, params: AddMessage$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'status'?: string;
 }>> {
-  const rb = new RequestBuilder(rootUrl, messagesPost.PATH, 'post');
+  const rb = new RequestBuilder(rootUrl, addMessage.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
   }
@@ -34,4 +34,4 @@ export function messagesPost(http: HttpClient, rootUrl: string, params: Messages
   );
 }
 
-messagesPost.PATH = '/messages';
+addMessage.PATH = '/messages';

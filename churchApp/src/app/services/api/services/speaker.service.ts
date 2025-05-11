@@ -11,9 +11,9 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { getAllSpeakers } from '../fn/speaker/get-all-speakers';
+import { GetAllSpeakers$Params } from '../fn/speaker/get-all-speakers';
 import { Speaker } from '../models/speaker';
-import { speakersGet } from '../fn/speaker/speakers-get';
-import { SpeakersGet$Params } from '../fn/speaker/speakers-get';
 
 @Injectable({ providedIn: 'root' })
 export class SpeakerService extends BaseService {
@@ -21,8 +21,8 @@ export class SpeakerService extends BaseService {
     super(config, http);
   }
 
-  /** Path part for operation `speakersGet()` */
-  static readonly SpeakersGetPath = '/speakers';
+  /** Path part for operation `getAllSpeakers()` */
+  static readonly GetAllSpeakersPath = '/speakers';
 
   /**
    * Get a list of all speakers.
@@ -30,14 +30,14 @@ export class SpeakerService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `speakersGet()` instead.
+   * To access only the response body, use `getAllSpeakers()` instead.
    *
    * This method doesn't expect any request body.
    */
-  speakersGet$Response(params?: SpeakersGet$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  getAllSpeakers$Response(params?: GetAllSpeakers$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'speakerList'?: Array<Speaker>;
 }>> {
-    return speakersGet(this.http, this.rootUrl, params, context);
+    return getAllSpeakers(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -46,14 +46,14 @@ export class SpeakerService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `speakersGet$Response()` instead.
+   * To access the full response (for headers, for example), `getAllSpeakers$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  speakersGet(params?: SpeakersGet$Params, context?: HttpContext): Observable<{
+  getAllSpeakers(params?: GetAllSpeakers$Params, context?: HttpContext): Observable<{
 'speakerList'?: Array<Speaker>;
 }> {
-    return this.speakersGet$Response(params, context).pipe(
+    return this.getAllSpeakers$Response(params, context).pipe(
       map((r: StrictHttpResponse<{
 'speakerList'?: Array<Speaker>;
 }>): {
