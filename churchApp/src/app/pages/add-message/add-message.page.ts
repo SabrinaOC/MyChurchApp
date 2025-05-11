@@ -80,7 +80,9 @@ export class AddMessagePage implements OnInit {
         //servicio editar
         const editMsg : Message = this.normalizeTitle();
         editMsg.id = this.editableMessage.id
+        // this.core.api.message.messagesPut(editMsg)
         this.restService.updateMessage(editMsg)
+        // this.core.api.message.messagesPut({body: editMsg})
         .subscribe({
           next: (res: any) => {
             this.form.reset();

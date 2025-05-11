@@ -1,0 +1,730 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My church API",
+        "version": "1.0.0",
+        "license": {
+            "name": "Licensed Under MIT",
+            "url": "https://spdx.org/licenses/MIT.html"
+        },
+        "contact": {
+            "name": "Sabrina Ojea Chapelet",
+            "url": "https://www.linkedin.com/in/sabrinaojeachapelet/"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://sabriojea-mychurch-api.k8s.arsahosting.net"
+        }
+    ],
+    "externalDocs": {
+        "description": "OpenAPI definition",
+        "url": "http://localhost:3000/api/docs.json"
+    },
+    "paths": {
+        "/audioFiles": {
+            "get": {
+                "summary": "Get audio from url",
+                "tags": [
+                    "AudioFile"
+                ],
+                "parameters": [
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "https://drive.google.com/file/d/1IlxPa5vsoW-bxwY_1i3BrySPLZNyYJcZ/view?usp=drive_link"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "emmanuel dios con nosotros"
+                        }
+                    },
+                    {
+                        "name": "mimetype",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": ".mp3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Audio downloaded",
+                        "content": {
+                            "audio/mpeg": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/books": {
+            "get": {
+                "summary": "Get a complete list of books",
+                "tags": [
+                    "Book"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "bookList": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Book"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/messages": {
+            "get": {
+                "summary": "Get a list of all messages",
+                "tags": [
+                    "Message"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "messageListMapped": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Message"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Insert a new message",
+                "tags": [
+                    "Message"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewMessage"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "New message added",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Message successfully added!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update a message",
+                "tags": [
+                    "Message"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewMessage"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message update",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Message successfully updated!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete a message",
+                "tags": [
+                    "Message"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "number",
+                                        "example": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Message deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Message successfully deleted!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/messages/title": {
+            "get": {
+                "summary": "Filter messages by title",
+                "tags": [
+                    "Message"
+                ],
+                "parameters": [
+                    {
+                        "name": "searchedTitle",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Título buscado"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Messages filtered",
+                        "content": {
+                            "application/json": {
+                                "properties": {
+                                    "messages": {
+                                        "type": "array",
+                                        "example": {
+                                            "messageListMapped": [
+                                                {
+                                                    "id": 70,
+                                                    "speaker": {
+                                                        "id": 1,
+                                                        "name": "Eduardo de la Piedra"
+                                                    },
+                                                    "book": {
+                                                        "id": 51,
+                                                        "name": "Colosenses"
+                                                    },
+                                                    "title": "Lucha por el tesoro",
+                                                    "normalizedTitle": "lucha por el tesoro",
+                                                    "date": "2025-01-26",
+                                                    "url": "https://drive.google.com/file/d/1_7l19YHv5RIhPBtAGGqkcv9Bzgk67mOY/view?usp=drivesdk",
+                                                    "note": null,
+                                                    "createdAt": "2025-01-29T14:19:33.907Z",
+                                                    "messageType": {
+                                                        "id": 1,
+                                                        "description": "Predicación"
+                                                    },
+                                                    "verses": "Colosenses 2:1-7;2 Corintios 11:24-28;Hechos 20:27-30;2 Corintios 4:2-6",
+                                                    "questions": "1. Corazones animados\n2. Corazones advertidos\n3. Corazones afirmados\n\n- ¿Quieres luchar por el verdadero tesoro?\n- ¿Por qué nos cuesta tanto disfrutar de ese tesoro y miramos lo que el mundo nos ofrece?\n- ¿Cuáles son tus luchas?\n- ¿Eres consciente de que tienes el consuelo dentro de ti? Cristo es la verdadera plenitud.\n- ¿Intentas llenar los vacíos de tu corazón con otras cosas aparte de Cristo? ¿Cómo está tu alma hoy?\n- ¿Qué enseñanza o discurso te ha podido seducir y desviar del camino? Necesitamos escuchar todo el consejo de Dios, aunque no endulce nuestros oídos y sea duro.\n- ¿Vives conforme a la palabra de Dios? ¿Es tu fe acorde con lo que vives?\n\nLa lucha cristiana siempre tiene un propósito. Sigue luchando, Dios no ha terminado contigo.",
+                                                    "mimetype": ".mp3"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/messages/filter": {
+            "get": {
+                "summary": "Filter messages by coincidence on any field",
+                "tags": [
+                    "Message"
+                ],
+                "parameters": [
+                    {
+                        "name": "speaker",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "book",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "number",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "dateFrom",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "Date",
+                            "example": "2024-01-01T14:43:00"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Messages filtered",
+                        "content": {
+                            "application/json": {
+                                "properties": {
+                                    "messages": {
+                                        "type": "array",
+                                        "example": {
+                                            "messageListMapped": [
+                                                {
+                                                    "id": 70,
+                                                    "speaker": {
+                                                        "id": 1,
+                                                        "name": "Eduardo de la Piedra"
+                                                    },
+                                                    "book": {
+                                                        "id": 51,
+                                                        "name": "Colosenses"
+                                                    },
+                                                    "title": "Lucha por el tesoro",
+                                                    "normalizedTitle": "lucha por el tesoro",
+                                                    "date": "2025-01-26",
+                                                    "url": "https://drive.google.com/file/d/1_7l19YHv5RIhPBtAGGqkcv9Bzgk67mOY/view?usp=drivesdk",
+                                                    "note": null,
+                                                    "createdAt": "2025-01-29T14:19:33.907Z",
+                                                    "messageType": {
+                                                        "id": 1,
+                                                        "description": "Predicación"
+                                                    },
+                                                    "verses": "Colosenses 2:1-7;2 Corintios 11:24-28;Hechos 20:27-30;2 Corintios 4:2-6",
+                                                    "questions": "1. Corazones animados\n2. Corazones advertidos\n3. Corazones afirmados\n\n- ¿Quieres luchar por el verdadero tesoro?\n- ¿Por qué nos cuesta tanto disfrutar de ese tesoro y miramos lo que el mundo nos ofrece?\n- ¿Cuáles son tus luchas?\n- ¿Eres consciente de que tienes el consuelo dentro de ti? Cristo es la verdadera plenitud.\n- ¿Intentas llenar los vacíos de tu corazón con otras cosas aparte de Cristo? ¿Cómo está tu alma hoy?\n- ¿Qué enseñanza o discurso te ha podido seducir y desviar del camino? Necesitamos escuchar todo el consejo de Dios, aunque no endulce nuestros oídos y sea duro.\n- ¿Vives conforme a la palabra de Dios? ¿Es tu fe acorde con lo que vives?\n\nLa lucha cristiana siempre tiene un propósito. Sigue luchando, Dios no ha terminado contigo.",
+                                                    "mimetype": ".mp3"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/messageTypes": {
+            "get": {
+                "summary": "Get a list of all message types",
+                "tags": [
+                    "MessageTypes"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of message types",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "messageTypeList": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/MessageType"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service unavailable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/speakers": {
+            "get": {
+                "summary": "Get a list of all speakers",
+                "tags": [
+                    "Speaker"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of speakers",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "speakerList": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Speaker"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    },
+                    "503": {
+                        "description": "Service unavailable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Message": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "speaker": {
+                        "$ref": "#/components/schemas/Speaker"
+                    },
+                    "book": {
+                        "$ref": "#/components/schemas/Book"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Este es el título"
+                    },
+                    "normalizedTitle": {
+                        "type": "string",
+                        "example": "este es el titulo"
+                    },
+                    "url": {
+                        "type": "string",
+                        "example": "https://drive..."
+                    },
+                    "date": {
+                        "type": "Date",
+                        "example": "23-12-24"
+                    },
+                    "note": {
+                        "type": "string",
+                        "example": "Nota con nombre invitado"
+                    },
+                    "messageType": {
+                        "$ref": "#/components/schemas/MessageType"
+                    },
+                    "verses": {
+                        "type": "string",
+                        "example": "Hebreos 11:1;Juan 3:16"
+                    },
+                    "questions": {
+                        "type": "string",
+                        "example": "¿Qué piensas?"
+                    },
+                    "mimetype": {
+                        "type": "string",
+                        "example": ".mp3"
+                    }
+                }
+            },
+            "Book": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Efesios"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "El libro de Efesios es una carta del apóstol Pablo que enfatiza la unidad en Cristo, la gracia de Dios y la vida cristiana, instruyendo a la iglesia sobre su identidad espiritual y la lucha contra las fuerzas del mal."
+                    }
+                }
+            },
+            "Speaker": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Susana Oria"
+                    }
+                }
+            },
+            "MessageType": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Predicación"
+                    }
+                }
+            },
+            "ErrorsSchema": {
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "string",
+                        "example": "Something went wrong..."
+                    }
+                }
+            },
+            "NewMessage": {
+                "type": "object",
+                "properties": {
+                    "id_speaker": {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "id_book": {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Este es el título"
+                    },
+                    "normalized_title": {
+                        "type": "string",
+                        "example": "este es el titulo"
+                    },
+                    "url": {
+                        "type": "string",
+                        "example": "https://drive..."
+                    },
+                    "date": {
+                        "type": "Date",
+                        "example": "23-12-24"
+                    },
+                    "note": {
+                        "type": "string",
+                        "example": "Nota con nombre invitado"
+                    },
+                    "id_message_type": {
+                        "type": "number",
+                        "example": 1
+                    },
+                    "verses": {
+                        "type": "string",
+                        "example": "Hebreos 11:1;Juan 3:16"
+                    },
+                    "questions": {
+                        "type": "string",
+                        "example": "¿Qué piensas?"
+                    },
+                    "mimetype": {
+                        "type": "string",
+                        "example": ".mp3"
+                    }
+                },
+                "required": [
+                    "id_speaker",
+                    "id_book",
+                    "title",
+                    "normalized_title",
+                    "url",
+                    "date",
+                    "id_message_type",
+                    "title"
+                ]
+            }
+        }
+    },
+    "tags": []
+}

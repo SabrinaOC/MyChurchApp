@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
+import { MessagesTitleGet$Params } from 'src/app/services/api/fn/message/messages-title-get';
 
 @Component({
   selector: 'app-message-list',
@@ -78,8 +79,9 @@ export class MessageListPage {
       })
       loading.present();
 
-      console.log('BUSQUEDA: ', query)
-      this.restService.getMessagesByTitle(query).subscribe({
+      // this.restService.getMessagesByTitle(query)
+      this.core.api.message.messagesTitleGet({searchedTitle : query})
+      .subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
           // this.rbSelection(this.rbSelected)
@@ -103,7 +105,9 @@ export class MessageListPage {
     })
     loading.present();
     console.log('ionViewWillEnter')
-    this.restService.getAllMessages().subscribe({
+    this.core.api.message.messagesGet()
+    // this.restService.getAllMessages()
+    .subscribe({
       next: (data: any) => {
         if(data) {
           this.updateMessageList(data.messageListMapped)
@@ -130,7 +134,8 @@ export class MessageListPage {
       
 
       // console.log('BUSQUEDA: ', this.removeNullUndefined(filtrosBusqueda))
-      this.restService.getMessagesByFilterOptions(this.removeNullUndefined(filtrosBusqueda)).subscribe({
+      this.core.api.message.messagesFilterGet(this.removeNullUndefined(filtrosBusqueda))
+      .subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
         },
@@ -168,7 +173,9 @@ export class MessageListPage {
   }
 
   refresh(event: any) {
-    this.restService.getAllMessages().subscribe((data: any) => {
+    this.restService.getAllMessages()
+    this.core.api.message.messagesGet()
+    .subscribe((data: any) => {
       if(data) {
         this.updateMessageList(data.messageListMapped)
       }
