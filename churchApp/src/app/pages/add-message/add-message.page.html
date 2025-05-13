@@ -22,7 +22,7 @@
 
       <!-- MESSAGE TYPE -->
       <ion-item>
-        <ion-select label="Tipo mensaje" label-placement="floating" formControlName="id_message_type">
+        <ion-select label="Tipo mensaje" label-placement="floating" formControlName="idMessageType">
           @for (msgType of this.restService.messageTypeList ; track msgType.id) {
           <ion-select-option [value]="msgType.id">{{ msgType.description }}</ion-select-option>
           }
@@ -31,13 +31,13 @@
 
       <!-- SPEAKER -->
       <ion-item>
-        <ion-select label="Predicador" label-placement="floating" formControlName="id_speaker">
+        <ion-select label="Predicador" label-placement="floating" formControlName="idSpeaker">
           @for (speaker of this.restService.speakerList ; track speaker.id) {
           <ion-select-option [value]="speaker.id">{{ speaker.name }}</ion-select-option>
           }
         </ion-select>
       </ion-item>
-      @if(this.form.get('id_speaker')?.value === 5) {
+      @if(this.form.get('idSpeaker')?.value === 5) {
       <ion-item>
         <ion-input label="Nombre predicador invitado" labelPlacement="floating" placeholder=""
           formControlName="note"></ion-input>
@@ -46,7 +46,7 @@
 
       <!-- BOOK -->
       <ion-item>
-        <ion-select label="Libro" label-placement="floating" formControlName="id_book">
+        <ion-select label="Libro" label-placement="floating" formControlName="idBook">
           @for (book of this.restService.bookList ; track book.id) {
           <ion-select-option [value]="book.id">{{ book.name }}</ion-select-option>
           }

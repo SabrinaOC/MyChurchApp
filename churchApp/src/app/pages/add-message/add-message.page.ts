@@ -36,11 +36,11 @@ export class AddMessagePage implements OnInit {
   ) {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),
-      id_speaker: new FormControl(null, Validators.required),
-      id_book: new FormControl(null),
+      idSpeaker: new FormControl(null, Validators.required),
+      idBook: new FormControl(null),
       date: new FormControl(this.datetime),
       url: new FormControl(null, Validators.required),
-      id_message_type: new FormControl(null, Validators.required),
+      idMessageType: new FormControl(null, Validators.required),
       note: new FormControl(null),
       questions: new FormControl(null),
       verses: new FormControl(null)
@@ -55,7 +55,7 @@ export class AddMessagePage implements OnInit {
 
   ionViewWillEnter() {
     this.checkIfPermissionNeeded()
-    this.form.get('id_speaker')?.valueChanges.subscribe(value => {
+    this.form.get('idSpeaker')?.valueChanges.subscribe(value => {
       if(value) {
         if(value === 5) {
           this.form.get('note')?.setValidators(Validators.required)
@@ -240,9 +240,9 @@ export class AddMessagePage implements OnInit {
     this.editableMessage = queryParams;
     
     this.form.reset(this.editableMessage);
-    this.form.get('id_message_type')?.reset(this.editableMessage?.['messageType']?.id);
-    this.form.get('id_speaker')?.reset(this.editableMessage?.['speaker']?.id);
-    this.form.get('id_book')?.reset(this.editableMessage?.['book']?.id);
+    this.form.get('idMessageType')?.reset(this.editableMessage?.['messageType']?.id);
+    this.form.get('idSpeaker')?.reset(this.editableMessage?.['speaker']?.id);
+    this.form.get('idBook')?.reset(this.editableMessage?.['book']?.id);
 
     this.datetime = new Date(this.editableMessage?.['date']).getTime();
 
