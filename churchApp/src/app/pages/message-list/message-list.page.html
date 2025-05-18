@@ -59,7 +59,7 @@
                   label-placement="floating"
                   formControlName="speaker"
                 >
-                  @for (speaker of this.restService.speakerList ; track
+                  @for (speaker of this.core.speakerList ; track
                   speaker.id) {
                   <ion-select-option [value]="speaker.id"
                     >{{ speaker.name }}</ion-select-option
@@ -73,7 +73,7 @@
                   label-placement="floating"
                   formControlName="book"
                 >
-                  @for (book of this.restService.bookList ; track book.id) {
+                  @for (book of this.core.bookList ; track book.id) {
                   <ion-select-option [value]="book.id"
                     >{{ book.name }}</ion-select-option
                   >
@@ -205,7 +205,7 @@
   <div div class="refresh">(Desliza para recargar)</div>
   }
   </div>
-
+  
   @if (selectedMessage) {
       <div style="margin-top: 24vh;"></div>
       <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)" (touchstart)="preventRefresher($event)" (finish)="markAsListened(selectedMessage, $event)"></app-mini-audio-player>
