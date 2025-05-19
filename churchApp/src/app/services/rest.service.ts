@@ -8,9 +8,6 @@ import { Observable, catchError, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class RestService {
-  public bookList!: Book[];
-  public speakerList!: Speaker[];
-  public messageTypeList!: MessageType[];
   
   constructor(private http: HttpClient) {}
 

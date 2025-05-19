@@ -2,12 +2,17 @@ import { Injectable } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import jsonBible from '../../assets/bible.json'
 import { ApiService } from './api.service';
+import { Book, MessageType, Speaker } from './api/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoreProvider {
   public theme: 'dark' | 'light' = 'dark';
+
+  messageTypeList: MessageType[] = [];
+  speakerList: Speaker[] = [];
+  bookList: Book[] = []
 
   constructor(
     public modalCtrl: ModalController,

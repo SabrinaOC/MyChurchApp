@@ -13,7 +13,7 @@
   <ion-list>
     @for (book of filteredBooks; track book) {
     <ion-item (click)="selectBook(book)">
-      {{book}}
+      {{book.name}}
     </ion-item>
     }
   </ion-list>
@@ -26,8 +26,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="selectedBook = ''">
-        <ion-icon name="arrow-back-circle"></ion-icon>
+      <ion-button (click)="selectedBook = undefined">
+        <ion-icon name="arrow-back" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -36,7 +36,7 @@
 
   <ion-toolbar>
     <div class="badge">
-      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}}</ion-badge>
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -58,7 +58,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="selectedChapter = 0">
-        <ion-icon name="arrow-back-circle"></ion-icon>
+        <ion-icon name="arrow-back" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -67,15 +67,15 @@
 
   <ion-toolbar>
     <div class="badge">
-      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}} {{selectedChapter}}</ion-badge>
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}} {{selectedChapter}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    @for (i of generateRange(0, verses); track $index) {
-    <ion-item (click)="selectedVerse = i">{{i}}</ion-item>
+    @for (i of generateRange(0, chapterVerses); track $index) {
+    <ion-item (click)="selectVerse(i)">{{i}}</ion-item>
     }
   </ion-list>
 </ion-content>
@@ -87,7 +87,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="selectedVerse = 0">
-        <ion-icon name="arrow-back-circle"></ion-icon>
+        <ion-icon name="arrow-back" color="dark"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -102,14 +102,14 @@
 
   <ion-toolbar>
     <div class="badge">
-      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook}} {{selectedChapter}}:{{selectedVerse}}</ion-badge>
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}} {{selectedChapter}}:{{selectedVerse}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    @for (i of generateRange(selectedVerse, verses); track $index) {
+    @for (i of generateRange(selectedVerse, chapterVerses); track $index) {
     <ion-item (click)="selectRange(i)">{{i}}</ion-item>
     }
   </ion-list>
