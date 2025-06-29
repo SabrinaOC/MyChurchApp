@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="navCtrl.navigateBack('')">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ msgSelected.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ msgSelected.book.name }}</ion-card-title>
+      @if (msgSelected.speaker.id === 5) {
+      <ion-card-subtitle>{{ msgSelected.note }}</ion-card-subtitle>
+      } @else {
+      <ion-card-subtitle>{{ msgSelected.speaker.name }}</ion-card-subtitle>
+      }
+    </ion-card-header>
+
+    <ion-card-content>
+      <h2>Reflexion:</h2>
+      <div [innerHTML]="msgSelected.questions | formatQuestionText">
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

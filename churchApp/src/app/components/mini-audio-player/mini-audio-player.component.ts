@@ -3,6 +3,7 @@ import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { GestureController, Gesture } from '@ionic/angular';
 import { RestService } from 'src/app/services/rest.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mini-audio-player',
@@ -19,9 +20,16 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
 
   private swipeGesture: Gesture | undefined;
 
-  audioUrl!: string | undefined;;
+  audioUrl!: string | undefined;
 
-  constructor(public core: CoreProvider, private gestureCtrl: GestureController, private restService: RestService) { }
+  navigationExtra: NavigationExtras = {};
+
+  constructor(
+    public core: CoreProvider,
+    private gestureCtrl: GestureController,
+    private restService: RestService,
+    private router: Router
+  ) { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['message']) {
       this.audioUrl = undefined;
@@ -87,5 +95,13 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
 
   endedAudio() {
     this.finish.emit();
+  }
+
+  openMsgDetail(event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.navigationExtra.queryParams = this.message;
+    this.router.navigate(['message-detail'], this.navigationExtra)
   }
 }
