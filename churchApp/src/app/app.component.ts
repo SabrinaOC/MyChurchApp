@@ -38,17 +38,17 @@ export class AppComponent {
   ) {
     this.core.api.book.getAllBooks().subscribe({
       next: (books: any) => {
-        this.restService.bookList = books.bookList
+        this.core.bookList = books.bookList;
       }
     })
     this.core.api.speaker.getAllSpeakers().subscribe({
       next: (speakers: any) => {
-        this.restService.speakerList = speakers.speakerList
+        this.core.speakerList = speakers.speakerList;
       }
     })
     this.core.api.messageType.getMessageTypes().subscribe({
       next: (msgTypes: any) => {
-        this.restService.bookList = msgTypes.messageTypeList
+        this.core.messageTypeList = msgTypes.messageTypeList;
       }
     })
 

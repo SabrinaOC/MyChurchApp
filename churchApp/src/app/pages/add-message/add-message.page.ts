@@ -5,7 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from 'src/app/components/simple-verse-selector/simple-verse-selector.component';
-import { Message, NewMessage } from 'src/app/services/api/models';
+import { Book, Message, MessageType, NewMessage } from 'src/app/services/api/models';
 import { RestService } from 'src/app/services/rest.service';
 
 @Component({
@@ -18,11 +18,12 @@ export class AddMessagePage implements OnInit {
   datetime: any = Date();
   messageEdit!: Message;
   editableMessage!: Message | any;
-
   manuallyAddedVerses: string = "";
   verses = new Map<number, string>();
   newVerseId: number = 0;
   editMode: boolean = false;
+
+  messageBook: string = ""
 
   constructor(
     public restService: RestService,
@@ -51,6 +52,7 @@ export class AddMessagePage implements OnInit {
 
   ngOnInit(): void {
     this.datetime = new Date().toISOString();
+    this.form.get('date')?.setValue(this.datetime); 
   }
 
   ionViewWillEnter() {
@@ -98,6 +100,8 @@ export class AddMessagePage implements OnInit {
             console.log('ERROR: ', err)
           },
           complete: () => {
+            this.verses.clear();
+            this.messageBook = "";
           }
         });
       } else {
@@ -118,7 +122,9 @@ export class AddMessagePage implements OnInit {
             );
             console.log('ERROR: ', err)
           },
-          complete: () => {
+          complete: () => {            
+            this.verses.clear();
+            this.messageBook = "";
           }
         });
       }
@@ -246,6 +252,8 @@ export class AddMessagePage implements OnInit {
 
     this.datetime = new Date(this.editableMessage?.['date']).getTime();
 
+    this.messageBook = this.editableMessage?.book.name;
+
     if(!this.editableMessage?.['date']) {
       this.datetime = new Date().getTime()
     }
@@ -262,7 +270,7 @@ export class AddMessagePage implements OnInit {
     });
     load.present();
     
-    this.core.api.message.deleteMessage({ body: this.editableMessage.id })
+    this.core.api.message.deleteMessage({ body: {id: this.editableMessage.id} })
     .subscribe({
       next: (res: any) => {
         this.form.reset();
@@ -298,6 +306,24 @@ export class AddMessagePage implements OnInit {
     alert.present();
   }
 
+  async showSimpleBookSelector() {
+    const popover = await this.popoverCtrl.create({
+      component: SimpleVerseSelectorComponent,
+      translucent: true,
+      cssClass: 'verse-selector-popover',
+      componentProps: {justBook: true}
+    });
+  
+    await popover.present();
+  
+    const { data } = await popover.onDidDismiss<Book>();
+    if (data) {
+      console.log(data);
+      this.messageBook = data.name!;
+      console.log(this.messageBook);
+      this.form.get('idBook')?.setValue(data.id);
+    }
+  }
 
   async showSimpleVerseSelector() {
     const popover = await this.popoverCtrl.create({
