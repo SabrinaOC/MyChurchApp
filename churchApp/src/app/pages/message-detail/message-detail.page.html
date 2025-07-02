@@ -5,24 +5,54 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ msgSelected.title }}</ion-title>
+    <ion-title>Detalle</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>{{ msgSelected.book.name }}</ion-card-title>
+      <!-- <div id="bookBadge">
+        <ion-badge>{{ msgSelected.book.name }}</ion-badge>
+      </div> -->
+      <h3>{{ msgSelected.book.name }}</h3>
+
+      <ion-card-title>{{ msgSelected.title }}
+        
+      </ion-card-title> 
+
       @if (msgSelected.speaker.id === 5) {
-      <ion-card-subtitle>{{ msgSelected.note }}</ion-card-subtitle>
+        <ion-card-subtitle>{{ msgSelected.note }}</ion-card-subtitle>
       } @else {
-      <ion-card-subtitle>{{ msgSelected.speaker.name }}</ion-card-subtitle>
+        <ion-card-subtitle>{{ msgSelected.speaker.name }}</ion-card-subtitle>
       }
     </ion-card-header>
 
     <ion-card-content>
       <h2>Reflexion:</h2>
-      <div [innerHTML]="msgSelected.questions | formatQuestionText">
+      <div [innerHTML]="msgSelected.questions | formatQuestionText"></div>
+      
+      <div id="bookBadge" class="ion-margin-top">
+        <ion-button class="ion-margin-end" fill="clear">
+          <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;"></ion-icon>
+        </ion-button>
+
+        <ion-button size="large" shape="round">
+          <ion-icon slot="icon-only" name="play"></ion-icon>
+        </ion-button>
+
+        <ion-button class="ion-margin-start" fill="clear" (click)="shareMessage($event)">
+          <ion-icon name="share-social-outline" style="color: #4d8dff;"></ion-icon>
+        </ion-button>
+      </div>
+      
+      <h2>Versículos:</h2>
+      <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; margin-top: 15px;">
+        @for (verse of verses; track $index) {
+            <ion-badge class="badge-verse">
+              <span>{{verse}}</span>
+            </ion-badge>
+        }
       </div>
     </ion-card-content>
   </ion-card>

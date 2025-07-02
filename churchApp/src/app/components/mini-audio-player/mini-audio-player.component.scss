@@ -1,6 +1,6 @@
 ion-card {
     border-radius: 15px;
-    background: rgba($color: #b26123, $alpha: 0.9);
+    background: rgba($color: var(--ion-color-primary-rgb), $alpha: 0.9);
 
     ion-card-header {
         padding-bottom: 0;
