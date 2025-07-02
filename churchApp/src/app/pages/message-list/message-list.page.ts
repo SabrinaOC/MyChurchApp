@@ -287,7 +287,6 @@ export class MessageListPage {
         // dialogTitle: `${message.title}`,
       });
     }
-
   }
 
   rbSelection(event: any) {
@@ -323,5 +322,13 @@ export class MessageListPage {
     
     this.navigationExtra.queryParams = message;
     this.router.navigate(['add-message'], this.navigationExtra)
+  }
+
+    openMsgDetail(message: Message, event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.navigationExtra.queryParams = message;
+    this.router.navigate(['message-detail'], this.navigationExtra)
   }
 }

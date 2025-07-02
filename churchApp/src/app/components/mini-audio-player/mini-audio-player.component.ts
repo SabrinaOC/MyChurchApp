@@ -62,6 +62,8 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
         if (ev.deltaY > 30 && !this.close) { //DeltaY value indicates the Y displacement
           this.close = true
           this.closeAudioPlayer();
+        } else if (ev.deltaY < -30) {
+          this.openMsgDetail(ev);
         }
       }
     });
@@ -98,8 +100,8 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
   }
 
   openMsgDetail(event: any) {
-    event.preventDefault();
-    event.stopPropagation();
+    // event.preventDefault();
+    // event.stopPropagation();
     
     this.navigationExtra.queryParams = this.message;
     this.router.navigate(['message-detail'], this.navigationExtra)
