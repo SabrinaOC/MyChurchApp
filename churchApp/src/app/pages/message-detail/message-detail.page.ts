@@ -5,13 +5,14 @@ import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { Share } from '@capacitor/share';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
+import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 
 @Component({
   selector: 'app-message-detail',
   templateUrl: './message-detail.page.html',
   styleUrls: ['./message-detail.page.scss'],
 })
-export class MessageDetailPage implements OnInit {
+export class MessageDetailPage {
 
   msgSelected!: Message;
   verses: string[] = [];
@@ -20,16 +21,17 @@ export class MessageDetailPage implements OnInit {
     public core: CoreProvider,
     public navCtrl: NavController,
     private router: Router
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.getMessageDetail();
   }
 
   getMessageDetail() {
     this.msgSelected = this.router.getCurrentNavigation()?.extras.queryParams as Message;
+
+    if (!this.msgSelected) {
+      this.navCtrl.navigateForward('message-list')
+    }
     this.versesToList();
-    console.log(this.msgSelected);
   }
 
   versesToList() {
@@ -37,7 +39,6 @@ export class MessageDetailPage implements OnInit {
   }
 
   async shareMessage(event: any) {
-    console.log("hola");
     event.stopPropagation()
     if (this.msgSelected.questions != null) {
       const modal = await this.core.modalCtrl.create({
@@ -48,7 +49,6 @@ export class MessageDetailPage implements OnInit {
       });
       modal.onDidDismiss().then(d => {
         if (d.data) {
-          // console.log(d.data);
           Share.share(d.data);
         }
       });
@@ -63,5 +63,5 @@ export class MessageDetailPage implements OnInit {
       });
     }
   }
-
+  
 }

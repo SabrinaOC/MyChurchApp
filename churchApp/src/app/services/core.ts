@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
-import jsonBible from '../../assets/bible.json'
+import { ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
+import jsonBible from '../../assets/bible.json';
 import { ApiService } from './api.service';
 import { Book, MessageType, Speaker } from './api/models';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +14,20 @@ export class CoreProvider {
 
   messageTypeList: MessageType[] = [];
   speakerList: Speaker[] = [];
-  bookList: Book[] = []
+  bookList: Book[] = [];
+  private bibleRVR1960: any;
 
   constructor(
+    private http: HttpClient,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    public api: ApiService
-  ) { }
+    public popoverCtrl: PopoverController,
+    public api: ApiService,
+    public router: Router,
+    public navCtrl: NavController
+  ) {
+    this.loadBibleRVR1960()
+  }
 
   public detectPrefersTheme() {
     let currentTheme: string | null = localStorage.getItem("theme");
@@ -118,6 +127,75 @@ export class CoreProvider {
     }
   
     return false;
+  }
+
+  private loadBibleRVR1960() {
+    this.http.get('../../assets/RVR1960 - Spanish.json').subscribe(data => {
+      console.log("Loaded Bible RVR1960");
+      this.bibleRVR1960 = data;
+    });
+  }
+
+public getBibleText(verseReference: string): string {
+  if (!this.bibleRVR1960) return 'The Bible is not loaded yet';
+
+  //Declare Regular Expresions
+  const versRegex: RegExp = /^([\dA-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+)\s+(\d+):(\d+)(?:-(\d+))?$/;
+  const capRegex: RegExp = /^([\dA-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+)\s+(\d+)$/;
+
+  let book = ''; //Deserved book
+  let chapter = ''; //Deserved chapter
+  let fromVerse = 0; //First verse
+  let toVerse = 0; //Last verse
+
+  let match: RegExpMatchArray | null;
+
+  //Check if the verses requested are are the whole chapter or an interval
+  if (match = verseReference.match(versRegex)) { //Verses
+    //Split elements by match
+    book = match[1];
+    chapter = match[2];
+    fromVerse = parseInt(match[3]);
+    toVerse = match[4] ? parseInt(match[4]) : fromVerse;
+
+  } else if (match = verseReference.match(capRegex)) { //Chapter
+    //Split elements by match
+    book = match[1];
+    chapter = match[2];
+    fromVerse = 1;
+
+    const verses = this.bibleRVR1960[book.trim()]?.[chapter];
+    if (!verses) return `Not found ${book} ${chapter}`;
+
+    toVerse = Math.max(...Object.keys(verses).map(Number));
+
+  } else {
+    return 'Invalid reference';
+  }
+
+  const bookName = book.trim();
+  const cap = this.bibleRVR1960[bookName]?.[chapter]; //Place chapter from Bible
+  if (!cap) return `Not found ${bookName} ${chapter}`;
+
+  let result = '';
+  //Fetch verses from Book and Chapter
+  for (let i = fromVerse; i <= toVerse; i++) { 
+    const texto = cap[i.toString()];
+    if (texto) {
+      result += `[${i}] ${texto}\n`;
+    }
+  }
+
+  return result.trim();
+}
+
+  normalizeText(text: string): string {
+    let normalized: string = ''
+    if(text) {
+      let formTitle = text.toLowerCase()
+      normalized = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+    }
+    return normalized;
   }
 
   public async adviceToast(color: string, message: string) {

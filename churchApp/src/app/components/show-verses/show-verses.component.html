@@ -1,0 +1,16 @@
+@if (verse) {
+  <ion-content>
+    <div class="badgeLayout">
+      <ion-badge>{{verse}}</ion-badge>
+    </div>
+
+    <ion-item>
+      <p class="bibleText">{{this.core.getBibleText(verse)}}</p>
+    </ion-item>
+  </ion-content>
+
+  <ion-footer>
+    <ion-button expand="block">Ver en la Biblia</ion-button>
+    <ion-button (click)="this.core.popoverCtrl.dismiss()" expand="block" color="light">Volver</ion-button>
+  </ion-footer>
+}

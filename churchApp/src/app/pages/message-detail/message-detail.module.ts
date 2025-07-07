@@ -8,6 +8,7 @@ import { MessageDetailPageRoutingModule } from './message-detail-routing.module'
 
 import { MessageDetailPage } from './message-detail.page';
 import { FormatQuestionTextPipe } from "../../components/format-question-text.pipe";
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { FormatQuestionTextPipe } from "../../components/format-question-text.pi
     FormsModule,
     IonicModule,
     MessageDetailPageRoutingModule,
-    FormatQuestionTextPipe
+    FormatQuestionTextPipe,
+    ComponentsModule
 ],
   declarations: [MessageDetailPage]
 })

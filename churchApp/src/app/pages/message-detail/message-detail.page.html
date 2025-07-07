@@ -12,9 +12,6 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <!-- <div id="bookBadge">
-        <ion-badge>{{ msgSelected.book.name }}</ion-badge>
-      </div> -->
       <h3>{{ msgSelected.book.name }}</h3>
 
       <ion-card-title>{{ msgSelected.title }}
@@ -32,7 +29,7 @@
       <h2>Reflexion:</h2>
       <div [innerHTML]="msgSelected.questions | formatQuestionText"></div>
       
-      <div id="bookBadge" class="ion-margin-top">
+      <div id="iconCenteredLayout" class="ion-margin-top">
         <ion-button class="ion-margin-end" fill="clear">
           <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;"></ion-icon>
         </ion-button>
@@ -49,9 +46,14 @@
       <h2>Versículos:</h2>
       <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; margin-top: 15px;">
         @for (verse of verses; track $index) {
-            <ion-badge class="badge-verse">
+            <ion-badge id="versesPopover{{$index}}" class="badge-verse">
               <span>{{verse}}</span>
             </ion-badge>
+            <ion-popover class="versesPopover" side="top" alignment="center" trigger="versesPopover{{$index}}">
+              <ng-template>
+                <app-show-verses [verse]="verse"></app-show-verses>
+              </ng-template>
+            </ion-popover>
         }
       </div>
     </ion-card-content>
