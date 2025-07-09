@@ -1,16 +1,17 @@
 @if (verse) {
-  <ion-content>
+  <ion-toolbar>
     <div class="badgeLayout">
-      <ion-badge>{{verse}}</ion-badge>
+      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{verse}}</ion-badge>
     </div>
+  </ion-toolbar>
+  <ion-content>
+    
+  <ion-item>
+    <p class="bibleText">{{this.core.getBibleText(verse)}}</p>
+  </ion-item>
+</ion-content>
 
-    <ion-item>
-      <p class="bibleText">{{this.core.getBibleText(verse)}}</p>
-    </ion-item>
-  </ion-content>
-
-  <ion-footer>
+<!-- <ion-footer>
     <ion-button expand="block">Ver en la Biblia</ion-button>
-    <ion-button (click)="this.core.popoverCtrl.dismiss()" expand="block" color="light">Volver</ion-button>
-  </ion-footer>
+  </ion-footer> -->
 }

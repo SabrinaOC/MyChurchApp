@@ -46,14 +46,14 @@
       <h2>Versículos:</h2>
       <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; margin-top: 15px;">
         @for (verse of verses; track $index) {
-            <ion-badge id="versesPopover{{$index}}" class="badge-verse">
+            <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
               <span>{{verse}}</span>
             </ion-badge>
-            <ion-popover class="versesPopover" side="top" alignment="center" trigger="versesPopover{{$index}}">
+            <!-- <ion-modal class="versesPopover" side="top" alignment="center" trigger="versesPopover{{$index}}">
               <ng-template>
                 <app-show-verses [verse]="verse"></app-show-verses>
               </ng-template>
-            </ion-popover>
+            </ion-modal> -->
         }
       </div>
     </ion-card-content>

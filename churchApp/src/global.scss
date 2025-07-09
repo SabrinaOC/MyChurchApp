@@ -37,7 +37,8 @@
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
 
-html, body {
+html,
+body {
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -48,6 +49,7 @@ html, body {
     font-family: 'IndieFlower';
     src: url('./assets/fonts/IndieFlower-Regular.ttf') format('truetype');
 }
+
 @font-face {
     font-family: 'NotoSerif';
     src: url('./assets/fonts/NotoSerif-VariableFont_wdth\,wght.ttf') format('truetype');
@@ -70,7 +72,7 @@ ion-loading.custom-loading {
 
     .loading-content {
         color: var(--ion-color-dark);
-        background:rgba(116, 117, 129, 0.25); 
+        background: rgba(116, 117, 129, 0.25);
         -webkit-box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
         -moz-box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
         box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
@@ -122,4 +124,11 @@ body.light-theme {
 
 .bibleText {
     font-family: "NotoSerif", sans-serif;
+}
+
+
+.versesPopover::part(content) {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 12px;
 }
