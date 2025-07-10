@@ -1,7 +1,8 @@
 @if (verse) {
-  <ion-toolbar>
-    <div class="badgeLayout">
-      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{verse}}</ion-badge>
+  <ion-toolbar color="primary">
+    <h2 id="verse">{{verse}}</h2>
+    <div class="closeIcon">
+      <ion-icon name="close-outline" size="large" color="dark" (click)="this.core.modalCtrl.dismiss()"></ion-icon>
     </div>
   </ion-toolbar>
   <ion-content>

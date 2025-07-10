@@ -94,7 +94,6 @@ export class MessageDetailPage {
   }
 
   async openShowVerses(verse: string) {
-    console.log("hola");
     const modal = await this.core.modalCtrl.create({
       component: ShowVersesComponent,
       componentProps: { verse },
