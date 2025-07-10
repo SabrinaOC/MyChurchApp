@@ -28,7 +28,7 @@ export class ShareOptionsPopoverComponent  implements OnInit {
     {
       format: "Formato de preguntas",
       title: "@Title",
-      text: "*@Title*. \n\n @Questions",
+      text: "*@Title*. \n\n@Questions\n",
       url: "@Url",
     },
   ]

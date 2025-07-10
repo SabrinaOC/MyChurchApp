@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { Message, MessageFilterOpt } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { IonModal, LoadingController } from '@ionic/angular';
-import { AppLauncher } from '@capacitor/app-launcher';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
@@ -80,11 +79,11 @@ export class MessageListPage {
       })
       loading.present();
 
-      console.log('BUSQUEDA: ', query)
-      this.restService.getMessagesByTitle(query).subscribe({
+      this.core.api.message.findByTitle({searchedTitle : query})
+      .subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
-          // this.rbSelection(this.rbSelected)
+
           this.updateListRdBtn()
         },
         error: (e) => {
@@ -104,8 +103,8 @@ export class MessageListPage {
       spinner: null,
     })
     loading.present();
-    console.log('ionViewWillEnter')
-    this.restService.getAllMessages().subscribe({
+    this.core.api.message.getAllMessages()
+    .subscribe({
       next: (data: any) => {
         if(data) {
           this.updateMessageList(data.messageListMapped)
@@ -132,7 +131,8 @@ export class MessageListPage {
       
 
       // console.log('BUSQUEDA: ', this.removeNullUndefined(filtrosBusqueda))
-      this.restService.getMessagesByFilterOptions(this.removeNullUndefined(filtrosBusqueda)).subscribe({
+      this.core.api.message.findByFilter(this.removeNullUndefined(filtrosBusqueda))
+      .subscribe({
         next: (val: any) => {
           this.updateMessageList(val.messageListMapped)
         },
@@ -170,7 +170,8 @@ export class MessageListPage {
   }
 
   refresh(event: any) {
-    this.restService.getAllMessages().subscribe((data: any) => {
+    this.core.api.message.getAllMessages()
+    .subscribe((data: any) => {
       if(data) {
         this.updateMessageList(data.messageListMapped)
       }
@@ -179,10 +180,9 @@ export class MessageListPage {
   }
 
   markAsListened(message: Message, event: any) {
-    event.stopPropagation()
+    event?.stopPropagation()
     //localStorage to track lilstened messages
     let listened = localStorage.getItem('listened');
-    // console.log('listened => ', listened)
     if(listened === null) {
       localStorage.setItem('listened', `${message.id}`)
     } else {
@@ -289,7 +289,6 @@ export class MessageListPage {
         // dialogTitle: `${message.title}`,
       });
     }
-
   }
 
   rbSelection(event: any) {
@@ -327,9 +326,11 @@ export class MessageListPage {
     this.router.navigate(['add-message'], this.navigationExtra)
   }
 
-  goToMessageInformation(navigate: boolean) {
-    if (navigate) {
-      this.router.navigate(['message-information'])
-    }
+    openMsgDetail(message: Message, event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.navigationExtra.queryParams = message;
+    this.router.navigate(['message-detail'], this.navigationExtra)
   }
 }

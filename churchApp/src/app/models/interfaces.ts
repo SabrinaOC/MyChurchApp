@@ -17,7 +17,7 @@ export interface Speaker {
 export interface Message {
     id: number,
     title: string,
-    normalized_title: string
+    normalizedTitle: string
     url: string,
     date: Date,
     speaker: Speaker,
@@ -27,8 +27,9 @@ export interface Message {
     isNew: Boolean,
     createdAt: Date,
     messageType: MessageType,
-    mimetype: string
-    questions: string
+    mimetype: string,
+    questions: string,
+    verses: string
 }
 
 export type NewMessage = Omit<Message, 'id'>

@@ -5,6 +5,7 @@ import { GestureController, Gesture } from '@ionic/angular';
 import { RestService } from 'src/app/services/rest.service';
 import * as Constants from 'src/app/constants'
 import { environment } from 'src/environments/environment';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-mini-audio-player',
@@ -14,6 +15,7 @@ import { environment } from 'src/environments/environment';
 export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterViewInit {
   @Input() public message!: Message | null;
   @Output() public closing: EventEmitter<any> = new EventEmitter();
+  @Output() public finish: EventEmitter<any> = new EventEmitter();
   @ViewChild("audioPlayer") audioPlayer!: ElementRef<HTMLElement>;
   @ViewChild('audio') audioElement?: ElementRef<HTMLAudioElement>; 
 
@@ -29,9 +31,15 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
   audioDuration!: any;
   progress!: any;
 
-  constructor(public core: CoreProvider,
-              private gestureCtrl: GestureController,
-              private restService: RestService) { }
+
+  navigationExtra: NavigationExtras = {};
+
+  constructor(
+    public core: CoreProvider,
+    private gestureCtrl: GestureController,
+    private restService: RestService,
+    private router: Router
+  ) { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['message']) {
       this.audioUrl = undefined;
@@ -80,12 +88,9 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
           console.log('IF')
           this.close = true
           this.closeAudioPlayer();
-        } 
-        // else if (ev.deltaY < 30) {
-        //   console.log('ELSE')
-        //   this.close = false
-        //   this.swipeUpEvent.emit(true)
-        // }
+        } else if (ev.deltaY < -30) {
+          this.openMsgDetail(ev);
+        }
       }
     });
 
@@ -121,7 +126,7 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
         /* nueva propuesta con fetch */
         try {
           // 🔹 Construimos la URL para descargar el audio
-          const url = `${environment.url}${environment.services.audioFiles}?url=${this.message.url}&title=${this.message.title}&mimetype=${this.message.mimetype}`;
+          const url = `${environment.url}/audioFiles?url=${this.message.url}&title=${this.message.title}&mimetype=${this.message.mimetype}`;
       
           // 🚀 Usamos fetch para descargar en streaming
           const response = await fetch(url, {
@@ -205,5 +210,17 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
     if(this.audioUrl) {
       this.onTapEvent.emit(true)
     }
+  }
+
+  endedAudio() {
+    this.finish.emit();
+  }
+
+  openMsgDetail(event: any) {
+    // event.preventDefault();
+    // event.stopPropagation();
+    
+    this.navigationExtra.queryParams = this.message;
+    this.router.navigate(['message-detail'], this.navigationExtra)
   }
 }

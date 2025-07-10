@@ -4,17 +4,20 @@ import { MiniAudioPlayerComponent } from './mini-audio-player/mini-audio-player.
 import { DriveLinkPipe } from './drive-link.pipe';
 import { IonicModule } from '@ionic/angular';
 import { ShareOptionsPopoverComponent } from './share-options-popover/share-options-popover.component';
+import { SimpleVerseSelectorComponent } from './simple-verse-selector/simple-verse-selector.component';
+import { FormsModule } from '@angular/forms';
 
 const COMPONENTS = [
   MiniAudioPlayerComponent,
-  ShareOptionsPopoverComponent
+  ShareOptionsPopoverComponent,
+  SimpleVerseSelectorComponent
 ];
 
 @NgModule({
   declarations: [COMPONENTS],
   imports: [
-    CommonModule, DriveLinkPipe, IonicModule
+    CommonModule, DriveLinkPipe, IonicModule, FormsModule
   ],
-  exports: [MiniAudioPlayerComponent, ShareOptionsPopoverComponent]
+  exports: [MiniAudioPlayerComponent, ShareOptionsPopoverComponent, SimpleVerseSelectorComponent]
 })
 export class ComponentsModule { }

@@ -20,8 +20,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
   {
-    path: 'message-information',
-    loadChildren: () => import('./pages/message-information/message-information.module').then( m => m.MessageInformationPageModule)
+    path: 'message-detail',
+    loadChildren: () => import('./pages/message-detail/message-detail.module').then( m => m.MessageDetailPageModule)
   }
 
 ];

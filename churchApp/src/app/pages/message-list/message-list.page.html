@@ -59,7 +59,7 @@
                   label-placement="floating"
                   formControlName="speaker"
                 >
-                  @for (speaker of this.restService.speakerList ; track
+                  @for (speaker of this.core.speakerList ; track
                   speaker.id) {
                   <ion-select-option [value]="speaker.id"
                     >{{ speaker.name }}</ion-select-option
@@ -73,7 +73,7 @@
                   label-placement="floating"
                   formControlName="book"
                 >
-                  @for (book of this.restService.bookList ; track book.id) {
+                  @for (book of this.core.bookList ; track book.id) {
                   <ion-select-option [value]="book.id"
                     >{{ book.name }}</ion-select-option
                   >
@@ -183,12 +183,13 @@
                 <!-- <a [href]="message.url"
                       ><ion-icon name="headset-outline"></ion-icon
                     ></a> -->
+                <ion-icon name="open-outline" style="color: #cbb04c; padding: 3px;" (click)="openMsgDetail(message, $event)"></ion-icon>
                 @if(message.listened) {
-                <ion-icon name="remove-circle-outline" style="color: #cbb04c; padding: 3px;"
-                  (click)="removeFromListened(message, $event)"></ion-icon>
+                  <ion-icon name="remove-circle-outline" style="color: #cbb04c; padding: 3px;"
+                    (click)="removeFromListened(message, $event)"></ion-icon>
                 } @else {
-                <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;"
-                  (click)="markAsListened(message, $event)"></ion-icon>
+                  <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;"
+                    (click)="markAsListened(message, $event)"></ion-icon>
                 }
                 <ion-icon name="share-social-outline" style="color: #4d8dff; padding: 3px;"
                   (click)="shareMessage(message, $event)"></ion-icon>
@@ -205,10 +206,10 @@
   <div div class="refresh">(Desliza para recargar)</div>
   }
   </div>
-
+  
   @if (selectedMessage) {
       <div style="margin-top: 24vh;"></div>
-      <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)" (touchstart)="preventRefresher($event)" (swipeUpEvent)="goToMessageInformation($event)" (onTapEvent)="goToMessageInformation($event)"></app-mini-audio-player>
+      <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)" (touchstart)="preventRefresher($event)" (finish)="markAsListened(selectedMessage, $event)"></app-mini-audio-player>
   }
 
 </ion-content>

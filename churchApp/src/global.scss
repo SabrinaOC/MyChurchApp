@@ -36,6 +36,14 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
 
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: static;
+}
+
 @font-face {
     font-family: 'IndieFlower';
     src: url('./assets/fonts/IndieFlower-Regular.ttf') format('truetype');
@@ -61,14 +69,17 @@ ion-loading.custom-loading {
         -webkit-box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
         -moz-box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
         box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
+        text-align: center;
     }
 }
 
 body.light-theme {
-    .loading-content {
-        -webkit-box-shadow: 10px 10px 78px 0px var(--ion-color-light);
-        -moz-box-shadow: 10px 10px 78px 0px var(--ion-color-light);
-        box-shadow: 10px 10px 78px 0px var(--ion-color-light);
+    .custom-loading {
+        .loading-content {
+            -webkit-box-shadow: 10px 10px 78px 0px var(--ion-color-light);
+            -moz-box-shadow: 10px 10px 78px 0px var(--ion-color-light);
+            box-shadow: 10px 10px 78px 0px var(--ion-color-light);
+        }
     }
 }
 
@@ -76,4 +87,24 @@ body.light-theme {
     display: flex;
     font-size: small;
     gap: 16px;
+}
+
+
+.verse-selector-popover {
+    --width: 80vw;
+    --height: 80vh;
+    bottom: 0;
+}
+
+.productToast {
+    color: white;
+}
+
+.badge-verse {
+    color: white;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    border-radius: 25px;
 }
