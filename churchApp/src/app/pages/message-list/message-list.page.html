@@ -1,14 +1,17 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-toggle>
+        <ion-img src="../assets/icon/favicon.png" style="width: 35px; margin-left: 10px;"></ion-img>
+      </ion-menu-toggle>
     </ion-buttons>
     <ion-title>Predicaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" id="messages">
   <ion-searchbar
+    mode="ios"
     animated="true"
     placeholder="Buscar por título"
     show-clear-button="always"
@@ -24,7 +27,7 @@
   </ion-refresher>
   <!-- filtros -->
   <div class="divFiltros">
-    <div style="padding-left: 8px; font-size: small; margin-top: 7px; display: flex; justify-content: space-around; margin-bottom: 7px;">
+    <div style="padding-left: 8px; font-size: small; margin-top: 7px; display: flex; justify-content: space-around; margin-bottom: 7px; color: white;">
         <ion-radio-group [value]="rbSelected" class="custom-radio-button-group" (ionFocus)="rbSelection($event)">
           <ion-radio value="listened" labelPlacement="end">Escuchadas</ion-radio><br>
           <ion-radio value="pending" labelPlacement="end">Pendientes</ion-radio><br>
@@ -32,7 +35,7 @@
         </ion-radio-group>
     </div>
     <div class="filtros">
-      <div button id="open-modal" class="action">
+      <div button id="open-modal" class="action" style="color: white;">
         <span>Filtros</span>
         <ion-icon name="options-outline" size="large"></ion-icon>
       </div>
@@ -156,20 +159,21 @@
         @if (message.isNew && !message.listened) {
           <h3 class="heartBeatLetters">¡Nueva!</h3>
         }
-        <ion-card (click)="selectMessage(message)" [class.highlightedCard]="message.isNew && !message.listened">
-          <ion-card-header>
-            <div style="display: flex; justify-content: space-between;">
-              <ion-card-title>{{ message.title }}</ion-card-title>
-              @if (isAuthUser) {
-                <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(message, $event)"></ion-icon>
-              }
-            </div>
+        <ion-card mode="ios" (click)="selectMessage(message)" [class.highlightedCard]="message.isNew && !message.listened">
+          <ion-card-header style="margin-bottom: -5px;">
             <ion-card-subtitle>
               <div class="flexSB">
                 <div>{{ message.book.name}}</div>
                 <div>{{ message.date| date:'dd/MM/yyyy' }}</div>
               </div>
             </ion-card-subtitle>
+
+            <div style="display: flex; justify-content: space-between;">
+              <ion-card-title color="dark" mode="md" class="ion-margin-bottom">{{ message.title }}</ion-card-title>
+              @if (isAuthUser) {
+                <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(message, $event)"></ion-icon>
+              }
+            </div>
           </ion-card-header>
       
           <ion-card-content>

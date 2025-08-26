@@ -1,6 +1,6 @@
 @if (!selectedBook) {
   <!-- BOOK SELECTOR -->
-<ion-header>
+<ion-header  mode="ios">
   <ion-toolbar>
     <ion-title>Libro:</ion-title>
   </ion-toolbar>
@@ -23,7 +23,7 @@
 
 <!-- CHAPTER SELECTOR -->
 @if (selectedChapter === 0) {
-<ion-header>
+<ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="selectedBook = undefined">
@@ -36,7 +36,8 @@
 
   <ion-toolbar>
     <div class="badgeLayout">
-      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}}</ion-badge>
+      <!-- <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}}</ion-badge> -->
+      <ion-badge>{{selectedBook.name}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -54,7 +55,7 @@
 @if (selectedVerse === 0) {
 
   <!-- VERSE SELECTOR -->
-<ion-header>
+<ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="selectedChapter = 0">
@@ -67,7 +68,8 @@
 
   <ion-toolbar>
     <div class="badgeLayout">
-      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}} {{selectedChapter}}</ion-badge>
+      <!-- <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}} {{selectedChapter}}</ion-badge> -->
+      <ion-badge>{{selectedBook.name}} {{selectedChapter}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -83,7 +85,7 @@
 } @else {
 
   <!-- VERSE RANGE SELECTOR -->
-<ion-header>
+<ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="selectedVerse = 0">
@@ -102,7 +104,8 @@
 
   <ion-toolbar>
     <div class="badgeLayout">
-      <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}} {{selectedChapter}}:{{selectedVerse}}</ion-badge>
+      <!-- <ion-badge [ngClass]="{'light-badge' : core.theme === 'light'}">{{selectedBook.name}} {{selectedChapter}}:{{selectedVerse}}</ion-badge> -->
+      <ion-badge>{{selectedBook.name}} {{selectedChapter}}:{{selectedVerse}}</ion-badge>
     </div>
   </ion-toolbar>
 </ion-header>

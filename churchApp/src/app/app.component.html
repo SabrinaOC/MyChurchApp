@@ -1,32 +1,33 @@
 <ion-app>
   <ion-split-pane contentId="main-content" when="lg">
     <ion-menu menuId="first-menu" contentId="main-content">
-    <ion-list>
-      <ion-list-header>
-        <ion-img src="../assets/icons/icon-96.webp"></ion-img>
-        <ion-label>Fernán Núñez<br> Comunidad Cristiana</ion-label>
-      </ion-list-header>
-      <ion-menu-toggle autoHide="false" *ngFor="let p of accountPages; let i = index">
-        @if (p.url !== '/add-message' || p.url === '/add-message' && isAuthorized) {
+      <ion-list>
+        <ion-list-header>
+          <ion-img src="../assets/icons/icon-96.webp"></ion-img>
+          <ion-label>Fernán Núñez<br> Comunidad Cristiana</ion-label>
+        </ion-list-header>
+        <ion-menu-toggle autoHide="false" *ngFor="let p of accountPages; let i = index">
+          @if (p.url !== '/add-message' || p.url === '/add-message' && isAuthorized) {
           <ion-item [routerLink]="p.url" class="icon-container">
-            <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''" [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
+            <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''"
+              [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
             <ion-label>
               {{p.title}}
             </ion-label>
           </ion-item>
-        }
-      </ion-menu-toggle>
-    </ion-list>
-    <ion-footer>
-      <div style="padding-left: 4px; font-size: small;" (click)="checkIfPermissionNeeded();">
-        <!-- <ion-icon slot="start" color="light" name="lock-closed-outline" style="font-size: 10px;"></ion-icon> -->
-        <ion-text> 
-          {{ version }}
-          <span style="color: transparent;">Patata:</span>
-        </ion-text>
-      </div>
-    </ion-footer>
-  </ion-menu>
+          }
+        </ion-menu-toggle>
+      </ion-list>
+      <ion-footer>
+        <div style="padding-left: 4px; font-size: small;" (click)="checkIfPermissionNeeded();">
+          <!-- <ion-icon slot="start" color="light" name="lock-closed-outline" style="font-size: 10px;"></ion-icon> -->
+          <ion-text>
+            {{ version }}
+            <span style="color: transparent;">Patata:</span>
+          </ion-text>
+        </div>
+      </ion-footer>
+    </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

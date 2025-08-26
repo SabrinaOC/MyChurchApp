@@ -3,18 +3,10 @@
     // margin-bottom:5px;
     display: flex;
     justify-content: center;
-    
-    // ion-badge {
-    //     color: white;
-    //     font-size: 15px;
-    //     border-radius: 25px;
-    //     padding-left: 10px;
-    //     padding-right: 10px;
-    // }
 }
 
 h2 {
-    color: white;
+    // color: var(--ion-color-light);
     margin-top: 15px;
 }
 
@@ -25,4 +17,20 @@ h3 {
 
 #playButton {
     border-radius: 25px;
+}
+
+@media (width > 600px) {
+    .versesPopover {
+        --width: 60vw;
+    }
+}
+
+@media (width > 900px) {
+    .versesPopover {
+        --width: 40vw;
+    }
+}
+
+#questionsDiv {
+    color: white;
 }
