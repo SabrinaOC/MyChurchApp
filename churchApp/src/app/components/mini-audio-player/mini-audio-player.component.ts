@@ -3,7 +3,6 @@ import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { GestureController, Gesture } from '@ionic/angular';
 import { RestService } from 'src/app/services/rest.service';
-import * as Constants from 'src/app/constants'
 import { environment } from 'src/environments/environment';
 import { NavigationExtras, Router } from '@angular/router';
 
