@@ -115,7 +115,7 @@ export class RestService {
    * @param msg 
    * @returns 
    */
-  downloadAudioFile(msg: Message): Observable<any> {
+  downloadAudioFile(msg: Message): Observable<Blob> {
     return this.http
       .get(environment.url + '/audioFiles', {
         headers: { 'Accept': 'audio/mpeg' },

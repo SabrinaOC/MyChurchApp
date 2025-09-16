@@ -33,6 +33,7 @@
     "@ionic/angular": "^8.0.0",
     "@trapezedev/configure": "^7.0.10",
     "firebase": "^10.12.3",
+    "howler": "^2.2.4",
     "ionicons": "^7.0.0",
     "lodash": "^4.17.21",
     "marked": "^15.0.11",

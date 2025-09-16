@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'message-list',
     loadChildren: () => import('./pages/message-list/message-list.module').then( m => m.MessageListPageModule)
-  },  {
+  },
+  {
     path: 'settings',
     loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
