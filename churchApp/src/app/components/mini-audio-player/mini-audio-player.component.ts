@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, output, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { GestureController, Gesture } from '@ionic/angular';
 import { RestService } from 'src/app/services/rest.service';
+import { environment } from 'src/environments/environment';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -10,17 +11,26 @@ import { NavigationExtras, Router } from '@angular/router';
   templateUrl: './mini-audio-player.component.html',
   styleUrls: ['./mini-audio-player.component.scss'],
 })
-export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnChanges {
+export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterViewInit {
   @Input() public message!: Message | null;
   @Output() public closing: EventEmitter<any> = new EventEmitter();
   @Output() public finish: EventEmitter<any> = new EventEmitter();
   @ViewChild("audioPlayer") audioPlayer!: ElementRef<HTMLElement>;
+  @ViewChild('audio') audioElement!: ElementRef<HTMLAudioElement>; 
+
 
   close: boolean = false;
 
   private swipeGesture: Gesture | undefined;
-
+  
   audioUrl!: string | undefined;
+  // nueva forma de event emitter angular 17
+  swipeUpEvent = output<boolean>();
+  onTapEvent = output<boolean>();
+  audioDuration!: any;
+  progress!: any;
+  startPlaying: boolean = false;
+
 
   navigationExtra: NavigationExtras = {};
 
@@ -32,7 +42,7 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['message']) {
-      this.audioUrl = undefined;
+      this.startPlaying = false;
       if (this.message) {
         this.getaudioFromServer()
       }
@@ -46,7 +56,8 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
     }
   }
 
-  ngAfterViewInit() {  
+  ngAfterViewInit() {
+    this.getaudioFromServer();
     if (this.audioPlayer) {
       this.initializeSwipeGesture();
     }
@@ -79,19 +90,22 @@ export class MiniAudioPlayerComponent implements AfterViewInit, OnDestroy, OnCha
     }, 700); //This time must match with the "disappearAudioPlayerAnimation" time
   }
 
-  getaudioFromServer() {
-    if(this.message) {
-      this.restService.downloadAudioFile(this.message)
-      // this.core.api.audio.getAudio(this.message)
-      .subscribe({
-        next: (response: Blob) => {
-          // Convertimos el blob en una URL para el elemento de audio
-          this.audioUrl = URL.createObjectURL(response);
-        },
-        error: (error) => {
-          console.error('Error al recibir el archivo de audio:', error);
-        }
-      })
+  getaudioFromServer(): void {
+    if(this.message && this.audioElement) {
+      const url = `${environment.url}/audioFiles?url=${this.message.url}&title=${this.message.title}&mimetype=${this.message.mimetype}`;
+      
+      this.audioElement.nativeElement.src = url
+      
+    }
+  }
+
+  onAudioPlaying() {
+      this.startPlaying = true;
+  }
+
+  tapEvent() {
+    if(this.audioUrl) {
+      this.onTapEvent.emit(true)
     }
   }
 

@@ -1,11 +1,10 @@
 #iconCenteredLayout {
     display: flex;
     justify-content: center;
-
 }
 
 h2 {
-    color: var(--ion-color-light);
+    // color: var(--ion-color-light);
     margin-top: 15px;
 }
 
@@ -22,8 +21,13 @@ h3 {
         --width: 60vw;
     }
 }
+
 @media (width > 900px) {
     .versesPopover {
         --width: 40vw;
     }
+}
+
+#questionsDiv {
+    color: white;
 }

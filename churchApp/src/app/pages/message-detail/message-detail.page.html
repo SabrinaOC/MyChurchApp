@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="navCtrl.navigateBack('')">
@@ -14,9 +14,7 @@
     <ion-card-header>
       <h3>{{ msgSelected.book.name }}</h3>
 
-      <ion-card-title>{{ msgSelected.title }}
-        
-      </ion-card-title> 
+      <ion-card-title>{{ msgSelected.title }}</ion-card-title> 
 
       @if (msgSelected.speaker.id === 5) {
         <ion-card-subtitle>{{ msgSelected.note }}</ion-card-subtitle>
@@ -27,7 +25,7 @@
 
     <ion-card-content>
       <h2>Reflexion:</h2>
-      <div [innerHTML]="msgSelected.questions | formatQuestionText"></div>
+      <div id="questionsDiv" [innerHTML]="msgSelected.questions | formatQuestionText"></div>
       
       <div id="iconCenteredLayout" class="ion-margin-top">
         <ion-button class="ion-margin-end" fill="clear">
