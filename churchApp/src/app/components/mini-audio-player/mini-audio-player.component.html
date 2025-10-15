@@ -1,5 +1,5 @@
 @if (message) {
-<div #audioPlayer id="audio-player" class="appearAudioPlayer">
+<div #audioPlayer id="audio-player" class="appearAudioPlayer" (click)="tapEvent()">
   <ion-card>
     <ion-card-header>
       <ion-row style="margin-bottom: -10px;">
@@ -23,11 +23,10 @@
       </div>
 
       <div style="display: flex; justify-content: center;">
-          @if (audioUrl) {
-            <audio controls [class.invertColors]="core.theme === 'light'" autoplay id="audio" (ended)="endedAudio()">
-              <source [src]="audioUrl" type="audio/mpeg">
-            </audio>
-          } @else {
+            <audio controls [class.invertColors]="core.theme === 'light'" [hidden]="!startPlaying" autoplay #audio (playing)="onAudioPlaying()" (seeking)="startPlaying = false">
+              <progress id="progressBar" [value]="progress" max="100"></progress></audio>
+
+           @if (!startPlaying) {
             <div id="cargando-div">
               <ion-label>Cargando el audio &nbsp;</ion-label>
               <ion-spinner name="dots" color="dark"></ion-spinner>
