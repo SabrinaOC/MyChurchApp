@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="navCtrl.navigateBack('')">
@@ -47,20 +47,18 @@
       <!-- BOOK -->
       <ion-item (click)="showSimpleBookSelector()">
         <ion-input label="Libro" labelPlacement="floating" [readonly]="true" [value]="messageBook"></ion-input>
-        <!-- <ion-button> -->
-            <ion-icon name="book-outline" [color]="core.theme"></ion-icon>
-        <!-- </ion-button> -->
+          <ion-icon name="book-outline"></ion-icon>
       </ion-item>
 
       <!-- DATE -->
       <ion-item id="date">
         <ion-input label="Fecha" labelPlacement="floating" value="{{ datetime | date: 'dd.MM.yyyy' }}"></ion-input>
-        <ion-icon name="calendar-outline" [color]="core.theme"></ion-icon>
+        <ion-icon name="calendar-outline"></ion-icon>
       </ion-item>
       <ion-popover trigger="date" reference="action-sheet">
         <ng-template>
           <ion-datetime presentation="date" formControlName="date" size="cover" [(ngModel)]="datetime"
-            firstDayOfWeek="1"></ion-datetime>
+            firstDayOfWeek="1" mode="ios"></ion-datetime>
         </ng-template>
       </ion-popover>
 
@@ -80,8 +78,6 @@
       <!-- VERSES -->
       <ion-list>
         <ion-item>
-          <!-- <ion-textarea label="Versículos" autoGrow="true"
-          label-placement="floating" formControlName="verses"></ion-textarea> -->
           <ion-label>Versículos</ion-label>
           <ion-button [color]="core.theme" (click)="expandedInput['expanded'] = !expandedInput['expanded']" fill="clear">
             <ion-icon [name]="expandedInput['expanded'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>

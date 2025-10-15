@@ -75,6 +75,7 @@ export class MessageListPage {
       let loading = await this.loadingController.create({
         message: 'Recuperando predicaciones...',
         cssClass: 'custom-loading',
+        mode: 'md',
         spinner: null,
       })
       loading.present();
@@ -100,6 +101,7 @@ export class MessageListPage {
     let loading = await this.loadingController.create({
       message: 'Recuperando predicaciones...',
       cssClass: 'custom-loading',
+      mode: 'md',
       spinner: null,
     })
     loading.present();
@@ -123,6 +125,7 @@ export class MessageListPage {
       let loading = await this.loadingController.create({
         message: 'Aplicando filtros...',
         cssClass: 'custom-loading',
+        mode: 'md',
         spinner: null,
       })
       loading.present();
