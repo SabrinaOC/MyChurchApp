@@ -16,18 +16,6 @@ h3 {
     border-radius: 25px;
 }
 
-@media (width > 600px) {
-    .versesPopover {
-        --width: 60vw;
-    }
-}
-
-@media (width > 900px) {
-    .versesPopover {
-        --width: 40vw;
-    }
-}
-
 #questionsDiv {
     color: white;
 }

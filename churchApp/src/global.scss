@@ -107,6 +107,23 @@ body.light-theme {
     bottom: 0;
 }
 
+.versesPopover {
+    --height: 45dvh;
+}
+
+@media (width > 600px) {
+    .versesPopover {
+        --width: 60vw;
+        --height: 50dvh;
+    }
+}
+
+@media (width > 900px) {
+    .versesPopover {
+        --width: 40vw;
+    }
+}
+
 .productToast {
     color: white;
 }
