@@ -6,11 +6,13 @@ import { IonicModule } from '@ionic/angular';
 import { ShareOptionsPopoverComponent } from './share-options-popover/share-options-popover.component';
 import { SimpleVerseSelectorComponent } from './simple-verse-selector/simple-verse-selector.component';
 import { FormsModule } from '@angular/forms';
+import { ShowVersesComponent } from './show-verses/show-verses.component';
 
 const COMPONENTS = [
   MiniAudioPlayerComponent,
   ShareOptionsPopoverComponent,
-  SimpleVerseSelectorComponent
+  SimpleVerseSelectorComponent,
+  ShowVersesComponent
 ];
 
 @NgModule({
@@ -18,6 +20,6 @@ const COMPONENTS = [
   imports: [
     CommonModule, DriveLinkPipe, IonicModule, FormsModule
   ],
-  exports: [MiniAudioPlayerComponent, ShareOptionsPopoverComponent, SimpleVerseSelectorComponent]
+  exports: [MiniAudioPlayerComponent, ShareOptionsPopoverComponent, SimpleVerseSelectorComponent, ShowVersesComponent]
 })
 export class ComponentsModule { }

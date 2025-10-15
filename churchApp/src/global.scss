@@ -26,7 +26,8 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 
-html, body {
+html,
+body {
     height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
@@ -75,7 +76,7 @@ ion-loading.custom-loading {
 
     .loading-content {
         color: var(--ion-color-dark);
-        background:rgba(116, 117, 129, 0.25); 
+        background: rgba(116, 117, 129, 0.25);
         -webkit-box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
         -moz-box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
         box-shadow: 10px 10px 78px 0px var(--ion-color-dark);
@@ -106,6 +107,23 @@ body.light-theme {
     bottom: 0;
 }
 
+.versesPopover {
+    --height: 45dvh;
+}
+
+@media (width > 600px) {
+    .versesPopover {
+        --width: 60vw;
+        --height: 50dvh;
+    }
+}
+
+@media (width > 900px) {
+    .versesPopover {
+        --width: 40vw;
+    }
+}
+
 .productToast {
     color: white;
 }
@@ -117,4 +135,21 @@ body.light-theme {
     align-items: center;
     margin-bottom: 5px;
     border-radius: 25px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    ion-icon {
+        margin: -3px -3px -3px 2px;
+    }
+}
+
+.bibleText {
+    font-family: "NotoSerif", sans-serif;
+}
+
+
+.versesPopover::part(content) {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 12px;
 }

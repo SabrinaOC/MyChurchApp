@@ -1,6 +1,4 @@
-#bookBadge {
-    // margin-top: 10px;
-    // margin-bottom:5px;
+#iconCenteredLayout {
     display: flex;
     justify-content: center;
 }
@@ -12,23 +10,10 @@ h2 {
 
 h3 {
     margin-top: -5px;
-    // margin-bottom: -10px;
 }
 
 #playButton {
     border-radius: 25px;
-}
-
-@media (width > 600px) {
-    .versesPopover {
-        --width: 60vw;
-    }
-}
-
-@media (width > 900px) {
-    .versesPopover {
-        --width: 40vw;
-    }
 }
 
 #questionsDiv {

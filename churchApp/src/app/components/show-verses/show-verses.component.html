@@ -1,0 +1,14 @@
+@if (verse) {
+  <ion-toolbar color="primary">
+    <h2 id="verse">{{verse}}</h2>
+    <div class="closeIcon">
+      <ion-icon name="close-outline" size="large" color="dark" (click)="this.core.modalCtrl.dismiss()"></ion-icon>
+    </div>
+  </ion-toolbar>
+  <ion-content>
+    
+  <ion-item>
+      <p class="bibleText">{{this.core.getBibleText(verse)}}</p>
+  </ion-item>
+</ion-content>
+}

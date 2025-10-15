@@ -1,0 +1,22 @@
+ion-button {
+    color: white;
+}
+
+#verse {
+    font-family: var(--ion-font-family, inherit);
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    color: white;
+}
+
+.closeIcon {
+    position: fixed;
+    top: 4px;
+    width: 70%;
+    right: 4px;
+    display: flex;
+    justify-content: end;
+}
