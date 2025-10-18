@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { Message, MessageFilterOpt } from '../../models/interfaces';
+import { Book, Message, MessageFilterOpt } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { IonModal, LoadingController } from '@ionic/angular';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -9,6 +9,7 @@ import { CoreProvider } from 'src/app/services/core';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
 import * as Constants from 'src/app/constants'
+import { SimpleVerseSelectorComponent } from 'src/app/components/simple-verse-selector/simple-verse-selector.component';
 
 @Component({
   selector: 'app-message-list',
@@ -30,6 +31,8 @@ export class MessageListPage {
   isOpenSharePopover: boolean = false;
   isAuthUser: boolean = false;
   navigationExtra: NavigationExtras = {};
+
+  filteredBook: string = "";
 
   constructor(
               public core: CoreProvider,
@@ -336,4 +339,22 @@ export class MessageListPage {
     this.navigationExtra.queryParams = message;
     this.router.navigate(['message-detail'], this.navigationExtra)
   }
+
+    async showSimpleBookSelector() {
+      const popover = await this.core.popoverCtrl.create({
+        component: SimpleVerseSelectorComponent,
+        translucent: true,
+        cssClass: 'verse-selector-popover',
+        componentProps: {justBook: true}
+      });
+    
+      await popover.present();
+    
+      const { data } = await popover.onDidDismiss<Book>();
+      if (data) {
+        console.log(data);
+        this.filterForm.get('book')?.setValue(data.id);
+        this.filteredBook = data.name;
+      }
+    }
 }

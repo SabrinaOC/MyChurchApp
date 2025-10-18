@@ -54,8 +54,10 @@
               </ion-buttons>
             </ion-toolbar>
           </ion-header>
+
           <ion-content class="ion-padding">
             <form [formGroup]="filterForm">
+              <!-- SPEAKER -->
               <ion-item>
                 <ion-select
                   label="Predicador"
@@ -70,7 +72,9 @@
                   }
                 </ion-select>
               </ion-item>
-              <ion-item>
+
+              <!-- BOOK -->
+              <!-- <ion-item>
                 <ion-select
                   label="Libro"
                   label-placement="floating"
@@ -82,39 +86,32 @@
                   >
                   }
                 </ion-select>
+              </ion-item> -->
+              
+              <ion-item (click)="showSimpleBookSelector()">
+                <ion-input label="Libro" labelPlacement="floating" [readonly]="true" [value]="filteredBook"></ion-input>
+                  <ion-icon name="book-outline"></ion-icon>
               </ion-item>
+              
               <!-- fecha desde -->
-              <ion-item id="date" style="width: 100%">
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    width: 100%;
-                  "
-                >
-                  <div style="display: flex; gap: 14px">
-                    <ion-label>Fecha</ion-label>
-                    <ion-icon name="calendar-outline"></ion-icon>
-                  </div>
-                  <div>
+              <ion-item id="date">
                     <ion-input
-                      style="margin-left: auto"
+                      style="margin-left: auto" label="Fecha" labelPlacement="floating"
                       [value]="filterForm.get('dateFrom')?.value | date: 'dd.MM.yyyy'"
                     ></ion-input>
-                  </div>
-                </div>
-                <ion-popover trigger="date">
-                  <ng-template>
-                    <ion-datetime
-                      presentation="date"
-                      formControlName="dateFrom"
-                      size="cover"
-                      firstDayOfWeek="1"
-                    ></ion-datetime>
-                  </ng-template>
-                </ion-popover>
+                    <ion-icon name="calendar-outline"></ion-icon>
               </ion-item>
+              <ion-popover trigger="date">
+                <ng-template>
+                  <ion-datetime
+                    presentation="date"
+                    formControlName="dateFrom"
+                    size="cover"
+                    firstDayOfWeek="1"
+                  ></ion-datetime>
+                </ng-template>
+              </ion-popover>
+
               <!-- FIN fecha desde -->
               <!-- opcion fecha fin -->
               <!-- @if (filterForm.get('dateFrom')?.value) {
@@ -175,7 +172,7 @@
               }
             </div>
           </ion-card-header>
-      
+
           <ion-card-content>
             <div class="flexSB">
               @if (message.speaker.id === 5) {
@@ -210,7 +207,7 @@
   <div div class="refresh">(Desliza para recargar)</div>
   }
   </div>
-  
+
   @if (selectedMessage) {
       <div style="margin-top: 24vh;"></div>
       <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)" (touchstart)="preventRefresher($event)" (finish)="markAsListened(selectedMessage, $event)"></app-mini-audio-player>
