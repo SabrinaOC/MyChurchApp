@@ -1,12 +1,10 @@
 @if (message) {
-<ion-header>
+<ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
     <ion-title class="ion-text-center">Compartir</ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-button (click)="cancel()">
-        <ion-icon name="close-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
