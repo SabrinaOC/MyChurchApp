@@ -20,3 +20,12 @@ ion-button {
     display: flex;
     justify-content: end;
 }
+
+#reader {
+    height: 100%;
+    background: --ion-card-background;
+}
+
+ion-item {
+    --inner-border-width: 0;
+}
