@@ -65,7 +65,7 @@ ion-icon {
 }
 
 ion-datetime {
-    --background: black;
+    --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
 
 ion-loading.custom-loading {
