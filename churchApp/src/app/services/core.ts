@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
 import jsonBible from '../../assets/bible.json';
 import { ApiService } from './api.service';
 import { Book, MessageType, Speaker } from './api/models';
@@ -24,7 +24,8 @@ export class CoreProvider {
     public popoverCtrl: PopoverController,
     public api: ApiService,
     public router: Router,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public loadingCtrl: LoadingController
   ) {
     this.loadBibleRVR1960()
   }
