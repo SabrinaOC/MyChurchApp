@@ -12,9 +12,14 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <h3>{{ msgSelected.book.name }}</h3>
+      <!-- <h3>{{ msgSelected.book.name }}</h3> -->
+      <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
+        <ion-badge class="badge-verse">
+          <span class="ion-padding-start ion-padding-end">{{msgSelected.book.name}}</span>
+        </ion-badge>
+      </div>
 
-      <ion-card-title>{{ msgSelected.title }}</ion-card-title> 
+      <ion-card-title color="dark" class="boldText">{{ msgSelected.title }}</ion-card-title> 
 
       @if (msgSelected.speaker.id === 5) {
         <ion-card-subtitle>{{ msgSelected.note }}</ion-card-subtitle>
@@ -24,7 +29,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <h2>Reflexion:</h2>
+      <h2 class="boldText">Reflexion:</h2>
       <div id="questionsDiv" [innerHTML]="msgSelected.questions | formatQuestionText"></div>
       
       <div id="iconCenteredLayout" class="ion-margin-top">
@@ -41,7 +46,7 @@
         </ion-button>
       </div>
       
-      <h2>Versículos:</h2>
+      <h2 class="boldText">Versículos:</h2>
       <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; margin-top: 15px;">
         @for (verse of verses; track $index) {
             <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
