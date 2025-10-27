@@ -306,7 +306,9 @@ export class AddMessagePage implements OnInit {
     alert.present();
   }
 
-  async showSimpleBookSelector() {
+  async showSimpleBookSelector(event: any) {
+    event.preventDefault();
+
     const popover = await this.popoverCtrl.create({
       component: SimpleVerseSelectorComponent,
       translucent: true,
