@@ -14,10 +14,9 @@
   <form [formGroup]="filterForm">
     <!-- SPEAKER -->
     <ion-item>
-      <ion-select id="speakerFilter" label="Predicador" label-placement="floating" formControlName="speaker">
-        @for (speaker of this.core.speakerList ; track
-        speaker.id) {
-        <ion-select-option [value]="speaker.id">{{ speaker.name }}</ion-select-option>
+      <ion-select label="Predicador" label-placement="floating" formControlName="speaker" [interfaceOptions]="{'cssClass': 'customSelect'}">
+        @for (speaker of this.core.speakerList; track speaker.id) {
+          <ion-select-option [value]="speaker.id">{{ speaker.name }}</ion-select-option>
         }
       </ion-select>
     </ion-item>
