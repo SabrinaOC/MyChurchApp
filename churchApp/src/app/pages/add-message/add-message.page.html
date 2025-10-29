@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="navCtrl.navigateBack('')">
+      <ion-button (click)="navigateBack()">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -124,7 +124,7 @@
 
     @if (editableMessage !== undefined) {
     <ion-button (click)="addMessage()" expand="block">Editar</ion-button>
-    <ion-button (click)="openAlert()" expand="block" color="light">Eliminar</ion-button>
+    <ion-button (click)="deleteMessage()" expand="block" color="light">Eliminar</ion-button>
     } @else {
     <ion-button (click)="addMessage()" expand="block">Añadir</ion-button>
     }

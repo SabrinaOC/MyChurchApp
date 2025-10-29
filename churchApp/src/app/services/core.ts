@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
 import jsonBible from '../../assets/bible.json';
 import { ApiService } from './api.service';
 import { Book, MessageType, Speaker } from './api/models';
@@ -25,7 +25,8 @@ export class CoreProvider {
     public api: ApiService,
     public router: Router,
     public navCtrl: NavController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController
   ) {
     this.loadBibleRVR1960()
   }
@@ -213,5 +214,31 @@ public getBibleText(verseReference: string): string {
         }
       ]
     })).present();
+  }
+
+
+  async openAlert(message: string, acceptText: string = "Aceptar", cancelText: string = "Cancelar"): Promise<boolean> {
+    return new Promise(async (resolve) => {
+      let alert = await this.alertCtrl.create({
+        message: message,
+        buttons: [
+          {
+            text: acceptText,
+            handler: () => { 
+              resolve(true);
+            }
+          },
+          {
+            text: cancelText,
+            role: 'cancel',
+            handler: () => { 
+              resolve(false);
+            }
+          }
+        ]
+      })
+  
+      alert.present();
+    });
   }
 }

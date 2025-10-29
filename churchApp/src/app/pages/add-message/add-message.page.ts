@@ -265,45 +265,45 @@ export class AddMessagePage implements OnInit {
   }
 
   async deleteMessage() {
-    let load = await this.loading.create({
-      message: 'Eliminando predicación',
-    });
-    load.present();
-    
-    this.core.api.message.deleteMessage({ body: {id: this.editableMessage.id} })
-    .subscribe({
-      next: (res: any) => {
-        this.form.reset();
-        load.dismiss();
-        this.presentSnakbar('Predicación eliminada con éxito')
-        this.router.navigate(['message-list'])
-      },
-      error: (err: Error) => {
-        load.dismiss();
-        this.presentSnakbar(
-          'No se ha podido eliminar la predicación. Vuelve a intentarlo en unos minutos'
-        );
-        console.log('ERROR: ', err)
-      },
-      complete: () => {
-      }
-    });
+    this.core.openAlert("Eliminar contenido").then(async (accepted) => {
+      if (accepted) {        
+        let load = await this.loading.create({
+          message: 'Eliminando predicación',
+        });
+        load.present();
+        
+        this.core.api.message.deleteMessage({ body: {id: this.editableMessage.id} })
+        .subscribe({
+          next: (res: any) => {
+            this.form.reset();
+            load.dismiss();
+            this.presentSnakbar('Predicación eliminada con éxito')
+            this.router.navigate(['message-list'])
+          },
+          error: (err: Error) => {
+            load.dismiss();
+            this.presentSnakbar(
+              'No se ha podido eliminar la predicación. Vuelve a intentarlo en unos minutos'
+            );
+            console.log('ERROR: ', err)
+          },
+          complete: () => {
+          }
+        });
+      } 
+    })
   }
 
-  async openAlert() {
-    let alert = await this.alrtCtrl.create({
-      message: 'Eliminar contenido',
-      buttons: [{
-        text: 'Aceptar',
-        handler: () => { this.deleteMessage() }
-      },
-      {
-        text: 'Cancelar',
-        role: 'cancel'
-      }]
-    })
-
-    alert.present();
+  navigateBack() {
+    if (this.form.dirty) {
+      this.core.openAlert("Ha realizado cambios. ¿Desea salir?", "Salir", "Cancelar").then(async (accepted) => {
+        if (accepted) {
+          this.core.navCtrl.navigateBack('');
+        }
+      });
+    } else {
+      this.core.navCtrl.navigateBack('');
+    }
   }
 
   async showSimpleBookSelector(event: any) {
