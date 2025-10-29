@@ -2,7 +2,9 @@
 <ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="cancel()">Cancelar</ion-button>
+      <ion-button (click)="cancel()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Compartir</ion-title>
   </ion-toolbar>
@@ -34,7 +36,6 @@
 
     </ion-list>
     <ion-button (click)="accept()" expand="block" style="color: white;">Aceptar</ion-button>
-    <ion-button (click)="cancel()" expand="block" style="color: white;" color="light">Cancelar</ion-button>
   </ion-card>
   
 </ion-content>
