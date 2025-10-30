@@ -18,7 +18,6 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
   @ViewChild("audioPlayer") audioPlayer!: ElementRef<HTMLElement>;
   @ViewChild('audio') audioElement!: ElementRef<HTMLAudioElement>; 
 
-
   close: boolean = false;
 
   private swipeGesture: Gesture | undefined;
@@ -28,16 +27,14 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
   swipeUpEvent = output<boolean>();
   onTapEvent = output<boolean>();
   audioDuration!: any;
-  progress!: any;
+  progress: number = 0;
   startPlaying: boolean = false;
-
 
   navigationExtra: NavigationExtras = {};
 
   constructor(
     public core: CoreProvider,
     private gestureCtrl: GestureController,
-    private restService: RestService,
     private router: Router
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -71,7 +68,7 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
       direction: 'y', // Detect vertical movement
       onMove: (ev) => {
         if (ev.deltaY > 30 && !this.close) { //DeltaY value indicates the Y displacement
-          this.close = true
+          this.close = true;
           this.closeAudioPlayer();
         } else if (ev.deltaY < -30) {
           this.openMsgDetail(ev);
@@ -85,9 +82,10 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
   closeAudioPlayer() {
     this.audioPlayer.nativeElement.classList.remove("appearAudioPlayer");
     this.audioPlayer.nativeElement.classList.add("disappearAudioPlayer");
+    // ng changes
     setTimeout(() => {
       this.closing.emit();
-    }, 700); //This time must match with the "disappearAudioPlayerAnimation" time
+    }, 800); //This time must match with the "disappearAudioPlayerAnimation" time
   }
 
   getaudioFromServer(): void {
@@ -95,7 +93,6 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
       const url = `${environment.url}/audioFiles?url=${this.message.url}&title=${this.message.title}&mimetype=${this.message.mimetype}`;
       
       this.audioElement.nativeElement.src = url
-      
     }
   }
 

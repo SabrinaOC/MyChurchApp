@@ -5,6 +5,7 @@ import { ApiService } from './api.service';
 import { Book, MessageType, Speaker } from './api/models';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AudioService } from './audio.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class CoreProvider {
     public toastCtrl: ToastController,
     public popoverCtrl: PopoverController,
     public api: ApiService,
+    public audio: AudioService,
     public router: Router,
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
