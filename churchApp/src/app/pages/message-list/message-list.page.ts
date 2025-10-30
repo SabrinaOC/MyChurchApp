@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book, Message } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { LoadingController } from '@ionic/angular';
@@ -35,7 +35,6 @@ export class MessageListPage implements OnInit, OnDestroy {
               public restService: RestService,
               private loadingController: LoadingController,
               private router: Router,
-              private cdRef: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -57,10 +56,7 @@ export class MessageListPage implements OnInit, OnDestroy {
   }
 
   selectMessage(message: Message | null) {
-    this.cdRef.detectChanges(); //Force detecting changes
     this.core.audio.selectMessage(message);
-      // this.core.audio.selectedMessage = message;
-      // localStorage.setItem(Constants.AUDIO_FILE_ID, ''+ this.core.audio.selectedMessage?.id)
   }
 
   async searchInput(event: any) {

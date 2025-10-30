@@ -12,9 +12,7 @@ export class AudioService {
 
   selectedMessage: Message | null = null;
 
-  constructor(
-    // private cdRef: ChangeDetectorRef
-  ) { }
+  constructor() { }
 
   selectMessage(message: Message | null) {
     this.selectedMessage = message;
