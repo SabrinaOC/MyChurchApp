@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { Message, MessageFilterOpt } from '../../models/interfaces';
+import { Book, Message, MessageFilterOpt } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
 import { IonModal, LoadingController } from '@ionic/angular';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
-import * as Constants from 'src/app/constants'
+import * as Constants from 'src/app/constants';
+import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 
 @Component({
   selector: 'app-message-list',
@@ -20,9 +20,7 @@ export class MessageListPage {
   messageList!: Message[]
   selectedMessage: Message | null = null;
   isDesktop: boolean = false;
-  filterForm!: FormGroup;
   datetime!: Date;
-  @ViewChild(IonModal) modal!: IonModal;
   rbSelected: string = 'all';
   backupListForRbFilter!: Message[];
   searchQuery: string = '';
@@ -35,18 +33,9 @@ export class MessageListPage {
               public core: CoreProvider,
               public restService: RestService,
               private loadingController: LoadingController,
-              private formBuilder: FormBuilder,
               private cdRef: ChangeDetectorRef,
               private router: Router
-  ) { 
-    this.filterForm = this.formBuilder.group({
-      speaker: new FormControl(null),
-      book: new FormControl(null),
-      testament: new FormControl(null),
-      dateFrom: new FormControl(null),
-      dateTo: new FormControl(null),
-    })
-  }
+  ) { }
 
   async ionViewWillEnter() {
     this.getAllMessages();
@@ -119,57 +108,6 @@ export class MessageListPage {
         loading.dismiss()
       }
     })
-  }
-
-  async searchFilter() {
-      let loading = await this.loadingController.create({
-        message: 'Aplicando filtros...',
-        cssClass: 'custom-loading',
-        mode: 'md',
-        spinner: null,
-      })
-      loading.present();
-
-      let filtrosBusqueda: MessageFilterOpt = this.filterForm.value
-      
-
-      // console.log('BUSQUEDA: ', this.removeNullUndefined(filtrosBusqueda))
-      this.core.api.message.findByFilter(this.removeNullUndefined(filtrosBusqueda))
-      .subscribe({
-        next: (val: any) => {
-          this.updateMessageList(val.messageListMapped)
-        },
-        error: (e) => {
-          console.log('ERROR ', e)
-        },
-        complete: () => {
-          this.resetFiltros();
-          loading.dismiss()
-        }
-      })
-    
-  }
-
-  removeNullUndefined(obj: any): any {
-    return Object.keys(obj).reduce((acc, key) => {
-      if (obj[key] !== null && obj[key] !== undefined) {
-        acc[key] = obj[key];
-      }
-      return acc;
-    }, {} as any);
-  }
-
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
-
-  confirm() {
-    this.modal.dismiss(null, 'confirm');
-    this.searchFilter();
-  }
-
-  resetFiltros() {
-    this.filterForm.reset();
   }
 
   refresh(event: any) {
@@ -264,6 +202,23 @@ export class MessageListPage {
     this.messageList.forEach(msg => {
       msg.listened = false;
     })
+  }
+
+  async showFilterModal(event: any) {
+    event?.stopPropagation();
+
+    const modal = await this.core.modalCtrl.create({
+      component: FilterModalComponent,
+      componentProps: {}
+    });
+
+    modal.onDidDismiss().then(data => {
+      if (data.data) {
+        this.updateMessageList(data.data)
+      }
+    });
+
+    await modal.present();
   }
 
   async shareMessage(message: Message, event: any) {

@@ -4,7 +4,7 @@
 }
 
 h2 {
-    // color: var(--ion-color-light);
+    color: var(--ion-color-primary);
     margin-top: 15px;
 }
 
@@ -18,4 +18,16 @@ h3 {
 
 #questionsDiv {
     color: white;
+}
+
+.boldText {
+    font-weight: 700;
+}
+
+ion-card-title {
+    font-size: 25px;
+}
+
+.ios .badge-verse {
+    margin-top: 10px;
 }

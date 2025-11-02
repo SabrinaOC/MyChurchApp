@@ -20,3 +20,11 @@ ion-button {
     display: flex;
     justify-content: end;
 }
+
+#reader {
+    min-height: 100%;
+}
+
+ion-item {
+    --inner-border-width: 0;
+}

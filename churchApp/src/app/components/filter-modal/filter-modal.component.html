@@ -1,0 +1,74 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    <ion-title>Filtrar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="filterForm">
+    <!-- SPEAKER -->
+    <ion-item>
+      <ion-select label="Predicador" label-placement="floating" formControlName="speaker" [interfaceOptions]="{'cssClass': 'customSelect'}">
+        @for (speaker of this.core.speakerList; track speaker.id) {
+          <ion-select-option [value]="speaker.id">{{ speaker.name }}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+
+    <!-- BOOK -->
+    <ion-item (click)="showSimpleBookSelector($event)">
+      <ion-input label="Libro" labelPlacement="floating" [readonly]="true" [value]="filteredBook"></ion-input>
+      <ion-icon name="book-outline"></ion-icon>
+    </ion-item>
+
+    <!-- fecha desde -->
+    <ion-item id="date">
+      <ion-input style="margin-left: auto" label="Fecha" labelPlacement="floating"
+        [value]="filterForm.get('dateFrom')?.value | date: 'dd.MM.yyyy'"></ion-input>
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-item>
+    <ion-popover trigger="date">
+      <ng-template>
+        <ion-datetime presentation="date" formControlName="dateFrom" size="cover" firstDayOfWeek="1"></ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+    <!-- FIN fecha desde -->
+    <!-- opcion fecha fin -->
+    <!-- @if (filterForm.get('dateFrom')?.value) {
+                  <ion-item id="dateTo" style="width: 100%;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%">
+                      <div style="display: flex; gap: 14px;">
+                        <ion-label>Fecha hasta</ion-label>
+                        <ion-icon name="calendar-outline"></ion-icon>
+                      </div>
+                      <div>
+                        <ion-input style="margin-left: auto;" [value]="filterForm.get('dateTo')?.value | date: 'dd.MM.yyyy'"></ion-input>
+                      </div>
+                    </div>
+                    <ion-popover trigger="dateTo">
+                      <ng-template>
+                        <ion-datetime
+                          presentation="date"
+                          formControlName="dateTo"
+                          size="cover"
+                          firstDayOfWeek="1"
+                          [min]="filterForm.get('dateTo')?.value"
+                        ></ion-datetime>
+                      </ng-template>
+                    </ion-popover>
+                  </ion-item>
+                } -->
+    <div class="btnResetFilters">
+      <ion-button fill="clear" (click)="resetFiltros();">Limpiar filtros
+        <ion-icon name="trash-outline" slot="end"></ion-icon>
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

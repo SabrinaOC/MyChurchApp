@@ -64,6 +64,17 @@ ion-icon {
     color: white;
 }
 
+ion-datetime {
+    --background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+
+.customSelect {
+    --background: var(--ion-item-background);
+
+    .alert-radio-label {
+        color: white;
+    }
+}
 
 ion-loading.custom-loading {
     .loading-wrapper {

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="navCtrl.navigateBack('')">
+      <ion-button (click)="navigateBack()">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -22,7 +22,7 @@
 
       <!-- MESSAGE TYPE -->
       <ion-item>
-        <ion-select label="Tipo mensaje" label-placement="floating" formControlName="idMessageType">
+        <ion-select label="Tipo mensaje" label-placement="floating" formControlName="idMessageType" [interfaceOptions]="{'cssClass': 'customSelect'}">
           @for (msgType of this.core.messageTypeList ; track msgType.id) {
           <ion-select-option [value]="msgType.id">{{ msgType.description }}</ion-select-option>
           }
@@ -31,7 +31,7 @@
 
       <!-- SPEAKER -->
       <ion-item>
-        <ion-select label="Predicador" label-placement="floating" formControlName="idSpeaker">
+        <ion-select label="Predicador" label-placement="floating" formControlName="idSpeaker" [interfaceOptions]="{'cssClass': 'customSelect'}">
           @for (speaker of this.core.speakerList ; track speaker.id) {
           <ion-select-option [value]="speaker.id">{{ speaker.name }}</ion-select-option>
           }
@@ -45,7 +45,7 @@
       }
 
       <!-- BOOK -->
-      <ion-item (click)="showSimpleBookSelector()">
+      <ion-item (click)="showSimpleBookSelector($event)">
         <ion-input label="Libro" labelPlacement="floating" [readonly]="true" [value]="messageBook"></ion-input>
           <ion-icon name="book-outline"></ion-icon>
       </ion-item>
@@ -58,7 +58,7 @@
       <ion-popover trigger="date" reference="action-sheet">
         <ng-template>
           <ion-datetime presentation="date" formControlName="date" size="cover" [(ngModel)]="datetime"
-            firstDayOfWeek="1" mode="ios"></ion-datetime>
+            firstDayOfWeek="1"></ion-datetime>
         </ng-template>
       </ion-popover>
 
@@ -124,7 +124,7 @@
 
     @if (editableMessage !== undefined) {
     <ion-button (click)="addMessage()" expand="block">Editar</ion-button>
-    <ion-button (click)="openAlert()" expand="block" color="light">Eliminar</ion-button>
+    <ion-button (click)="deleteMessage()" expand="block" color="light">Eliminar</ion-button>
     } @else {
     <ion-button (click)="addMessage()" expand="block">Añadir</ion-button>
     }
