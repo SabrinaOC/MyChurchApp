@@ -5,6 +5,7 @@ import { AlertController, Platform } from '@ionic/angular';
 import { App, AppInfo } from '@capacitor/app';
 import { CoreProvider } from './services/core';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -35,7 +36,8 @@ export class AppComponent {
   constructor(private platform: Platform,
     public core: CoreProvider,
     private alrtCtrl: AlertController,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    public router: Router
   ) {
     this.core.api.book.getAllBooks().subscribe({
       next: (books: any) => {

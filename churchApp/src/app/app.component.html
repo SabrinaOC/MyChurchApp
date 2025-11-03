@@ -34,7 +34,8 @@
       <!-- <div style="margin-top: 24vh;"></div> -->
       <app-mini-audio-player [message]="core.audio.selectedMessage" 
         (closing)="closeAudioPlayer()"
-        (finish)="markAsListenedMessage($event)">
+        (finish)="markAsListenedMessage($event)"
+        [ngClass]="{'hidden': router.url !== '/message-list'}">
       </app-mini-audio-player>
     }
   </ion-split-pane>
