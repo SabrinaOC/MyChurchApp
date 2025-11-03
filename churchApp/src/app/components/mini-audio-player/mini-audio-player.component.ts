@@ -26,8 +26,6 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
   // nueva forma de event emitter angular 17
   swipeUpEvent = output<boolean>();
   onTapEvent = output<boolean>();
-  audioDuration!: any;
-  progress: number = 0;
   startPlaying: boolean = false;
 
   navigationExtra: NavigationExtras = {};
@@ -58,6 +56,36 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
     if (this.audioPlayer) {
       this.initializeSwipeGesture();
     }
+  }
+
+
+  togglePlay() {
+    const audio = this.audioElement.nativeElement;
+
+    if (this.core.audio.isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+
+    this.core.audio.isPlaying = !this.core.audio.isPlaying;
+  }
+
+  loadMetadata() {
+    const audio = this.audioElement.nativeElement;
+    this.core.audio.audioDuration = audio.duration;
+  }
+
+  updateProgress() {
+    const audio = this.audioElement.nativeElement;
+    this.core.audio.progress = audio.currentTime;
+  }
+
+  onSeek(event: any) {
+    const audio = this.audioElement.nativeElement;    
+    const value = event.detail.value;
+    audio.currentTime = value;
+    this.core.audio.progress = value;
   }
 
   initializeSwipeGesture() {
@@ -93,11 +121,16 @@ export class MiniAudioPlayerComponent implements OnDestroy, OnChanges, AfterView
       const url = `${environment.url}/audioFiles?url=${this.message.url}&title=${this.message.title}&mimetype=${this.message.mimetype}`;
       
       this.audioElement.nativeElement.src = url
+
+      console.log(this.audioElement.nativeElement.duration);
+      
+      // this.core.audio.audioDuration = this.audioElement.nativeElement.duration;
     }
   }
 
   onAudioPlaying() {
       this.startPlaying = true;
+      this.core.audio.isPlaying = true;
   }
 
   tapEvent() {

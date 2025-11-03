@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Message } from '../models/interfaces';
 import * as Constants from 'src/app/constants';
 import { Subject } from 'rxjs';
@@ -12,11 +12,17 @@ export class AudioService {
 
   selectedMessage: Message | null = null;
 
+  isPlaying: boolean = false;
+  progress: number = 0;
+  audioDuration: number = 100;
+
   constructor() { }
 
   selectMessage(message: Message | null) {
     this.selectedMessage = message;
-    localStorage.setItem(Constants.AUDIO_FILE_ID, '' + this.selectedMessage?.id)
+    localStorage.setItem(Constants.AUDIO_FILE_ID, '' + this.selectedMessage?.id);
+
+    this.progress = 0;
   }
 
   markAsListened(message: Message, event: any) {

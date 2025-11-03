@@ -1,6 +1,7 @@
 ion-card {
     border-radius: 15px;
-    background: rgba($color: var(--ion-color-primary-rgb), $alpha: 0.9);
+    background: rgba($color: var(--ion-color-primary-rgb), $alpha: 0.85);
+    opacity: 1;
 
     ion-card-header {
         padding-bottom: 0;
@@ -61,17 +62,6 @@ ion-card {
     }
 }
 
-
-.invertColors {
-    filter: invert(1);
-}
-
-
-.close-icon {
-    font-size: 15px;
-    color: white;
-}
-
 .title {
     color: white;
     font-size: 17px;
@@ -92,10 +82,38 @@ ion-card {
 #cargando-div {
     display: flex;
     color: white;
-    height: 54px;
     align-items: center;
+    margin-left: 20px;
+    margin-top: 7px;
 }
 
-#audio {
-    width: 95%;
+#info {
+    margin-left: 20px; margin-top: 2px;
+}
+
+
+#audioImg {
+    background-color: white;
+    border-radius: 25px;
+    width: 41px;
+    height: 41px;
+
+    ion-img {
+        width: 35px;
+        margin-left: 3px;
+    }
+}
+
+#audioProgress {
+    --bar-background: #333;
+    --bar-background-active: #1db954;
+    --bar-height: 5px;
+    --knob-background: #1db954;
+    --knob-size: 14px;
+    --pin-background: #1db954;
+    --pin-color: #fff;
+
+    --height: 5px;
+    padding: 0;
+    margin: 0 10px 0 10px;
 }
