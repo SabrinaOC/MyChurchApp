@@ -6,16 +6,22 @@ import { CoreProvider } from 'src/app/services/core';
 import { Share } from '@capacitor/share';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-message-detail',
   templateUrl: './message-detail.page.html',
   styleUrls: ['./message-detail.page.scss'],
 })
-export class MessageDetailPage {
+export class MessageDetailPage implements OnInit {
 
   msgSelected!: Message;
   verses: string[] = [];
+
+  isPlaying = false;
+  progress = 0;
+  duration = 0;
+  isLoading: boolean = false;
 
   constructor(
     public core: CoreProvider,
@@ -24,6 +30,13 @@ export class MessageDetailPage {
     private animationCtrl: AnimationController
   ) {
     this.getMessageDetail();
+  }
+
+  ngOnInit(): void {
+    this.core.audio.isPlaying$.subscribe(v => this.isPlaying = v);
+    this.core.audio.progress$.subscribe(v => this.progress = v);
+    this.core.audio.duration$.subscribe(v => this.duration = v);
+    this.core.audio.isLoading$.subscribe(v => this.isLoading = v);
   }
 
   enterAnimation = (baseEl: HTMLElement) => {
@@ -105,5 +118,25 @@ export class MessageDetailPage {
     });
 
     modal.present()
+  }
+
+  togglePlay() {
+    if (!this.core.audio.selectedMessage) {
+      this.core.audio.selectMessage(this.msgSelected);
+    } else {
+      if (this.isPlaying) this.core.audio.pause();
+      else this.core.audio.play();
+    }
+
+  }
+
+  onSeek(event: any) {
+    const value = event.detail.value;
+    this.core.audio.seekTo(value);
+  }
+
+  formatMiliSeconds(format: string) {
+    // return new DatePipe().format(format);
+    // DatePipe
   }
 }

@@ -29,34 +29,43 @@
     </ion-card-header>
 
     <ion-card-content>
-      <h2 class="boldText">Reflexion:</h2>
-      <div id="questionsDiv" [innerHTML]="msgSelected.questions | formatQuestionText"></div>
-      
-      <div id="iconCenteredLayout" class="ion-margin-top">
+      <ion-row id="iconCenteredLayout" class="ion-margin-top">
         <ion-button class="ion-margin-end" fill="clear">
           <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;"></ion-icon>
         </ion-button>
 
-        <ion-button size="large" shape="round">
-          <ion-icon slot="icon-only" name="play"></ion-icon>
+        <ion-button size="large" shape="round" (click)="togglePlay()">
+          @if (isLoading) {
+            <ion-spinner slot="icon-only" name="lines-small" style="color: white;"></ion-spinner>
+          } @else {
+            <ion-icon slot="icon-only" [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+          }
         </ion-button>
 
         <ion-button class="ion-margin-start" fill="clear" (click)="shareMessage($event)">
           <ion-icon name="share-social-outline" style="color: #4d8dff;"></ion-icon>
         </ion-button>
-      </div>
+      </ion-row>
+
+      <ion-row id="seconds" class="ion-justify-content-between">
+        <ion-col class="ion-text-start">{{progress * 1000 | date:'mm:ss':'UTC'}}</ion-col>
+        <ion-col class="ion-text-end">{{duration * 1000 | date:'mm:ss':'UTC'}}</ion-col>
+      </ion-row>
+
+      <ion-row class="ion-margin-bottom">
+        <ion-range id="audioProgress" [value]="progress" (ionChange)="onSeek($event)" min="0" [max]="duration"
+          step="0.1"></ion-range>
+      </ion-row>
+
+      <h2 class="boldText">Reflexion:</h2>
+      <div id="questionsDiv" class="markdown-content" [innerHTML]="msgSelected.questions | formatQuestionText"></div>
       
       <h2 class="boldText">Versículos:</h2>
       <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; margin-top: 15px;">
         @for (verse of verses; track $index) {
-            <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
-              <span>{{verse}}</span>
-            </ion-badge>
-            <!-- <ion-popover class="versesPopover" side="top" alignment="center" trigger="versesPopover{{$index}}">
-              <ng-template>
-                <app-show-verses [verse]="verse"></app-show-verses>
-              </ng-template>
-            </ion-popover> -->
+          <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
+            <span>{{verse}}</span>
+          </ion-badge>
         }
       </div>
     </ion-card-content>
