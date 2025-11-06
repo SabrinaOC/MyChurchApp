@@ -1,14 +1,14 @@
-import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { Book, Message, MessageFilterOpt } from '../../models/interfaces';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Book, Message } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { IonModal, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
-import * as Constants from 'src/app/constants';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-message-list',
@@ -16,9 +16,8 @@ import { FilterModalComponent } from 'src/app/components/filter-modal/filter-mod
   styleUrls: ['./message-list.page.scss'],
 })
 
-export class MessageListPage {
+export class MessageListPage implements OnInit, OnDestroy {
   messageList!: Message[]
-  selectedMessage: Message | null = null;
   isDesktop: boolean = false;
   datetime!: Date;
   rbSelected: string = 'all';
@@ -29,13 +28,25 @@ export class MessageListPage {
   isAuthUser: boolean = false;
   navigationExtra: NavigationExtras = {};
 
+  private subscription: Subscription = new Subscription();
+
   constructor(
               public core: CoreProvider,
               public restService: RestService,
               private loadingController: LoadingController,
-              private cdRef: ChangeDetectorRef,
-              private router: Router
+              private router: Router,
   ) { }
+
+  ngOnInit(): void {
+    const sub = this.core.audio.listened.subscribe(value => {
+      this.updateMessageList(this.messageList);
+    });
+    this.subscription.add(sub) 
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   async ionViewWillEnter() {
     this.getAllMessages();
@@ -45,17 +56,7 @@ export class MessageListPage {
   }
 
   selectMessage(message: Message | null) {
-      this.selectedMessage = message;
-      this.cdRef.detectChanges(); //Force detecting changes
-      localStorage.setItem(Constants.AUDIO_FILE_ID, ''+this.selectedMessage?.id)
-  }
-
-  /**
-   * Prevent refreshing page when swiping down mini-audio-player component
-   * @param event 
-   */
-  preventRefresher(event: TouchEvent) {
-    event.stopPropagation();
+    this.core.audio.selectMessage(message);
   }
 
   async searchInput(event: any) {
@@ -118,21 +119,6 @@ export class MessageListPage {
       }
       event.target.complete();
     })
-  }
-
-  markAsListened(message: Message, event: any) {
-    event?.stopPropagation()
-    //localStorage to track lilstened messages
-    let listened = localStorage.getItem('listened');
-    if(listened === null) {
-      localStorage.setItem('listened', `${message.id}`)
-    } else {
-      listened += `, ${message.id}`
-      localStorage.setItem('listened', listened)
-
-    }
-    
-    this.updateMessageList(this.messageList)
   }
 
   removeFromListened(message: Message, event: any) {

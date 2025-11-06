@@ -1,39 +1,42 @@
 @if (message) {
 <div #audioPlayer id="audio-player" class="appearAudioPlayer" (click)="tapEvent()">
   <ion-card>
-    <ion-card-header>
-      <ion-row style="margin-bottom: -10px;">
-        <ion-col size="11" class="ion-align-self-start">
-          <span class="title">{{message.title}}</span>
-        </ion-col>
+      <ion-row>
         <ion-col size="1">
-          <ion-icon name="close-outline" class="close-icon" size="large" (click)="closeAudioPlayer()"></ion-icon>
+          <div id="audioImg">
+            <ion-img src="../assets/icon/favicon.png"></ion-img>
+          </div>
         </ion-col>
-      </ion-row>
-    </ion-card-header>
 
-    <ion-card-content>
-      <div class="speaker">
-        <ion-icon name="person-circle-outline" size="medium"></ion-icon>
-        @if (message.speaker.id === 5) {
-          <span>{{message.note}}</span>
-        } @else {
-          <span>{{message.speaker.name}}</span>
-        }
-      </div>
-
-      <div style="display: flex; justify-content: center;">
-            <audio controls [class.invertColors]="core.theme === 'light'" [hidden]="!startPlaying" autoplay #audio (playing)="onAudioPlaying()" (seeking)="startPlaying = false">
-              <progress id="progressBar" [value]="progress" max="100"></progress></audio>
-
-           @if (!startPlaying) {
+        <ion-col size="9">
+          @if (isLoading) {
             <div id="cargando-div">
               <ion-label>Cargando el audio &nbsp;</ion-label>
               <ion-spinner name="dots" color="dark"></ion-spinner>
             </div>
+
+          } @else {
+            <div id="info">
+              <ion-card-title class="title">{{message.title}}</ion-card-title>
+  
+              @if (message.speaker.id === 5) {
+                <ion-card-subtitle>{{message.note}}</ion-card-subtitle>
+              } @else {
+                <ion-card-subtitle>{{message.speaker.name}}</ion-card-subtitle>
+              }
+            </div>
           }
-      </div>
-    </ion-card-content>
+        </ion-col>
+
+        <ion-col size="2" style="display: flex; align-items: center; justify-content: center;">
+          <ion-icon [name]="isPlaying ? 'pause' : 'play'" (click)="togglePlay()"></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-range [disabled]="isLoading" id="audioProgress" [value]="progress" (ionChange)="onSeek($event)" min="0" [max]="duration"
+          step="0.1"></ion-range>
+      </ion-row>
   </ion-card>
 </div>
 }

@@ -164,3 +164,21 @@ body.light-theme {
     max-height: 80vh;
     border-radius: 12px;
 }
+
+.hidden {
+    display: none;
+}
+
+.markdown-content {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.markdown-content pre,
+.markdown-content code {
+    white-space: pre-wrap; 
+    word-wrap: break-word;
+    overflow-x: auto; 
+}

@@ -17,7 +17,7 @@ h3 {
 }
 
 #questionsDiv {
-    color: white;
+color: white;
 }
 
 .boldText {
@@ -30,4 +30,22 @@ ion-card-title {
 
 .ios .badge-verse {
     margin-top: 10px;
+}
+
+#audioProgress {
+    // --bar-background: #333;
+    // --bar-background-active: #1db954;
+    --bar-height: 5px;
+    // --knob-background: #1db954;
+    --knob-size: 14px;
+    // --pin-background: #1db954;
+    --pin-color: #fff;
+
+    --height: 5px;
+    padding: 0;
+    margin: 6px 10px 0 10px;
+}
+
+#seconds {
+    margin-top: -30px
 }

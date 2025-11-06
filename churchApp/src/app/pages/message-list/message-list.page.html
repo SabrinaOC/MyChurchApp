@@ -21,7 +21,7 @@
     (ionClear)="getAllMessages(); rbSelected = 'all'"
     [(ngModel)]="searchQuery"
   ></ion-searchbar>
-  
+
   <!-- refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''">
     <ion-refresher-content></ion-refresher-content>
@@ -84,7 +84,7 @@
                     (click)="removeFromListened(message, $event)"></ion-icon>
                 } @else {
                   <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;"
-                    (click)="markAsListened(message, $event)"></ion-icon>
+                    (click)="this.core.audio.markAsListened(message, $event)"></ion-icon>
                 }
                 <ion-icon name="share-social-outline" style="color: #4d8dff; padding: 3px;"
                   (click)="shareMessage(message, $event)"></ion-icon>
@@ -101,10 +101,5 @@
   <div div class="refresh">(Desliza para recargar)</div>
   }
   </div>
-
-  @if (selectedMessage) {
-      <div style="margin-top: 24vh;"></div>
-      <app-mini-audio-player [message]="selectedMessage" (closing)="selectMessage(null)" (touchstart)="preventRefresher($event)" (finish)="markAsListened(selectedMessage, $event)"></app-mini-audio-player>
-  }
 
 </ion-content>

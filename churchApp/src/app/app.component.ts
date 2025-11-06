@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { RestService } from './services/rest.service';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { environment } from 'src/environments/environment';
 import { AlertController, Platform } from '@ionic/angular';
 import { App, AppInfo } from '@capacitor/app';
 import { CoreProvider } from './services/core';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -29,12 +29,15 @@ export class AppComponent {
       ionicIcon: 'settings-outline',
     },
   ];
+
   isAuthorized!: boolean;
   version!: string;
-  constructor(private restService: RestService,
-    private platform: Platform,
+
+  constructor(private platform: Platform,
     public core: CoreProvider,
-    private alrtCtrl: AlertController
+    private alrtCtrl: AlertController,
+    private cdRef: ChangeDetectorRef,
+    public router: Router
   ) {
     this.core.api.book.getAllBooks().subscribe({
       next: (books: any) => {
@@ -156,4 +159,13 @@ export class AppComponent {
     alert.present();
   }
 
+  closeAudioPlayer() {
+    this.core.audio.selectMessage(null);
+    this.cdRef.detectChanges(); //Force detecting changes
+  }
+
+  markAsListenedMessage(event: any) {
+    event.preventDefault();
+    this.core.audio.markAsListened(this.core.audio.selectedMessage!, event);
+  }
 }
