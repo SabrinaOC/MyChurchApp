@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Message } from '../models/interfaces';
 import * as Constants from 'src/app/constants';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AudioService {
+export class AudioService implements OnDestroy {
   private listenedObs = new Subject<string | null>();
   listened = this.listenedObs.asObservable();
 
@@ -34,10 +34,17 @@ export class AudioService {
     });
     this.audio.addEventListener('play', () => this.isPlayingSubject.next(true));
     this.audio.addEventListener('pause', () => this.isPlayingSubject.next(false));
-    this.audio.addEventListener("loadstart", () => this.isLoadingSubject.next(true));
-    this.audio.addEventListener("loadeddata", () => this.isLoadingSubject.next(false));
+    this.audio.addEventListener("loadstart", () => { this.isLoadingSubject.next(this.selectedMessage !== null); });
+    this.audio.addEventListener("loadeddata", () => { this.isLoadingSubject.next(false); });
     // this.audio.addEventListener("seeking", () => this.isLoadingSubject.next(true));
     // this.audio.addEventListener("seeked", () => this.isLoadingSubject.next(false));
+  }
+
+  ngOnDestroy(): void {
+    // Liberar la URL generada para evitar fugas de memoria
+    if (this.audio.src) {
+      URL.revokeObjectURL(this.audio.src);
+    }
   }
 
   loadAudio() {   
@@ -53,14 +60,14 @@ export class AudioService {
 
   selectMessage(message: Message | null) {
     if (message === null) {
-      this.isPlayingSubject.next(false);
-      this.progressSubject.next(0);
-      console.log("goplaa");
-      
+      this.isPlayingSubject.next(false);      
       this.isLoadingSubject.next(false);
+      
       this.audio.src = "";
       this.audio.pause();
     }
+    this.progressSubject.next(0);
+    this.durationSubject.next(0);
 
     this.selectedMessage = message;
     localStorage.setItem(Constants.AUDIO_FILE_ID, '' + this.selectedMessage?.id);

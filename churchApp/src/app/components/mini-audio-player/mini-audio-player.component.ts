@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, output, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, output, Output, ViewChild } from '@angular/core';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { GestureController, Gesture } from '@ionic/angular';
-import { RestService } from 'src/app/services/rest.service';
 import { environment } from 'src/environments/environment';
 import { NavigationExtras, Router } from '@angular/router';
 
@@ -11,7 +10,7 @@ import { NavigationExtras, Router } from '@angular/router';
   templateUrl: './mini-audio-player.component.html',
   styleUrls: ['./mini-audio-player.component.scss'],
 })
-export class MiniAudioPlayerComponent implements OnInit, OnDestroy, AfterViewInit {
+export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
   @Input() public message!: Message | null;
   @Output() public closing: EventEmitter<any> = new EventEmitter();
   @Output() public finish: EventEmitter<any> = new EventEmitter();
@@ -22,7 +21,6 @@ export class MiniAudioPlayerComponent implements OnInit, OnDestroy, AfterViewIni
 
   private swipeGesture: Gesture | undefined;
   
-  audioUrl!: string | undefined;
   // nueva forma de event emitter angular 17
   swipeUpEvent = output<boolean>();
   onTapEvent = output<boolean>();
@@ -45,13 +43,6 @@ export class MiniAudioPlayerComponent implements OnInit, OnDestroy, AfterViewIni
     this.core.audio.progress$.subscribe(v => this.progress = v);
     this.core.audio.duration$.subscribe(v => this.duration = v);
     this.core.audio.isLoading$.subscribe(v => this.isLoading = v);
-  }
-
-  ngOnDestroy(): void {
-    // Liberar la URL generada para evitar fugas de memoria
-    if (this.audioUrl) {
-      URL.revokeObjectURL(this.audioUrl);
-    }
   }
 
   ngAfterViewInit() {
@@ -103,9 +94,7 @@ export class MiniAudioPlayerComponent implements OnInit, OnDestroy, AfterViewIni
   }
 
   tapEvent() {
-    if(this.audioUrl) {
-      this.onTapEvent.emit(true)
-    }
+    this.onTapEvent.emit(true)
   }
 
   endedAudio() {
