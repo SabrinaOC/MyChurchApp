@@ -1,5 +1,5 @@
 @if (message) {
-<div #audioPlayer id="audio-player" class="appearAudioPlayer" (click)="tapEvent()">
+<div #audioPlayer id="audio-player" class="appearAudioPlayer">
   <ion-card>
       <ion-row>
         <ion-col size="1">
@@ -16,7 +16,7 @@
             </div>
 
           } @else {
-            <div id="info">
+            <div id="info" (click)="openMsgDetail($event)">
               <ion-card-title class="title">{{message.title}}</ion-card-title>
   
               @if (message.speaker.id === 5) {

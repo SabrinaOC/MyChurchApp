@@ -38,6 +38,7 @@ export class AudioService implements OnDestroy {
     this.audio.addEventListener("loadeddata", () => { this.isLoadingSubject.next(false); });
     // this.audio.addEventListener("seeking", () => this.isLoadingSubject.next(true));
     // this.audio.addEventListener("seeked", () => this.isLoadingSubject.next(false));
+    this.audio.addEventListener('ended', (event) => this.markAsListened(this.selectedMessage!, event));
   }
 
   ngOnDestroy(): void {

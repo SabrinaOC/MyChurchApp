@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, output, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { GestureController, Gesture } from '@ionic/angular';
@@ -20,10 +20,7 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
   close: boolean = false;
 
   private swipeGesture: Gesture | undefined;
-  
-  // nueva forma de event emitter angular 17
-  swipeUpEvent = output<boolean>();
-  onTapEvent = output<boolean>();
+
 
   navigationExtra: NavigationExtras = {};
 
@@ -91,10 +88,6 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
       
       this.audioElement.nativeElement.src = url
     }
-  }
-
-  tapEvent() {
-    this.onTapEvent.emit(true)
   }
 
   endedAudio() {
