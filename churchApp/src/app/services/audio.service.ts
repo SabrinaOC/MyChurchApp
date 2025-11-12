@@ -60,6 +60,8 @@ export class AudioService implements OnDestroy {
   }
 
   selectMessage(message: Message | null) {
+    if (message?.id === this.selectedMessage?.id) return
+
     if (message === null) {
       this.isPlayingSubject.next(false);      
       this.isLoadingSubject.next(false);
