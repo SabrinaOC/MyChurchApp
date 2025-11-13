@@ -75,8 +75,10 @@ export class MessageDetailPage implements OnInit {
     this.versesToList();
   }
 
-  versesToList() {
-    this.verses = this.msgSelected.verses.split(";");
+  versesToList() {    
+    if (this.msgSelected.verses) {
+      this.verses = this.msgSelected.verses.split(";");
+    }
   }
 
   async shareMessage(event: any) {
@@ -120,6 +122,8 @@ export class MessageDetailPage implements OnInit {
   }
 
   togglePlay() {
+    console.log("Plaay");
+    
     if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage !== this.msgSelected) {
       this.core.audio.selectMessage(this.msgSelected);
     } else {
