@@ -121,9 +121,7 @@ export class MessageDetailPage implements OnInit {
     modal.present()
   }
 
-  togglePlay() {
-    console.log("Plaay");
-    
+  togglePlay() {    
     if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage !== this.msgSelected) {
       this.core.audio.selectMessage(this.msgSelected);
     } else {
