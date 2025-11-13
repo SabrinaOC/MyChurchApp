@@ -3,6 +3,7 @@ import { Message } from '../models/interfaces';
 import * as Constants from 'src/app/constants';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { CapacitorMusicControls } from 'capacitor-music-controls-plugin';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,8 @@ export class AudioService implements OnDestroy {
 
       this.audio.play();
     }
+
+    this.createMusicControls();
   }
 
   selectMessage(message: Message | null) {
@@ -92,7 +95,54 @@ export class AudioService implements OnDestroy {
     this.listenedObs.next(listened);
   }
 
-  play() { this.audio.play(); }
-  pause() { this.audio.pause(); }
+  play() {
+    this.audio.play();
+    CapacitorMusicControls.updateIsPlaying({ isPlaying: true });
+  }
+  pause() {
+    this.audio.pause();
+    CapacitorMusicControls.updateIsPlaying({ isPlaying: false });
+  }
   seekTo(seconds: number) { this.audio.currentTime = seconds; }
+
+
+  async createMusicControls() {
+    await CapacitorMusicControls.destroy();
+
+    await CapacitorMusicControls.create({
+      track: this.selectedMessage?.title,
+      artist: this.selectedMessage?.speaker.name,
+      cover: 'assets/icon/favicon.png', 
+      isPlaying: true,
+      dismissable: true,
+    });
+    
+    this.registerControlEvents();
+  }
+
+  private registerControlEvents() {
+    // Listening native events
+    CapacitorMusicControls.addListener('music-controls-next', () => {
+    });
+
+    CapacitorMusicControls.addListener('music-controls-previous', () => {
+    });
+
+    CapacitorMusicControls.addListener('music-controls-pause', () => {
+      this.audio.pause();
+      CapacitorMusicControls.updateIsPlaying({ isPlaying: false });
+      this.isPlayingSubject.next(false);
+    });
+
+    CapacitorMusicControls.addListener('music-controls-play', () => {
+      this.audio.play();
+      CapacitorMusicControls.updateIsPlaying({ isPlaying: true });
+      this.isPlayingSubject.next(true);
+    });
+
+    CapacitorMusicControls.addListener('music-controls-destroy', () => {
+      this.audio.pause();
+      this.isPlayingSubject.next(false);
+    });
+  }
 }
