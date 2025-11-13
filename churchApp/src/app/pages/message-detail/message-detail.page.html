@@ -49,8 +49,8 @@
       </ion-row>
 
       <ion-row id="seconds" class="ion-justify-content-between">
-        <ion-col class="ion-text-start">{{progress * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
-        <ion-col class="ion-text-end">{{duration * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
+        <ion-col size="2" class="ion-text-start">{{progress * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
+        <ion-col size="2" class="ion-text-end">{{duration * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
       </ion-row>
 
       <ion-row class="ion-margin-bottom">
