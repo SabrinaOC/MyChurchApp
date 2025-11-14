@@ -30,27 +30,29 @@
 
     <ion-card-content>
       <ion-row id="iconCenteredLayout" class="ion-margin-top">
-        <ion-button class="ion-margin-end" fill="clear" disabled>
-          <ion-icon name="heart-outline" color="danger"></ion-icon>
-        </ion-button>
-
-        <ion-button size="large" shape="round" (click)="togglePlay()">
-          @if (isLoading) {
-            <ion-spinner slot="icon-only" name="lines-small" style="color: white;"></ion-spinner>
-          } @else {
-            <ion-icon slot="icon-only" [name]="isPlaying && core.audio.selectedMessage === msgSelected ? 'pause' : 'play'">
-            </ion-icon>
-          }
-        </ion-button>
-
-        <ion-button class="ion-margin-start" fill="clear" (click)="shareMessage($event)">
-          <ion-icon name="share-social-outline" style="color: #4d8dff;"></ion-icon>
-        </ion-button>
+        <div style="z-index: 999;">
+          <ion-button class="ion-margin-end" fill="clear" disabled>
+            <ion-icon name="heart-outline" color="danger"></ion-icon>
+          </ion-button>
+  
+          <ion-button size="large" shape="round" (click)="togglePlay()">
+            @if (isLoading) {
+              <ion-spinner slot="icon-only" name="lines-small" style="color: white;"></ion-spinner>
+            } @else {
+              <ion-icon slot="icon-only" [name]="isPlaying && core.audio.selectedMessage === msgSelected ? 'pause' : 'play'">
+              </ion-icon>
+            }
+          </ion-button>
+  
+          <ion-button class="ion-margin-start" fill="clear" (click)="shareMessage($event)">
+            <ion-icon name="share-social-outline" style="color: #4d8dff;"></ion-icon>
+          </ion-button>
+        </div>
       </ion-row>
 
       <ion-row id="seconds" class="ion-justify-content-between">
-        <ion-col size="2" class="ion-text-start">{{progress * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
-        <ion-col size="2" class="ion-text-end">{{duration * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
+        <ion-col class="ion-text-start">{{progress * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
+        <ion-col class="ion-text-end">{{duration * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
       </ion-row>
 
       <ion-row class="ion-margin-bottom">
