@@ -1,0 +1,20 @@
+.divFiltros {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+#checkBox-layout {
+    padding-left: 8px;
+    font-size: small;
+    margin-top: 7px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 7px;
+    color: white;
+}
+
+.btnResetFilters {
+    display: flex;
+    justify-content: end;
+}
