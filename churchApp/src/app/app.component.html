@@ -9,8 +9,12 @@
         <ion-menu-toggle autoHide="false" *ngFor="let p of accountPages; let i = index">
           @if (p.url !== '/add-message' || p.url === '/add-message' && isAuthorized) {
           <ion-item [routerLink]="p.url" class="icon-container">
-            <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''"
-              [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
+            @if (!p.ionicIcon.includes("assets")) {
+              <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''"
+                [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
+            } @else {
+              <ion-img slot="start" [src]="p.ionicIcon" class="img-menu"></ion-img>
+            }
             <ion-label>
               {{p.title}}
             </ion-label>

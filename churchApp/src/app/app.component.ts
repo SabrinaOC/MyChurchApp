@@ -24,6 +24,11 @@ export class AppComponent {
       ionicIcon: 'lock-closed-outline',
     },
     {
+      title: 'Concordancias',
+      url: '/bible-reference',
+      ionicIcon: '../assets/icons/book-search.png', //src\assets\icons\book-search.png
+    },
+    {
       title: 'Configuración',
       url: '/settings',
       ionicIcon: 'settings-outline',
