@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
+import { AlertController, AnimationController, LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
 import jsonBible from '../../assets/bible.json';
 import { ApiService } from './api.service';
 import { Book, MessageType, Speaker } from './api/models';
@@ -28,7 +28,8 @@ export class CoreProvider {
     public router: Router,
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public animationCtrl: AnimationController
   ) {
     this.loadBibleRVR1960()
   }
@@ -196,8 +197,8 @@ public getBibleText(verseReference: string): string {
   normalizeText(text: string): string {
     let normalized: string = ''
     if(text) {
-      let formTitle = text.toLowerCase()
-      normalized = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+      let formTitle = text.toLowerCase().normalize("NFD");
+      normalized = formTitle.replace(/[\u0300-\u036f]/g, "");;
     }
     return normalized;
   }
@@ -242,5 +243,65 @@ public getBibleText(verseReference: string): string {
   
       alert.present();
     });
+  }
+
+
+
+  findInBible(term: string, includeAT: boolean = true, includeNT: boolean = true) {
+    console.log(term);
+    
+    if (term.length < 3) return [];
+
+    const results: any[] = [];
+    const normalicedTerm = this.normalizeText(term);
+
+    const books = this.getFilteredBooks(includeAT, includeNT);
+    
+    if (books.length === 0) {
+      return results; // nada seleccionado
+    }
+
+    for (const book of books) {
+      const chapters = this.bibleRVR1960[book];
+      if (!chapters) continue; //If any book isn't on the bibleRVR1960 json
+
+      for (const chapter in chapters) {
+        const verses = chapters[chapter];
+
+        for (const verse in verses) {
+          const text = verses[verse];
+          const normalizedText = this.normalizeText(text);
+
+          if (normalizedText.includes(normalicedTerm)) {
+            results.push({
+              verse: `${book} ${chapter}:${verse}`, 
+              text
+            });
+          }
+        }
+      }
+    }
+
+    return results;
+  }
+
+  /**
+   * Returns an array which has all the books from a Testament or both Testaments
+   * @param includeAT 
+   * @param includeNT 
+   * @returns 
+   */
+  private getFilteredBooks(includeAT: boolean, includeNT: boolean) {
+    let books: string[] = [];
+
+    if (includeAT) {
+      books = books.concat(Object.keys(jsonBible["Antiguo Testamento"]));
+    }
+
+    if (includeNT) {
+      books = books.concat(Object.keys(jsonBible["Nuevo Testamento"]));
+    }
+
+    return books;
   }
 }

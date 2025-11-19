@@ -18,3 +18,21 @@
     display: flex;
     justify-content: end;
 }
+
+.cardHeader {
+    width: fit-content;
+
+    ion-badge {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+p {
+    margin-top: -15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    color: white;
+}

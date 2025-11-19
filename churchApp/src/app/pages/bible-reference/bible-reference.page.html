@@ -18,16 +18,34 @@
     show-clear-button="always"
     clear-icon="close-outline"
     [debounce]="1000"
+    (ionInput)="changedSearchBar($event)"
     ></ion-searchbar>
 
     <div class="divFiltros">
       <div id="checkBox-layout">
-        <ion-checkbox mode="ios" checked>Antiguo Testamento</ion-checkbox>
-        <ion-checkbox mode="ios" checked>Nuevo Testamento</ion-checkbox>
+        <ion-checkbox mode="ios" checked (ionChange)="toggleOldTestament($event)">Antiguo Testamento</ion-checkbox>
+        <ion-checkbox mode="ios" checked (ionChange)="toggleNewTestament($event)">Nuevo Testamento</ion-checkbox>
       </div>
     </div>
 
     <div class="btnResetFilters">
-      <ion-button fill="clear">Resultados: 0</ion-button>
+      <ion-button fill="clear">Resultados: {{result.length}}</ion-button>
+    </div>
+
+    <div>
+      @for (res of result; track $index) {
+        <ion-card (click)="openShowVerses(res.verse)">
+          <ion-card-header>
+            <div class="cardHeader">
+              <ion-badge id="versesPopover{{$index}}" class="badge-verse">
+                <span>{{res.verse}}</span>
+              </ion-badge>
+            </div>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="bibleText">{{res.text}}</p>
+          </ion-card-content>
+        </ion-card>
+      }
     </div>
 </ion-content>
