@@ -54,7 +54,7 @@ export class BibleReferencePage implements OnInit {
   };
 
   searchInput() {
-    this.result = this.core.findInBible(this.searchedTerm, this.includeAT, this.includeNT);
+    this.result = this.core.bible.findInBible(this.searchedTerm, this.includeAT, this.includeNT);
     console.log(this.result);
     
   }
