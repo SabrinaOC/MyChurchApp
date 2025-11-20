@@ -39,7 +39,7 @@
             @if (isLoading) {
               <ion-spinner slot="icon-only" name="lines-small" style="color: white;"></ion-spinner>
             } @else {
-              <ion-icon slot="icon-only" [name]="isPlaying && core.audio.selectedMessage === msgSelected ? 'pause' : 'play'">
+              <ion-icon slot="icon-only" [name]="isPlaying && core.audio.selectedMessage?.id === msgSelected.id ? 'pause' : 'play'">
               </ion-icon>
             }
           </ion-button>

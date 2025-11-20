@@ -124,7 +124,7 @@ export class MessageDetailPage implements OnInit {
   togglePlay() {
     console.log("Plaay");
     
-    if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage !== this.msgSelected) {
+    if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage.id !== this.msgSelected.id) {
       this.core.audio.selectMessage(this.msgSelected);
     } else {
       if (this.isPlaying) this.core.audio.pause();
