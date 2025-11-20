@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { GestureController, Gesture } from '@ionic/angular';
@@ -32,7 +32,8 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
   constructor(
     public core: CoreProvider,
     private gestureCtrl: GestureController,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit(): void {
@@ -65,7 +66,9 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
           this.close = true;
           this.closeAudioPlayer();
         } else if (ev.deltaY < -30) {
-          this.openMsgDetail(ev);
+          this.ngZone.run(() => {
+            this.openMsgDetail(ev);
+          });
         }
       }
     });
