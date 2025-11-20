@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import jsonBible from '../../assets/bible.json';
-import { CoreProvider } from './core';
 
 @Injectable({
   providedIn: 'root'
@@ -196,4 +195,16 @@ export class BibleService {
     return normalized;
   }
 
+  getFullChapterText(book: string, chapter: string) {
+  const chapterObj = this.bibleRVR1960?.[book]?.[chapter];
+
+  if (!chapterObj) {
+    return null;
+  }
+
+  return Object.keys(chapterObj)
+    .sort((a, b) => Number(a) - Number(b)) // Order verses
+    .map(verseNum => chapterObj[verseNum])
+    .join(" ");
+}
 }

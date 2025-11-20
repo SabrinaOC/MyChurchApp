@@ -1,0 +1,14 @@
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="core.modalCtrl.dismiss()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{chapter}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p id="bibleText">{{text}}</p>
+</ion-content>

@@ -1,9 +1,9 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="core.navCtrl.navigateBack('')">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-button>
+      <ion-menu-toggle>
+        <ion-img src="../assets/icon/favicon.png" style="width: 35px; margin-left: 10px;"></ion-img>
+      </ion-menu-toggle>
     </ion-buttons>
     <ion-title>Concordancias bíblicas</ion-title>
   </ion-toolbar>
@@ -14,7 +14,7 @@
     <ion-searchbar
     mode="ios"
     animated="true"
-    placeholder="Busca "
+    placeholder="Buscar un término"
     show-clear-button="always"
     clear-icon="close-outline"
     [debounce]="1000"
