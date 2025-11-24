@@ -25,34 +25,6 @@ export class BibleReferencePage implements OnInit {
     
   }
 
-  enterAnimation = (baseEl: HTMLElement) => {
-    const root = baseEl.shadowRoot;
-
-    const backdropAnimation = this.core.animationCtrl
-      .create()
-      .addElement(root!.querySelector('ion-backdrop')!)
-      .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
-
-    const wrapperAnimation = this.core.animationCtrl
-      .create()
-      .addElement(root!.querySelector('.modal-wrapper')!)
-      .keyframes([
-        { offset: 0, opacity: '0', transform: 'scale(0)' },
-        { offset: 1, opacity: '0.99', transform: 'scale(1)' },
-      ]);
-
-    return this.core.animationCtrl
-      .create()
-      .addElement(baseEl)
-      .easing('ease-out')
-      .duration(500)
-      .addAnimation([backdropAnimation, wrapperAnimation]);
-  };
-
-  leaveAnimation = (baseEl: HTMLElement) => {
-    return this.enterAnimation(baseEl).direction('reverse');
-  };
-
   searchInput() {
     this.result = this.core.bible.findInBible(this.searchedTerm, this.includeAT, this.includeNT);
   }
@@ -79,8 +51,8 @@ export class BibleReferencePage implements OnInit {
       cssClass: 'versesPopover',
       backdropDismiss: true,
       showBackdrop: true,
-      enterAnimation: this.enterAnimation,
-      leaveAnimation: this.leaveAnimation,
+      enterAnimation: this.core.enterShowVersesAnimation,
+      leaveAnimation: this.core.leaveShowVersesAnimation,
     });
 
     modal.present()
