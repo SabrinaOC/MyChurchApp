@@ -121,7 +121,7 @@ export class BibleService {
     for (let i = fromVerse; i <= toVerse; i++) {
       const texto = cap[i.toString()];
       if (texto) {
-        result += `[${i}] ${texto}\n`;
+        result += `<span class="verseNumber">${i}</span> ${texto}\n`;
       }
     }
 
@@ -186,9 +186,9 @@ export class BibleService {
     return books;
   }
 
-    normalizeText(text: string): string {
+  normalizeText(text: string): string {
     let normalized: string = ''
-    if(text) {
+    if (text) {
       let formTitle = text.toLowerCase().normalize("NFD");
       normalized = formTitle.replace(/[\u0300-\u036f]/g, "");;
     }
@@ -196,15 +196,15 @@ export class BibleService {
   }
 
   getFullChapterText(book: string, chapter: string) {
-  const chapterObj = this.bibleRVR1960?.[book]?.[chapter];
+    const chapterObj = this.bibleRVR1960?.[book]?.[chapter];
 
-  if (!chapterObj) {
-    return null;
+    if (!chapterObj) {
+      return null;
+    }
+
+    return Object.keys(chapterObj)
+      .sort((a, b) => Number(a) - Number(b)) // Order verses
+      .map(verseNum => `<span class="verseNumber">${verseNum}</span> ${chapterObj[verseNum]}`)
+      .join(" ");
   }
-
-  return Object.keys(chapterObj)
-    .sort((a, b) => Number(a) - Number(b)) // Order verses
-    .map(verseNum => chapterObj[verseNum])
-    .join(" ");
-}
 }

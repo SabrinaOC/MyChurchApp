@@ -9,7 +9,7 @@
   <ion-content>
     <ion-list id="reader">
       <ion-item>
-          <p class="bibleText" style="margin-bottom: 60px;">{{core.bible.getBibleText(verse)}}</p>
+          <p class="bibleText" style="margin-bottom: 60px;" [innerHTML]="core.bible.getBibleText(verse)"></p>
       </ion-item>
     </ion-list>
 
