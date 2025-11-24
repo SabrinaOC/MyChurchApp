@@ -10,6 +10,9 @@ import { BibleReaderComponent } from '../bible-reader/bible-reader.component';
 export class ShowVersesComponent {
 
   @Input() public verse: string | undefined;
+  @Input() public searchedTerm: string = "";
+
+  bibleText: string = "";
 
   constructor(public core: CoreProvider) { }
 
@@ -22,5 +25,11 @@ export class ShowVersesComponent {
     });
     modal.onDidDismiss().then(d => { });
     await modal.present();
+  }
+
+  getBibleText(): string {
+    let text = this.core.bible.getBibleText(this.verse!)
+
+    return text.replace(this.searchedTerm!, `<mark class="markTerm">${this.searchedTerm}</mark>`)
   }
 }

@@ -12,8 +12,6 @@ export class BibleReaderComponent {
 
   @Input()
   set verse(value: string | undefined) {
-    console.log("Setter ejecutado", value);
-
     this._verse = value;
     if (value) {
       this.setText(value);

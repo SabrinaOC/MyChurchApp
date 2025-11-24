@@ -55,8 +55,6 @@ export class BibleReferencePage implements OnInit {
 
   searchInput() {
     this.result = this.core.bible.findInBible(this.searchedTerm, this.includeAT, this.includeNT);
-    console.log(this.result);
-    
   }
 
   changedSearchBar(e: any) {
@@ -77,7 +75,7 @@ export class BibleReferencePage implements OnInit {
   async openShowVerses(verse: string) {
     const modal = await this.core.modalCtrl.create({
       component: ShowVersesComponent,
-      componentProps: { verse },
+      componentProps: { verse, searchedTerm: this.searchedTerm },
       cssClass: 'versesPopover',
       backdropDismiss: true,
       showBackdrop: true,
