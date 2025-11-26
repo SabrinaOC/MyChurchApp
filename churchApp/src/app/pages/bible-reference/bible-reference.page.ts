@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { IonContent } from '@ionic/angular';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { CoreProvider } from 'src/app/services/core';
 
@@ -7,7 +8,12 @@ import { CoreProvider } from 'src/app/services/core';
   templateUrl: './bible-reference.page.html',
   styleUrls: ['./bible-reference.page.scss'],
 })
-export class BibleReferencePage implements OnInit {
+export class BibleReferencePage implements AfterViewInit {
+
+  @ViewChildren(IonContent) contents!: QueryList<IonContent>;
+  content!: IonContent;
+
+  showScroller = false;
 
   searchedTerm: string = ""
   includeNT: boolean = true;
@@ -20,9 +26,16 @@ export class BibleReferencePage implements OnInit {
     public core: CoreProvider
   ) { }
 
-  ngOnInit() {
-    console.log("Hi!");
-    
+  ngAfterViewInit() {
+    this.content = this.contents.last;
+  }
+
+  onScroll(event: any) {
+    this.showScroller = event.detail.scrollTop > 100;
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop(500);
   }
 
   searchInput() {

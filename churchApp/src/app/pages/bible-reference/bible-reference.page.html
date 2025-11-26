@@ -10,7 +10,7 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" (ionScroll)="onScroll($event)" scrollEvents="true">
     <ion-searchbar
     mode="ios"
     animated="true"
@@ -47,5 +47,9 @@
           </ion-card-content>
         </ion-card>
       }
+    </div>
+
+    <div class="topScroller" [class.visible]="showScroller" (click)="scrollToTop()">
+      <ion-icon name="chevron-up-circle-outline"></ion-icon>
     </div>
 </ion-content>
