@@ -10,6 +10,8 @@ export class BibleService {
   private bibleRVR1960: any;
   private bibleTitles: any;
 
+  public showBibleTittles: boolean = true;
+
   constructor(private http: HttpClient) {
     this.loadBibleRVR1960();
   }
@@ -214,11 +216,12 @@ export class BibleService {
 
     for (let verseNum of verseNumbers) {
 
-      
-      // Check if there is any version that starts with that verse
-      const section = chapterSections?.find((s: { from: number; }) => s.from === verseNum);
-      if (section) {
-        result.push(`<h4 class="sectionTitle">${section.titulo}</h4>`);
+      if (this.showBibleTittles) {
+        // Check if there is any version that starts with that verse
+        const section = chapterSections?.find((s: { desde: number; }) => s.desde === verseNum);
+        if (section) {
+          result.push(`<h4 class="sectionTitle">${section.titulo}</h4>`);
+        }
       }
 
       result.push(`<span class="verseNumber">${verseNum}</span> ${chapterObj[verseNum]}`);

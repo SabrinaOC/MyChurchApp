@@ -6,11 +6,8 @@ import { CoreProvider } from 'src/app/services/core';
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
-export class SettingsPage implements OnInit {
+export class SettingsPage {
 
   constructor(public core: CoreProvider) { }
-
-  ngOnInit() {
-  }
 
 }

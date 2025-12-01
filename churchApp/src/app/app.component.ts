@@ -66,6 +66,7 @@ export class AppComponent {
     this.initialize();
 
     this.core.detectPrefersTheme();
+    this.core.detectPrefersShowBibleTitles();
 
     App.getInfo().then(res => {
       this.version = res.version

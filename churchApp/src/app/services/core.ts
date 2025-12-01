@@ -54,6 +54,22 @@ export class CoreProvider {
     }
   }
 
+  public detectPrefersShowBibleTitles() {
+    let prefersBibleTitles: string | null = localStorage.getItem("bibleTitles")
+
+    switch (prefersBibleTitles) {
+      case 'true':
+        this.bible.showBibleTittles = true;
+        break;
+      case 'false':
+        this.bible.showBibleTittles = false;
+        break;
+      case null:
+        this.bible.showBibleTittles = true;
+        break;
+    }
+  }
+
   private setLightTheme() {
     this.theme = 'light';
     document.body.classList.remove('dark-theme');
@@ -76,6 +92,10 @@ export class CoreProvider {
     }
   }
 
+  public toggleBibleTitles() {
+    this.bible.showBibleTittles = !this.bible.showBibleTittles;
+    localStorage.setItem("bibleTitles", this.bible.showBibleTittles + "");
+  }
 
   normalizeText(text: string): string {
     let normalized: string = ''
