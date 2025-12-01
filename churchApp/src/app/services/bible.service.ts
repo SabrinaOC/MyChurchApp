@@ -8,6 +8,7 @@ import jsonBible from '../../assets/bible.json';
 export class BibleService {
 
   private bibleRVR1960: any;
+  private bibleTitles: any;
 
   constructor(private http: HttpClient) {
     this.loadBibleRVR1960();
@@ -72,6 +73,10 @@ export class BibleService {
     this.http.get('../../assets/RVR1960 - Spanish.json').subscribe(data => {
       console.log("Loaded Bible RVR1960");
       this.bibleRVR1960 = data;
+    });
+
+    this.http.get("../../assets/Bible Titles RVR1960.json").subscribe(data => {
+      this.bibleTitles = data;
     });
   }
 
@@ -197,14 +202,28 @@ export class BibleService {
 
   getFullChapterText(book: string, chapter: string) {
     const chapterObj = this.bibleRVR1960?.[book]?.[chapter];
+    const chapterSections = this.bibleTitles?.[book]?.[chapter];
 
     if (!chapterObj) {
       return null;
     }
 
-    return Object.keys(chapterObj)
-      .sort((a, b) => Number(a) - Number(b)) // Order verses
-      .map(verseNum => `<span class="verseNumber">${verseNum}</span> ${chapterObj[verseNum]}`)
-      .join(" ");
+    const verseNumbers = Object.keys(chapterObj).map(v => Number(v)).sort((a, b) => a - b);
+
+    let result: string[] = [];
+
+    for (let verseNum of verseNumbers) {
+
+      
+      // Check if there is any version that starts with that verse
+      const section = chapterSections?.find((s: { from: number; }) => s.from === verseNum);
+      if (section) {
+        result.push(`<h4 class="sectionTitle">${section.titulo}</h4>`);
+      }
+
+      result.push(`<span class="verseNumber">${verseNum}</span> ${chapterObj[verseNum]}`);
+    }
+
+    return result.join(" ");
   }
 }
