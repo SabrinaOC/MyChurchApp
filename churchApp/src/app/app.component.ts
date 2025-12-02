@@ -35,7 +35,6 @@ export class AppComponent {
     },
   ];
 
-  isAuthorized!: boolean;
   version!: string;
 
   constructor(private platform: Platform,
@@ -72,7 +71,7 @@ export class AppComponent {
       this.version = res.version
     })
 
-    this.isAuthorized = localStorage.getItem('USER_CREDENTIALS') ? true : false;
+    this.core.isAuthUser = localStorage.getItem('USER_CREDENTIALS') ? true : false;
   }
 
   initialize() {

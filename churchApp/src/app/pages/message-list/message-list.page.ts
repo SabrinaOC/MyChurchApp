@@ -29,7 +29,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   searchQuery: string = '';
 
   isOpenSharePopover: boolean = false;
-  isAuthUser: boolean = false;
   navigationExtra: NavigationExtras = {};
 
   showScroller = false;
@@ -60,9 +59,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   async ionViewWillEnter() {
     this.getAllMessages();
-    if(localStorage.getItem('USER_CREDENTIALS')){
-      this.isAuthUser = true;
-    }
   }
 
   onScroll(event: any) {

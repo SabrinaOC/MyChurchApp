@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AnimationController, NavController } from '@ionic/angular';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
@@ -21,6 +21,8 @@ export class MessageDetailPage implements OnInit {
   progress = 0;
   duration = 0;
   isLoading: boolean = false;
+
+  navigationExtra: NavigationExtras = {};
 
   constructor(
     public core: CoreProvider,
@@ -50,6 +52,18 @@ export class MessageDetailPage implements OnInit {
     if (this.msgSelected.verses) {
       this.verses = this.msgSelected.verses.split(";");
     }
+  }
+
+  /**
+   * 
+   * @param message 
+   */
+  editMessage(message: Message, event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.navigationExtra.queryParams = message;
+    this.router.navigate(['add-message'], this.navigationExtra)
   }
 
   async shareMessage(event: any) {
@@ -92,9 +106,7 @@ export class MessageDetailPage implements OnInit {
     modal.present()
   }
 
-  togglePlay() {
-    console.log("Plaay");
-    
+  togglePlay() {    
     if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage.id !== this.msgSelected.id) {
       this.core.audio.selectMessage(this.msgSelected);
     } else {

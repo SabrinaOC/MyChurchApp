@@ -12,11 +12,14 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <!-- <h3>{{ msgSelected.book.name }}</h3> -->
-      <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; cursor: pointer;">
         <ion-badge class="badge-verse">
           <span class="ion-padding-start ion-padding-end">{{msgSelected.book.name}}</span>
         </ion-badge>
+
+        @if (core.isAuthUser) {
+          <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(msgSelected, $event)"></ion-icon>
+        }
       </div>
 
       <ion-card-title color="dark" class="boldText">{{ msgSelected.title }}</ion-card-title> 

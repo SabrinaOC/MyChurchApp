@@ -7,7 +7,7 @@
           <ion-label>Fernán Núñez<br> Comunidad Cristiana</ion-label>
         </ion-list-header>
         <ion-menu-toggle autoHide="false" *ngFor="let p of accountPages; let i = index">
-          @if (p.url !== '/add-message' || p.url === '/add-message' && isAuthorized) {
+          @if (p.url !== '/add-message' || p.url === '/add-message' && core.isAuthUser) {
           <ion-item [routerLink]="p.url" class="icon-container">
             @if (!p.ionicIcon.includes("assets")) {
               <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''"

@@ -16,6 +16,8 @@ export class CoreProvider {
   speakerList: Speaker[] = [];
   bookList: Book[] = [];
 
+  isAuthUser: boolean = false;
+
   constructor(
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
