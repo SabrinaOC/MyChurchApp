@@ -136,8 +136,6 @@ export class BibleService {
   }
 
   findInBible(term: string, includeAT: boolean = true, includeNT: boolean = true) {
-    console.log(term);
-
     if (term.length < 3) return [];
 
     const results: any[] = [];

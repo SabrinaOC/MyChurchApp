@@ -28,8 +28,29 @@ export class ShowVersesComponent {
   }
 
   getBibleText(): string {
-    let text = this.core.bible.getBibleText(this.verse!)
+    const text = this.core.bible.getBibleText(this.verse!);
+    const term = this.searchedTerm!;
 
-    return text.replace(this.searchedTerm!, `<mark class="markTerm">${this.searchedTerm}</mark>`)
+    const normText = this.core.bible.normalizeText(text);
+    const normTerm = this.core.bible.normalizeText(term);
+
+    let result = "";
+    let last = 0;
+
+    // Búsqueda manual sin matchAll
+    let index = normText.indexOf(normTerm);
+
+    while (index !== -1) {
+      result += text.slice(last, index) +
+        `<mark class="markTerm">${text.slice(index, index + term.length)}</mark>`;
+
+      last = index + term.length;
+
+      index = normText.indexOf(normTerm, last);
+    }
+
+    result += text.slice(last);
+
+    return result;
   }
 }
