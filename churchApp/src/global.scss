@@ -200,9 +200,9 @@ body.light-theme {
 .topScroller {
     z-index: 999;
     position: fixed;
-    width: 35px;
+    max-width: 45px;
     bottom: 80px;
-    right: 30px;
+    right: 20px;
     border-radius: 20px;
     cursor: pointer;
 
@@ -218,6 +218,6 @@ body.light-theme {
     }
 
     ion-icon {
-        font-size: 45px
+        font-size: 45px;
     }
 }
