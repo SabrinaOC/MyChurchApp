@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
+import { VerseObject } from 'src/app/services/bible.service';
 import { CoreProvider } from 'src/app/services/core';
 
 @Component({
@@ -19,8 +20,8 @@ export class BibleReferencePage implements AfterViewInit {
   includeNT: boolean = true;
   includeAT: boolean = true;
 
-  result: any[] = [];
-  results: number = 0;
+  groupedVerses = new Map<string, Array<VerseObject>>();
+  verseCount: number = 0;
 
   constructor(
     public core: CoreProvider
@@ -39,7 +40,19 @@ export class BibleReferencePage implements AfterViewInit {
   }
 
   searchInput() {
-    this.result = this.core.bible.findInBible(this.searchedTerm, this.includeAT, this.includeNT);
+    this.groupedVerses = new Map<string, Array<VerseObject>>();
+
+    let result: VerseObject[] = this.core.bible.findInBible(this.searchedTerm, this.includeAT, this.includeNT);
+
+    this.verseCount = result.length;
+    
+    result.forEach((verse: VerseObject) => {
+      if (this.groupedVerses.has(verse.book)) {
+        this.groupedVerses.get(verse.book)?.push(verse);
+      } else {
+        this.groupedVerses.set(verse.book, new Array(verse));
+      }
+    });    
   }
 
   changedSearchBar(e: any) {

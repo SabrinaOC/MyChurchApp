@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import jsonBible from '../../assets/bible.json';
 
+export interface VerseObject {
+    book: string
+    verse: string
+    text: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -135,10 +141,10 @@ export class BibleService {
     return result.trim();
   }
 
-  findInBible(term: string, includeAT: boolean = true, includeNT: boolean = true) {
+  findInBible(term: string, includeAT: boolean = true, includeNT: boolean = true): VerseObject[] {
     if (term.length < 3) return [];
 
-    const results: any[] = [];
+    const results: VerseObject[] = [];
     const normalicedTerm = this.normalizeText(term);
 
     const books = this.getFilteredBooks(includeAT, includeNT);
@@ -160,6 +166,7 @@ export class BibleService {
 
           if (normalizedText.includes(normalicedTerm)) {
             results.push({
+              book,
               verse: `${book} ${chapter}:${verse}`,
               text
             });

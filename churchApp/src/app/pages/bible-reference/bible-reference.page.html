@@ -29,7 +29,7 @@
     </div>
 
     <div class="btnResetFilters">
-      <ion-button fill="clear">Resultados: {{result.length}}</ion-button>
+      <ion-button fill="clear">Resultados: {{verseCount}}</ion-button>
 
       <ion-button fill="clear" class="action" style="color: white;" ><!-- (click)="showFilterModal($event)" -->
         <span>Filtros &nbsp;</span>
@@ -38,20 +38,33 @@
     </div>
 
     <div>
-      @for (res of result; track $index) {
-        <ion-card (click)="openShowVerses(res.verse)">
-          <ion-card-header>
-            <div class="cardHeader">
-              <ion-badge id="versesPopover{{$index}}" class="badge-verse">
-                <span>{{res.verse}}</span>
-              </ion-badge>
+      <ion-accordion-group #accordionGroup [multiple]="true" [value]="0">
+
+        @for (verseGroup of groupedVerses; track $index) {
+          <ion-accordion [value]="$index">
+            <ion-item slot="header" class="accordionHeader">
+              <ion-label>{{verseGroup[0]}}</ion-label>
+            </ion-item>
+
+            <div slot="content">
+              @for (res of verseGroup[1]; track $index) {
+                <ion-card (click)="openShowVerses(res.verse)">
+                  <ion-card-header>
+                    <div class="cardHeader">
+                      <ion-badge id="versesPopover{{$index}}" class="badge-verse">
+                        <span>{{res.verse}}</span>
+                      </ion-badge>
+                    </div>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p class="bibleText">{{res.text}}</p>
+                  </ion-card-content>
+                </ion-card>
+              }
             </div>
-          </ion-card-header>
-          <ion-card-content>
-            <p class="bibleText">{{res.text}}</p>
-          </ion-card-content>
-        </ion-card>
-      }
+          </ion-accordion>
+        }
+      </ion-accordion-group>
     </div>
 
     <div class="topScroller" [class.visible]="showScroller" (click)="scrollToTop()">
