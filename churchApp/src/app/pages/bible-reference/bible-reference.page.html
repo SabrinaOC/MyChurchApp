@@ -28,18 +28,20 @@
       </div>
     </div>
 
-    <div class="btnResetFilters">
-      <ion-button fill="clear">Resultados: {{verseCount}}</ion-button>
-      
-      <div style="margin-right: 5px;">
-        <ion-button fill="clear" (click)="toggleAccordionGroup(false)" title="Colapsar grupos">
-          <ion-icon name="chevron-collapse" slot="icon-only"></ion-icon>
-        </ion-button>
-        <ion-button fill="clear" (click)="toggleAccordionGroup(true)" title="Expandir grupos">
-          <ion-icon name="chevron-expand" slot="icon-only"></ion-icon>
-        </ion-button>
+    @if (verseCount || searchedTerm) {
+      <div id="resultBar">
+        <ion-button fill="clear" style="--color: white">Resultados: {{verseCount}}</ion-button>
+        
+        <div style="margin-right: 5px;">
+          <ion-button fill="clear" (click)="toggleAccordionGroup(false)" title="Colapsar grupos">
+            <ion-icon name="chevron-collapse" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" (click)="toggleAccordionGroup(true)" title="Expandir grupos">
+            <ion-icon name="chevron-expand" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
       </div>
-    </div>
+    }
 
     <div>
       <ion-accordion-group #accordionGroup [multiple]="true" [value]="0">
@@ -72,7 +74,7 @@
       </ion-accordion-group>
     </div>
 
-    <div class="topScroller" [class.visible]="showScroller" (click)="scrollToTop()">
+    <!-- <div class="topScroller" [class.visible]="showScroller" (click)="scrollToTop()">
       <ion-icon name="chevron-up-circle-outline"></ion-icon>
-    </div>
+    </div> -->
 </ion-content>

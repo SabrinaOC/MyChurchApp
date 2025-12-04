@@ -72,6 +72,8 @@ export class BibleReferencePage implements AfterViewInit {
   }
 
   toggleAccordionGroup(expand: boolean) {    
+    this.scrollToTop()
+
     if (expand) {
       let i = 0;
       var array: string[] = []

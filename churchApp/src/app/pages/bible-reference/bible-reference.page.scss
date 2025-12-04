@@ -14,9 +14,23 @@
     color: white;
 }
 
-.btnResetFilters {
+#resultBar {
     display: flex;
     justify-content: space-between;
+
+    position: sticky;
+    top: 0; 
+    z-index: 10;
+    margin-top: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: white;
+    background-color: var(--ion-color-primary);
+    // --ion-card-backgroun: transparent !important;
+    // background: var(--ion-card-background);
 }
 
 .cardHeader {
