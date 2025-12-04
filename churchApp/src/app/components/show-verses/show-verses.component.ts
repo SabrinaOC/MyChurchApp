@@ -27,9 +27,13 @@ export class ShowVersesComponent {
     await modal.present();
   }
 
-  getBibleText(): string {
+  getBibleText(): string {    
     const text = this.core.bible.getBibleText(this.verse!);
-    const term = this.searchedTerm!;
+    const term = this.searchedTerm || "";
+
+    if (!term) {
+      return text;
+    }
 
     const normText = this.core.bible.normalizeText(text);
     const normTerm = this.core.bible.normalizeText(term);
@@ -41,11 +45,10 @@ export class ShowVersesComponent {
     let index = normText.indexOf(normTerm);
 
     while (index !== -1) {
-      result += text.slice(last, index) +
+      result += text.slice(last, index) + 
         `<mark class="markTerm">${text.slice(index, index + term.length)}</mark>`;
 
       last = index + term.length;
-
       index = normText.indexOf(normTerm, last);
     }
 
