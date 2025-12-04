@@ -74,7 +74,8 @@
       
       @if (verses && verses.length) {
         <h2 class="boldText">Versículos:</h2>
-        <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; margin-top: 15px;">
+
+        <div id="versesLayout">
           @for (verse of verses; track $index) {
             <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
               <span>{{verse}}</span>
