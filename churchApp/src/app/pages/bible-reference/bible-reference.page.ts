@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { IonContent } from '@ionic/angular';
+import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { IonAccordionGroup, IonContent } from '@ionic/angular';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { VerseObject } from 'src/app/services/bible.service';
 import { CoreProvider } from 'src/app/services/core';
@@ -11,6 +11,7 @@ import { CoreProvider } from 'src/app/services/core';
 })
 export class BibleReferencePage implements AfterViewInit {
 
+  @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup;
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
   content!: IonContent;
 
@@ -68,6 +69,22 @@ export class BibleReferencePage implements AfterViewInit {
   toggleNewTestament(e: any) {
     this.includeNT = e.detail.checked;
     this.searchInput();
+  }
+
+  toggleAccordionGroup(expand: boolean) {    
+    if (expand) {
+      let i = 0;
+      var array: string[] = []
+
+      this.groupedVerses.forEach(group => {       
+        array.push(i + "");
+        i++;
+      });
+
+      this.accordionGroup.value = array;
+    } else {
+      this.accordionGroup.value = [];
+    }
   }
 
   async openShowVerses(verse: string) {

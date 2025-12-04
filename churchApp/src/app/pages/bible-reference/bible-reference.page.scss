@@ -39,14 +39,11 @@ p {
 }
 
 .accordionHeader {
-    // --color: red;
-    // --background-color: rgba(var(--ion-item-background), $alpha: 0) !important;
-    // color: rgba(var(--ion-item-background), $alpha: 0)rgba(var(--ion-item-background), $alpha: 0);
     --ion-item-background: transparent !important;
     
     &::part(native) {
         // border-radius: 10px;
-        border: 1px lightgray;
+        border: 1px dimgrey;
         border-style: solid none solid none;
     }
 }
