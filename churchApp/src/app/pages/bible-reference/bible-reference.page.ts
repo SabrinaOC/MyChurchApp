@@ -53,7 +53,11 @@ export class BibleReferencePage implements AfterViewInit {
       } else {
         this.groupedVerses.set(verse.book, new Array(verse));
       }
-    });    
+    });
+
+    if (this.verseCount) {
+      this.accordionGroup.value = ["0"];
+    }
   }
 
   changedSearchBar(e: any) {
