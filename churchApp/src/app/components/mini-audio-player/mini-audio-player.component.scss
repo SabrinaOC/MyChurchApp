@@ -22,15 +22,15 @@ ion-card {
     border-radius: 20px;
 }
 
-#msg-detail-div {
-    display: flex; justify-content: flex-end; padding-top: 7px;
-    color: white;
-}
-
 @media (width < 550px) {
     #audio-player {
         width: 100%;
     }
+}
+
+#msg-detail-div {
+    display: flex; justify-content: flex-end; padding-top: 7px;
+    color: white;
 }
 
 
