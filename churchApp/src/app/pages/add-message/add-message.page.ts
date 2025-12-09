@@ -51,7 +51,9 @@ export class AddMessagePage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.datetime = new Date().toISOString();
+    if(!this.editableMessage) {
+      this.datetime = new Date().toISOString();
+    }
     this.form.get('date')?.setValue(this.datetime); 
   }
 
