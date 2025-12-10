@@ -15,7 +15,7 @@ deploy-ah-k8s:
 # Legacy push to github
 deploy_to_github:
   script:
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/git.arsahosting.com/arsahosting/k8s/k8s.arsahosting.com/customer/sabriojea/mychurch-app.git myChurch
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.arsahosting.com/arsahosting/k8s/k8s.arsahosting.com/customer/sabriojea/mychurch-app.git myChurch
     - cd myChurch
     - git remote add github https://oauth2:${GITHUB_TOKEN}@github.com/SabrinaOC/MyChurchApp.git
     - git push --mirror github
