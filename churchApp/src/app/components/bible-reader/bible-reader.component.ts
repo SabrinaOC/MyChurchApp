@@ -28,11 +28,9 @@ export class BibleReaderComponent {
   constructor(public core: CoreProvider) { }
 
   setText(verse: string) {
-    console.log(verse);
-
     const { book, chapter, verseStart, verseEnd } = this.parseVerseReference(verse);
-    this.text = this.core.bible.getFullChapterText(book, chapter)!;
-    // this.text = this.core.bible.getBibleText(`${book} ${chapter}: ${verseStart}-${verseEnd}`)!;
+
+    this.text = this.core.bible.getFullChapterText(book, chapter, parseInt(verseStart), parseInt(verseEnd))!;
 
     this.chapter = `${book} ${chapter}`;
   }

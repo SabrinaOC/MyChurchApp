@@ -156,7 +156,7 @@ body.light-theme {
 
 .bibleText {
     font-family: "NotoSerif", sans-serif;
-    line-height: 26px;
+    line-height: 28px;
 }
 
 
@@ -191,6 +191,10 @@ body.light-theme {
 .verseNumber {
     font-size: small;
     color: var(--ion-color-medium);
+}
+
+.underlineVerse {
+    text-decoration: underline var(--ion-color-primary);
 }
 
 .markTerm {

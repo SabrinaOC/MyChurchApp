@@ -207,7 +207,7 @@ export class BibleService {
     return normalized;
   }
 
-  getFullChapterText(book: string, chapter: string) {
+  getFullChapterText(book: string, chapter: string, underlineFrom: number = 0, underlineTo: number = 0) {
     const chapterObj = this.bibleRVR1960?.[book]?.[chapter];
     const chapterSections = this.bibleTitles?.[book]?.[chapter];
 
@@ -219,8 +219,7 @@ export class BibleService {
 
     let result: string[] = [];
 
-    for (let verseNum of verseNumbers) {
-
+    for (let verseNum of verseNumbers) {      
       if (this.showBibleTittles) {
         // Check if there is any version that starts with that verse
         const section = chapterSections?.find((s: { desde: number; }) => s.desde === verseNum);
@@ -228,8 +227,13 @@ export class BibleService {
           result.push(`<h4 class="sectionTitle">${section.titulo}</h4>`);
         }
       }
-
-      result.push(`<span class="verseNumber">${verseNum}</span> ${chapterObj[verseNum]}`);
+      
+      //Undeline selected verses
+      if (verseNum >= underlineFrom && verseNum <= underlineTo) {
+        result.push(`<span class="verseNumber">${verseNum}</span> <span class="underlineVerse">${chapterObj[verseNum]}</span>`);
+      } else {
+        result.push(`<span class="verseNumber">${verseNum}</span> ${chapterObj[verseNum]}`);
+      }
     }
 
     return result.join(" ");
