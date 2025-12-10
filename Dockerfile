@@ -2,7 +2,8 @@
 # Build image
 FROM node:20 AS builder
 WORKDIR /app
-COPY churchApp . # Una vez estandarizado la carpeta del proyecto: COPY . .
+# Una vez estandarizado la carpeta del proyecto: COPY . .
+COPY churchApp .
 RUN npm --version && node --version
 # RUN npm install --legacy-peer-deps
 RUN npm install
