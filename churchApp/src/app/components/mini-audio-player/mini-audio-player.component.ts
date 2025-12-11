@@ -61,11 +61,13 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
       el: this.audioPlayer.nativeElement,
       gestureName: 'swipe-down',
       direction: 'y', // Detect vertical movement
-      onMove: (ev) => {
-        if (ev.deltaY > 30 && !this.close) { //DeltaY value indicates the Y displacement
+      onEnd: (ev) => {
+        const threshold = 20;
+
+        if (ev.deltaY > threshold && !this.close) { //DeltaY value indicates the Y displacement
           this.close = true;
           this.closeAudioPlayer();
-        } else if (ev.deltaY < -30) {
+        } else if (ev.deltaY < -threshold) {
           this.ngZone.run(() => {
             this.openMsgDetail(ev);
           });

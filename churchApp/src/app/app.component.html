@@ -35,12 +35,13 @@
     <ion-router-outlet id="main-content"></ion-router-outlet>
 
     @if (core.audio.selectedMessage) {
-      <!-- <div style="margin-top: 24vh;"></div> -->
-      <app-mini-audio-player [message]="core.audio.selectedMessage" 
+      <div style="touch-action: none;">
+        <app-mini-audio-player [message]="core.audio.selectedMessage" 
         (closing)="closeAudioPlayer()"
         (finish)="markAsListenedMessage($event)"
         [ngClass]="{'hidden': router.url !== '/message-list'}">
       </app-mini-audio-player>
+    </div>
     }
   </ion-split-pane>
 </ion-app>
