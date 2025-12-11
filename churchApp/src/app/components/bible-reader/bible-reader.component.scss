@@ -1,5 +1,10 @@
 #text {
     margin: 20px;
+    user-select: text;
+
+    &::selection {
+        background-color: var(--ion-color-primary);
+    }
 }
 
 
