@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Book, Message } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { LoadingController } from '@ionic/angular';
+import { IonContent, LoadingController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
@@ -16,7 +16,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./message-list.page.scss'],
 })
 
-export class MessageListPage implements OnInit, OnDestroy {
+export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
+
+  @ViewChildren(IonContent) contents!: QueryList<IonContent>;
+  content!: IonContent;
+
   messageList!: Message[]
   isDesktop: boolean = false;
   datetime!: Date;
@@ -25,8 +29,9 @@ export class MessageListPage implements OnInit, OnDestroy {
   searchQuery: string = '';
 
   isOpenSharePopover: boolean = false;
-  isAuthUser: boolean = false;
   navigationExtra: NavigationExtras = {};
+
+  showScroller = false;
 
   private subscription: Subscription = new Subscription();
 
@@ -47,12 +52,22 @@ export class MessageListPage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+  
+  ngAfterViewInit() {
+    this.content = this.contents.last;
+  }
 
   async ionViewWillEnter() {
     this.getAllMessages();
-    if(localStorage.getItem('USER_CREDENTIALS')){
-      this.isAuthUser = true;
-    }
+  }
+
+  onScroll(event: any) {
+    const scrollTop = event.detail.scrollTop;
+    this.showScroller = scrollTop > 100;
+  }
+
+  scrollToTop() {
+    this.content.scrollToTop(500);
   }
 
   selectMessage(message: Message | null) {

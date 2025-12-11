@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, NgZone, OnInit, Output, ViewChild } from '@angular/core';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { GestureController, Gesture } from '@ionic/angular';
@@ -32,7 +32,8 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
   constructor(
     public core: CoreProvider,
     private gestureCtrl: GestureController,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit(): void {
@@ -60,12 +61,16 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
       el: this.audioPlayer.nativeElement,
       gestureName: 'swipe-down',
       direction: 'y', // Detect vertical movement
-      onMove: (ev) => {
-        if (ev.deltaY > 30 && !this.close) { //DeltaY value indicates the Y displacement
+      onEnd: (ev) => {
+        const threshold = 20;
+
+        if (ev.deltaY > threshold && !this.close) { //DeltaY value indicates the Y displacement
           this.close = true;
           this.closeAudioPlayer();
-        } else if (ev.deltaY < -30) {
-          this.openMsgDetail(ev);
+        } else if (ev.deltaY < -threshold) {
+          this.ngZone.run(() => {
+            this.openMsgDetail(ev);
+          });
         }
       }
     });

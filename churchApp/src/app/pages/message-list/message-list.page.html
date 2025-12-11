@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" id="messages">
+<ion-content [fullscreen]="true" id="messages" (ionScroll)="onScroll($event)" scrollEvents="true">
   <ion-searchbar
     mode="ios"
     animated="true"
@@ -61,7 +61,7 @@
 
             <div style="display: flex; justify-content: space-between;">
               <ion-card-title color="dark" mode="md" class="ion-margin-bottom">{{ message.title }}</ion-card-title>
-              @if (isAuthUser) {
+              @if (core.isAuthUser) {
                 <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(message, $event)"></ion-icon>
               }
             </div>
@@ -100,6 +100,10 @@
   </div>
   <div div class="refresh">(Desliza para recargar)</div>
   }
+  </div>
+
+  <div class="topScroller" [class.visible]="showScroller" (click)="scrollToTop()">
+    <ion-icon name="chevron-up-circle-outline"></ion-icon>
   </div>
 
 </ion-content>

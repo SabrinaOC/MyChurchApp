@@ -36,7 +36,7 @@ export class SimpleVerseSelectorComponent {
   selectBook(book: Book) {
     this.selectedBook = book;
     this.searchTerm = book.name ?? ''; // Show selected value at toolbar
-    this.chapters = this.core.getChapterCount(this.selectedBook.name!) ?? 0;
+    this.chapters = this.core.bible.getChapterCount(this.selectedBook.name!) ?? 0;
 
     if (this.justBook) {
       this.chooseVerse();
@@ -46,7 +46,7 @@ export class SimpleVerseSelectorComponent {
   selectChapter(chapter: number) {
     this.selectedChapter = chapter;
 
-    this.chapterVerses = this.core.getVerses(this.selectedBook!.name!, this.selectedChapter) ?? 0;
+    this.chapterVerses = this.core.bible.getVerses(this.selectedBook!.name!, this.selectedChapter) ?? 0;
   }
 
   selectVerse(verse: number) {

@@ -28,8 +28,8 @@ ion-card-title {
     font-size: 25px;
 }
 
-.ios .badge-verse {
-    margin-top: 10px;
+.badge-verse {
+    margin-top: 5px;
 }
 
 #audioProgress {
@@ -48,4 +48,11 @@ ion-card-title {
 
 #seconds {
     margin-top: -30px
+}
+
+#versesLayout {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 15px;
 }

@@ -1,0 +1,80 @@
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-toggle>
+        <ion-img src="../assets/icon/favicon.png" style="width: 35px; margin-left: 10px;"></ion-img>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>Concordancias bíblicas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" (ionScroll)="onScroll($event)" scrollEvents="true">
+    <ion-searchbar
+    mode="ios"
+    animated="true"
+    placeholder="Buscar un término"
+    show-clear-button="always"
+    clear-icon="close-outline"
+    [debounce]="1000"
+    (ionInput)="changedSearchBar($event)"
+    ></ion-searchbar>
+
+    <div class="divFiltros">
+      <div id="checkBox-layout">
+        <ion-checkbox mode="ios" checked (ionChange)="toggleOldTestament($event)">Antiguo Testamento</ion-checkbox>
+        <ion-checkbox mode="ios" checked (ionChange)="toggleNewTestament($event)">Nuevo Testamento</ion-checkbox>
+      </div>
+    </div>
+
+    @if (verseCount || searchedTerm) {
+      <div id="resultBar">
+        <ion-button fill="clear" style="--color: white">Resultados: {{verseCount}}</ion-button>
+        
+        <div style="margin-right: 5px;">
+          <ion-button fill="clear" (click)="toggleAccordionGroup(false)" title="Colapsar grupos">
+            <ion-icon name="chevron-collapse" slot="icon-only"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" (click)="toggleAccordionGroup(true)" title="Expandir grupos">
+            <ion-icon name="chevron-expand" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    }
+
+    <div>
+      <ion-accordion-group #accordionGroup [multiple]="true" [value]="0">
+
+        @for (verseGroup of groupedVerses; track $index) {
+          <ion-accordion [value]="$index">
+            <ion-item slot="header" class="accordionHeader" style="display: flex;">
+              <ion-label style="font-size: large;">{{verseGroup[0]}}</ion-label>
+              <p style="margin-top: 15px; margin-right: 10px;">{{verseGroup[1].length}}</p>
+            </ion-item>
+
+            <div slot="content">
+              @for (res of verseGroup[1]; track $index) {
+                <ion-card button="true" (click)="openShowVerses($event, res.verse)">
+                  <ion-card-header>
+                    <div class="cardHeader">
+                      <ion-badge id="versesPopover{{$index}}" class="badge-verse">
+                        <span>{{res.verse}}</span>
+                      </ion-badge>
+                    </div>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p class="bibleText">{{res.text}}</p>
+                  </ion-card-content>
+                </ion-card>
+              }
+            </div>
+          </ion-accordion>
+        }
+      </ion-accordion-group>
+    </div>
+
+    <!-- <div class="topScroller" [class.visible]="showScroller" (click)="scrollToTop()">
+      <ion-icon name="chevron-up-circle-outline"></ion-icon>
+    </div> -->
+</ion-content>

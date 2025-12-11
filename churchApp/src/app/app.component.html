@@ -7,10 +7,14 @@
           <ion-label>Fernán Núñez<br> Comunidad Cristiana</ion-label>
         </ion-list-header>
         <ion-menu-toggle autoHide="false" *ngFor="let p of accountPages; let i = index">
-          @if (p.url !== '/add-message' || p.url === '/add-message' && isAuthorized) {
+          @if (p.url !== '/add-message' || p.url === '/add-message' && core.isAuthUser) {
           <ion-item [routerLink]="p.url" class="icon-container">
-            <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''"
-              [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
+            @if (!p.ionicIcon.includes("assets")) {
+              <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''"
+                [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
+            } @else {
+              <ion-img slot="start" [src]="p.ionicIcon" class="img-menu"></ion-img>
+            }
             <ion-label>
               {{p.title}}
             </ion-label>
@@ -31,12 +35,13 @@
     <ion-router-outlet id="main-content"></ion-router-outlet>
 
     @if (core.audio.selectedMessage) {
-      <!-- <div style="margin-top: 24vh;"></div> -->
-      <app-mini-audio-player [message]="core.audio.selectedMessage" 
+      <div style="touch-action: none;">
+        <app-mini-audio-player [message]="core.audio.selectedMessage" 
         (closing)="closeAudioPlayer()"
         (finish)="markAsListenedMessage($event)"
         [ngClass]="{'hidden': router.url !== '/message-list'}">
       </app-mini-audio-player>
+    </div>
     }
   </ion-split-pane>
 </ion-app>

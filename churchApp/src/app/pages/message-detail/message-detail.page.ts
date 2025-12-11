@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AnimationController, NavController } from '@ionic/angular';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
@@ -22,11 +22,12 @@ export class MessageDetailPage implements OnInit {
   duration = 0;
   isLoading: boolean = false;
 
+  navigationExtra: NavigationExtras = {};
+
   constructor(
     public core: CoreProvider,
     public navCtrl: NavController,
-    private router: Router,
-    private animationCtrl: AnimationController
+    private router: Router
   ) {
     this.getMessageDetail();
   }
@@ -37,34 +38,6 @@ export class MessageDetailPage implements OnInit {
     this.core.audio.duration$.subscribe(v => this.duration = v);
     this.core.audio.isLoading$.subscribe(v => { this.isLoading = v; });
   }
-
-  enterAnimation = (baseEl: HTMLElement) => {
-    const root = baseEl.shadowRoot;
-
-    const backdropAnimation = this.animationCtrl
-      .create()
-      .addElement(root!.querySelector('ion-backdrop')!)
-      .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
-
-    const wrapperAnimation = this.animationCtrl
-      .create()
-      .addElement(root!.querySelector('.modal-wrapper')!)
-      .keyframes([
-        { offset: 0, opacity: '0', transform: 'scale(0)' },
-        { offset: 1, opacity: '0.99', transform: 'scale(1)' },
-      ]);
-
-    return this.animationCtrl
-      .create()
-      .addElement(baseEl)
-      .easing('ease-out')
-      .duration(500)
-      .addAnimation([backdropAnimation, wrapperAnimation]);
-  };
-
-  leaveAnimation = (baseEl: HTMLElement) => {
-    return this.enterAnimation(baseEl).direction('reverse');
-  };
 
   getMessageDetail() {
     this.msgSelected = this.router.getCurrentNavigation()?.extras.queryParams as Message;
@@ -79,6 +52,18 @@ export class MessageDetailPage implements OnInit {
     if (this.msgSelected.verses) {
       this.verses = this.msgSelected.verses.split(";");
     }
+  }
+
+  /**
+   * 
+   * @param message 
+   */
+  editMessage(message: Message, event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.navigationExtra.queryParams = message;
+    this.router.navigate(['add-message'], this.navigationExtra)
   }
 
   async shareMessage(event: any) {
@@ -114,15 +99,15 @@ export class MessageDetailPage implements OnInit {
       cssClass: 'versesPopover',
       backdropDismiss: true,
       showBackdrop: true,
-      enterAnimation: this.enterAnimation,
-      leaveAnimation: this.leaveAnimation,
+      enterAnimation: this.core.enterShowVersesAnimation,
+      leaveAnimation: this.core.leaveShowVersesAnimation,
     });
 
     modal.present()
   }
 
   togglePlay() {    
-    if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage !== this.msgSelected) {
+    if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage.id !== this.msgSelected.id) {
       this.core.audio.selectMessage(this.msgSelected);
     } else {
       if (this.isPlaying) this.core.audio.pause();
