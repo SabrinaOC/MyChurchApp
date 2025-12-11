@@ -55,7 +55,7 @@
 
             <div slot="content">
               @for (res of verseGroup[1]; track $index) {
-                <ion-card (click)="openShowVerses(res.verse)">
+                <ion-card button="true" (click)="openShowVerses($event, res.verse)">
                   <ion-card-header>
                     <div class="cardHeader">
                       <ion-badge id="versesPopover{{$index}}" class="badge-verse">

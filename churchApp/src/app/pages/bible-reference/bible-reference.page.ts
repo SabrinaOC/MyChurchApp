@@ -93,7 +93,7 @@ export class BibleReferencePage implements AfterViewInit {
     }
   }
 
-  async openShowVerses(verse: string) {
+  async openShowVerses(e: any, verse: string) {
     const modal = await this.core.modalCtrl.create({
       component: ShowVersesComponent,
       componentProps: { verse, searchedTerm: this.searchedTerm },
@@ -104,6 +104,12 @@ export class BibleReferencePage implements AfterViewInit {
       leaveAnimation: this.core.leaveShowVersesAnimation,
     });
 
-    modal.present()
+    modal.onWillDismiss().then(() => {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    });
+
+    await modal.present()
   }
 }
