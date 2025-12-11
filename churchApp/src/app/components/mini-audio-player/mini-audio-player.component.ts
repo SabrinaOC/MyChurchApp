@@ -99,9 +99,7 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
     this.finish.emit();
   }
 
-  togglePlay() {
-    console.log(this.isPlaying);
-    
+  togglePlay() {    
     if (this.isPlaying) this.core.audio.pause();
     else this.core.audio.play();
   }

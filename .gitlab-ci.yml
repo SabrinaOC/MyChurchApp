@@ -1,10 +1,21 @@
-stages:
-  - sync
+include:
+  - project: 'arsahosting/automation/ci-templates'
+    ref: master
+    file:
+      - 'generic/deploy-ah-k8s.yml'
 
+deploy-ah-k8s:
+  variables:
+    ARGO_PROJECT_NAME: sabriojea/mychurch-app
+  only:
+    - master
+
+
+
+# Legacy push to github
 deploy_to_github:
-  stage: sync
   script:
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/own-projects2155520/MyChurchApp.git myChurch
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@git.arsahosting.com/arsahosting/k8s/k8s.arsahosting.com/customer/sabriojea/mychurch-app.git myChurch
     - cd myChurch
     - git remote add github https://oauth2:${GITHUB_TOKEN}@github.com/SabrinaOC/MyChurchApp.git
     - git push --mirror github
