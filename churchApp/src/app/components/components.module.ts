@@ -8,13 +8,15 @@ import { SimpleVerseSelectorComponent } from './simple-verse-selector/simple-ver
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShowVersesComponent } from './show-verses/show-verses.component';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
+import { BibleReaderComponent } from './bible-reader/bible-reader.component';
 
 const COMPONENTS = [
   MiniAudioPlayerComponent,
   ShareOptionsPopoverComponent,
   SimpleVerseSelectorComponent,
   ShowVersesComponent,
-  FilterModalComponent
+  FilterModalComponent,
+  BibleReaderComponent
 ];
 
 @NgModule({
@@ -22,6 +24,6 @@ const COMPONENTS = [
   imports: [
     CommonModule, DriveLinkPipe, IonicModule, FormsModule, ReactiveFormsModule
   ],
-  exports: [MiniAudioPlayerComponent, ShareOptionsPopoverComponent, SimpleVerseSelectorComponent, ShowVersesComponent, FilterModalComponent]
+  exports: [COMPONENTS]
 })
 export class ComponentsModule { }

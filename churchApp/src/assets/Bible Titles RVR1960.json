@@ -1,0 +1,3655 @@
+{
+  "Génesis": {
+    "1": [
+      { "titulo": "La creación del mundo", "desde": 1, "hasta": 31 }
+    ],
+    "2": [
+      { "titulo": "La creación del hombre y la mujer", "desde": 1, "hasta": 25 }
+    ],
+    "3": [
+      { "titulo": "La caída del hombre", "desde": 1, "hasta": 24 }
+    ],
+    "4": [
+      { "titulo": "Caín y Abel", "desde": 1, "hasta": 16 },
+      { "titulo": "Descendientes de Caín", "desde": 17, "hasta": 24 },
+      { "titulo": "Nacimiento de Set", "desde": 25, "hasta": 26 }
+    ],
+    "5": [
+      { "titulo": "Descendientes de Adán", "desde": 1, "hasta": 32 }
+    ],
+    "6": [
+      { "titulo": "La maldad de los hombres", "desde": 1, "hasta": 8 },
+      { "titulo": "Construcción del arca", "desde": 9, "hasta": 22 }
+    ],
+    "7": [
+      { "titulo": "El diluvio", "desde": 1, "hasta": 24 }
+    ],
+    "8": [
+      { "titulo": "Fin del diluvio", "desde": 1, "hasta": 22 }
+    ],
+    "9": [
+      { "titulo": "Pacto de Dios con Noé", "desde": 1, "hasta": 17 },
+      { "titulo": "Maledicción de Canaán", "desde": 18, "hasta": 29 }
+    ],
+    "10": [
+      { "titulo": "Los descendientes de los hijos de Noé", "desde": 1, "hasta": 32 }
+    ],
+    "11": [
+      { "titulo": "La torre de Babel", "desde": 1, "hasta": 9 },
+      { "titulo": "Descendientes de Sem hasta Abram", "desde": 10, "hasta": 32 }
+    ],
+    "12": [
+      { "titulo": "El llamado de Abram", "desde": 1, "hasta": 9 },
+      { "titulo": "Abram en Egipto", "desde": 10, "hasta": 20 }
+    ],
+    "13": [
+      { "titulo": "Abram y Lot se separan", "desde": 1, "hasta": 18 }
+    ],
+    "14": [
+      { "titulo": "Abram libera a Lot", "desde": 1, "hasta": 24 }
+    ],
+    "15": [
+      { "titulo": "Dios hace pacto con Abram", "desde": 1, "hasta": 21 }
+    ],
+    "16": [
+      { "titulo": "Nacimiento de Ismael", "desde": 1, "hasta": 16 }
+    ],
+    "17": [
+      { "titulo": "Pacto de la circuncisión", "desde": 1, "hasta": 27 }
+    ],
+    "18": [
+      { "titulo": "La visita de los ángeles a Abraham", "desde": 1, "hasta": 15 },
+      { "titulo": "Intercesión por Sodoma", "desde": 16, "hasta": 33 }
+    ],
+    "19": [
+      { "titulo": "Destrucción de Sodoma y Gomorra", "desde": 1, "hasta": 29 },
+      { "titulo": "Las hijas de Lot", "desde": 30, "hasta": 38 }
+    ],
+    "20": [
+      { "titulo": "Abraham y Abimelec", "desde": 1, "hasta": 18 }
+    ],
+    "21": [
+      { "titulo": "Nacimiento de Isaac", "desde": 1, "hasta": 21 },
+      { "titulo": "Agar e Ismael son despedidos", "desde": 22, "hasta": 34 }
+    ],
+    "22": [
+      { "titulo": "Sacrificio de Isaac", "desde": 1, "hasta": 24 }
+    ],
+    "23": [
+      { "titulo": "Muerte y sepultura de Sara", "desde": 1, "hasta": 20 }
+    ],
+    "24": [
+      { "titulo": "Rebeca es esposa de Isaac", "desde": 1, "hasta": 67 }
+    ],
+    "25": [
+      { "titulo": "Abraham vuelve a casarse", "desde": 1, "hasta": 11 },
+      { "titulo": "Nacimiento de Jacob y Esaú", "desde": 19, "hasta": 34 }
+    ],
+    "26": [
+      { "titulo": "Isaac en Gerar", "desde": 1, "hasta": 35 }
+    ],
+    "27": [
+      { "titulo": "Jacob obtiene la bendición", "desde": 1, "hasta": 46 }
+    ],
+    "28": [
+      { "titulo": "El sueño de Jacob en Bet-el", "desde": 1, "hasta": 22 }
+    ],
+    "29": [
+      { "titulo": "Jacob sirve por Raquel", "desde": 1, "hasta": 35 }
+    ],
+    "30": [
+      { "titulo": "Los hijos de Jacob", "desde": 1, "hasta": 43 }
+    ],
+    "31": [
+      { "titulo": "Jacob huye de Labán", "desde": 1, "hasta": 55 }
+    ],
+    "32": [
+      { "titulo": "Jacob lucha con el ángel", "desde": 1, "hasta": 32 }
+    ],
+    "33": [
+      { "titulo": "Encuentro de Jacob y Esaú", "desde": 1, "hasta": 20 }
+    ],
+    "34": [
+      { "titulo": "La deshonra de Dina", "desde": 1, "hasta": 31 }
+    ],
+    "35": [
+      { "titulo": "Jacob vuelve a Bet-el", "desde": 1, "hasta": 29 }
+    ],
+    "37": [
+      { "titulo": "José vendido por sus hermanos", "desde": 1, "hasta": 36 }
+    ],
+    "39": [
+      { "titulo": "José en casa de Potifar", "desde": 1, "hasta": 23 }
+    ],
+    "41": [
+      { "titulo": "Sueños del faraón", "desde": 1, "hasta": 57 }
+    ]
+  },
+
+  "Éxodo": {
+    "1": [
+      { "titulo": "Los israelitas en Egipto", "desde": 1, "hasta": 22 }
+    ],
+    "2": [
+      { "titulo": "Nacimiento de Moisés", "desde": 1, "hasta": 10 },
+      { "titulo": "Moisés huye a Madián", "desde": 11, "hasta": 25 }
+    ],
+    "3": [
+      { "titulo": "La zarza ardiente", "desde": 1, "hasta": 22 }
+    ],
+    "4": [
+      { "titulo": "Moisés recibe señales", "desde": 1, "hasta": 31 }
+    ],
+    "5": [
+      { "titulo": "Faraón rechaza la petición", "desde": 1, "hasta": 23 }
+    ],
+    "6": [
+      { "titulo": "Dios promete liberar a Israel", "desde": 1, "hasta": 30 }
+    ],
+    "7": [
+      { "titulo": "Comienzan las plagas", "desde": 1, "hasta": 25 }
+    ],
+    "12": [
+      { "titulo": "Institución de la Pascua", "desde": 1, "hasta": 51 }
+    ],
+    "14": [
+      { "titulo": "Cruce del Mar Rojo", "desde": 1, "hasta": 31 }
+    ],
+    "20": [
+      { "titulo": "Los Diez Mandamientos", "desde": 1, "hasta": 26 }
+    ]
+  },
+
+  "Levítico": {
+    "1": [{ "titulo": "Leyes sobre los holocaustos", "desde": 1, "hasta": 17 }],
+    "2": [{ "titulo": "Leyes sobre las ofrendas", "desde": 1, "hasta": 16 }],
+    "3": [{ "titulo": "Leyes sobre los sacrificios de paz", "desde": 1, "hasta": 17 }],
+    "11": [{ "titulo": "Animales limpios e inmundos", "desde": 1, "hasta": 47 }],
+    "16": [{ "titulo": "El día de la expiación", "desde": 1, "hasta": 34 }],
+    "19": [{ "titulo": "Llamado a la santidad", "desde": 1, "hasta": 37 }]
+  },
+
+  "Números": {
+    "1": [{ "titulo": "Primer censo de Israel", "desde": 1, "hasta": 54 }],
+    "6": [{ "titulo": "El voto nazareo", "desde": 1, "hasta": 27 }],
+    "13": [{ "titulo": "Los doce espías", "desde": 1, "hasta": 33 }],
+    "20": [{ "titulo": "Moisés golpea la roca", "desde": 1, "hasta": 29 }],
+    "22": [{ "titulo": "Balac y Balaam", "desde": 1, "hasta": 41 }]
+  },
+
+  "Deuteronomio": {
+    "1": [{ "titulo": "Discurso de Moisés a Israel", "desde": 1, "hasta": 46 }],
+    "5": [{ "titulo": "Los Diez Mandamientos reiterados", "desde": 1, "hasta": 33 }],
+    "6": [{ "titulo": "Oye, Israel", "desde": 1, "hasta": 25 }],
+    "28": [
+      { "titulo": "Bendiciones de la obediencia", "desde": 1, "hasta": 14 },
+      { "titulo": "Maldiciones de la desobediencia", "desde": 15, "hasta": 68 }
+    ],
+    "34": [{ "titulo": "Muerte de Moisés", "desde": 1, "hasta": 12 }]
+  },
+
+  "Josué": {
+    "1": [
+      { "titulo": "Comisión de Josué", "desde": 1, "hasta": 18 }
+    ],
+    "2": [
+      { "titulo": "Rahab y los espías", "desde": 1, "hasta": 24 }
+    ],
+    "3": [
+      { "titulo": "Israel cruza el Jordán", "desde": 1, "hasta": 17 }
+    ],
+    "4": [
+      { "titulo": "Doce piedras por memorial", "desde": 1, "hasta": 24 }
+    ],
+    "5": [
+      { "titulo": "Circuncisión en Guilgal", "desde": 1, "hasta": 12 },
+      { "titulo": "El príncipe del ejército de Jehová", "desde": 13, "hasta": 15 }
+    ],
+    "6": [
+      { "titulo": "Caída de los muros de Jericó", "desde": 1, "hasta": 27 }
+    ],
+    "7": [
+      { "titulo": "El pecado de Acán", "desde": 1, "hasta": 26 }
+    ],
+    "8": [
+      { "titulo": "Conquista de Hai", "desde": 1, "hasta": 29 },
+      { "titulo": "Renovación del pacto en Ebal", "desde": 30, "hasta": 35 }
+    ],
+    "9": [
+      { "titulo": "Los gabaonitas engañan a Israel", "desde": 1, "hasta": 27 }
+    ],
+    "10": [
+      { "titulo": "El sol se detiene", "desde": 1, "hasta": 15 },
+      { "titulo": "Conquista del sur", "desde": 16, "hasta": 43 }
+    ],
+    "11": [
+      { "titulo": "Conquista del norte", "desde": 1, "hasta": 23 }
+    ],
+    "12": [
+      { "titulo": "Reyes derrotados por Israel", "desde": 1, "hasta": 24 }
+    ],
+    "13": [
+      { "titulo": "Territorio restante", "desde": 1, "hasta": 33 }
+    ],
+    "14": [
+      { "titulo": "Herencia de Caleb", "desde": 1, "hasta": 15 }
+    ],
+    "15": [
+      { "titulo": "Territorio de Judá", "desde": 1, "hasta": 63 }
+    ],
+    "18": [
+      { "titulo": "Distribución del territorio restante", "desde": 1, "hasta": 28 }
+    ],
+    "20": [
+      { "titulo": "Ciudades de refugio", "desde": 1, "hasta": 9 }
+    ],
+    "24": [
+      { "titulo": "Pacto de Josué en Siquem", "desde": 1, "hasta": 33 }
+    ]
+  },
+
+  "Jueces": {
+    "1": [
+      { "titulo": "Conquistas y fracasos de Israel", "desde": 1, "hasta": 36 }
+    ],
+    "2": [
+      { "titulo": "La infidelidad de Israel", "desde": 1, "hasta": 23 }
+    ],
+    "3": [
+      { "titulo": "Otoniel, Aod y Samgar", "desde": 1, "hasta": 31 }
+    ],
+    "4": [
+      { "titulo": "Débora y Barac", "desde": 1, "hasta": 24 }
+    ],
+    "5": [
+      { "titulo": "Cántico de Débora", "desde": 1, "hasta": 31 }
+    ],
+    "6": [
+      { "titulo": "Llamamiento de Gedeón", "desde": 1, "hasta": 40 }
+    ],
+    "7": [
+      { "titulo": "Gedeón vence a Madián", "desde": 1, "hasta": 25 }
+    ],
+    "8": [
+      { "titulo": "Muerte de Gedeón", "desde": 1, "hasta": 35 }
+    ],
+    "9": [
+      { "titulo": "Abimelec", "desde": 1, "hasta": 57 }
+    ],
+    "11": [
+      { "titulo": "Jepté", "desde": 1, "hasta": 40 }
+    ],
+    "13": [
+      { "titulo": "Nacimiento de Sansón", "desde": 1, "hasta": 25 }
+    ],
+    "14": [
+      { "titulo": "Sansón y la mujer filistea", "desde": 1, "hasta": 20 }
+    ],
+    "15": [
+      { "titulo": "Victorias de Sansón", "desde": 1, "hasta": 20 }
+    ],
+    "16": [
+      { "titulo": "Sansón y Dalila", "desde": 1, "hasta": 31 }
+    ],
+    "19": [
+      { "titulo": "El levita y su concubina", "desde": 1, "hasta": 30 }
+    ],
+    "21": [
+      { "titulo": "Las esposas para Benjamín", "desde": 1, "hasta": 25 }
+    ]
+  },
+
+  "Rut": {
+    "1": [
+      { "titulo": "Noemí y Rut", "desde": 1, "hasta": 22 }
+    ],
+    "2": [
+      { "titulo": "Rut recoge espigas en el campo de Booz", "desde": 1, "hasta": 23 }
+    ],
+    "3": [
+      { "titulo": "Rut en la era", "desde": 1, "hasta": 18 }
+    ],
+    "4": [
+      { "titulo": "Booz redime a Rut", "desde": 1, "hasta": 22 }
+    ]
+  },
+
+  "1 Samuel": {
+    "1": [
+      { "titulo": "Nacimiento de Samuel", "desde": 1, "hasta": 28 },
+      { "titulo": "Oración de Ana", "desde": 29, "hasta": 28 }
+    ],
+    "2": [
+      { "titulo": "Cántico de Ana", "desde": 1, "hasta": 10 },
+      { "titulo": "Pecado de los hijos de Elí", "desde": 11, "hasta": 26 },
+      { "titulo": "Profecía contra la casa de Elí", "desde": 27, "hasta": 36 }
+    ],
+    "3": [
+      { "titulo": "Dios habla a Samuel", "desde": 1, "hasta": 21 }
+    ],
+    "4": [
+      { "titulo": "El arca es tomada por los filisteos", "desde": 1, "hasta": 22 }
+    ],
+    "5": [
+      { "titulo": "El arca en territorio filisteo", "desde": 1, "hasta": 12 }
+    ],
+    "6": [
+      { "titulo": "El arca es devuelta a Israel", "desde": 1, "hasta": 21 }
+    ],
+    "7": [
+      { "titulo": "Samuel juez de Israel", "desde": 1, "hasta": 17 }
+    ],
+    "8": [
+      { "titulo": "El pueblo pide rey", "desde": 1, "hasta": 22 }
+    ],
+    "9": [
+      { "titulo": "Saúl busca las asnas", "desde": 1, "hasta": 14 },
+      { "titulo": "Samuel unge a Saúl", "desde": 15, "hasta": 27 }
+    ],
+    "10": [
+      { "titulo": "Saúl es ungido rey", "desde": 1, "hasta": 16 },
+      { "titulo": "Saúl proclamado rey", "desde": 17, "hasta": 27 }
+    ],
+    "11": [
+      { "titulo": "Saúl vence a los amonitas", "desde": 1, "hasta": 15 }
+    ],
+    "12": [
+      { "titulo": "Discurso de despedida de Samuel", "desde": 1, "hasta": 25 }
+    ],
+    "13": [
+      { "titulo": "Saúl reina y desobedece", "desde": 1, "hasta": 23 }
+    ],
+    "14": [
+      { "titulo": "Jonatán ataca a los filisteos", "desde": 1, "hasta": 23 },
+      { "titulo": "El juramento imprudente de Saúl", "desde": 24, "hasta": 52 }
+    ],
+    "15": [
+      { "titulo": "Saúl desobedece con Amalec", "desde": 1, "hasta": 35 }
+    ],
+    "16": [
+      { "titulo": "Samuel unge a David", "desde": 1, "hasta": 13 },
+      { "titulo": "David sirve a Saúl", "desde": 14, "hasta": 23 }
+    ],
+    "17": [
+      { "titulo": "David y Goliat", "desde": 1, "hasta": 58 }
+    ],
+    "18": [
+      { "titulo": "Enemistad de Saúl hacia David", "desde": 1, "hasta": 30 }
+    ],
+    "19": [
+      { "titulo": "David huye de Saúl", "desde": 1, "hasta": 24 }
+    ],
+    "20": [
+      { "titulo": "Pacto entre David y Jonatán", "desde": 1, "hasta": 42 }
+    ],
+    "21": [
+      { "titulo": "David huye a Nob y Gat", "desde": 1, "hasta": 15 }
+    ],
+    "22": [
+      { "titulo": "David en Adulam", "desde": 1, "hasta": 5 },
+      { "titulo": "Saúl mata a los sacerdotes", "desde": 6, "hasta": 23 }
+    ],
+    "23": [
+      { "titulo": "David libra a Keila", "desde": 1, "hasta": 13 },
+      { "titulo": "David perseguido por Saúl", "desde": 14, "hasta": 29 }
+    ],
+    "24": [
+      { "titulo": "David perdona la vida a Saúl", "desde": 1, "hasta": 22 }
+    ],
+    "25": [
+      { "titulo": "Muerte de Samuel", "desde": 1, "hasta": 1 },
+      { "titulo": "David y Abigail", "desde": 2, "hasta": 44 }
+    ],
+    "26": [
+      { "titulo": "David perdona a Saúl por segunda vez", "desde": 1, "hasta": 25 }
+    ],
+    "27": [
+      { "titulo": "David entre los filisteos", "desde": 1, "hasta": 12 }
+    ],
+    "28": [
+      { "titulo": "Saúl consulta a la adivina de Endor", "desde": 1, "hasta": 25 }
+    ],
+    "29": [
+      { "titulo": "Filisteos desconfían de David", "desde": 1, "hasta": 11 }
+    ],
+    "30": [
+      { "titulo": "David derrota a los amalecitas", "desde": 1, "hasta": 31 }
+    ],
+    "31": [
+      { "titulo": "Muerte de Saúl y sus hijos", "desde": 1, "hasta": 13 }
+    ]
+  },
+  "2 Samuel": {
+    "1": [
+      { "titulo": "David recibe noticia de la muerte de Saúl", "desde": 1, "hasta": 16 },
+      { "titulo": "Canto fúnebre de David por Saúl y Jonatán", "desde": 17, "hasta": 27 }
+    ],
+    "2": [
+      { "titulo": "David es proclamado rey de Judá", "desde": 1, "hasta": 7 },
+      { "titulo": "Guerra entre la casa de Saúl y David", "desde": 8, "hasta": 32 }
+    ],
+    "3": [
+      { "titulo": "Abner apoya a David", "desde": 1, "hasta": 21 },
+      { "titulo": "Asesinato de Abner", "desde": 22, "hasta": 39 }
+    ],
+    "4": [
+      { "titulo": "Muerte de Is-boset", "desde": 1, "hasta": 12 }
+    ],
+    "5": [
+      { "titulo": "David rey sobre todo Israel", "desde": 1, "hasta": 5 },
+      { "titulo": "David conquista Jerusalén", "desde": 6, "hasta": 16 },
+      { "titulo": "Victorias de David sobre los filisteos", "desde": 17, "hasta": 25 }
+    ],
+    "6": [
+      { "titulo": "David traslada el arca", "desde": 1, "hasta": 11 },
+      { "titulo": "El arca entra en Jerusalén", "desde": 12, "hasta": 23 }
+    ],
+    "7": [
+      { "titulo": "Pacto de Dios con David", "desde": 1, "hasta": 17 },
+      { "titulo": "Oración de David", "desde": 18, "hasta": 29 }
+    ],
+    "8": [
+      { "titulo": "Victorias de David", "desde": 1, "hasta": 18 },
+      { "titulo": "Oficiales del reino de David", "desde": 15, "hasta": 18 }
+    ],
+    "9": [
+      { "titulo": "David favorece a Mefi-boset", "desde": 1, "hasta": 13 }
+    ],
+    "10": [
+      { "titulo": "Guerra contra los amonitas", "desde": 1, "hasta": 19 }
+    ],
+    "11": [
+      { "titulo": "David y Betsabé", "desde": 1, "hasta": 5 },
+      { "titulo": "David ordena la muerte de Urías", "desde": 6, "hasta": 25 },
+      { "titulo": "Betsabé queda viuda y luego esposa de David", "desde": 26, "hasta": 27 }
+    ],
+    "12": [
+      { "titulo": "Natán reprende a David", "desde": 1, "hasta": 14 },
+      { "titulo": "Muerte del hijo de David", "desde": 15, "hasta": 23 },
+      { "titulo": "Nacimiento de Salomón", "desde": 24, "hasta": 25 },
+      { "titulo": "David toma Rabá", "desde": 26, "hasta": 31 }
+    ],
+    "13": [
+      { "titulo": "Amnón y Tamar", "desde": 1, "hasta": 22 },
+      { "titulo": "Absalón mata a Amnón", "desde": 23, "hasta": 39 }
+    ],
+    "14": [
+      { "titulo": "Joab hace volver a Absalón", "desde": 1, "hasta": 24 },
+      { "titulo": "Absalón se reconcilia con David", "desde": 25, "hasta": 33 }
+    ],
+    "15": [
+      { "titulo": "Rebelión de Absalón", "desde": 1, "hasta": 12 },
+      { "titulo": "David huye de Jerusalén", "desde": 13, "hasta": 37 }
+    ],
+    "16": [
+      { "titulo": "Siba engaña a David", "desde": 1, "hasta": 4 },
+      { "titulo": "Simí maldice a David", "desde": 5, "hasta": 14 },
+      { "titulo": "Consejo de Ahitofel a Absalón", "desde": 15, "hasta": 23 }
+    ],
+    "17": [
+      { "titulo": "Consejo de Husai", "desde": 1, "hasta": 14 },
+      { "titulo": "David es advertido", "desde": 15, "hasta": 22 },
+      { "titulo": "David recibe provisiones", "desde": 23, "hasta": 29 }
+    ],
+    "18": [
+      { "titulo": "Batalla en el bosque de Efraín", "desde": 1, "hasta": 18 },
+      { "titulo": "Muerte de Absalón", "desde": 9, "hasta": 18 },
+      { "titulo": "David llora a Absalón", "desde": 19, "hasta": 33 }
+    ],
+    "19": [
+      { "titulo": "David regresa a Jerusalén", "desde": 1, "hasta": 15 },
+      { "titulo": "David perdona a Simí", "desde": 16, "hasta": 23 },
+      { "titulo": "Mefi-boset justifica su ausencia", "desde": 24, "hasta": 30 },
+      { "titulo": "Barzilai y Quimham", "desde": 31, "hasta": 40 },
+      { "titulo": "Disputa entre Judá e Israel", "desde": 41, "hasta": 43 }
+    ],
+    "20": [
+      { "titulo": "Rebelión de Seba", "desde": 1, "hasta": 22 },
+      { "titulo": "Oficiales del reino de David", "desde": 23, "hasta": 26 }
+    ],
+    "21": [
+      { "titulo": "Venganza por los gabaonitas", "desde": 1, "hasta": 14 },
+      { "titulo": "Héroes de David contra los gigantes", "desde": 15, "hasta": 22 }
+    ],
+    "22": [
+      { "titulo": "Cántico de David", "desde": 1, "hasta": 51 }
+    ],
+    "23": [
+      { "titulo": "Últimas palabras de David", "desde": 1, "hasta": 7 },
+      { "titulo": "Los valientes de David", "desde": 8, "hasta": 39 }
+    ],
+    "24": [
+      { "titulo": "Censo de David y castigo", "desde": 1, "hasta": 25 }
+    ]
+  },
+
+  "1 Reyes": {
+    "1": [
+      { "titulo": "Sucesión de David: Adonías se exalta", "desde": 1, "hasta": 27 },
+      { "titulo": "Salomón es proclamado rey", "desde": 28, "hasta": 53 }
+    ],
+    "2": [
+      { "titulo": "Últimas instrucciones de David a Salomón", "desde": 1, "hasta": 12 },
+      { "titulo": "Muerte de David", "desde": 10, "hasta": 12 },
+      { "titulo": "Salomón afirma su reino", "desde": 13, "hasta": 46 }
+    ],
+    "3": [
+      { "titulo": "Salomón pide sabiduría", "desde": 1, "hasta": 15 },
+      { "titulo": "Juicio de Salomón", "desde": 16, "hasta": 28 }
+    ],
+    "4": [
+      { "titulo": "Príncipes y gobernadores de Salomón", "desde": 1, "hasta": 19 },
+      { "titulo": "Grandeza y sabiduría de Salomón", "desde": 20, "hasta": 34 }
+    ],
+    "5": [
+      { "titulo": "Preparativos para el templo", "desde": 1, "hasta": 18 }
+    ],
+    "6": [
+      { "titulo": "Construcción del templo", "desde": 1, "hasta": 38 }
+    ],
+    "7": [
+      { "titulo": "Palacio de Salomón", "desde": 1, "hasta": 12 },
+      { "titulo": "Acabado del templo", "desde": 13, "hasta": 51 }
+    ],
+    "8": [
+      { "titulo": "El arca es llevada al templo", "desde": 1, "hasta": 21 },
+      { "titulo": "Oración de dedicación", "desde": 22, "hasta": 53 },
+      { "titulo": "Dedicación del templo", "desde": 54, "hasta": 66 }
+    ],
+    "9": [
+      { "titulo": "Dios se aparece a Salomón nuevamente", "desde": 1, "hasta": 9 },
+      { "titulo": "Relaciones con Hiram", "desde": 10, "hasta": 14 },
+      { "titulo": "Obras de Salomón", "desde": 15, "hasta": 28 }
+    ],
+    "10": [
+      { "titulo": "Visita de la reina de Sabá", "desde": 1, "hasta": 13 },
+      { "titulo": "Riqueza y gloria de Salomón", "desde": 14, "hasta": 29 }
+    ],
+    "11": [
+      { "titulo": "Apostasía de Salomón", "desde": 1, "hasta": 13 },
+      { "titulo": "Adversarios de Salomón", "desde": 14, "hasta": 25 },
+      { "titulo": "Jeroboam se rebela", "desde": 26, "hasta": 40 },
+      { "titulo": "Muerte de Salomón", "desde": 41, "hasta": 43 }
+    ],
+    "12": [
+      { "titulo": "División del reino", "desde": 1, "hasta": 24 },
+      { "titulo": "Pecado de Jeroboam", "desde": 25, "hasta": 33 }
+    ],
+    "13": [
+      { "titulo": "El hombre de Dios y Jeroboam", "desde": 1, "hasta": 34 }
+    ],
+    "14": [
+      { "titulo": "Profecía contra Jeroboam", "desde": 1, "hasta": 20 },
+      { "titulo": "Reinado de Roboam", "desde": 21, "hasta": 31 }
+    ],
+    "15": [
+      { "titulo": "Reinados de Abiam y Asa en Judá", "desde": 1, "hasta": 24 },
+      { "titulo": "Reyes de Israel: Nadab y Baasa", "desde": 25, "hasta": 34 }
+    ],
+    "16": [
+      { "titulo": "Reyes de Israel: Ela, Zimri, Omri", "desde": 1, "hasta": 28 },
+      { "titulo": "Acab rey de Israel", "desde": 29, "hasta": 34 }
+    ],
+    "17": [
+      { "titulo": "Elías anuncia sequía", "desde": 1, "hasta": 7 },
+      { "titulo": "Elías y la viuda de Sarepta", "desde": 8, "hasta": 24 }
+    ],
+    "18": [
+      { "titulo": "Elías y Abdías", "desde": 1, "hasta": 16 },
+      { "titulo": "Elías en el Carmelo", "desde": 17, "hasta": 40 },
+      { "titulo": "Fin de la sequía", "desde": 41, "hasta": 46 }
+    ],
+    "19": [
+      { "titulo": "Elías huye al Horeb", "desde": 1, "hasta": 18 },
+      { "titulo": "Llamamiento de Eliseo", "desde": 19, "hasta": 21 }
+    ],
+    "20": [
+      { "titulo": "Acab vence a los sirios", "desde": 1, "hasta": 22 },
+      { "titulo": "Profecía contra Acab", "desde": 23, "hasta": 43 }
+    ],
+    "21": [
+      { "titulo": "Nabot y su viña", "desde": 1, "hasta": 16 },
+      { "titulo": "Juicio contra Acab y Jezabel", "desde": 17, "hasta": 29 }
+    ],
+    "22": [
+      { "titulo": "Acab y Josafat consultan a los profetas", "desde": 1, "hasta": 28 },
+      { "titulo": "Muerte de Acab", "desde": 29, "hasta": 40 },
+      { "titulo": "Reinados de Josafat y Ocozías", "desde": 41, "hasta": 54 }
+    ]
+  },
+
+  "2 Reyes": {
+    "1": [
+      { "titulo": "Ocozías y el mensaje de Elías", "desde": 1, "hasta": 18 },
+      { "titulo": "Elías y los capitanes", "desde": 19, "hasta": 18 },
+      { "titulo": "Ocozías muere conforme a la palabra de Elías", "desde": 19, "hasta": 18 }
+    ],
+    "2": [
+      { "titulo": "Elías es llevado al cielo", "desde": 1, "hasta": 14 },
+      { "titulo": "Milagros iniciales de Eliseo", "desde": 15, "hasta": 25 }
+    ],
+    "3": [
+      { "titulo": "Joram, Josafat y el rey de Edom", "desde": 1, "hasta": 20 },
+      { "titulo": "Derrota de Moab", "desde": 21, "hasta": 27 }
+    ],
+    "4": [
+      { "titulo": "La viuda y el aceite", "desde": 1, "hasta": 7 },
+      { "titulo": "La sunamita y Eliseo", "desde": 8, "hasta": 37 },
+      { "titulo": "Eliseo purifica el potaje", "desde": 38, "hasta": 41 },
+      { "titulo": "Multiplicación de panes", "desde": 42, "hasta": 44 }
+    ],
+    "5": [
+      { "titulo": "Naamán es sanado", "desde": 1, "hasta": 19 },
+      { "titulo": "Castigo de Gehazi", "desde": 20, "hasta": 27 }
+    ],
+    "6": [
+      { "titulo": "El hacha perdida", "desde": 1, "hasta": 7 },
+      { "titulo": "Eliseo y el ejército sirio", "desde": 8, "hasta": 23 },
+      { "titulo": "El sitio de Samaria", "desde": 24, "hasta": 33 }
+    ],
+    "7": [
+      { "titulo": "Liberación de Samaria", "desde": 1, "hasta": 20 }
+    ],
+    "8": [
+      { "titulo": "La sunamita recobra sus bienes", "desde": 1, "hasta": 6 },
+      { "titulo": "Hazael es proclamado rey de Siria", "desde": 7, "hasta": 15 },
+      { "titulo": "Reinado de Joram en Judá", "desde": 16, "hasta": 24 },
+      { "titulo": "Reinado de Ocozías", "desde": 25, "hasta": 29 }
+    ],
+    "9": [
+      { "titulo": "Jehú es ungido rey", "desde": 1, "hasta": 13 },
+      { "titulo": "Jehú mata a Joram y a Ocozías", "desde": 14, "hasta": 29 },
+      { "titulo": "Jehú destruye a Jezabel", "desde": 30, "hasta": 37 }
+    ],
+    "10": [
+      { "titulo": "Derrotas de Jehú", "desde": 1, "hasta": 17 },
+      { "titulo": "Jehú extirpa el culto a Baal", "desde": 18, "hasta": 31 },
+      { "titulo": "Muerte de Jehú", "desde": 32, "hasta": 36 }
+    ],
+    "11": [
+      { "titulo": "Atalía usurpa el trono", "desde": 1, "hasta": 3 },
+      { "titulo": "Joás es proclamado rey", "desde": 4, "hasta": 12 },
+      { "titulo": "Atalía es ejecutada", "desde": 13, "hasta": 21 }
+    ],
+    "12": [
+      { "titulo": "Reinado de Joás", "desde": 1, "hasta": 16 },
+      { "titulo": "Muerte de Joás", "desde": 17, "hasta": 21 }
+    ],
+    "13": [
+      { "titulo": "Reinado de Joacaz", "desde": 1, "hasta": 9 },
+      { "titulo": "Reinado de Joás en Israel", "desde": 10, "hasta": 13 },
+      { "titulo": "Muerte de Eliseo", "desde": 14, "hasta": 25 }
+    ],
+    "14": [
+      { "titulo": "Reinado de Amasías", "desde": 1, "hasta": 22 },
+      { "titulo": "Reinado de Jeroboam II", "desde": 23, "hasta": 29 }
+    ],
+    "15": [
+      { "titulo": "Reinado de Azarías", "desde": 1, "hasta": 7 },
+      { "titulo": "Reinados en Israel", "desde": 8, "hasta": 31 },
+      { "titulo": "Reinado de Jotam", "desde": 32, "hasta": 38 }
+    ],
+    "16": [
+      { "titulo": "Reinado de Acaz", "desde": 1, "hasta": 20 }
+    ],
+    "17": [
+      { "titulo": "Cautiverio de Israel", "desde": 1, "hasta": 23 },
+      { "titulo": "Origen de los samaritanos", "desde": 24, "hasta": 41 }
+    ],
+    "18": [
+      { "titulo": "Ezequías reina en Judá", "desde": 1, "hasta": 8 },
+      { "titulo": "Senaquerib invade Judá", "desde": 9, "hasta": 18 },
+      { "titulo": "Rabsaces desafía a Judá", "desde": 19, "hasta": 37 }
+    ],
+    "19": [
+      { "titulo": "Oración de Ezequías", "desde": 1, "hasta": 19 },
+      { "titulo": "Derrota de Asiria", "desde": 20, "hasta": 37 }
+    ],
+    "20": [
+      { "titulo": "Enfermedad de Ezequías", "desde": 1, "hasta": 11 },
+      { "titulo": "Visita de los enviados de Babilonia", "desde": 12, "hasta": 21 }
+    ],
+    "21": [
+      { "titulo": "Reinado de Manasés", "desde": 1, "hasta": 18 },
+      { "titulo": "Reinado de Amón", "desde": 19, "hasta": 26 }
+    ],
+    "22": [
+      { "titulo": "Reinado de Josías", "desde": 1, "hasta": 7 },
+      { "titulo": "El libro de la ley hallado", "desde": 8, "hasta": 20 }
+    ],
+    "23": [
+      { "titulo": "Reformas de Josías", "desde": 1, "hasta": 27 },
+      { "titulo": "Muerte de Josías", "desde": 28, "hasta": 30 },
+      { "titulo": "Últimos reyes de Judá", "desde": 31, "hasta": 37 }
+    ],
+    "24": [
+      { "titulo": "Primeras deportaciones a Babilonia", "desde": 1, "hasta": 16 },
+      { "titulo": "Reinado de Sedequías", "desde": 17, "hasta": 20 }
+    ],
+    "25": [
+      { "titulo": "Caída de Jerusalén", "desde": 1, "hasta": 21 },
+      { "titulo": "Gobernación de Gedalías", "desde": 22, "hasta": 26 },
+      { "titulo": "Libertad de Joaquín", "desde": 27, "hasta": 30 }
+    ]
+  },
+
+  "1 Crónicas": {
+    "1": [
+      { "titulo": "Genealogías desde Adán", "desde": 1, "hasta": 54 }
+    ],
+    "2": [
+      { "titulo": "Descendientes de Judá", "desde": 1, "hasta": 55 }
+    ],
+    "3": [
+      { "titulo": "Descendientes de David", "desde": 1, "hasta": 24 }
+    ],
+    "4": [
+      { "titulo": "Descendientes de Judá y Simeón", "desde": 1, "hasta": 43 }
+    ],
+    "5": [
+      { "titulo": "Rubén, Gad y Manasés", "desde": 1, "hasta": 26 }
+    ],
+    "6": [
+      { "titulo": "Descendientes de Leví", "desde": 1, "hasta": 81 }
+    ],
+    "7": [
+      { "titulo": "Descendientes del norte", "desde": 1, "hasta": 40 }
+    ],
+    "8": [
+      { "titulo": "Descendientes de Benjamín", "desde": 1, "hasta": 40 }
+    ],
+    "9": [
+      { "titulo": "Los primeros habitantes después del destierro", "desde": 1, "hasta": 44 }
+    ],
+    "10": [
+      { "titulo": "Muerte de Saúl", "desde": 1, "hasta": 14 }
+    ],
+    "11": [
+      { "titulo": "David es proclamado rey", "desde": 1, "hasta": 3 },
+      { "titulo": "Héroes de David", "desde": 4, "hasta": 47 }
+    ],
+    "12": [
+      { "titulo": "Guerreros que apoyaron a David", "desde": 1, "hasta": 40 }
+    ],
+    "13": [
+      { "titulo": "Arca trasladada", "desde": 1, "hasta": 14 }
+    ],
+    "14": [
+      { "titulo": "Reinado de David", "desde": 1, "hasta": 17 }
+    ],
+    "15": [
+      { "titulo": "Arca llevada correctamente a Jerusalén", "desde": 1, "hasta": 29 }
+    ],
+    "16": [
+      { "titulo": "Arca colocada y salmo de acción de gracias", "desde": 1, "hasta": 43 }
+    ],
+    "17": [
+      { "titulo": "Pacto de Dios con David", "desde": 1, "hasta": 27 }
+    ],
+    "18": [
+      { "titulo": "Victorias de David", "desde": 1, "hasta": 17 }
+    ],
+    "19": [
+      { "titulo": "Guerra contra los amonitas", "desde": 1, "hasta": 19 }
+    ],
+    "20": [
+      { "titulo": "Conquistas adicionales", "desde": 1, "hasta": 8 }
+    ],
+    "21": [
+      { "titulo": "Censo de David", "desde": 1, "hasta": 30 }
+    ],
+    "22": [
+      { "titulo": "Preparativos para el templo", "desde": 1, "hasta": 19 }
+    ],
+    "23": [
+      { "titulo": "Leví y los levitas", "desde": 1, "hasta": 32 }
+    ],
+    "24": [
+      { "titulo": "Turnos sacerdotales", "desde": 1, "hasta": 31 }
+    ],
+    "25": [
+      { "titulo": "Músicos del templo", "desde": 1, "hasta": 31 }
+    ],
+    "26": [
+      { "titulo": "Porteros y tesoreros", "desde": 1, "hasta": 32 }
+    ],
+    "27": [
+      { "titulo": "Oficiales del reino", "desde": 1, "hasta": 34 }
+    ],
+    "28": [
+      { "titulo": "David instruye a Salomón", "desde": 1, "hasta": 21 }
+    ],
+    "29": [
+      { "titulo": "Ofrendas para el templo y muerte de David", "desde": 1, "hasta": 30 }
+    ]
+  },
+
+  "2 Crónicas": {
+    "1": [
+      { "titulo": "Salomón pide sabiduría", "desde": 1, "hasta": 17 }
+    ],
+    "2": [
+      { "titulo": "Preparativos para el templo", "desde": 1, "hasta": 18 }
+    ],
+    "3": [
+      { "titulo": "Construcción del templo", "desde": 1, "hasta": 17 }
+    ],
+    "4": [
+      { "titulo": "Objetos y mobiliario del templo", "desde": 1, "hasta": 22 }
+    ],
+    "5": [
+      { "titulo": "El arca es llevada al templo", "desde": 1, "hasta": 14 }
+    ],
+    "6": [
+      { "titulo": "Oración de Salomón", "desde": 1, "hasta": 42 }
+    ],
+    "7": [
+      { "titulo": "Dios responde a Salomón", "desde": 1, "hasta": 22 }
+    ],
+    "8": [
+      { "titulo": "Obras de Salomón", "desde": 1, "hasta": 18 }
+    ],
+    "9": [
+      { "titulo": "Reina de Sabá y riquezas de Salomón", "desde": 1, "hasta": 31 }
+    ],
+    "10": [
+      { "titulo": "Rebelión contra Roboam", "desde": 1, "hasta": 19 }
+    ],
+    "11": [
+      { "titulo": "Reinado de Roboam", "desde": 1, "hasta": 23 }
+    ],
+    "12": [
+      { "titulo": "Invasión de Sisac", "desde": 1, "hasta": 16 }
+    ],
+    "13": [
+      { "titulo": "Reinado de Abías", "desde": 1, "hasta": 22 }
+    ],
+    "14": [
+      { "titulo": "Reinado de Asa", "desde": 1, "hasta": 15 }
+    ],
+    "15": [
+      { "titulo": "Reformas de Asa", "desde": 1, "hasta": 19 }
+    ],
+    "16": [
+      { "titulo": "Últimos años de Asa", "desde": 1, "hasta": 14 }
+    ],
+    "17": [
+      { "titulo": "Reinado de Josafat", "desde": 1, "hasta": 19 }
+    ],
+    "18": [
+      { "titulo": "Alianza de Josafat con Acab", "desde": 1, "hasta": 34 }
+    ],
+    "19": [
+      { "titulo": "Reformas de Josafat", "desde": 1, "hasta": 11 }
+    ],
+    "20": [
+      { "titulo": "Victoria milagrosa de Josafat", "desde": 1, "hasta": 37 }
+    ],
+    "21": [
+      { "titulo": "Reinado de Joram", "desde": 1, "hasta": 20 }
+    ],
+    "22": [
+      { "titulo": "Reinado de Ocozías", "desde": 1, "hasta": 12 }
+    ],
+    "23": [
+      { "titulo": "Joás proclamado rey", "desde": 1, "hasta": 21 }
+    ],
+    "24": [
+      { "titulo": "Reinado de Joás y su muerte", "desde": 1, "hasta": 27 }
+    ],
+    "25": [
+      { "titulo": "Reinado de Amasías", "desde": 1, "hasta": 28 }
+    ],
+    "26": [
+      { "titulo": "Reinado de Uzías", "desde": 1, "hasta": 23 }
+    ],
+    "27": [
+      { "titulo": "Reinado de Jotam", "desde": 1, "hasta": 9 }
+    ],
+    "28": [
+      { "titulo": "Reinado de Acaz", "desde": 1, "hasta": 27 }
+    ],
+    "29": [
+      { "titulo": "Restauración de Ezequías", "desde": 1, "hasta": 36 }
+    ],
+    "30": [
+      { "titulo": "Pascua celebrada por Ezequías", "desde": 1, "hasta": 27 }
+    ],
+    "31": [
+      { "titulo": "Reformas adicionales de Ezequías", "desde": 1, "hasta": 21 }
+    ],
+    "32": [
+      { "titulo": "Invasión de Senaquerib", "desde": 1, "hasta": 33 }
+    ],
+    "33": [
+      { "titulo": "Manasés y Amón", "desde": 1, "hasta": 25 }
+    ],
+    "34": [
+      { "titulo": "Reinado de Josías", "desde": 1, "hasta": 33 }
+    ],
+    "35": [
+      { "titulo": "Pascua celebrada", "desde": 1, "hasta": 27 }
+    ],
+    "36": [
+      { "titulo": "Últimos reyes de Judá y exilio", "desde": 1, "hasta": 23 }
+    ]
+  },
+
+  "Esdras": {
+    "1": [
+      { "titulo": "Edicto de Ciro", "desde": 1, "hasta": 11 }
+    ],
+    "2": [
+      { "titulo": "Lista de los que volvieron del exilio", "desde": 1, "hasta": 70 }
+    ],
+    "3": [
+      { "titulo": "Restauración del altar y fiestas", "desde": 1, "hasta": 7 },
+      { "titulo": "Fundamentos del templo colocados", "desde": 8, "hasta": 13 }
+    ],
+    "4": [
+      { "titulo": "Oposición a la reconstrucción", "desde": 1, "hasta": 24 }
+    ],
+    "5": [
+      { "titulo": "Profetizan Hageo y Zacarías", "desde": 1, "hasta": 2 },
+      { "titulo": "Carta a Darío", "desde": 3, "hasta": 17 }
+    ],
+    "6": [
+      { "titulo": "Darío confirma la reconstrucción", "desde": 1, "hasta": 12 },
+      { "titulo": "Dedicación del templo", "desde": 13, "hasta": 18 },
+      { "titulo": "Celebración de la Pascua", "desde": 19, "hasta": 22 }
+    ],
+    "7": [
+      { "titulo": "Esdras es enviado a Jerusalén", "desde": 1, "hasta": 10 },
+      { "titulo": "Carta del rey Artajerjes", "desde": 11, "hasta": 28 }
+    ],
+    "8": [
+      { "titulo": "Compañeros de Esdras", "desde": 1, "hasta": 20 },
+      { "titulo": "Preparativos para el viaje", "desde": 21, "hasta": 36 }
+    ],
+    "9": [
+      { "titulo": "Intercesión por los matrimonios mixtos", "desde": 1, "hasta": 15 }
+    ],
+    "10": [
+      { "titulo": "Separación de los matrimonios mixtos", "desde": 1, "hasta": 44 }
+    ]
+  },
+
+  "Nehemías": {
+    "1": [
+      { "titulo": "Nehemías ora por Jerusalén", "desde": 1, "hasta": 11 }
+    ],
+    "2": [
+      { "titulo": "Nehemías enviado a Jerusalén", "desde": 1, "hasta": 10 },
+      { "titulo": "Inspección de los muros", "desde": 11, "hasta": 20 }
+    ],
+    "3": [
+      { "titulo": "Reparación de los muros", "desde": 1, "hasta": 32 }
+    ],
+    "4": [
+      { "titulo": "Oposición a la reconstrucción", "desde": 1, "hasta": 23 }
+    ],
+    "5": [
+      { "titulo": "Reformas contra la opresión", "desde": 1, "hasta": 19 }
+    ],
+    "6": [
+      { "titulo": "Conspiraciones contra Nehemías", "desde": 1, "hasta": 14 },
+      { "titulo": "El muro es terminado", "desde": 15, "hasta": 19 }
+    ],
+    "7": [
+      { "titulo": "Organización y registro del pueblo", "desde": 1, "hasta": 73 }
+    ],
+    "8": [
+      { "titulo": "Lectura de la Ley", "desde": 1, "hasta": 12 },
+      { "titulo": "Fiesta de los Tabernáculos", "desde": 13, "hasta": 18 }
+    ],
+    "9": [
+      { "titulo": "Confesión del pueblo", "desde": 1, "hasta": 38 }
+    ],
+    "10": [
+      { "titulo": "Pacto del pueblo", "desde": 1, "hasta": 39 }
+    ],
+    "11": [
+      { "titulo": "Habitantes de Jerusalén y Judá", "desde": 1, "hasta": 36 }
+    ],
+    "12": [
+      { "titulo": "Sacerdotes y levitas", "desde": 1, "hasta": 26 },
+      { "titulo": "Dedicación del muro", "desde": 27, "hasta": 47 }
+    ],
+    "13": [
+      { "titulo": "Reformas finales de Nehemías", "desde": 1, "hasta": 31 }
+    ]
+  },
+
+  "Ester": {
+    "1": [
+      { "titulo": "Banquete del rey Asuero", "desde": 1, "hasta": 9 },
+      { "titulo": "La reina Vasti es depuesta", "desde": 10, "hasta": 22 }
+    ],
+    "2": [
+      { "titulo": "Ester es elegida reina", "desde": 1, "hasta": 18 },
+      { "titulo": "Mardoqueo descubre una conspiración", "desde": 19, "hasta": 23 }
+    ],
+    "3": [
+      { "titulo": "Amán se ensaña contra los judíos", "desde": 1, "hasta": 15 }
+    ],
+    "4": [
+      { "titulo": "Mardoqueo insta a Ester", "desde": 1, "hasta": 17 }
+    ],
+    "5": [
+      { "titulo": "Ester se presenta ante el rey", "desde": 1, "hasta": 8 },
+      { "titulo": "Amán prepara la horca", "desde": 9, "hasta": 14 }
+    ],
+    "6": [
+      { "titulo": "El rey honra a Mardoqueo", "desde": 1, "hasta": 14 }
+    ],
+    "7": [
+      { "titulo": "Ester acusa a Amán", "desde": 1, "hasta": 10 }
+    ],
+    "8": [
+      { "titulo": "Nueva orden en favor de los judíos", "desde": 1, "hasta": 17 }
+    ],
+    "9": [
+      { "titulo": "Defensa de los judíos", "desde": 1, "hasta": 19 },
+      { "titulo": "Institución del Purim", "desde": 20, "hasta": 32 }
+    ],
+    "10": [
+      { "titulo": "Grandeza de Mardoqueo", "desde": 1, "hasta": 3 }
+    ]
+  },
+
+  "Salmos": {
+    "1": [
+      { "titulo": "El justo y el impío", "desde": 1, "hasta": 6 }
+    ],
+    "2": [
+      { "titulo": "El reinado del Ungido", "desde": 1, "hasta": 12 }
+    ],
+    "3": [
+      { "titulo": "Oración matutina de confianza", "desde": 1, "hasta": 8 }
+    ],
+    "4": [
+      { "titulo": "Oración vespertina de confianza", "desde": 1, "hasta": 8 }
+    ],
+    "5": [
+      { "titulo": "Oración pidiendo dirección", "desde": 1, "hasta": 12 }
+    ],
+    "6": [
+      { "titulo": "Oración pidiendo misericordia en el dolor", "desde": 1, "hasta": 10 }
+    ],
+    "7": [
+      { "titulo": "Oración clamando justicia", "desde": 1, "hasta": 17 }
+    ],
+    "8": [
+      { "titulo": "La gloria de Dios y la dignidad del hombre", "desde": 1, "hasta": 9 }
+    ],
+    "9": [
+      { "titulo": "Acción de gracias por la justicia de Dios", "desde": 1, "hasta": 20 }
+    ],
+    "10": [
+      { "titulo": "Clamor contra los impíos", "desde": 1, "hasta": 18 }
+    ],
+    "11": [
+      { "titulo": "Confianza en Dios en medio del peligro", "desde": 1, "hasta": 7 }
+    ],
+    "12": [
+      { "titulo": "Oración por la fidelidad de Dios", "desde": 1, "hasta": 8 }
+    ],
+    "13": [
+      { "titulo": "Clamor a Dios por ayuda", "desde": 1, "hasta": 6 }
+    ],
+    "14": [
+      { "titulo": "La necedad de los impíos", "desde": 1, "hasta": 7 }
+    ],
+    "15": [
+      { "titulo": "Los que pueden habitar en la presencia de Dios", "desde": 1, "hasta": 5 }
+    ],
+    "16": [
+      { "titulo": "Confianza y alegría en Dios", "desde": 1, "hasta": 11 }
+    ],
+    "17": [
+      { "titulo": "Oración de protección", "desde": 1, "hasta": 15 }
+    ],
+    "18": [
+      { "titulo": "Dios, fortaleza y salvador", "desde": 1, "hasta": 50 }
+    ],
+    "19": [
+      { "titulo": "Gloria de Dios en la creación y la Ley", "desde": 1, "hasta": 14 }
+    ],
+    "20": [
+      { "titulo": "Oración por victoria del rey", "desde": 1, "hasta": 9 }
+    ],
+    "21": [
+      { "titulo": "Acción de gracias por la victoria del rey", "desde": 1, "hasta": 13 }
+    ],
+    "22": [
+      { "titulo": "Clamor de angustia y alabanza futura", "desde": 1, "hasta": 31 }
+    ],
+    "23": [
+      { "titulo": "El Señor es mi pastor", "desde": 1, "hasta": 6 }
+    ],
+    "24": [
+      { "titulo": "La gloria de Dios y la pureza del adorador", "desde": 1, "hasta": 10 }
+    ],
+    "25": [
+      { "titulo": "Oración de humildad y confianza", "desde": 1, "hasta": 22 }
+    ],
+    "26": [
+      { "titulo": "Confianza en la integridad", "desde": 1, "hasta": 12 }
+    ],
+    "27": [
+      { "titulo": "El Señor es luz y salvación", "desde": 1, "hasta": 14 }
+    ],
+    "28": [
+      { "titulo": "Oración y acción de gracias", "desde": 1, "hasta": 9 }
+    ],
+    "29": [
+      { "titulo": "La voz de Dios en la tormenta", "desde": 1, "hasta": 11 }
+    ],
+    "30": [
+      { "titulo": "Acción de gracias por la recuperación", "desde": 1, "hasta": 12 }
+    ],
+    "31": [
+      { "titulo": "Refugio en Dios y liberación", "desde": 1, "hasta": 24 }
+    ],
+    "32": [
+      { "titulo": "Bienaventuranza del perdón", "desde": 1, "hasta": 11 }
+    ],
+    "33": [
+      { "titulo": "La alabanza a la creación y providencia de Dios", "desde": 1, "hasta": 22 }
+    ],
+    "34": [
+      { "titulo": "Bendeciré al Señor en todo tiempo", "desde": 1, "hasta": 22 }
+    ],
+    "35": [
+      { "titulo": "Oración por justicia contra los enemigos", "desde": 1, "hasta": 28 }
+    ],
+    "36": [
+      { "titulo": "La misericordia y fidelidad de Dios", "desde": 1, "hasta": 12 }
+    ],
+    "37": [
+      { "titulo": "Paciencia y esperanza en Dios", "desde": 1, "hasta": 40 }
+    ],
+    "38": [
+      { "titulo": "Oración de aflicción y súplica", "desde": 1, "hasta": 22 }
+    ],
+    "39": [
+      { "titulo": "Vanidad de la vida humana", "desde": 1, "hasta": 13 }
+    ],
+    "40": [
+      { "titulo": "Acción de gracias por la salvación", "desde": 1, "hasta": 17 }
+    ],
+    "41": [
+      { "titulo": "Bendición de los que se apiadan de los pobres", "desde": 1, "hasta": 13 }
+    ],
+    "42": [
+      { "titulo": "Deseo de Dios en la aflicción", "desde": 1, "hasta": 11 }
+    ],
+    "43": [
+      { "titulo": "Oración pidiendo justicia y guía", "desde": 1, "hasta": 5 }
+    ],
+    "44": [
+      { "titulo": "Oración por liberación de la derrota", "desde": 1, "hasta": 26 }
+    ],
+    "45": [
+      { "titulo": "Salmo real y nupcial", "desde": 1, "hasta": 17 }
+    ],
+    "46": [
+      { "titulo": "Dios es nuestro refugio y fortaleza", "desde": 1, "hasta": 11 }
+    ],
+    "47": [
+      { "titulo": "Dios reina sobre las naciones", "desde": 1, "hasta": 9 }
+    ],
+    "48": [
+      { "titulo": "La ciudad de Dios", "desde": 1, "hasta": 14 }
+    ],
+    "49": [
+      { "titulo": "Reflexión sobre la muerte y la vanidad de los ricos", "desde": 1, "hasta": 20 }
+    ],
+    "50": [
+      { "titulo": "Dios juzga y convoca a su pueblo", "desde": 1, "hasta": 23 }
+    ],
+    "51": [
+      { "titulo": "Oración de arrepentimiento de David", "desde": 1, "hasta": 19 }
+    ],
+    "52": [
+      { "titulo": "Destrucción de los malvados", "desde": 1, "hasta": 9 }
+    ],
+    "53": [
+      { "titulo": "La necedad de los que niegan a Dios", "desde": 1, "hasta": 6 }
+    ],
+    "54": [
+      { "titulo": "Oración de confianza en la ayuda de Dios", "desde": 1, "hasta": 7 }
+    ],
+    "55": [
+      { "titulo": "Oración de angustia y confianza", "desde": 1, "hasta": 23 }
+    ],
+    "56": [
+      { "titulo": "Confianza en medio del miedo", "desde": 1, "hasta": 13 }
+    ],
+    "57": [
+      { "titulo": "Oración de confianza en la misericordia de Dios", "desde": 1, "hasta": 11 }
+    ],
+    "58": [
+      { "titulo": "Oración contra los malvados", "desde": 1, "hasta": 11 }
+    ],
+    "59": [
+      { "titulo": "Oración de protección contra enemigos", "desde": 1, "hasta": 17 }
+    ],
+    "60": [
+      { "titulo": "Oración de victoria y restauración", "desde": 1, "hasta": 12 }
+    ],
+    "61": [
+      { "titulo": "Oración pidiendo protección y refugio", "desde": 1, "hasta": 8 }
+    ],
+    "62": [
+      { "titulo": "Confianza en Dios como roca y salvación", "desde": 1, "hasta": 12 }
+    ],
+    "63": [
+      { "titulo": "Deseo de Dios en tierra seca", "desde": 1, "hasta": 11 }
+    ],
+    "64": [
+      { "titulo": "Oración contra los conspiradores", "desde": 1, "hasta": 10 }
+    ],
+    "65": [
+      { "titulo": "Acción de gracias por la provisión y bendición", "desde": 1, "hasta": 13 }
+    ],
+    "66": [
+      { "titulo": "Alabanza y acción de gracias", "desde": 1, "hasta": 20 }
+    ],
+    "67": [
+      { "titulo": "Oración por bendición y justicia para las naciones", "desde": 1, "hasta": 7 }
+    ],
+    "68": [
+      { "titulo": "Dios se levanta y dispersa a sus enemigos", "desde": 1, "hasta": 35 }
+    ],
+    "69": [
+      { "titulo": "Clamor de socorro en angustia", "desde": 1, "hasta": 36 }
+    ],
+    "70": [
+      { "titulo": "Oración de ayuda rápida", "desde": 1, "hasta": 5 }
+    ],
+    "71": [
+      { "titulo": "Oración por protección y justicia en la vejez", "desde": 1, "hasta": 24 }
+    ],
+    "72": [
+      { "titulo": "Oración por el rey y su justicia", "desde": 1, "hasta": 20 }
+    ],
+    "73": [
+      { "titulo": "Confusión de los malvados y bendición de los justos", "desde": 1, "hasta": 28 }
+    ],
+    "74": [
+      { "titulo": "Oración por la liberación del templo", "desde": 1, "hasta": 23 }
+    ],
+    "75": [
+      { "titulo": "Dios juzga con justicia", "desde": 1, "hasta": 10 }
+    ],
+    "76": [
+      { "titulo": "Dios es temible en Sion", "desde": 1, "hasta": 12 }
+    ],
+    "77": [
+      { "titulo": "Recuerdo de las obras de Dios", "desde": 1, "hasta": 20 }
+    ],
+    "78": [
+      { "titulo": "Historia y enseñanza del pueblo de Dios", "desde": 1, "hasta": 72 }
+    ],
+    "79": [
+      { "titulo": "Oración por la restauración de Israel", "desde": 1, "hasta": 13 }
+    ],
+    "80": [
+      { "titulo": "Oración para la restauración de Israel", "desde": 1, "hasta": 19 }
+    ],
+    "81": [
+      { "titulo": "Exhortación a la obediencia y adoración", "desde": 1, "hasta": 16 }
+    ],
+    "82": [
+      { "titulo": "Dios juzga a los jueces injustos", "desde": 1, "hasta": 8 }
+    ],
+    "83": [
+      { "titulo": "Oración contra los enemigos de Israel", "desde": 1, "hasta": 18 }
+    ],
+    "84": [
+      { "titulo": "Bienaventuranza de los que habitan en la casa de Dios", "desde": 1, "hasta": 12 }
+    ],
+    "85": [
+      { "titulo": "Oración por restauración y misericordia", "desde": 1, "hasta": 13 }
+    ],
+    "86": [
+      { "titulo": "Oración de David pidiendo gracia y ayuda", "desde": 1, "hasta": 17 }
+    ],
+    "87": [
+      { "titulo": "La ciudad de Dios y su gloria", "desde": 1, "hasta": 7 }
+    ],
+    "88": [
+      { "titulo": "Oración de angustia profunda", "desde": 1, "hasta": 18 }
+    ],
+    "89": [
+      { "titulo": "Alabanza y promesa del pacto davídico", "desde": 1, "hasta": 52 }
+    ],
+    "90": [
+      { "titulo": "Oración de Moisés sobre la brevedad de la vida", "desde": 1, "hasta": 17 }
+    ],
+    "91": [
+      { "titulo": "Seguridad y protección en Dios", "desde": 1, "hasta": 16 }
+    ],
+    "92": [
+      { "titulo": "Cántico para el día de reposo", "desde": 1, "hasta": 15 }
+    ],
+    "93": [
+      { "titulo": "El Señor reina con poder", "desde": 1, "hasta": 5 }
+    ],
+    "94": [
+      { "titulo": "Oración por justicia contra los malvados", "desde": 1, "hasta": 23 }
+    ],
+    "95": [
+      { "titulo": "Exhortación a la adoración y obediencia", "desde": 1, "hasta": 11 }
+    ],
+    "96": [
+      { "titulo": "Cántico de alabanza universal a Dios", "desde": 1, "hasta": 13 }
+    ],
+    "97": [
+      { "titulo": "El Señor reina, justicia y gozo", "desde": 1, "hasta": 12 }
+    ],
+    "98": [
+      { "titulo": "Cántico de victoria y justicia de Dios", "desde": 1, "hasta": 9 }
+    ],
+    "99": [
+      { "titulo": "El Señor reina y es santo", "desde": 1, "hasta": 9 }
+    ],
+    "100": [
+      { "titulo": "Cántico de acción de gracias y alegría", "desde": 1, "hasta": 5 }
+    ],
+    "101": [
+      { "titulo": "Decisión de vivir con integridad", "desde": 1, "hasta": 8 }
+    ],
+    "102": [
+      { "titulo": "Oración en aflicción y esperanza en Dios", "desde": 1, "hasta": 28 }
+    ],
+    "103": [
+      { "titulo": "Bendice, alma mía, al Señor", "desde": 1, "hasta": 22 }
+    ],
+    "104": [
+      { "titulo": "La grandeza de la creación y providencia de Dios", "desde": 1, "hasta": 35 }
+    ],
+    "105": [
+      { "titulo": "Alabanza a Dios por sus maravillas en la historia de Israel", "desde": 1, "hasta": 45 }
+    ],
+    "106": [
+      { "titulo": "Confesión y acción de gracias por la fidelidad de Dios", "desde": 1, "hasta": 48 }
+    ],
+    "107": [
+      { "titulo": "Acción de gracias por la liberación de Dios", "desde": 1, "hasta": 43 }
+    ],
+    "108": [
+      { "titulo": "Cántico de guerra y confianza en Dios", "desde": 1, "hasta": 13 }
+    ],
+    "109": [
+      { "titulo": "Oración contra los enemigos", "desde": 1, "hasta": 31 }
+    ],
+    "110": [
+      { "titulo": "Profecía del Mesías y su sacerdocio eterno", "desde": 1, "hasta": 7 }
+    ],
+    "111": [
+      { "titulo": "Alabanza por las obras de Dios", "desde": 1, "hasta": 10 }
+    ],
+    "112": [
+      { "titulo": "Bienaventuranza de los que temen al Señor", "desde": 1, "hasta": 10 }
+    ],
+    "113": [
+      { "titulo": "Alabanza a Dios exaltado sobre todo", "desde": 1, "hasta": 9 }
+    ],
+    "114": [
+      { "titulo": "La liberación de Israel de Egipto", "desde": 1, "hasta": 8 }
+    ],
+    "115": [
+      { "titulo": "La gloria pertenece a Dios, no a los ídolos", "desde": 1, "hasta": 18 }
+    ],
+    "116": [
+      { "titulo": "Acción de gracias por la liberación de la muerte", "desde": 1, "hasta": 19 }
+    ],
+    "117": [
+      { "titulo": "Alabanza universal a Dios", "desde": 1, "hasta": 2 }
+    ],
+    "118": [
+      { "titulo": "Acción de gracias por la victoria y la protección divina", "desde": 1, "hasta": 29 }
+    ],
+    "119": [
+      { "titulo": "Exaltación de la Ley de Dios", "desde": 1, "hasta": 176 }
+    ],
+    "120": [
+      { "titulo": "Oración en tiempos de aflicción", "desde": 1, "hasta": 7 }
+    ],
+    "121": [
+      { "titulo": "El Señor, protector y ayuda constante", "desde": 1, "hasta": 8 }
+    ],
+    "122": [
+      { "titulo": "Gozo en Jerusalén", "desde": 1, "hasta": 9 }
+    ],
+    "123": [
+      { "titulo": "Confianza en la misericordia de Dios", "desde": 1, "hasta": 4 }
+    ],
+    "124": [
+      { "titulo": "Dios protege a su pueblo", "desde": 1, "hasta": 8 }
+    ],
+    "125": [
+      { "titulo": "Seguridad de los que confían en Dios", "desde": 1, "hasta": 5 }
+    ],
+    "126": [
+      { "titulo": "Acción de gracias por la restauración de Sion", "desde": 1, "hasta": 6 }
+    ],
+    "127": [
+      { "titulo": "Bendición de la casa y familia", "desde": 1, "hasta": 5 }
+    ],
+    "128": [
+      { "titulo": "Bendición sobre los que temen al Señor", "desde": 1, "hasta": 6 }
+    ],
+    "129": [
+      { "titulo": "Oración contra los opresores de Israel", "desde": 1, "hasta": 8 }
+    ],
+    "130": [
+      { "titulo": "Oración de esperanza desde el abismo", "desde": 1, "hasta": 8 }
+    ],
+    "131": [
+      { "titulo": "Humildad y confianza como niño", "desde": 1, "hasta": 3 }
+    ],
+    "132": [
+      { "titulo": "Oración por la restauración del trono de David", "desde": 1, "hasta": 18 }
+    ],
+    "133": [
+      { "titulo": "Bendición de la unidad fraternal", "desde": 1, "hasta": 3 }
+    ],
+    "134": [
+      { "titulo": "Bendición de los siervos en el templo", "desde": 1, "hasta": 3 }
+    ],
+    "135": [
+      { "titulo": "Alabanza a Dios por sus obras y poder", "desde": 1, "hasta": 21 }
+    ],
+    "136": [
+      { "titulo": "Alabanza por la misericordia de Dios", "desde": 1, "hasta": 26 }
+    ],
+    "137": [
+      { "titulo": "Lamento por la cautividad en Babilonia", "desde": 1, "hasta": 9 }
+    ],
+    "138": [
+      { "titulo": "Alabanza por la fidelidad de Dios", "desde": 1, "hasta": 8 }
+    ],
+    "139": [
+      { "titulo": "Dios conoce y guía a su pueblo", "desde": 1, "hasta": 24 }
+    ],
+    "140": [
+      { "titulo": "Oración contra los malvados", "desde": 1, "hasta": 13 }
+    ],
+    "141": [
+      { "titulo": "Oración de protección y santidad", "desde": 1, "hasta": 10 }
+    ],
+    "142": [
+      { "titulo": "Clamor en la soledad", "desde": 1, "hasta": 7 }
+    ],
+    "143": [
+      { "titulo": "Oración de súplica y guía", "desde": 1, "hasta": 12 }
+    ],
+    "144": [
+      { "titulo": "Oración y bendición por la victoria", "desde": 1, "hasta": 15 }
+    ],
+    "145": [
+      { "titulo": "Alabanza al Rey eterno", "desde": 1, "hasta": 21 }
+    ],
+    "146": [
+      { "titulo": "Confianza en Dios, no en hombres", "desde": 1, "hasta": 10 }
+    ],
+    "147": [
+      { "titulo": "Alabanza por la bondad y cuidado de Dios", "desde": 1, "hasta": 20 }
+    ],
+    "148": [
+      { "titulo": "Alabanza de toda la creación", "desde": 1, "hasta": 14 }
+    ],
+    "149": [
+      { "titulo": "Cántico de gozo y victoria", "desde": 1, "hasta": 9 }
+    ],
+    "150": [
+      { "titulo": "Alabanza final: todo lo que respira, alabe al Señor", "desde": 1, "hasta": 6 }
+    ]
+  },
+
+
+  "Proverbios": {
+    "1": [
+      { "titulo": "Propósito de los proverbios", "desde": 1, "hasta": 7 },
+      { "titulo": "Advertencia contra malas compañías", "desde": 8, "hasta": 19 },
+      { "titulo": "Clamor de la sabiduría", "desde": 20, "hasta": 33 }
+    ],
+    "2": [
+      { "titulo": "Los beneficios de la sabiduría", "desde": 1, "hasta": 22 }
+    ],
+    "3": [
+      { "titulo": "Confía en el Señor", "desde": 1, "hasta": 12 },
+      { "titulo": "Bienaventuranza del que halla la sabiduría", "desde": 13, "hasta": 26 },
+      { "titulo": "Consejos de bondad y prudencia", "desde": 27, "hasta": 35 }
+    ],
+    "4": [
+      { "titulo": "Exhortación a la sabiduría", "desde": 1, "hasta": 13 },
+      { "titulo": "El camino de los justos", "desde": 14, "hasta": 27 }
+    ],
+    "5": [
+      { "titulo": "Advertencia contra la inmoralidad sexual", "desde": 1, "hasta": 23 }
+    ],
+    "6": [
+      { "titulo": "Advertencias prácticas", "desde": 1, "hasta": 19 },
+      { "titulo": "Advertencia contra el adulterio", "desde": 20, "hasta": 35 }
+    ],
+    "7": [
+      { "titulo": "La mujer adúltera", "desde": 1, "hasta": 27 }
+    ],
+    "8": [
+      { "titulo": "Excelencia de la sabiduría", "desde": 1, "hasta": 36 }
+    ],
+    "9": [
+      { "titulo": "La sabiduría y la insensatez invitan", "desde": 1, "hasta": 18 }
+    ]
+  },
+
+  "Eclesiastés": {
+    "1": [
+      { "titulo": "Todo es vanidad", "desde": 1, "hasta": 11 },
+      { "titulo": "Aflicción de la sabiduría", "desde": 12, "hasta": 18 }
+    ],
+    "2": [
+      { "titulo": "Vanidad de los placeres", "desde": 1, "hasta": 11 },
+      { "titulo": "La sabiduría y la insensatez", "desde": 12, "hasta": 17 },
+      { "titulo": "Vanidad del trabajo", "desde": 18, "hasta": 26 }
+    ],
+    "3": [
+      { "titulo": "Todo tiene su tiempo", "desde": 1, "hasta": 15 },
+      { "titulo": "Injusticias de la vida", "desde": 16, "hasta": 22 }
+    ],
+    "4": [
+      { "titulo": "Las opresiones de la vida", "desde": 1, "hasta": 3 },
+      { "titulo": "La vanidad del individualismo", "desde": 4, "hasta": 16 }
+    ],
+    "5": [
+      { "titulo": "Teme a Dios", "desde": 1, "hasta": 7 },
+      { "titulo": "Vanidad de las riquezas", "desde": 8, "hasta": 20 }
+    ],
+    "6": [
+      { "titulo": "Seis males que hay debajo del sol", "desde": 1, "hasta": 12 }
+    ]
+  },
+
+  "Cantares": {
+    "1": [
+      { "titulo": "Anhelo de amor", "desde": 1, "hasta": 17 }
+    ],
+    "2": [
+      { "titulo": "La voz del amado", "desde": 1, "hasta": 17 }
+    ],
+    "3": [
+      { "titulo": "La búsqueda nocturna", "desde": 1, "hasta": 5 },
+      { "titulo": "El cortejo nupcial", "desde": 6, "hasta": 11 }
+    ],
+    "4": [
+      { "titulo": "Belleza de la amada", "desde": 1, "hasta": 15 }
+    ],
+    "5": [
+      { "titulo": "El amado llama a la puerta", "desde": 1, "hasta": 8 },
+      { "titulo": "Descripción del amado", "desde": 9, "hasta": 16 }
+    ],
+    "6": [
+      { "titulo": "Belleza y majestad de la esposa", "desde": 1, "hasta": 13 }
+    ],
+    "7": [
+      { "titulo": "Encantos de la esposa", "desde": 1, "hasta": 13 }
+    ],
+    "8": [
+      { "titulo": "El poder del amor", "desde": 1, "hasta": 14 }
+    ]
+  },
+
+  "Isaías": {
+    "1": [
+      { "titulo": "Denuncia de la rebelión de Israel", "desde": 1, "hasta": 31 }
+    ],
+    "2": [
+      { "titulo": "El día del Señor y la exaltación de Sion", "desde": 1, "hasta": 22 }
+    ],
+    "3": [
+      { "titulo": "Juicio contra los líderes y opresores de Judá", "desde": 1, "hasta": 26 }
+    ],
+    "4": [
+      { "titulo": "Purificación y restauración futura de Sion", "desde": 1, "hasta": 6 }
+    ],
+    "5": [
+      { "titulo": "El canto de la viña y juicio sobre Israel", "desde": 1, "hasta": 30 }
+    ],
+    "6": [
+      { "titulo": "La visión de Dios y el llamado de Isaías", "desde": 1, "hasta": 13 }
+    ],
+    "7": [
+      { "titulo": "Señal del Emanuel y amenaza de invasión", "desde": 1, "hasta": 25 }
+    ],
+    "8": [
+      { "titulo": "Advertencia sobre la soberbia y la confianza en el Señor", "desde": 1, "hasta": 22 }
+    ],
+    "9": [
+      { "titulo": "Promesa del Mesías y gozo del pueblo", "desde": 1, "hasta": 21 }
+    ],
+    "10": [
+      { "titulo": "Juicio contra Asiria y esperanza de Israel", "desde": 1, "hasta": 34 }
+    ],
+    "11": [
+      { "titulo": "El reino mesiánico y la paz universal", "desde": 1, "hasta": 16 }
+    ],
+    "12": [
+      { "titulo": "Cántico de gratitud por la salvación", "desde": 1, "hasta": 6 }
+    ],
+    "13": [
+      { "titulo": "Juicio contra Babilonia", "desde": 1, "hasta": 22 }
+    ],
+    "14": [
+      { "titulo": "Caída de Babilonia y restauración de Israel", "desde": 1, "hasta": 32 }
+    ],
+    "15": [
+      { "titulo": "Lamento por Moab", "desde": 1, "hasta": 9 }
+    ],
+    "16": [
+      { "titulo": "Pronunciamiento sobre Moab", "desde": 1, "hasta": 14 }
+    ],
+    "17": [
+      { "titulo": "Juicio sobre Siria y Efraín", "desde": 1, "hasta": 14 }
+    ],
+    "18": [
+      { "titulo": "Oráculo contra Etiopía", "desde": 1, "hasta": 7 }
+    ],
+    "19": [
+      { "titulo": "Juicio y restauración de Egipto", "desde": 1, "hasta": 25 }
+    ],
+    "20": [
+      { "titulo": "Señal contra Egipto y Etiopía", "desde": 1, "hasta": 6 }
+    ],
+    "21": [
+      { "titulo": "Oráculos contra Babilonia, Edom y Arabia", "desde": 1, "hasta": 17 }
+    ],
+    "22": [
+      { "titulo": "Denuncia de la negligencia de Jerusalén y advertencia a la casa de David", "desde": 1, "hasta": 25 }
+    ],
+    "23": [
+      { "titulo": "Oráculo contra Tiro", "desde": 1, "hasta": 18 }
+    ],
+    "24": [
+      { "titulo": "Juicio universal y destrucción de la tierra", "desde": 1, "hasta": 23 }
+    ],
+    "25": [
+      { "titulo": "Alabanza a Dios por la salvación y la victoria", "desde": 1, "hasta": 12 }
+    ],
+    "26": [
+      { "titulo": "Oración de confianza y paz en Dios", "desde": 1, "hasta": 21 }
+    ],
+    "27": [
+      { "titulo": "Restauración de Israel y juicio sobre los enemigos", "desde": 1, "hasta": 13 }
+    ],
+    "28": [
+      { "titulo": "Juicio sobre Efraín y advertencia contra la soberbia", "desde": 1, "hasta": 29 }
+    ],
+    "29": [
+      { "titulo": "Juicio sobre Jerusalén y promesa de liberación", "desde": 1, "hasta": 24 }
+    ],
+    "30": [
+      { "titulo": "Advertencia contra la confianza en Egipto", "desde": 1, "hasta": 33 }
+    ],
+    "31": [
+      { "titulo": "Confiar en Dios, no en Egipto", "desde": 1, "hasta": 9 }
+    ],
+    "32": [
+      { "titulo": "Reino de justicia y prosperidad futura", "desde": 1, "hasta": 20 }
+    ],
+    "33": [
+      { "titulo": "Oración de súplica y confianza en Dios", "desde": 1, "hasta": 24 }
+    ],
+    "34": [
+      { "titulo": "Juicio sobre Edom", "desde": 1, "hasta": 17 }
+    ],
+    "35": [
+      { "titulo": "Promesa de restauración y alegría", "desde": 1, "hasta": 10 }
+    ],
+    "36": [
+      { "titulo": "Siria y Efraín amenazan a Judá; Rabshakeh habla", "desde": 1, "hasta": 22 }
+    ],
+    "37": [
+      { "titulo": "Ezequías ora y Dios libra Jerusalén", "desde": 1, "hasta": 38 }
+    ],
+    "38": [
+      { "titulo": "Enfermedad y recuperación de Ezequías", "desde": 1, "hasta": 22 }
+    ],
+    "39": [
+      { "titulo": "Ezequías muestra sus tesoros a Babilonia", "desde": 1, "hasta": 8 }
+    ],
+      "40": [
+      { "titulo": "Consuelo y grandeza de Dios", "desde": 1, "hasta": 31 }
+    ],
+    "41": [
+      { "titulo": "Dios fortalece a su pueblo contra los enemigos", "desde": 1, "hasta": 29 }
+    ],
+    "42": [
+      { "titulo": "El Siervo de Dios traerá justicia", "desde": 1, "hasta": 25 }
+    ],
+    "43": [
+      { "titulo": "Dios rescata a Israel y promete protección", "desde": 1, "hasta": 28 }
+    ],
+    "44": [
+      { "titulo": "Dios es el único Salvador", "desde": 1, "hasta": 28 }
+    ],
+    "45": [
+      { "titulo": "Dios sostiene al rey y su propósito", "desde": 1, "hasta": 25 }
+    ],
+    "46": [
+      { "titulo": "Dios es refugio y fortaleza", "desde": 1, "hasta": 13 }
+    ],
+    "47": [
+      { "titulo": "Juicio sobre Babilonia", "desde": 1, "hasta": 15 }
+    ],
+    "48": [
+      { "titulo": "Dios recuerda a Israel su fidelidad", "desde": 1, "hasta": 22 }
+    ],
+    "49": [
+      { "titulo": "El Siervo de Dios es luz para las naciones", "desde": 1, "hasta": 26 }
+    ],
+    "50": [
+      { "titulo": "El Siervo obediente y sufriente", "desde": 1, "hasta": 11 }
+    ],
+    "51": [
+      { "titulo": "Ánimo para Sion y justicia de Dios", "desde": 1, "hasta": 23 }
+    ],
+    "52": [
+      { "titulo": "El Señor traerá liberación y gloria", "desde": 1, "hasta": 15 }
+    ],
+    "53": [
+      { "titulo": "El Siervo sufriente y redentor", "desde": 1, "hasta": 12 }
+    ],
+    "54": [
+      { "titulo": "Promesa de restauración y bendición para Sion", "desde": 1, "hasta": 17 }
+    ],
+    "55": [
+      { "titulo": "Llamado a la misericordia y al arrepentimiento", "desde": 1, "hasta": 13 }
+    ],
+    "56": [
+      { "titulo": "Inclusión de extranjeros y justicia para todos", "desde": 1, "hasta": 12 }
+    ],
+    "57": [
+      { "titulo": "Denuncia contra los impíos y promesa de restauración", "desde": 1, "hasta": 21 }
+    ],
+    "58": [
+      { "titulo": "Verdadero ayuno y justicia social", "desde": 1, "hasta": 14 }
+    ],
+    "59": [
+      { "titulo": "Oración por liberación de los enemigos", "desde": 1, "hasta": 21 }
+    ],
+    "60": [
+      { "titulo": "Gloria futura de Sion", "desde": 1, "hasta": 22 }
+    ],
+    "61": [
+      { "titulo": "Misión del Siervo de Dios", "desde": 1, "hasta": 11 }
+    ],
+    "62": [
+      { "titulo": "Esperanza y protección de Sion", "desde": 1, "hasta": 12 }
+    ],
+    "63": [
+      { "titulo": "Oración de misericordia y recuerdo de la fidelidad de Dios", "desde": 1, "hasta": 19 }
+    ],
+    "64": [
+      { "titulo": "Oración contra la iniquidad del pueblo", "desde": 1, "hasta": 12 }
+    ],
+    "65": [
+      { "titulo": "Alabanza por la obra de Dios y la prosperidad futura", "desde": 1, "hasta": 25 }
+    ],
+    "66": [
+      { "titulo": "Alabanza universal y testimonio de Dios", "desde": 1, "hasta": 24 }
+    ]
+  },
+
+  "Jeremías": {
+    "1": [
+      { "titulo": "Llamado de Jeremías y su consagración", "desde": 1, "hasta": 19 }
+    ],
+    "2": [
+      { "titulo": "Reproche a Israel por su infidelidad", "desde": 1, "hasta": 37 }
+    ],
+    "3": [
+      { "titulo": "Llamado al arrepentimiento y promesa de restauración", "desde": 1, "hasta": 25 },
+      { "titulo": "Castigo a Judá por su idolatría", "desde": 26, "hasta": 31 }
+    ],
+    "4": [
+      { "titulo": "Anuncio de juicio y destrucción por el pecado", "desde": 1, "hasta": 31 }
+    ],
+    "5": [
+      { "titulo": "Denuncia de la rebelión y corrupción del pueblo", "desde": 1, "hasta": 31 }
+    ],
+    "6": [
+      { "titulo": "Advertencia de juicio inminente", "desde": 1, "hasta": 30 }
+    ],
+    "7": [
+      { "titulo": "Denuncia de la falsedad en el templo", "desde": 1, "hasta": 34 }
+    ],
+    "8": [
+      { "titulo": "Tristeza por la corrupción y la infidelidad del pueblo", "desde": 1, "hasta": 22 }
+    ],
+    "9": [
+      { "titulo": "Lamento por el pecado de Judá y Jerusalén", "desde": 1, "hasta": 26 }
+    ],
+    "10": [
+      { "titulo": "La vanidad de los ídolos", "desde": 1, "hasta": 25 }
+    ],
+    "11": [
+      { "titulo": "Pacto quebrantado y advertencia de juicio", "desde": 1, "hasta": 23 }
+    ],
+    "12": [
+      { "titulo": "Oración de Jeremías sobre la prosperidad de los malvados", "desde": 1, "hasta": 17 }
+    ],
+    "13": [
+      { "titulo": "La faja podrida como señal de la corrupción de Judá", "desde": 1, "hasta": 27 }
+    ],
+    "14": [
+      { "titulo": "Plegarias durante la sequía y respuesta de Dios", "desde": 1, "hasta": 22 }
+    ],
+    "15": [
+      { "titulo": "Juicio inminente y fortalecimiento de Jeremías", "desde": 1, "hasta": 21 }
+    ],
+    "16": [
+      { "titulo": "Vida de Jeremías como señal y futura restauración", "desde": 1, "hasta": 21 }
+    ],
+    "17": [
+      { "titulo": "Pecado de Judá, bendición del que confía en Dios", "desde": 1, "hasta": 27 }
+    ],
+    "18": [
+      { "titulo": "El alfarero y el barro: soberanía de Dios", "desde": 1, "hasta": 23 }
+    ],
+    "19": [
+      { "titulo": "Vasija quebrada: juicio sobre Judá", "desde": 1, "hasta": 15 }
+    ],
+    "20": [
+      { "titulo": "Jeremías perseguido y su lamento", "desde": 1, "hasta": 18 }
+    ],
+    "21": [
+      { "titulo": "Respuesta de Dios a Sedequías", "desde": 1, "hasta": 14 }
+    ],
+    "22": [
+      { "titulo": "Juicio sobre los reyes injustos de Judá", "desde": 1, "hasta": 30 }
+    ],
+    "23": [
+      { "titulo": "Mala conducta de los pastores y promesa del Rey justo", "desde": 1, "hasta": 40 }
+    ],
+    "24": [
+      { "titulo": "Las dos cestas de higos: destino de Judá", "desde": 1, "hasta": 10 }
+    ],
+  "25": [
+        { "titulo": "Los setenta años de cautiverio", "desde": 1, "hasta": 14 },
+        { "titulo": "La copa del furor para las naciones", "desde": 15, "hasta": 38 }
+      ],
+      "26": [
+        { "titulo": "Jeremías amenaza al templo y enfrenta juicio", "desde": 1, "hasta": 19 },
+        { "titulo": "El destino del profeta Urías", "desde": 20, "hasta": 24 }
+      ],
+      "27": [
+        { "titulo": "El yugo impuesto por Babilonia", "desde": 1, "hasta": 11 },
+        { "titulo": "Advertencia a los falsos profetas", "desde": 12, "hasta": 22 }
+      ],
+      "28": [
+        { "titulo": "El falso profeta Hananías y su muerte", "desde": 1, "hasta": 17 }
+      ],
+      "29": [
+        { "titulo": "Carta a los cautivos en Babilonia", "desde": 1, "hasta": 23 },
+        { "titulo": "Mensaje contra Semaías", "desde": 24, "hasta": 32 }
+      ],
+      "30": [
+        { "titulo": "Promesa de restauración y liberación final", "desde": 1, "hasta": 24 }
+      ],
+      "31": [
+        { "titulo": "Restauración de Israel y Judá", "desde": 1, "hasta": 26 },
+        { "titulo": "El nuevo pacto", "desde": 27, "hasta": 34 },
+        { "titulo": "Jerusalén será reconstruida", "desde": 35, "hasta": 40 }
+      ],
+      "32": [
+        { "titulo": "Jeremías compra un campo como señal de esperanza", "desde": 1, "hasta": 15 },
+        { "titulo": "Oración de Jeremías", "desde": 16, "hasta": 25 },
+        { "titulo": "Respuesta de Dios: juicio y restauración", "desde": 26, "hasta": 44 }
+      ],
+      "33": [
+        { "titulo": "Promesas de paz y prosperidad para Judá", "desde": 1, "hasta": 13 },
+        { "titulo": "El pacto eterno con David y los levitas", "desde": 14, "hasta": 26 }
+      ],
+      "34": [
+        { "titulo": "Mensaje para Sedequías y Jerusalén", "desde": 1, "hasta": 7 },
+        { "titulo": "El pacto violado de la liberación de siervos", "desde": 8, "hasta": 22 }
+      ],
+      "35": [
+        { "titulo": "Los recabitas como ejemplo de obediencia", "desde": 1, "hasta": 19 }
+      ],
+      "36": [
+        { "titulo": "Baruc escribe el rollo; Joacim lo quema", "desde": 1, "hasta": 32 }
+      ],
+      "37": [
+        { "titulo": "Jeremías es apresado injustamente", "desde": 1, "hasta": 21 }
+      ],
+      "38": [
+        { "titulo": "Jeremías en el pozo", "desde": 1, "hasta": 13 },
+        { "titulo": "Encuentro con Sedequías", "desde": 14, "hasta": 28 }
+      ],
+      "39": [
+        { "titulo": "La caída de Jerusalén", "desde": 1, "hasta": 10 },
+        { "titulo": "Liberación de Jeremías", "desde": 11, "hasta": 18 }
+      ],
+      "40": [
+        { "titulo": "Jeremías con Gedalías", "desde": 1, "hasta": 6 },
+        { "titulo": "Advertencia sobre el complot contra Gedalías", "desde": 7, "hasta": 16 }
+      ],
+      "41": [
+        { "titulo": "Ismael asesina a Gedalías", "desde": 1, "hasta": 10 },
+        { "titulo": "Los capitanes persiguen a Ismael", "desde": 11, "hasta": 18 }
+      ],
+      "42": [
+        { "titulo": "El pueblo pide dirección a Dios", "desde": 1, "hasta": 6 },
+        { "titulo": "Dios prohíbe ir a Egipto", "desde": 7, "hasta": 22 }
+      ],
+      "43": [
+        { "titulo": "El pueblo desobedece y huye a Egipto", "desde": 1, "hasta": 7 },
+        { "titulo": "Profecía contra Egipto", "desde": 8, "hasta": 13 }
+      ],
+      "44": [
+        { "titulo": "Idolatría persistente en Egipto", "desde": 1, "hasta": 19 },
+        { "titulo": "Juicio sobre Judá en Egipto", "desde": 20, "hasta": 30 }
+      ],
+      "45": [
+        { "titulo": "Palabra a Baruc", "desde": 1, "hasta": 5 }
+      ],
+      "46": [
+        { "titulo": "Juicio contra Egipto", "desde": 1, "hasta": 26 },
+        { "titulo": "Promesa para Israel", "desde": 27, "hasta": 28 }
+      ],
+      "47": [
+        { "titulo": "Profecía contra los filisteos", "desde": 1, "hasta": 7 }
+      ],
+      "48": [
+        { "titulo": "Juicio contra Moab", "desde": 1, "hasta": 47 }
+      ],
+      "49": [
+        { "titulo": "Juicio contra Amón", "desde": 1, "hasta": 6 },
+        { "titulo": "Juicio contra Edom", "desde": 7, "hasta": 22 },
+        { "titulo": "Juicio contra Damasco", "desde": 23, "hasta": 27 },
+        { "titulo": "Juicio contra Cedar y Hazor", "desde": 28, "hasta": 33 },
+        { "titulo": "Juicio contra Elam", "desde": 34, "hasta": 39 }
+      ],
+      "50": [
+        { "titulo": "Juicio contra Babilonia", "desde": 1, "hasta": 46 }
+      ],
+      "51": [
+        { "titulo": "La caída de Babilonia anunciada", "desde": 1, "hasta": 64 }
+      ],
+      "52": [
+        { "titulo": "La caída final de Jerusalén", "desde": 1, "hasta": 30 },
+        { "titulo": "Liberación de Joaquín en Babilonia", "desde": 31, "hasta": 34 }
+      ]
+    },
+
+    "Lamentaciones": {
+    "1": [
+      { "titulo": "Lamento por la soledad y destrucción de Jerusalén", "desde": 1, "hasta": 22 }
+    ],
+    "2": [
+      { "titulo": "La ira del Señor sobre Jerusalén", "desde": 1, "hasta": 22 }
+    ],
+    "3": [
+      { "titulo": "La aflicción del profeta y esperanza en la misericordia de Dios", "desde": 1, "hasta": 66 }
+    ],
+    "4": [
+      { "titulo": "El sufrimiento extremo del pueblo", "desde": 1, "hasta": 22 }
+    ],
+    "5": [
+      { "titulo": "Súplica final por restauración", "desde": 1, "hasta": 22 }
+    ]
+  },
+
+  "Ezequiel": {
+    "1": [
+      { "titulo": "Visión de la gloria de Dios con los seres vivientes", "desde": 1, "hasta": 28 }
+    ],
+    "2": [
+      { "titulo": "Llamamiento de Ezequiel y su comisión profética", "desde": 1, "hasta": 10 }
+    ],
+    "3": [
+      { "titulo": "Ezequiel recibe el rollo y es constituido atalaya", "desde": 1, "hasta": 27 }
+    ],
+    "4": [
+      { "titulo": "Actos simbólicos del sitio de Jerusalén", "desde": 1, "hasta": 17 }
+    ],
+    "5": [
+      { "titulo": "Juicio de Dios sobre Jerusalén", "desde": 1, "hasta": 17 }
+    ],
+    "6": [
+      { "titulo": "Profecía contra los montes de Israel", "desde": 1, "hasta": 14 }
+    ],
+    "7": [
+      { "titulo": "El fin: juicio total sobre Israel", "desde": 1, "hasta": 27 }
+    ],
+    "8": [
+      { "titulo": "Visión de las abominaciones en el templo", "desde": 1, "hasta": 18 }
+    ],
+    "9": [
+      { "titulo": "Los marcados y los ejecutores del juicio", "desde": 1, "hasta": 11 }
+    ],
+    "10": [
+      { "titulo": "La gloria de Dios abandona el templo", "desde": 1, "hasta": 22 }
+    ],
+    "11": [
+      { "titulo": "Juicio a los líderes y promesa de un corazón nuevo", "desde": 1, "hasta": 25 }
+    ],
+    "12": [
+      { "titulo": "Actos simbólicos del exilio y mensajes de juicio", "desde": 1, "hasta": 28 }
+    ],
+    "13": [
+      { "titulo": "Juicio contra los falsos profetas y profetisas", "desde": 1, "hasta": 23 }
+    ],
+    "14": [
+      { "titulo": "Idólatras reprendidos y juicio inevitable", "desde": 1, "hasta": 23 }
+    ],
+    "15": [
+      { "titulo": "La vid inútil", "desde": 1, "hasta": 8 }
+    ],
+    "16": [
+      { "titulo": "La infidelidad de Jerusalén comparada con una esposa adúltera", "desde": 1, "hasta": 63 }
+    ],
+    "17": [
+      { "titulo": "La parábola de las dos águilas y la vid", "desde": 1, "hasta": 24 }
+    ],
+    "18": [
+      { "titulo": "El alma que pecare, esa morirá", "desde": 1, "hasta": 32 }
+    ],
+    "19": [
+      { "titulo": "Endecha sobre los príncipes de Israel", "desde": 1, "hasta": 14 }
+    ],
+    "20": [
+      { "titulo": "Rebeliones de Israel y juicio de Dios", "desde": 1, "hasta": 49 }
+    ],
+    "21": [
+      { "titulo": "La espada del Señor contra Jerusalén y Amón", "desde": 1, "hasta": 32 }
+    ],
+    "22": [
+      { "titulo": "Pecados de Jerusalén enumerados y denunciados", "desde": 1, "hasta": 31 }
+    ],
+    "23": [
+      { "titulo": "Oholá y Oholibá: alegoría de la infidelidad de Israel y Judá", "desde": 1, "hasta": 49 }
+    ],
+    "24": [
+      { "titulo": "La olla hirviente y la muerte de la esposa del profeta", "desde": 1, "hasta": 27 }
+    ],
+    "25": [
+      { "titulo": "Juicios contra Amón, Moab, Edom y los filisteos", "desde": 1, "hasta": 17 }
+    ],
+    "26": [
+      { "titulo": "Profecía contra Tiro", "desde": 1, "hasta": 21 }
+    ],
+    "27": [
+      { "titulo": "Lamento por Tiro", "desde": 1, "hasta": 36 }
+    ],
+    "28": [
+      { "titulo": "Juicio contra el príncipe y el rey de Tiro", "desde": 1, "hasta": 19 },
+      { "titulo": "Juicio contra Sidón y restauración futura de Israel", "desde": 20, "hasta": 26 }
+    ],
+    "29": [
+      { "titulo": "Juicio contra Egipto: Faraón como dragón", "desde": 1, "hasta": 21 }
+    ],
+    "30": [
+      { "titulo": "El día de Jehová contra Egipto y sus aliados", "desde": 1, "hasta": 26 }
+    ],
+    "31": [
+      { "titulo": "El cedro del Líbano como símbolo de Egipto", "desde": 1, "hasta": 18 }
+    ],
+    "32": [
+      { "titulo": "Lamento por Faraón y su caída", "desde": 1, "hasta": 32 }
+    ],
+    "33": [
+      { "titulo": "Ezequiel el atalaya y restauración prometida", "desde": 1, "hasta": 33 }
+    ],
+    "34": [
+      { "titulo": "Juicio contra los pastores infieles y promesa del Pastor único", "desde": 1, "hasta": 31 }
+    ],
+    "35": [
+      { "titulo": "Profecía contra el monte Seir (Edom)", "desde": 1, "hasta": 15 }
+    ],
+    "36": [
+      { "titulo": "Restauración de Israel y el corazón nuevo", "desde": 1, "hasta": 38 }
+    ],
+    "37": [
+      { "titulo": "El valle de los huesos secos", "desde": 1, "hasta": 14 },
+      { "titulo": "Los dos palos unidos", "desde": 15, "hasta": 28 }
+    ],
+    "38": [
+      { "titulo": "Gog de la tierra de Magog: invasión profética", "desde": 1, "hasta": 23 }
+    ],
+    "39": [
+      { "titulo": "Derrota de Gog y glorificación de Dios", "desde": 1, "hasta": 29 }
+    ],
+    "40": [
+      { "titulo": "Visión del nuevo templo: medidas del atrio y puertas", "desde": 1, "hasta": 49 }
+    ],
+    "41": [
+      { "titulo": "Medidas del santuario y cámaras", "desde": 1, "hasta": 26 }
+    ],
+    "42": [
+      { "titulo": "Las cámaras de los sacerdotes", "desde": 1, "hasta": 20 }
+    ],
+    "43": [
+      { "titulo": "La gloria del Señor vuelve al templo", "desde": 1, "hasta": 12 },
+      { "titulo": "El altar y sus ordenanzas", "desde": 13, "hasta": 27 }
+    ],
+    "44": [
+      { "titulo": "Normas para sacerdotes y levitas", "desde": 1, "hasta": 31 }
+    ],
+    "45": [
+      { "titulo": "Distribución de la tierra santa", "desde": 1, "hasta": 25 }
+    ],
+    "46": [
+      { "titulo": "Reglas de adoración y sacrificios", "desde": 1, "hasta": 24 }
+    ],
+    "47": [
+      { "titulo": "El río que sale del templo", "desde": 1, "hasta": 12 },
+      { "titulo": "Límites de la tierra", "desde": 13, "hasta": 23 }
+    ],
+    "48": [
+      { "titulo": "Distribución final de la tierra y nombre de la ciudad: Jehová-sama", "desde": 1, "hasta": 35 }
+    ]
+  },
+
+  "Daniel": {
+    "1": [
+      { "titulo": "Daniel y sus amigos en Babilonia", "desde": 1, "hasta": 21 }
+    ],
+    "2": [
+      { "titulo": "El sueño de Nabucodonosor y la estatua de los reinos", "desde": 1, "hasta": 49 }
+    ],
+    "3": [
+      { "titulo": "Los tres jóvenes en el horno de fuego", "desde": 1, "hasta": 30 }
+    ],
+    "4": [
+      { "titulo": "El sueño del árbol y la humillación de Nabucodonosor", "desde": 1, "hasta": 37 }
+    ],
+    "5": [
+      { "titulo": "La escritura en la pared y la caída de Babilonia", "desde": 1, "hasta": 31 }
+    ],
+    "6": [
+      { "titulo": "Daniel en el foso de los leones", "desde": 1, "hasta": 28 }
+    ],
+    "7": [
+      { "titulo": "Visión de las cuatro bestias y el Hijo del Hombre", "desde": 1, "hasta": 28 }
+    ],
+    "8": [
+      { "titulo": "Visión del carnero y el macho cabrío", "desde": 1, "hasta": 27 }
+    ],
+    "9": [
+      { "titulo": "Oración de Daniel y profecía de las setenta semanas", "desde": 1, "hasta": 27 }
+    ],
+    "10": [
+      { "titulo": "Daniel tiene una visión junto al río", "desde": 1, "hasta": 21 }
+    ],
+    "11": [
+      { "titulo": "Conflictos entre los reyes del norte y del sur", "desde": 1, "hasta": 45 }
+    ],
+    "12": [
+      { "titulo": "El tiempo del fin y la resurrección", "desde": 1, "hasta": 13 }
+    ]
+  },
+  "Oseas": {
+    "1": [
+      { "titulo": "La familia de Oseas como señal del juicio", "desde": 1, "hasta": 11 }
+    ],
+    "2": [
+      { "titulo": "Infidelidad de Israel y futura restauración", "desde": 1, "hasta": 23 }
+    ],
+    "3": [
+      { "titulo": "Oseas ama a su esposa como símbolo del amor de Dios", "desde": 1, "hasta": 5 }
+    ],
+    "4": [
+      { "titulo": "Acusación contra Israel por su pecado", "desde": 1, "hasta": 19 }
+    ],
+    "5": [
+      { "titulo": "Juicio sobre los líderes y el pueblo", "desde": 1, "hasta": 15 }
+    ],
+    "6": [
+      { "titulo": "Llamado al arrepentimiento y denuncia de la inconstancia", "desde": 1, "hasta": 11 }
+    ],
+    "7": [
+      { "titulo": "Pecados ocultos de Israel", "desde": 1, "hasta": 16 }
+    ],
+    "8": [
+      { "titulo": "Israel cosecha lo que sembró", "desde": 1, "hasta": 14 }
+    ],
+    "9": [
+      { "titulo": "Castigo por la idolatría", "desde": 1, "hasta": 17 }
+    ],
+    "10": [
+      { "titulo": "La iniquidad de Israel y la inminente destrucción", "desde": 1, "hasta": 15 }
+    ],
+    "11": [
+      { "titulo": "El amor paternal de Dios hacia Israel", "desde": 1, "hasta": 12 }
+    ],
+    "12": [
+      { "titulo": "Contienda contra Israel por su engaño", "desde": 1, "hasta": 14 }
+    ],
+    "13": [
+      { "titulo": "La idolatría de Efraín y el juicio final", "desde": 1, "hasta": 16 }
+    ],
+    "14": [
+      { "titulo": "Llamado al arrepentimiento y promesa de restauración", "desde": 1, "hasta": 9 }
+    ]
+  },
+
+  "Joel": {
+    "1": [
+      { "titulo": "La devastación por la langosta", "desde": 1, "hasta": 20 }
+    ],
+    "2": [
+      { "titulo": "Llamado al arrepentimiento y promesa del Espíritu Santo", "desde": 1, "hasta": 32 }
+    ],
+    "3": [
+      { "titulo": "Juicio de las naciones y restauración de Judá", "desde": 1, "hasta": 21 }
+    ]
+  },
+
+  "Amós": {
+    "1": [
+      { "titulo": "Juicio sobre las naciones vecinas", "desde": 1, "hasta": 15 }
+    ],
+    "2": [
+      { "titulo": "Juicio sobre Moab, Judá e Israel", "desde": 1, "hasta": 16 }
+    ],
+    "3": [
+      { "titulo": "Juicio contra Israel por su rebelión", "desde": 1, "hasta": 15 }
+    ],
+    "4": [
+      { "titulo": "Rebelión persistente de Israel", "desde": 1, "hasta": 13 }
+    ],
+    "5": [
+      { "titulo": "Llamado a buscar a Dios y vivir", "desde": 1, "hasta": 27 }
+    ],
+    "6": [
+      { "titulo": "Ay de los confiados en Sion", "desde": 1, "hasta": 14 }
+    ],
+    "7": [
+      { "titulo": "Visiones de juicio y oposición a Amós", "desde": 1, "hasta": 17 }
+    ],
+    "8": [
+      { "titulo": "La visión del canastillo de fruta de verano", "desde": 1, "hasta": 14 }
+    ],
+    "9": [
+      { "titulo": "Juicio final y restauración del tabernáculo de David", "desde": 1, "hasta": 15 }
+    ]
+  },
+
+  "Abdías": {
+    "1": [
+      { "titulo": "Juicio contra Edom y restauración de Israel", "desde": 1, "hasta": 21 }
+    ]
+  },
+
+  "Jonás": {
+    "1": [
+      { "titulo": "Jonás huye de Dios", "desde": 1, "hasta": 17 }
+    ],
+    "2": [
+      { "titulo": "Oración de Jonás desde el pez", "desde": 1, "hasta": 10 }
+    ],
+    "3": [
+      { "titulo": "Jonás predica en Nínive", "desde": 1, "hasta": 10 }
+    ],
+    "4": [
+      { "titulo": "La actitud de Jonás y la compasión de Dios", "desde": 1, "hasta": 11 }
+    ]
+  },
+
+  "Miqueas": {
+    "1": [
+      { "titulo": "Juicio contra Samaria y Jerusalén", "desde": 1, "hasta": 16 }
+    ],
+    "2": [
+      { "titulo": "Ay de los opresores y promesa del remanente", "desde": 1, "hasta": 13 }
+    ],
+    "3": [
+      { "titulo": "Juicio contra los líderes injustos", "desde": 1, "hasta": 12 }
+    ],
+    "4": [
+      { "titulo": "Reinado futuro de paz", "desde": 1, "hasta": 13 }
+    ],
+    "5": [
+      { "titulo": "Nacimiento del gobernante en Belén", "desde": 1, "hasta": 15 }
+    ],
+    "6": [
+      { "titulo": "Controversia del Señor con su pueblo", "desde": 1, "hasta": 16 }
+    ],
+    "7": [
+      { "titulo": "Confesión, esperanza y restauración", "desde": 1, "hasta": 20 }
+    ]
+  },
+
+  "Nahúm": {
+    "1": [
+      { "titulo": "La justicia y el poder de Dios", "desde": 1, "hasta": 15 }
+    ],
+    "2": [
+      { "titulo": "La destrucción de Nínive anunciada", "desde": 1, "hasta": 13 }
+    ],
+    "3": [
+      { "titulo": "La causa y la certeza del juicio de Nínive", "desde": 1, "hasta": 19 }
+    ]
+  },
+
+  "Habacuc": {
+    "1": [
+      { "titulo": "El clamor de Habacuc y la respuesta de Dios", "desde": 1, "hasta": 17 }
+    ],
+    "2": [
+      { "titulo": "La respuesta del Señor y los ayes", "desde": 1, "hasta": 20 }
+    ],
+    "3": [
+      { "titulo": "Oración de Habacuc y confianza en Dios", "desde": 1, "hasta": 19 }
+    ]
+  },
+
+  "Sofonías": {
+    "1": [
+      { "titulo": "El día de Jehová sobre Judá", "desde": 1, "hasta": 18 }
+    ],
+    "2": [
+      { "titulo": "Juicio contra naciones vecinas", "desde": 1, "hasta": 15 }
+    ],
+    "3": [
+      { "titulo": "Restauración de Israel y gozo futuro", "desde": 1, "hasta": 20 }
+    ]
+  },
+
+  "Hageo": {
+    "1": [
+      { "titulo": "Llamado a reconstruir el templo", "desde": 1, "hasta": 15 }
+    ],
+    "2": [
+      { "titulo": "La gloria del segundo templo y promesas futuras", "desde": 1, "hasta": 23 }
+    ]
+  },
+
+  "Zacarías": {
+    "1": [
+      { "titulo": "Llamado al arrepentimiento y visión de los jinetes", "desde": 1, "hasta": 21 }
+    ],
+    "2": [
+      { "titulo": "Visión del hombre con el cordel de medir", "desde": 1, "hasta": 13 }
+    ],
+    "3": [
+      { "titulo": "Josué el sumo sacerdote y la promesa del Renuevo", "desde": 1, "hasta": 10 }
+    ],
+    "4": [
+      { "titulo": "El candelero de oro y los dos olivos", "desde": 1, "hasta": 14 }
+    ],
+    "5": [
+      { "titulo": "El rollo volador y la mujer en el efa", "desde": 1, "hasta": 11 }
+    ],
+    "6": [
+      { "titulo": "Los cuatro carros y la coronación del Renuevo", "desde": 1, "hasta": 15 }
+    ],
+    "7": [
+      { "titulo": "Ayuno y obediencia verdadera", "desde": 1, "hasta": 14 }
+    ],
+    "8": [
+      { "titulo": "Promesas de restauración y bendición", "desde": 1, "hasta": 23 }
+    ],
+    "9": [
+      { "titulo": "Juicios y la venida del Rey humilde", "desde": 1, "hasta": 17 }
+    ],
+    "10": [
+      { "titulo": "Redención y fortalecimiento de Judá", "desde": 1, "hasta": 12 }
+    ],
+    "11": [
+      { "titulo": "Los pastores y el pastor insensato", "desde": 1, "hasta": 17 }
+    ],
+    "12": [
+      { "titulo": "Jerusalén en el día de Jehová", "desde": 1, "hasta": 14 }
+    ],
+    "13": [
+      { "titulo": "Fuente de limpieza y juicio contra profetas falsos", "desde": 1, "hasta": 9 }
+    ],
+    "14": [
+      { "titulo": "El día del Señor y el reino universal", "desde": 1, "hasta": 21 }
+    ]
+  },
+
+  "Malaquías": {
+    "1": [
+      { "titulo": "El amor de Dios y la falta de honra del pueblo", "desde": 1, "hasta": 14 }
+    ],
+    "2": [
+      { "titulo": "Reprensión a los sacerdotes y al matrimonio infiel", "desde": 1, "hasta": 17 }
+    ],
+    "3": [
+      { "titulo": "El mensajero del pacto y el llamado a la obediencia", "desde": 1, "hasta": 18 }
+    ],
+    "4": [
+      { "titulo": "El día de Jehová y la promesa de Elías", "desde": 1, "hasta": 6 }
+    ]
+  },
+
+  "Mateo": {
+    "1": [
+      { "titulo": "Genealogía de Jesucristo", "desde": 1, "hasta": 17 },
+      { "titulo": "Nacimiento de Jesús", "desde": 18, "hasta": 25 }
+    ],
+    "2": [
+      { "titulo": "Visita de los magos", "desde": 1, "hasta": 12 },
+      { "titulo": "Huida a Egipto", "desde": 13, "hasta": 15 },
+      { "titulo": "Matanza de los niños", "desde": 16, "hasta": 18 },
+      { "titulo": "Regreso a Nazaret", "desde": 19, "hasta": 23 }
+    ],
+    "3": [
+      { "titulo": "Ministerio de Juan el Bautista", "desde": 1, "hasta": 12 },
+      { "titulo": "Bautismo de Jesús", "desde": 13, "hasta": 17 }
+    ],
+    "4": [
+      { "titulo": "Tentación de Jesús", "desde": 1, "hasta": 11 },
+      { "titulo": "Jesús inicia su ministerio", "desde": 12, "hasta": 17 },
+      { "titulo": "Llamamiento de los primeros discípulos", "desde": 18, "hasta": 22 },
+      { "titulo": "Jesús recorre Galilea", "desde": 23, "hasta": 25 }
+    ],
+    "5": [
+      { "titulo": "Bienaventuranzas", "desde": 1, "hasta": 12 },
+      { "titulo": "Sal de la tierra y luz del mundo", "desde": 13, "hasta": 16 },
+      { "titulo": "Jesús y la ley", "desde": 17, "hasta": 20 },
+      { "titulo": "Enseñanzas sobre el homicidio", "desde": 21, "hasta": 26 },
+      { "titulo": "Enseñanzas sobre el adulterio", "desde": 27, "hasta": 30 },
+      { "titulo": "El divorcio", "desde": 31, "hasta": 32 },
+      { "titulo": "Los juramentos", "desde": 33, "hasta": 37 },
+      { "titulo": "La venganza", "desde": 38, "hasta": 42 },
+      { "titulo": "El amor a los enemigos", "desde": 43, "hasta": 48 }
+    ],
+    "6": [
+      { "titulo": "Dar limosna", "desde": 1, "hasta": 4 },
+      { "titulo": "La oración y el Padre Nuestro", "desde": 5, "hasta": 15 },
+      { "titulo": "El ayuno", "desde": 16, "hasta": 18 },
+      { "titulo": "Tesoros en el cielo", "desde": 19, "hasta": 24 },
+      { "titulo": "No os afanéis", "desde": 25, "hasta": 34 }
+    ],
+    "7": [
+      { "titulo": "No juzguéis", "desde": 1, "hasta": 6 },
+      { "titulo": "La oración y la regla de oro", "desde": 7, "hasta": 12 },
+      { "titulo": "La puerta estrecha", "desde": 13, "hasta": 14 },
+      { "titulo": "Por sus frutos los conoceréis", "desde": 15, "hasta": 20 },
+      { "titulo": "Nunca os conocí", "desde": 21, "hasta": 23 },
+      { "titulo": "Los dos cimientos", "desde": 24, "hasta": 29 }
+    ],
+    "8": [
+      { "titulo": "Jesús sana a un leproso", "desde": 1, "hasta": 4 },
+      { "titulo": "El siervo del centurión", "desde": 5, "hasta": 13 },
+      { "titulo": "Jesús sana a muchos", "desde": 14, "hasta": 17 },
+      { "titulo": "Lo que cuesta seguir a Jesús", "desde": 18, "hasta": 22 },
+      { "titulo": "Jesús calma la tempestad", "desde": 23, "hasta": 27 },
+      { "titulo": "Endemoniados gadarenos", "desde": 28, "hasta": 34 }
+    ],
+    "9": [
+      { "titulo": "Jesús sana a un paralítico", "desde": 1, "hasta": 8 },
+      { "titulo": "Llamado de Mateo", "desde": 9, "hasta": 13 },
+      { "titulo": "La pregunta sobre el ayuno", "desde": 14, "hasta": 17 },
+      { "titulo": "La hija de Jairo y la mujer del flujo", "desde": 18, "hasta": 26 },
+      { "titulo": "Dos ciegos y un mudo", "desde": 27, "hasta": 34 },
+      { "titulo": "La mies y los obreros", "desde": 35, "hasta": 38 }
+    ],
+    "10": [
+      { "titulo": "Elección de los doce apóstoles", "desde": 1, "hasta": 4 },
+      { "titulo": "Misión de los doce", "desde": 5, "hasta": 15 },
+      { "titulo": "Persecuciones venideras", "desde": 16, "hasta": 23 },
+      { "titulo": "El valor de confesar a Cristo", "desde": 24, "hasta": 33 },
+      { "titulo": "No paz, sino espada", "desde": 34, "hasta": 39 },
+      { "titulo": "Recompensa por recibir a los enviados", "desde": 40, "hasta": 42 }
+    ],
+    "11": [
+      { "titulo": "Mensajeros de Juan el Bautista", "desde": 1, "hasta": 19 },
+      { "titulo": "Ayes sobre las ciudades", "desde": 20, "hasta": 24 },
+      { "titulo": "Venid a mí y descansad", "desde": 25, "hasta": 30 }
+    ],
+    "12": [
+      { "titulo": "Jesús, Señor del día de reposo", "desde": 1, "hasta": 14 },
+      { "titulo": "El siervo escogido", "desde": 15, "hasta": 21 },
+      { "titulo": "Una casa dividida", "desde": 22, "hasta": 32 },
+      { "titulo": "El árbol y su fruto", "desde": 33, "hasta": 37 },
+      { "titulo": "La señal de Jonás", "desde": 38, "hasta": 45 },
+      { "titulo": "La madre y los hermanos de Jesús", "desde": 46, "hasta": 50 }
+    ],
+    "13": [
+      { "titulo": "Parábola del sembrador", "desde": 1, "hasta": 23 },
+      { "titulo": "El trigo y la cizaña", "desde": 24, "hasta": 30 },
+      { "titulo": "La semilla de mostaza y la levadura", "desde": 31, "hasta": 35 },
+      { "titulo": "Explicación de la cizaña", "desde": 36, "hasta": 43 },
+      { "titulo": "Parábola del tesoro escondido", "desde": 44, "hasta": 44 },
+      { "titulo": "Parábola de la perla preciosa", "desde": 45, "hasta": 46 },
+      { "titulo": "Parábola de la red", "desde": 47, "hasta": 52 },
+      { "titulo": "Jesús rechazado en Nazaret", "desde": 53, "hasta": 58 }
+    ],
+    "14": [
+      { "titulo": "Muerte de Juan el Bautista", "desde": 1, "hasta": 12 },
+      { "titulo": "Alimentación de los cinco mil", "desde": 13, "hasta": 21 },
+      { "titulo": "Jesús anda sobre el mar", "desde": 22, "hasta": 33 },
+      { "titulo": "Jesús sana en Genesaret", "desde": 34, "hasta": 36 }
+    ],
+    "15": [
+      { "titulo": "Lo que contamina al hombre", "desde": 1, "hasta": 20 },
+      { "titulo": "La mujer cananea", "desde": 21, "hasta": 28 },
+      { "titulo": "Jesús sana a muchos", "desde": 29, "hasta": 31 },
+      { "titulo": "Alimentación de los cuatro mil", "desde": 32, "hasta": 39 }
+    ],
+    "16": [
+      { "titulo": "La demanda de una señal", "desde": 1, "hasta": 4 },
+      { "titulo": "La levadura de los fariseos", "desde": 5, "hasta": 12 },
+      { "titulo": "Confesión de Pedro", "desde": 13, "hasta": 20 },
+      { "titulo": "Jesús anuncia su muerte", "desde": 21, "hasta": 23 },
+      { "titulo": "Tomar la cruz", "desde": 24, "hasta": 28 }
+    ],
+    "17": [
+      { "titulo": "La transfiguración", "desde": 1, "hasta": 13 },
+      { "titulo": "Jesús sana a un muchacho endemoniado", "desde": 14, "hasta": 21 },
+      { "titulo": "Jesús anuncia nuevamente su muerte y resurrección", "desde": 22, "hasta": 23 },
+      { "titulo": "El impuesto del templo", "desde": 24, "hasta": 27 }
+    ],
+    "18": [
+      { "titulo": "Quién es el mayor en el reino", "desde": 1, "hasta": 6 },
+      { "titulo": "La oveja perdida", "desde": 7, "hasta": 14 },
+      { "titulo": "Cómo tratar al hermano que peca", "desde": 15, "hasta": 20 },
+      { "titulo": "El siervo sin misericordia", "desde": 21, "hasta": 35 }
+    ],
+    "19": [
+      { "titulo": "Jesús enseña sobre el divorcio", "desde": 1, "hasta": 12 },
+      { "titulo": "Jesús bendice a los niños", "desde": 13, "hasta": 15 },
+      { "titulo": "El joven rico", "desde": 16, "hasta": 22 },
+      { "titulo": "Recompensa para los que dejan todo por Cristo", "desde": 23, "hasta": 30 }
+    ],
+    "20": [
+      { "titulo": "Los obreros de la viña", "desde": 1, "hasta": 16 },
+      { "titulo": "Tercer anuncio de la muerte de Jesús", "desde": 17, "hasta": 19 },
+      { "titulo": "Petición de la madre de los hijos de Zebedeo", "desde": 20, "hasta": 28 },
+      { "titulo": "Dos ciegos reciben vista", "desde": 29, "hasta": 34 }
+    ],
+    "21": [
+      { "titulo": "Entrada triunfal en Jerusalén", "desde": 1, "hasta": 11 },
+      { "titulo": "Purificación del templo", "desde": 12, "hasta": 17 },
+      { "titulo": "Maldición de la higuera", "desde": 18, "hasta": 22 },
+      { "titulo": "La autoridad de Jesús cuestionada", "desde": 23, "hasta": 27 },
+      { "titulo": "Parábola de los dos hijos", "desde": 28, "hasta": 32 },
+      { "titulo": "Parábola de los labradores malvados", "desde": 33, "hasta": 46 }
+    ],
+    "22": [
+      { "titulo": "Parábola de la fiesta de bodas", "desde": 1, "hasta": 14 },
+      { "titulo": "La cuestión del tributo a César", "desde": 15, "hasta": 22 },
+      { "titulo": "Los saduceos y la resurrección", "desde": 23, "hasta": 33 },
+      { "titulo": "El gran mandamiento", "desde": 34, "hasta": 40 },
+      { "titulo": "El hijo de David", "desde": 41, "hasta": 46 }
+    ],
+    "23": [
+      { "titulo": "Jesús denuncia a los fariseos", "desde": 1, "hasta": 36 },
+      { "titulo": "Lamento sobre Jerusalén", "desde": 37, "hasta": 39 }
+    ],
+    "24": [
+      { "titulo": "Profecía sobre la destrucción del templo", "desde": 1, "hasta": 2 },
+      { "titulo": "Señales antes del fin", "desde": 3, "hasta": 14 },
+      { "titulo": "La gran tribulación", "desde": 15, "hasta": 28 },
+      { "titulo": "La venida del Hijo del Hombre", "desde": 29, "hasta": 31 },
+      { "titulo": "La parábola de la higuera", "desde": 32, "hasta": 35 },
+      { "titulo": "Exhortación a la vigilancia", "desde": 36, "hasta": 51 }
+    ],
+    "25": [
+      { "titulo": "Las diez vírgenes", "desde": 1, "hasta": 13 },
+      { "titulo": "Los talentos", "desde": 14, "hasta": 30 },
+      { "titulo": "El juicio final", "desde": 31, "hasta": 46 }
+    ],
+    "26": [
+      { "titulo": "Complot para prender a Jesús", "desde": 1, "hasta": 5 },
+      { "titulo": "Alabanza en Betania", "desde": 6, "hasta": 13 },
+      { "titulo": "Judas acuerda traicionarlo", "desde": 14, "hasta": 16 },
+      { "titulo": "La última cena", "desde": 17, "hasta": 30 },
+      { "titulo": "Jesús ora en Getsemaní", "desde": 31, "hasta": 46 },
+      { "titulo": "Arresto de Jesús", "desde": 47, "hasta": 56 },
+      { "titulo": "Jesús ante el concilio", "desde": 57, "hasta": 68 },
+      { "titulo": "Pedro niega a Jesús", "desde": 69, "hasta": 75 }
+    ],
+    "27": [
+      { "titulo": "Jesús ante Pilato", "desde": 1, "hasta": 26 },
+      { "titulo": "Crucifixión", "desde": 27, "hasta": 44 },
+      { "titulo": "Muerte de Jesús", "desde": 45, "hasta": 56 },
+      { "titulo": "Sepultura de Jesús", "desde": 57, "hasta": 66 }
+    ],
+    "28": [
+      { "titulo": "La resurrección de Jesús", "desde": 1, "hasta": 10 },
+      { "titulo": "El soborno a los guardias", "desde": 11, "hasta": 15 },
+      { "titulo": "La gran comisión", "desde": 16, "hasta": 20 }
+    ]
+  },
+
+  "Marcos": {
+    "1": [
+      { "titulo": "Predicación de Juan el Bautista", "desde": 1, "hasta": 8 },
+      { "titulo": "Bautismo y tentación de Jesús", "desde": 9, "hasta": 13 },
+      { "titulo": "Jesús inicia su ministerio en Galilea", "desde": 14, "hasta": 20 },
+      { "titulo": "Jesús expulsa un espíritu inmundo", "desde": 21, "hasta": 28 },
+      { "titulo": "Jesús sana a muchos", "desde": 29, "hasta": 34 },
+      { "titulo": "Jesús predica en Galilea", "desde": 35, "hasta": 39 },
+      { "titulo": "Jesús sana a un leproso", "desde": 40, "hasta": 45 }
+    ],
+    "2": [
+      { "titulo": "Jesús sana a un paralítico", "desde": 1, "hasta": 12 },
+      { "titulo": "Llamamiento de Leví", "desde": 13, "hasta": 17 },
+      { "titulo": "La pregunta sobre el ayuno", "desde": 18, "hasta": 22 },
+      { "titulo": "Jesús, Señor del día de reposo", "desde": 23, "hasta": 28 }
+    ],
+    "3": [
+      { "titulo": "Jesús sana en día de reposo", "desde": 1, "hasta": 6 },
+      { "titulo": "Multitud sigue a Jesús", "desde": 7, "hasta": 12 },
+      { "titulo": "Elección de los doce apóstoles", "desde": 13, "hasta": 19 },
+      { "titulo": "Una casa dividida", "desde": 20, "hasta": 30 },
+      { "titulo": "La madre y los hermanos de Jesús", "desde": 31, "hasta": 35 }
+    ],
+    "4": [
+      { "titulo": "Parábola del sembrador", "desde": 1, "hasta": 20 },
+      { "titulo": "La luz debajo del almud", "desde": 21, "hasta": 25 },
+      { "titulo": "La semilla que crece", "desde": 26, "hasta": 29 },
+      { "titulo": "La parábola del grano de mostaza", "desde": 30, "hasta": 34 },
+      { "titulo": "Jesús calma la tempestad", "desde": 35, "hasta": 41 }
+    ],
+    "5": [
+      { "titulo": "Endemoniado gadareno", "desde": 1, "hasta": 20 },
+      { "titulo": "La hija de Jairo y la mujer del flujo de sangre", "desde": 21, "hasta": 43 }
+    ],
+    "6": [
+      { "titulo": "Jesús rechazado en Nazaret", "desde": 1, "hasta": 6 },
+      { "titulo": "Misión de los doce", "desde": 7, "hasta": 13 },
+      { "titulo": "Muerte de Juan el Bautista", "desde": 14, "hasta": 29 },
+      { "titulo": "Alimentación de los cinco mil", "desde": 30, "hasta": 44 },
+      { "titulo": "Jesús anda sobre el mar", "desde": 45, "hasta": 52 },
+      { "titulo": "Jesús sana a muchos en Genesaret", "desde": 53, "hasta": 56 }
+    ],
+    "7": [
+      { "titulo": "Lo que contamina al hombre", "desde": 1, "hasta": 23 },
+      { "titulo": "La mujer sirofenicia", "desde": 24, "hasta": 30 },
+      { "titulo": "Jesús sana a un sordomudo", "desde": 31, "hasta": 37 }
+    ],
+    "8": [
+      { "titulo": "Alimentación de los cuatro mil", "desde": 1, "hasta": 10 },
+      { "titulo": "La demanda de una señal", "desde": 11, "hasta": 13 },
+      { "titulo": "La levadura de los fariseos", "desde": 14, "hasta": 21 },
+      { "titulo": "Jesús sana a un ciego", "desde": 22, "hasta": 26 },
+      { "titulo": "Confesión de Pedro", "desde": 27, "hasta": 30 },
+      { "titulo": "Jesús anuncia su muerte y resurrección", "desde": 31, "hasta": 33 },
+      { "titulo": "Tomar la cruz", "desde": 34, "hasta": 38 }
+    ],
+    "9": [
+      { "titulo": "La transfiguración", "desde": 1, "hasta": 13 },
+      { "titulo": "Jesús sana a un muchacho endemoniado", "desde": 14, "hasta": 29 },
+      { "titulo": "Segundo anuncio de la muerte de Jesús", "desde": 30, "hasta": 32 },
+      { "titulo": "¿Quién es el mayor?", "desde": 33, "hasta": 37 },
+      { "titulo": "El que no es contra nosotros, por nosotros es", "desde": 38, "hasta": 41 },
+      { "titulo": "Ocasiones de caer", "desde": 42, "hasta": 50 }
+    ],
+    "10": [
+      { "titulo": "Jesús enseña sobre el divorcio", "desde": 1, "hasta": 12 },
+      { "titulo": "Jesús bendice a los niños", "desde": 13, "hasta": 16 },
+      { "titulo": "El joven rico", "desde": 17, "hasta": 22 },
+      { "titulo": "El peligro de las riquezas", "desde": 23, "hasta": 31 },
+      { "titulo": "Tercer anuncio de la muerte de Jesús", "desde": 32, "hasta": 34 },
+      { "titulo": "Petición de Jacobo y Juan", "desde": 35, "hasta": 45 },
+      { "titulo": "Bartimeo recibe la vista", "desde": 46, "hasta": 52 }
+    ],
+    "11": [
+      { "titulo": "La entrada triunfal en Jerusalén", "desde": 1, "hasta": 11 },
+      { "titulo": "Maldición de la higuera", "desde": 12, "hasta": 14 },
+      { "titulo": "Purificación del templo", "desde": 15, "hasta": 19 },
+      { "titulo": "La oración y la fe", "desde": 20, "hasta": 26 },
+      { "titulo": "La autoridad de Jesús cuestionada", "desde": 27, "hasta": 33 }
+    ],
+    "12": [
+      { "titulo": "Parábola de los labradores malvados", "desde": 1, "hasta": 12 },
+      { "titulo": "La cuestión del tributo a César", "desde": 13, "hasta": 17 },
+      { "titulo": "Los saduceos y la resurrección", "desde": 18, "hasta": 27 },
+      { "titulo": "El gran mandamiento", "desde": 28, "hasta": 34 },
+      { "titulo": "¿De quién es hijo el Cristo?", "desde": 35, "hasta": 37 },
+      { "titulo": "Jesús denuncia a los escribas", "desde": 38, "hasta": 40 },
+      { "titulo": "La ofrenda de la viuda", "desde": 41, "hasta": 44 }
+    ],
+    "13": [
+      { "titulo": "Jesús anuncia la destrucción del templo", "desde": 1, "hasta": 2 },
+      { "titulo": "Principio de dolores", "desde": 3, "hasta": 13 },
+      { "titulo": "La gran tribulación", "desde": 14, "hasta": 23 },
+      { "titulo": "La venida del Hijo del Hombre", "desde": 24, "hasta": 27 },
+      { "titulo": "La parábola de la higuera", "desde": 28, "hasta": 31 },
+      { "titulo": "Exhortación a la vigilancia", "desde": 32, "hasta": 37 }
+    ],
+    "14": [
+      { "titulo": "Complot contra Jesús", "desde": 1, "hasta": 11 },
+      { "titulo": "La última cena", "desde": 12, "hasta": 26 },
+      { "titulo": "Jesús ora en Getsemaní", "desde": 27, "hasta": 42 },
+      { "titulo": "Arresto de Jesús", "desde": 43, "hasta": 52 },
+      { "titulo": "Jesús ante el concilio", "desde": 53, "hasta": 65 },
+      { "titulo": "Pedro niega a Jesús", "desde": 66, "hasta": 72 }
+    ],
+    "15": [
+      { "titulo": "Jesús ante Pilato", "desde": 1, "hasta": 15 },
+      { "titulo": "Crucifixión", "desde": 16, "hasta": 32 },
+      { "titulo": "Muerte de Jesús", "desde": 33, "hasta": 41 },
+      { "titulo": "Sepultura de Jesús", "desde": 42, "hasta": 47 }
+    ],
+    "16": [
+      { "titulo": "Resurrección de Jesús", "desde": 1, "hasta": 8 },
+      { "titulo": "Apariciones de Jesús resucitado", "desde": 9, "hasta": 14 },
+      { "titulo": "La gran comisión", "desde": 15, "hasta": 20 }
+    ]
+  },
+
+  "Lucas": {
+    "1": [
+      { "titulo": "Anuncio del nacimiento de Juan el Bautista", "desde": 5, "hasta": 25 },
+      { "titulo": "Anuncio del nacimiento de Jesús", "desde": 26, "hasta": 38 },
+      { "titulo": "María visita a Elisabet", "desde": 39, "hasta": 45 },
+      { "titulo": "El cántico de María (Magníficat)", "desde": 46, "hasta": 56 },
+      { "titulo": "Nacimiento de Juan el Bautista", "desde": 57, "hasta": 66 },
+      { "titulo": "El cántico de Zacarías (Benedictus)", "desde": 67, "hasta": 80 }
+    ],
+    "2": [
+      { "titulo": "Nacimiento de Jesús", "desde": 1, "hasta": 7 },
+      { "titulo": "Los ángeles y los pastores", "desde": 8, "hasta": 20 },
+      { "titulo": "Presentación de Jesús en el templo", "desde": 21, "hasta": 40 },
+      { "titulo": "Jesús en el templo a los doce años", "desde": 41, "hasta": 52 }
+    ],
+    "3": [
+      { "titulo": "Predicación de Juan el Bautista", "desde": 1, "hasta": 20 },
+      { "titulo": "Bautismo de Jesús", "desde": 21, "hasta": 22 },
+      { "titulo": "Genealogía de Jesús", "desde": 23, "hasta": 38 }
+    ],
+    "4": [
+      { "titulo": "Tentación de Jesús", "desde": 1, "hasta": 13 },
+      { "titulo": "Jesús en Nazaret", "desde": 14, "hasta": 30 },
+      { "titulo": "Jesús sana a un endemoniado en Capernaúm", "desde": 31, "hasta": 37 },
+      { "titulo": "Muchos sanados al ponerse el sol", "desde": 38, "hasta": 41 },
+      { "titulo": "Jesús predica en Galilea", "desde": 42, "hasta": 44 }
+    ],
+    "5": [
+      { "titulo": "Llamamiento de los primeros discípulos", "desde": 1, "hasta": 11 },
+      { "titulo": "Jesús sana a un leproso", "desde": 12, "hasta": 16 },
+      { "titulo": "El paralítico sanado", "desde": 17, "hasta": 26 },
+      { "titulo": "Llamamiento de Leví", "desde": 27, "hasta": 32 },
+      { "titulo": "El ayuno", "desde": 33, "hasta": 39 }
+    ],
+    "6": [
+      { "titulo": "Jesús Señor del día de reposo", "desde": 1, "hasta": 11 },
+      { "titulo": "Llamamiento de los doce apóstoles", "desde": 12, "hasta": 16 },
+      { "titulo": "Bienaventuranzas y ayes", "desde": 17, "hasta": 26 },
+      { "titulo": "Amad a vuestros enemigos", "desde": 27, "hasta": 36 },
+      { "titulo": "El juzgar a los demás", "desde": 37, "hasta": 42 },
+      { "titulo": "El árbol y su fruto", "desde": 43, "hasta": 45 },
+      { "titulo": "Los dos cimientos", "desde": 46, "hasta": 49 }
+    ],
+    "7": [
+      { "titulo": "El siervo del centurión", "desde": 1, "hasta": 10 },
+      { "titulo": "El hijo de la viuda de Naín", "desde": 11, "hasta": 17 },
+      { "titulo": "Los mensajeros de Juan el Bautista", "desde": 18, "hasta": 35 },
+      { "titulo": "Jesús es ungido por una mujer pecadora", "desde": 36, "hasta": 50 }
+    ],
+    "8": [
+      { "titulo": "Mujeres que acompañan a Jesús", "desde": 1, "hasta": 3 },
+      { "titulo": "Parábola del sembrador", "desde": 4, "hasta": 15 },
+      { "titulo": "La lámpara", "desde": 16, "hasta": 18 },
+      { "titulo": "La madre y los hermanos de Jesús", "desde": 19, "hasta": 21 },
+      { "titulo": "Jesús calma la tempestad", "desde": 22, "hasta": 25 },
+      { "titulo": "El endemoniado gadareno", "desde": 26, "hasta": 39 },
+      { "titulo": "La hija de Jairo y la mujer con flujo de sangre", "desde": 40, "hasta": 56 }
+    ],
+    "9": [
+      { "titulo": "Misión de los doce", "desde": 1, "hasta": 6 },
+      { "titulo": "Herodes y Jesús", "desde": 7, "hasta": 9 },
+      { "titulo": "Alimentación de los cinco mil", "desde": 10, "hasta": 17 },
+      { "titulo": "Confesión de Pedro", "desde": 18, "hasta": 20 },
+      { "titulo": "La transfiguración", "desde": 28, "hasta": 36 },
+      { "titulo": "Jesús sana a un muchacho endemoniado", "desde": 37, "hasta": 43 },
+      { "titulo": "Jesús anuncia su muerte", "desde": 44, "hasta": 45 },
+      { "titulo": "Quién es el mayor", "desde": 46, "hasta": 48 },
+      { "titulo": "El que no es contra nosotros", "desde": 49, "hasta": 50 },
+      { "titulo": "Los samaritanos rechazan a Jesús", "desde": 51, "hasta": 56 },
+      { "titulo": "Jesús exige entrega total", "desde": 57, "hasta": 62 }
+    ],
+    "10": [
+      { "titulo": "Misión de los setenta", "desde": 1, "hasta": 24 },
+      { "titulo": "Parábola del buen samaritano", "desde": 25, "hasta": 37 },
+      { "titulo": "Marta y María", "desde": 38, "hasta": 42 }
+    ],
+    "11": [
+      { "titulo": "Enseñanza sobre la oración", "desde": 1, "hasta": 13 },
+      { "titulo": "Una señal pedida", "desde": 14, "hasta": 32 },
+      { "titulo": "La lámpara del cuerpo", "desde": 33, "hasta": 36 },
+      { "titulo": "Ayes contra fariseos y escribas", "desde": 37, "hasta": 54 }
+    ],
+    "12": [
+      { "titulo": "Guardaos de la hipocresía", "desde": 1, "hasta": 12 },
+      { "titulo": "Parábola del rico insensato", "desde": 13, "hasta": 21 },
+      { "titulo": "La ansiedad por la vida", "desde": 22, "hasta": 34 },
+      { "titulo": "El siervo fiel y el infiel", "desde": 35, "hasta": 48 },
+      { "titulo": "Jesús causa división", "desde": 49, "hasta": 53 },
+      { "titulo": "Interpretar los tiempos", "desde": 54, "hasta": 59 }
+    ],
+    "13": [
+      { "titulo": "Arrepentimiento o destrucción", "desde": 1, "hasta": 5 },
+      { "titulo": "La higuera estéril", "desde": 6, "hasta": 9 },
+      { "titulo": "Jesús sana en sábado a una mujer encorvada", "desde": 10, "hasta": 17 },
+      { "titulo": "Parábolas del grano de mostaza y la levadura", "desde": 18, "hasta": 21 },
+      { "titulo": "La puerta estrecha", "desde": 22, "hasta": 30 },
+      { "titulo": "Lamento sobre Jerusalén", "desde": 31, "hasta": 35 }
+    ],
+    "14": [
+      { "titulo": "Jesús sana a un hidrópico en sábado", "desde": 1, "hasta": 6 },
+      { "titulo": "Parábola de los primeros asientos", "desde": 7, "hasta": 14 },
+      { "titulo": "Parábola de la gran cena", "desde": 15, "hasta": 24 },
+      { "titulo": "El costo del discipulado", "desde": 25, "hasta": 35 }
+    ],
+    "15": [
+      { "titulo": "Parábola de la oveja perdida", "desde": 1, "hasta": 7 },
+      { "titulo": "Parábola de la moneda perdida", "desde": 8, "hasta": 10 },
+      { "titulo": "Parábola del hijo pródigo", "desde": 11, "hasta": 32 }
+    ],
+    "16": [
+      { "titulo": "Parábola del mayordomo infiel", "desde": 1, "hasta": 13 },
+      { "titulo": "La ley y el reino", "desde": 14, "hasta": 18 },
+      { "titulo": "El rico y Lázaro", "desde": 19, "hasta": 31 }
+    ],
+    "17": [
+      { "titulo": "Tropiezos y perdón", "desde": 1, "hasta": 6 },
+      { "titulo": "Fe y servicio", "desde": 7, "hasta": 10 },
+      { "titulo": "Los diez leprosos", "desde": 11, "hasta": 19 },
+      { "titulo": "El reino de Dios y el fin", "desde": 20, "hasta": 37 }
+    ],
+    "18": [
+      { "titulo": "La viuda y el juez injusto", "desde": 1, "hasta": 8 },
+      { "titulo": "El fariseo y el publicano", "desde": 9, "hasta": 14 },
+      { "titulo": "Jesús bendice a los niños", "desde": 15, "hasta": 17 },
+      { "titulo": "El joven rico", "desde": 18, "hasta": 30 },
+      { "titulo": "Jesús anuncia su muerte", "desde": 31, "hasta": 34 },
+      { "titulo": "El ciego de Jericó", "desde": 35, "hasta": 43 }
+    ],
+    "19": [
+      { "titulo": "Zaqueo", "desde": 1, "hasta": 10 },
+      { "titulo": "Parábola de las minas", "desde": 11, "hasta": 27 },
+      { "titulo": "Entrada triunfal", "desde": 28, "hasta": 40 },
+      { "titulo": "Jesús llora por Jerusalén", "desde": 41, "hasta": 44 },
+      { "titulo": "Purificación del templo", "desde": 45, "hasta": 48 }
+    ],
+    "20": [
+      { "titulo": "Autoridad de Jesús cuestionada", "desde": 1, "hasta": 8 },
+      { "titulo": "Parábola de los labradores malvados", "desde": 9, "hasta": 19 },
+      { "titulo": "¿Es lícito pagar tributo a César?", "desde": 20, "hasta": 26 },
+      { "titulo": "La resurrección y los saduceos", "desde": 27, "hasta": 40 },
+      { "titulo": "El Cristo, hijo de David", "desde": 41, "hasta": 44 },
+      { "titulo": "Ayes contra los escribas", "desde": 45, "hasta": 47 }
+    ],
+    "21": [
+      { "titulo": "La ofrenda de la viuda", "desde": 1, "hasta": 4 },
+      { "titulo": "Señales del fin", "desde": 5, "hasta": 38 }
+    ],
+    "22": [
+      { "titulo": "Complot para matar a Jesús", "desde": 1, "hasta": 6 },
+      { "titulo": "La última cena", "desde": 7, "hasta": 23 },
+      { "titulo": "Oración en Getsemaní", "desde": 39, "hasta": 46 },
+      { "titulo": "Arresto de Jesús", "desde": 47, "hasta": 53 },
+      { "titulo": "Pedro niega a Jesús", "desde": 54, "hasta": 62 },
+      { "titulo": "Jesús ante el concilio", "desde": 63, "hasta": 71 }
+    ],
+    "23": [
+      { "titulo": "Jesús ante Pilato y Herodes", "desde": 1, "hasta": 25 },
+      { "titulo": "Crucifixión", "desde": 26, "hasta": 49 },
+      { "titulo": "Sepultura de Jesús", "desde": 50, "hasta": 56 }
+    ],
+    "24": [
+      { "titulo": "Resurrección de Jesús", "desde": 1, "hasta": 12 },
+      { "titulo": "Camino a Emaús", "desde": 13, "hasta": 35 },
+      { "titulo": "Jesús se aparece a sus discípulos", "desde": 36, "hasta": 49 },
+      { "titulo": "Ascensión de Jesús", "desde": 50, "hasta": 53 }
+    ]
+  },
+
+  "Juan": {
+    "1": [
+      { "titulo": "El Verbo se hace carne", "desde": 1, "hasta": 18 },
+      { "titulo": "Testimonio de Juan el Bautista", "desde": 19, "hasta": 34 },
+      { "titulo": "Los primeros discípulos", "desde": 35, "hasta": 51 }
+    ],
+    "2": [
+      { "titulo": "Boda en Caná", "desde": 1, "hasta": 12 },
+      { "titulo": "Purificación del templo", "desde": 13, "hasta": 25 }
+    ],
+    "3": [
+      { "titulo": "Nicodemo y el nuevo nacimiento", "desde": 1, "hasta": 21 },
+      { "titulo": "Testimonio de Juan el Bautista sobre Jesús", "desde": 22, "hasta": 36 }
+    ],
+    "4": [
+      { "titulo": "Jesús y la mujer samaritana", "desde": 1, "hasta": 26 },
+      { "titulo": "La mujer da testimonio", "desde": 27, "hasta": 42 },
+      { "titulo": "Jesús sana al hijo del funcionario", "desde": 43, "hasta": 54 }
+    ],
+    "5": [
+      { "titulo": "Jesús sana a un paralítico en Betesda", "desde": 1, "hasta": 15 },
+      { "titulo": "Jesús defiende su autoridad", "desde": 16, "hasta": 30 },
+      { "titulo": "Testimonio del Padre", "desde": 31, "hasta": 47 }
+    ],
+    "6": [
+      { "titulo": "Alimentación de los cinco mil", "desde": 1, "hasta": 15 },
+      { "titulo": "Jesús camina sobre el agua", "desde": 16, "hasta": 21 },
+      { "titulo": "Jesús, pan de vida", "desde": 22, "hasta": 71 }
+    ],
+    "7": [
+      { "titulo": "Jesús en la fiesta de los tabernáculos", "desde": 1, "hasta": 13 },
+      { "titulo": "Jesús enseña en el templo", "desde": 14, "hasta": 36 },
+      { "titulo": "Controversia sobre su identidad", "desde": 37, "hasta": 52 }
+    ],
+    "8": [
+      { "titulo": "La mujer sorprendida en adulterio", "desde": 1, "hasta": 11 },
+      { "titulo": "Jesús, luz del mundo", "desde": 12, "hasta": 30 },
+      { "titulo": "Testimonio de Abraham", "desde": 31, "hasta": 59 }
+    ],
+    "9": [
+      { "titulo": "Jesús sana al ciego de nacimiento", "desde": 1, "hasta": 41 }
+    ],
+    "10": [
+      { "titulo": "Jesús, buen pastor", "desde": 1, "hasta": 21 },
+      { "titulo": "Jesús y la división entre los judíos", "desde": 22, "hasta": 42 }
+    ],
+    "11": [
+      { "titulo": "La resurrección de Lázaro", "desde": 1, "hasta": 44 },
+      { "titulo": "La reacción de los fariseos", "desde": 45, "hasta": 57 }
+    ],
+    "12": [
+      { "titulo": "Jesús ungido en Betania", "desde": 1, "hasta": 8 },
+      { "titulo": "La entrada triunfal en Jerusalén", "desde": 9, "hasta": 19 },
+      { "titulo": "Jesús predice su muerte", "desde": 20, "hasta": 36 },
+      { "titulo": "La voz del Padre", "desde": 37, "hasta": 50 }
+    ],
+    "13": [
+      { "titulo": "Jesús lava los pies de los discípulos", "desde": 1, "hasta": 20 },
+      { "titulo": "Nuevo mandamiento: amaos los unos a los otros", "desde": 21, "hasta": 35 }
+    ],
+    "14": [
+      { "titulo": "Jesús, camino, verdad y vida", "desde": 1, "hasta": 14 },
+      { "titulo": "Promesa del Espíritu Santo", "desde": 15, "hasta": 31 }
+    ],
+    "15": [
+      { "titulo": "Parábolas de la oveja, la moneda y el hijo pródigo", "desde": 1, "hasta": 32 }
+    ],
+    "16": [
+      { "titulo": "La resurrección de Lázaro (recordatorio)", "desde": 1, "hasta": 33 } 
+    ],
+    "17": [
+      { "titulo": "Jesús enseña sobre la fe y el perdón", "desde": 1, "hasta": 10 },
+      { "titulo": "La venida del reino de Dios", "desde": 11, "hasta": 37 }
+    ],
+    "18": [
+      { "titulo": "Oración de la viuda persistente", "desde": 1, "hasta": 8 },
+      { "titulo": "El fariseo y el publicano", "desde": 9, "hasta": 14 },
+      { "titulo": "Jesús bendice a los niños", "desde": 15, "hasta": 17 },
+      { "titulo": "El joven rico", "desde": 18, "hasta": 30 },
+      { "titulo": "Jesús anuncia su muerte por cuarta vez", "desde": 31, "hasta": 34 },
+      { "titulo": "El ciego de Jericó", "desde": 35, "hasta": 43 }
+    ],
+    "19": [
+      { "titulo": "Zaqueo", "desde": 1, "hasta": 10 },
+      { "titulo": "Parábola de las minas", "desde": 11, "hasta": 27 },
+      { "titulo": "Entrada triunfal", "desde": 28, "hasta": 44 }
+    ],
+    "20": [
+      { "titulo": "Jesús cuestionado por su autoridad", "desde": 1, "hasta": 8 },
+      { "titulo": "Parábola de los labradores malvados", "desde": 9, "hasta": 19 },
+      { "titulo": "¿Es lícito pagar tributo a César?", "desde": 20, "hasta": 26 },
+      { "titulo": "Los saduceos y la resurrección", "desde": 27, "hasta": 40 },
+      { "titulo": "El gran mandamiento", "desde": 41, "hasta": 44 },
+      { "titulo": "Ayes contra los escribas", "desde": 45, "hasta": 47 }
+    ],
+    "21": [
+      { "titulo": "La ofrenda de la viuda", "desde": 1, "hasta": 4 },
+      { "titulo": "Profecías sobre el fin", "desde": 5, "hasta": 36 }
+    ]
+  },
+
+  "Hechos": {
+    "1": [
+      { "titulo": "Jesús resucitado con sus discípulos", "desde": 1, "hasta": 8 },
+      { "titulo": "Ascensión de Jesús", "desde": 9, "hasta": 11 },
+      { "titulo": "Elección de Matías", "desde": 12, "hasta": 26 }
+    ],
+    "2": [
+      { "titulo": "Pentecostés", "desde": 1, "hasta": 13 },
+      { "titulo": "Pedro predica a la multitud", "desde": 14, "hasta": 36 },
+      { "titulo": "Conversión de tres mil personas", "desde": 37, "hasta": 41 },
+      { "titulo": "La vida de la comunidad cristiana primitiva", "desde": 42, "hasta": 47 }
+    ],
+    "3": [
+      { "titulo": "Sanidad del cojo de nacimiento", "desde": 1, "hasta": 10 },
+      { "titulo": "Pedro predica en el templo", "desde": 11, "hasta": 26 }
+    ],
+    "4": [
+      { "titulo": "Pedro y Juan ante el concilio", "desde": 1, "hasta": 22 },
+      { "titulo": "Oración de los creyentes", "desde": 23, "hasta": 31 },
+      { "titulo": "La vida en común de los cristianos", "desde": 32, "hasta": 37 }
+    ],
+    "5": [
+      { "titulo": "Ananías y Safira", "desde": 1, "hasta": 11 },
+      { "titulo": "Muchas señales y prodigios", "desde": 12, "hasta": 16 },
+      { "titulo": "Aprehensión y liberación de los apóstoles", "desde": 17, "hasta": 42 }
+    ],
+    "6": [
+      { "titulo": "Elección de los siete diáconos", "desde": 1, "hasta": 7 },
+      { "titulo": "Esteban lleno de fe y poder", "desde": 8, "hasta": 15 }
+    ],
+    "7": [
+      { "titulo": "Discurso de Esteban", "desde": 1, "hasta": 53 },
+      { "titulo": "Martirio de Esteban", "desde": 54, "hasta": 60 }
+    ],
+    "8": [
+      { "titulo": "Persecución y dispersión de la iglesia", "desde": 1, "hasta": 4 },
+      { "titulo": "Felipe en Samaria", "desde": 5, "hasta": 25 },
+      { "titulo": "El eunuco etíope", "desde": 26, "hasta": 40 }
+    ],
+    "9": [
+      { "titulo": "Conversión de Saulo", "desde": 1, "hasta": 19 },
+      { "titulo": "Saulo predica en Damasco", "desde": 20, "hasta": 25 },
+      { "titulo": "Saulo con Pedro en Jerusalén", "desde": 26, "hasta": 31 },
+      { "titulo": "Poder de Pedro en Lida y Joppe", "desde": 32, "hasta": 43 }
+    ],
+    "10": [
+      { "titulo": "Cornelio y la visión de Pedro", "desde": 1, "hasta": 23 },
+      { "titulo": "El Espíritu Santo cae sobre los gentiles", "desde": 24, "hasta": 48 }
+    ],
+    "11": [
+      { "titulo": "Pedro defiende su acción ante los apóstoles", "desde": 1, "hasta": 18 },
+      { "titulo": "Antioquía: primeros discípulos llamados cristianos", "desde": 19, "hasta": 30 }
+    ],
+    "12": [
+      { "titulo": "Persecución de Herodes", "desde": 1, "hasta": 19 },
+      { "titulo": "Muerte de Herodes", "desde": 20, "hasta": 25 }
+    ],
+    "13": [
+      { "titulo": "Envío de Pablo y Bernabé", "desde": 1, "hasta": 12 },
+      { "titulo": "Predicación en Antioquía de Pisidia", "desde": 13, "hasta": 52 }
+    ],
+    "14": [
+      { "titulo": "Pablo y Bernabé en Iconio, Listra y Derbe", "desde": 1, "hasta": 28 }
+    ],
+    "15": [
+      { "titulo": "El concilio de Jerusalén", "desde": 1, "hasta": 35 },
+      { "titulo": "Carta a los gentiles", "desde": 36, "hasta": 41 }
+    ],
+    "16": [
+      { "titulo": "Timoteo se une a Pablo y Silas", "desde": 1, "hasta": 5 },
+      { "titulo": "Visión de la macedonia", "desde": 6, "hasta": 10 },
+      { "titulo": "Lidia y la cárcel de Filipos", "desde": 11, "hasta": 40 }
+    ],
+    "17": [
+      { "titulo": "Pablo en Tesalónica", "desde": 1, "hasta": 9 },
+      { "titulo": "Pablo en Berea", "desde": 10, "hasta": 15 },
+      { "titulo": "Pablo en Atenas", "desde": 16, "hasta": 34 }
+    ],
+    "18": [
+      { "titulo": "Pablo en Corinto", "desde": 1, "hasta": 17 },
+      { "titulo": "Pablo vuelve a Antioquía", "desde": 18, "hasta": 23 },
+      { "titulo": "Pablo en Éfeso", "desde": 24, "hasta": 28 }
+    ],
+    "19": [
+      { "titulo": "Pablo en Éfeso: bautismo y milagros", "desde": 1, "hasta": 20 },
+      { "titulo": "Revuelta de los artesanos", "desde": 21, "hasta": 41 }
+    ],
+    "20": [
+      { "titulo": "Pablo en Macedonia y Grecia", "desde": 1, "hasta": 6 },
+      { "titulo": "Concilio en Mileto", "desde": 7, "hasta": 38 }
+    ],
+    "21": [
+      { "titulo": "Pablo vuelve a Jerusalén", "desde": 1, "hasta": 14 },
+      { "titulo": "Arresto de Pablo", "desde": 15, "hasta": 40 }
+    ],
+    "22": [
+      { "titulo": "Defensa de Pablo ante la multitud", "desde": 1, "hasta": 30 }
+    ],
+    "23": [
+      { "titulo": "Pablo ante el concilio", "desde": 1, "hasta": 35 }
+    ],
+    "24": [
+      { "titulo": "Pablo ante Félix", "desde": 1, "hasta": 27 }
+    ],
+    "25": [
+      { "titulo": "Pablo ante Festo", "desde": 1, "hasta": 27 }
+    ],
+    "26": [
+      { "titulo": "Defensa de Pablo ante Agripa", "desde": 1, "hasta": 32 },
+      { "titulo": "Pablo testifica de su fe", "desde": 33, "hasta": 32 }
+    ],
+    "27": [
+      { "titulo": "Viaje a Roma y naufragio", "desde": 1, "hasta": 44 }
+    ],
+    "28": [
+      { "titulo": "Llegada a Roma y ministerio de Pablo", "desde": 1, "hasta": 31 }
+    ]
+  },
+
+  "Romanos": {
+    "1": [
+      { "titulo": "Saludo de Pablo a los creyentes en Roma", "desde": 1, "hasta": 7 },
+      { "titulo": "Acción de gracias y tema de la carta", "desde": 8, "hasta": 17 },
+      { "titulo": "La ira de Dios contra la impiedad", "desde": 18, "hasta": 32 }
+    ],
+    "2": [
+      { "titulo": "Juicio de Dios sobre la hipocresía", "desde": 1, "hasta": 16 },
+      { "titulo": "La ley y los que la cumplen", "desde": 17, "hasta": 29 }
+    ],
+    "3": [
+      { "titulo": "Todos pecaron", "desde": 1, "hasta": 20 },
+      { "titulo": "Justificación por la fe", "desde": 21, "hasta": 31 }
+    ],
+    "4": [
+      { "titulo": "Ejemplo de fe de Abraham", "desde": 1, "hasta": 25 }
+    ],
+    "5": [
+      { "titulo": "Justificación y paz con Dios", "desde": 1, "hasta": 11 },
+      { "titulo": "Adán y Cristo", "desde": 12, "hasta": 21 }
+    ],
+    "6": [
+      { "titulo": "Vivir en nueva vida", "desde": 1, "hasta": 14 },
+      { "titulo": "Obedecer a Dios", "desde": 15, "hasta": 23 }
+    ],
+    "7": [
+      { "titulo": "La lucha entre la carne y el espíritu", "desde": 1, "hasta": 25 }
+    ],
+    "8": [
+      { "titulo": "Vida en el Espíritu", "desde": 1, "hasta": 17 },
+      { "titulo": "Esperanza de la creación", "desde": 18, "hasta": 30 },
+      { "titulo": "Seguridad del amor de Dios", "desde": 31, "hasta": 39 }
+    ],
+    "9": [
+      { "titulo": "Soberanía de Dios", "desde": 1, "hasta": 29 }
+    ],
+    "10": [
+      { "titulo": "La salvación por la fe", "desde": 1, "hasta": 21 }
+    ],
+    "11": [
+      { "titulo": "Israel y la misericordia de Dios", "desde": 1, "hasta": 36 }
+    ],
+    "12": [
+      { "titulo": "Exhortaciones prácticas para la vida cristiana", "desde": 1, "hasta": 21 }
+    ],
+    "13": [
+      { "titulo": "Obediencia a las autoridades", "desde": 1, "hasta": 14 }
+    ],
+    "14": [
+      { "titulo": "Respeto a las diferencias en la fe", "desde": 1, "hasta": 23 }
+    ],
+    "15": [
+      { "titulo": "Unidad y ejemplo de Cristo", "desde": 1, "hasta": 33 }
+    ],
+    "16": [
+      { "titulo": "Saludos finales y advertencias", "desde": 1, "hasta": 27 }
+    ]
+  },
+
+  "1 Corintios": {
+    "1": [
+      { "titulo": "Saludo e introducción", "desde": 1, "hasta": 9 },
+      { "titulo": "Divisiones en la iglesia", "desde": 10, "hasta": 17 },
+      { "titulo": "Sabiduría de Dios", "desde": 18, "hasta": 31 }
+    ],
+    "2": [
+      { "titulo": "La sabiduría de Dios revelada por el Espíritu", "desde": 1, "hasta": 16 }
+    ],
+    "3": [
+      { "titulo": "La iglesia como templo de Dios", "desde": 1, "hasta": 23 }
+    ],
+    "4": [
+      { "titulo": "Los ministros de Cristo", "desde": 1, "hasta": 21 }
+    ],
+    "5": [
+      { "titulo": "Inmoralidad en la iglesia", "desde": 1, "hasta": 13 }
+    ],
+    "6": [
+      { "titulo": "Demandas entre creyentes y moralidad sexual", "desde": 1, "hasta": 20 }
+    ],
+    "7": [
+      { "titulo": "Instrucciones sobre el matrimonio", "desde": 1, "hasta": 40 }
+    ],
+    "8": [
+      { "titulo": "Comida sacrificada a los ídolos", "desde": 1, "hasta": 13 }
+    ],
+    "9": [
+      { "titulo": "Libertad y derechos del apóstol", "desde": 1, "hasta": 27 }
+    ],
+    "10": [
+      { "titulo": "Advertencia por los ejemplos del pasado", "desde": 1, "hasta": 33 }
+    ],
+    "11": [
+      { "titulo": "Adoración en la iglesia", "desde": 1, "hasta": 34 }
+    ],
+    "12": [
+      { "titulo": "Dones del Espíritu", "desde": 1, "hasta": 31 }
+    ],
+    "13": [
+      { "titulo": "El amor, más que los dones", "desde": 1, "hasta": 13 }
+    ],
+    "14": [
+      { "titulo": "Orden en la adoración", "desde": 1, "hasta": 40 }
+    ],
+    "15": [
+      { "titulo": "La resurrección de los muertos", "desde": 1, "hasta": 58 }
+    ],
+    "16": [
+      { "titulo": "Saludos finales", "desde": 1, "hasta": 24 }
+    ]
+  },
+
+  "2 Corintios": {
+    "1": [
+      { "titulo": "Consuelo de Dios y motivación de Pablo", "desde": 1, "hasta": 11 }
+    ],
+    "2": [
+      { "titulo": "Restauración del creyente arrepentido", "desde": 1, "hasta": 17 }
+    ],
+    "3": [
+      { "titulo": "Ministros del nuevo pacto", "desde": 1, "hasta": 18 }
+    ],
+    "4": [
+      { "titulo": "Tesoro en vasijas de barro", "desde": 1, "hasta": 18 }
+    ],
+    "5": [
+      { "titulo": "La reconciliación en Cristo", "desde": 1, "hasta": 21 }
+    ],
+    "6": [
+      { "titulo": "Exhortación a la reconciliación y separación del mundo", "desde": 1, "hasta": 18 }
+    ],
+    "7": [
+      { "titulo": "Gozo por el arrepentimiento", "desde": 1, "hasta": 16 }
+    ],
+    "8": [
+      { "titulo": "Generosidad de la iglesia en Macedonia", "desde": 1, "hasta": 24 }
+    ],
+    "9": [
+      { "titulo": "Principio de la siembra y la cosecha", "desde": 1, "hasta": 15 }
+    ],
+    "10": [
+      { "titulo": "La autoridad de Pablo", "desde": 1, "hasta": 18 }
+    ],
+    "11": [
+      { "titulo": "Advertencias sobre falsos apóstoles", "desde": 1, "hasta": 33 }
+    ],
+    "12": [
+      { "titulo": "La protección de Dios sobre Pablo", "desde": 1, "hasta": 13 },
+      { "titulo": "La liberación de Pedro de la cárcel", "desde": 14, "hasta": 19 }
+    ],
+    "13": [
+      { "titulo": "Exhortaciones finales", "desde": 1, "hasta": 14 }
+    ]
+  },
+
+  "Gálatas": {
+    "1": [
+      { "titulo": "Saludo y defensa del evangelio", "desde": 1, "hasta": 24 }
+    ],
+    "2": [
+      { "titulo": "Pablo defiende su ministerio", "desde": 1, "hasta": 21 }
+    ],
+    "3": [
+      { "titulo": "Justificación por la fe", "desde": 1, "hasta": 29 }
+    ],
+    "4": [
+      { "titulo": "Hijos de Dios por la fe", "desde": 1, "hasta": 31 }
+    ],
+    "5": [
+      { "titulo": "Libertad en Cristo y vida en el Espíritu", "desde": 1, "hasta": 26 }
+    ],
+    "6": [
+      { "titulo": "Exhortación final y siembra espiritual", "desde": 1, "hasta": 18 }
+    ]
+  },
+
+  "Efesios": {
+    "1": [
+      { "titulo": "Saludo y bendición espiritual", "desde": 1, "hasta": 14 },
+      { "titulo": "Acción de gracias y oración", "desde": 15, "hasta": 23 }
+    ],
+    "2": [
+      { "titulo": "De la muerte a la vida en Cristo", "desde": 1, "hasta": 10 },
+      { "titulo": "Unidad en Cristo", "desde": 11, "hasta": 22 }
+    ],
+    "3": [
+      { "titulo": "El misterio de Cristo revelado", "desde": 1, "hasta": 13 },
+      { "titulo": "Oración por fortaleza espiritual", "desde": 14, "hasta": 21 }
+    ],
+    "4": [
+      { "titulo": "Unidad y madurez en la iglesia", "desde": 1, "hasta": 16 },
+      { "titulo": "Vida nueva en Cristo", "desde": 17, "hasta": 32 }
+    ],
+    "5": [
+      { "titulo": "Caminar como hijos de luz", "desde": 1, "hasta": 20 },
+      { "titulo": "Relaciones entre esposos y esposas", "desde": 21, "hasta": 33 }
+    ],
+    "6": [
+      { "titulo": "Relaciones familiares y laborales", "desde": 1, "hasta": 9 },
+      { "titulo": "La armadura de Dios", "desde": 10, "hasta": 24 }
+    ]
+  },
+
+  "Filipenses": {
+    "1": [
+      { "titulo": "Saludo y acción de gracias", "desde": 1, "hasta": 11 },
+      { "titulo": "El progreso del evangelio y gozo de Pablo", "desde": 12, "hasta": 26 },
+      { "titulo": "Vivir para Cristo", "desde": 27, "hasta": 30 }
+    ],
+    "2": [
+      { "titulo": "Unidad y humildad en Cristo", "desde": 1, "hasta": 11 },
+      { "titulo": "Hacer brillar a Cristo en la vida", "desde": 12, "hasta": 18 },
+      { "titulo": "Timoteo y Epafrodito", "desde": 19, "hasta": 30 }
+    ],
+    "3": [
+      { "titulo": "La verdadera meta: conocer a Cristo", "desde": 1, "hasta": 21 }
+    ],
+    "4": [
+      { "titulo": "Exhortaciones finales y agradecimientos", "desde": 1, "hasta": 23 }
+    ]
+  },
+
+  "Colosenses": {
+    "1": [
+      { "titulo": "Saludo y acción de gracias", "desde": 1, "hasta": 14 },
+      { "titulo": "Supremacía de Cristo", "desde": 15, "hasta": 23 },
+      { "titulo": "Oración por los creyentes", "desde": 24, "hasta": 29 }
+    ],
+    "2": [
+      { "titulo": "Advertencia contra engaños", "desde": 1, "hasta": 23 }
+    ],
+    "3": [
+      { "titulo": "Vivir en Cristo", "desde": 1, "hasta": 17 },
+      { "titulo": "Relaciones familiares y laborales", "desde": 18, "hasta": 25 }
+    ],
+    "4": [
+      { "titulo": "Exhortaciones finales y saludos", "desde": 1, "hasta": 18 }
+    ]
+  },
+
+  "1 Tesalonicenses": {
+    "1": [
+      { "titulo": "Saludo y acción de gracias", "desde": 1, "hasta": 10 }
+    ],
+    "2": [
+      { "titulo": "El ministerio de Pablo entre ellos", "desde": 1, "hasta": 16 },
+      { "titulo": "Amor de Pablo por ellos", "desde": 17, "hasta": 20 }
+    ],
+    "3": [
+      { "titulo": "El cuidado de Pablo por ellos", "desde": 1, "hasta": 13 }
+    ],
+    "4": [
+      { "titulo": "Vida santa y amor fraternal", "desde": 1, "hasta": 12 },
+      { "titulo": "La venida del Señor", "desde": 13, "hasta": 18 }
+    ],
+    "5": [
+      { "titulo": "Vivir como hijos de la luz", "desde": 1, "hasta": 11 },
+      { "titulo": "Admoniciones finales", "desde": 12, "hasta": 28 }
+    ]
+  },
+
+  "2 Tesalonicenses": {
+    "1": [
+      { "titulo": "Alabanza por la fe y paciencia", "desde": 1, "hasta": 12 }
+    ],
+    "2": [
+      { "titulo": "La venida del Señor y la apostasía", "desde": 1, "hasta": 17 }
+    ],
+    "3": [
+      { "titulo": "Exhortaciones finales", "desde": 1, "hasta": 18 }
+    ]
+  },
+
+  "1 Timoteo": {
+    "1": [
+      { "titulo": "Saludo y propósito de la carta", "desde": 1, "hasta": 20 }
+    ],
+    "2": [
+      { "titulo": "Oración por todos y la mujer en la adoración", "desde": 1, "hasta": 15 }
+    ],
+    "3": [
+      { "titulo": "Requisitos para obispos y diáconos", "desde": 1, "hasta": 16 }
+    ],
+    "4": [
+      { "titulo": "Advertencia contra falsos maestros", "desde": 1, "hasta": 16 },
+      { "titulo": "Ejemplo de piedad en la vida y el ministerio", "desde": 17, "hasta": 16 }
+    ],
+    "5": [
+      { "titulo": "Cuidado de los ancianos y viudas", "desde": 1, "hasta": 25 }
+    ],
+    "6": [
+      { "titulo": "Instrucciones a los siervos y lucha espiritual", "desde": 1, "hasta": 21 }
+    ]
+  },
+
+  "2 Timoteo": {
+    "1": [
+      { "titulo": "Ánimo a Timoteo", "desde": 1, "hasta": 18 }
+    ],
+    "2": [
+      { "titulo": "Exhortaciones al ministerio fiel", "desde": 1, "hasta": 26 }
+    ],
+    "3": [
+      { "titulo": "Advertencia sobre los tiempos difíciles", "desde": 1, "hasta": 17 },
+      { "titulo": "Permanecer en la Palabra de Dios", "desde": 18, "hasta": 17 }
+    ],
+    "4": [
+      { "titulo": "Predica la palabra y persevera", "desde": 1, "hasta": 22 }
+    ]
+  },
+
+  "Tito": {
+    "1": [
+      { "titulo": "Saludo y requisitos de los líderes", "desde": 1, "hasta": 16 }
+    ],
+    "2": [
+      { "titulo": "Instrucciones para vida piadosa", "desde": 1, "hasta": 15 }
+    ],
+    "3": [
+      { "titulo": "Obras buenas y obediencia a las autoridades", "desde": 1, "hasta": 15 }
+    ]
+  },
+
+  "Filemón": {
+    "1": [
+      { "titulo": "Petición por Onésimo", "desde": 1, "hasta": 25 }
+    ]
+  },
+
+  "Hebreos": {
+    "1": [
+      { "titulo": "La supremacía de Cristo", "desde": 1, "hasta": 14 }
+    ],
+    "2": [
+      { "titulo": "Advertencia contra la incredulidad", "desde": 1, "hasta": 18 }
+    ],
+    "3": [
+      { "titulo": "Advertencia por la incredulidad de Israel", "desde": 1, "hasta": 19 }
+    ],
+    "4": [
+      { "titulo": "El descanso de Dios y exhortación a la fe", "desde": 1, "hasta": 16 }
+    ],
+    "5": [
+      { "titulo": "Cristo sumo sacerdote", "desde": 1, "hasta": 10 }
+    ],
+    "6": [
+      { "titulo": "Exhortación a la diligencia y esperanza", "desde": 1, "hasta": 20 }
+    ],
+    "7": [
+      { "titulo": "El sacerdocio de Melquisedec", "desde": 1, "hasta": 28 }
+    ],
+    "8": [
+      { "titulo": "El nuevo pacto", "desde": 1, "hasta": 13 }
+    ],
+    "9": [
+      { "titulo": "El ministerio del tabernáculo y la sangre de Cristo", "desde": 1, "hasta": 28 }
+    ],
+    "10": [
+      { "titulo": "Cristo: sacrificio perfecto", "desde": 1, "hasta": 39 }
+    ],
+    "11": [
+      { "titulo": "Capítulo de la fe", "desde": 1, "hasta": 40 }
+    ],
+    "12": [
+      { "titulo": "Exhortación a la perseverancia", "desde": 1, "hasta": 29 }
+    ],
+    "13": [
+      { "titulo": "Exhortaciones finales", "desde": 1, "hasta": 25 }
+    ]
+  },
+
+  "Santiago": {
+    "1": [
+      { "titulo": "Pruebas y tentaciones", "desde": 1, "hasta": 18 }
+    ],
+    "2": [
+      { "titulo": "Fe y obras", "desde": 1, "hasta": 26 }
+    ],
+    "3": [
+      { "titulo": "Control de la lengua y sabiduría divina", "desde": 1, "hasta": 18 }
+    ],
+    "4": [
+      { "titulo": "Llamado a la humildad", "desde": 1, "hasta": 17 }
+    ],
+    "5": [
+      { "titulo": "Paciencia y oración", "desde": 1, "hasta": 20 }
+    ]
+  },
+
+  "1_Pedro": {
+    "1": [
+      { "titulo": "Exhortación a la santidad y esperanza", "desde": 1, "hasta": 25 }
+    ],
+    "2": [
+      { "titulo": "Piedra viva y pueblo elegido", "desde": 1, "hasta": 25 }
+    ],
+    "3": [
+      { "titulo": "Sumisión y sufrimiento por Cristo", "desde": 1, "hasta": 22 }
+    ],
+    "4": [
+      { "titulo": "Sufrimiento por ser cristiano", "desde": 1, "hasta": 19 }
+    ],
+    "5": [
+      { "titulo": "Exhortación a los ancianos y juventud", "desde": 1, "hasta": 14 }
+    ]
+  },
+
+  "2 Pedro": {
+    "1": [
+      { "titulo": "Llamado a la vida santa", "desde": 1, "hasta": 21 }
+    ],
+    "2": [
+      { "titulo": "Advertencia contra falsos maestros", "desde": 1, "hasta": 22 }
+    ],
+    "3": [
+      { "titulo": "La paciencia de Dios y la venida del Señor", "desde": 1, "hasta": 18 }
+    ]
+  },
+
+  "1 Juan": {
+    "1": [
+      { "titulo": "Palabra de vida y comunión con Dios", "desde": 1, "hasta": 10 }
+    ],
+    "2": [
+      { "titulo": "Caminar en la luz y obediencia", "desde": 1, "hasta": 29 }
+    ],
+    "3": [
+      { "titulo": "Amor y justicia", "desde": 1, "hasta": 24 }
+    ],
+    "4": [
+      { "titulo": "Amar a Dios y a los hermanos", "desde": 1, "hasta": 21 }
+    ],
+    "5": [
+      { "titulo": "Victoria en Cristo", "desde": 1, "hasta": 21 }
+    ]
+  },
+
+  "2 Juan": {
+    "1": [
+      { "titulo": "Caminar en la verdad y amor", "desde": 1, "hasta": 13 }
+    ]
+  },
+
+  "3 Juan": {
+    "1": [
+      { "titulo": "Exhortaciones a la hospitalidad y verdad", "desde": 1, "hasta": 14 }
+    ]
+  },
+
+  "Judas": {
+    "1": [
+      { "titulo": "Advertencia contra falsos maestros", "desde": 1, "hasta": 25 }
+    ]
+  },
+
+  "Apocalipsis": {
+    "1": [
+      { "titulo": "Visión de Cristo glorioso", "desde": 1, "hasta": 20 }
+    ],
+    "2": [
+      { "titulo": "Cartas a las iglesias de Asia", "desde": 1, "hasta": 29 }
+    ],
+    "3": [
+      { "titulo": "Continuación de las cartas a las iglesias", "desde": 1, "hasta": 22 }
+    ],
+    "4": [
+      { "titulo": "Visión del trono de Dios", "desde": 1, "hasta": 11 }
+    ],
+    "5": [
+      { "titulo": "El libro y el Cordero", "desde": 1, "hasta": 14 }
+    ],
+    "6": [
+      { "titulo": "Los sellos del libro", "desde": 1, "hasta": 17 }
+    ],
+    "7": [
+      { "titulo": "Los 144.000 y la gran multitud", "desde": 1, "hasta": 17 }
+    ],
+    "8": [
+      { "titulo": "Los siete ángeles con las trompetas", "desde": 1, "hasta": 13 }
+    ],
+    "9": [
+      { "titulo": "La quinta y sexta trompeta", "desde": 1, "hasta": 21 }
+    ],
+    "10": [
+      { "titulo": "El ángel y el librito", "desde": 1, "hasta": 11 }
+    ],
+    "11": [
+      { "titulo": "Medición del templo y los dos testigos", "desde": 1, "hasta": 19 }
+    ],
+    "12": [
+      { "titulo": "La mujer y el dragón", "desde": 1, "hasta": 17 }
+    ],
+    "13": [
+      { "titulo": "La bestia del mar y el mensaje a la iglesia", "desde": 1, "hasta": 18 }
+    ],
+    "14": [
+      { "titulo": "El Cordero y los 144.000", "desde": 1, "hasta": 20 }
+    ],
+    "15": [
+      { "titulo": "Los siete ángeles con las siete plagas", "desde": 1, "hasta": 8 }
+    ],
+    "16": [
+      { "titulo": "La copa de la ira de Dios", "desde": 1, "hasta": 21 }
+    ],
+    "17": [
+      { "titulo": "La caída de Babilonia", "desde": 1, "hasta": 18 }
+    ],
+    "18": [
+      { "titulo": "El lamento por Babilonia", "desde": 1, "hasta": 24 }
+    ],
+    "19": [
+      { "titulo": "Cantando alabanzas en el cielo", "desde": 1, "hasta": 10 }
+    ],
+    "20": [
+      { "titulo": "El juicio final y victoria de Dios", "desde": 1, "hasta": 15 }
+    ],
+    "21": [
+      { "titulo": "Nueva Jerusalén y el fin de las cosas", "desde": 1, "hasta": 27 }
+    ],
+    "22": [
+      { "titulo": "Alabanza final", "desde": 1, "hasta": 21 }
+    ]
+  }
+}

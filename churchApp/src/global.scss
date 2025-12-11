@@ -156,6 +156,7 @@ body.light-theme {
 
 .bibleText {
     font-family: "NotoSerif", sans-serif;
+    line-height: 28px;
 }
 
 
@@ -178,7 +179,53 @@ body.light-theme {
 
 .markdown-content pre,
 .markdown-content code {
-    white-space: pre-wrap; 
+    white-space: pre-wrap;
     word-wrap: break-word;
-    overflow-x: auto; 
+    overflow-x: auto;
+}
+
+.sectionTitle {
+    font-style: italic;
+    color: lightgray;
+}
+.verseNumber {
+    font-size: small;
+    color: var(--ion-color-medium);
+}
+
+.underlineVerse {
+    text-decoration: underline var(--ion-color-primary);
+}
+
+.markTerm {
+    background-color: var(--ion-color-warning);
+}
+
+.topScroller {
+    z-index: 999;
+    position: fixed;
+    max-width: 45px;
+    bottom: 80px;
+    right: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+    }
+
+    ion-icon {
+        font-size: 45px;
+    }
+}
+
+.ios #audio-player {
+    margin-bottom: -18px !important;
 }

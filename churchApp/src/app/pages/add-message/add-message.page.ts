@@ -370,7 +370,7 @@ export class AddMessagePage implements OnInit {
     }
 
     verses.forEach((verse) => {
-      if (this.core.verseExists(verse)) {
+      if (this.core.bible.verseExists(verse)) {
         // console.log("Correct: " + verse);
         this.verses.set(this.newVerseId, verse);
         this.newVerseId++;

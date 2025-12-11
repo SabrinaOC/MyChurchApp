@@ -12,11 +12,14 @@
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-header>
-      <!-- <h3>{{ msgSelected.book.name }}</h3> -->
-      <div style="display: flex; justify-content: flex-start; flex-wrap: wrap;">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; cursor: pointer;">
         <ion-badge class="badge-verse">
           <span class="ion-padding-start ion-padding-end">{{msgSelected.book.name}}</span>
         </ion-badge>
+
+        @if (core.isAuthUser) {
+          <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(msgSelected, $event)"></ion-icon>
+        }
       </div>
 
       <ion-card-title color="dark" class="boldText">{{ msgSelected.title }}</ion-card-title> 
@@ -39,7 +42,7 @@
             @if (isLoading) {
               <ion-spinner slot="icon-only" name="lines-small" style="color: white;"></ion-spinner>
             } @else {
-              <ion-icon slot="icon-only" [name]="isPlaying && core.audio.selectedMessage === msgSelected ? 'pause' : 'play'">
+              <ion-icon slot="icon-only" [name]="isPlaying && core.audio.selectedMessage?.id === msgSelected.id ? 'pause' : 'play'">
               </ion-icon>
             }
           </ion-button>
@@ -71,7 +74,8 @@
       
       @if (verses && verses.length) {
         <h2 class="boldText">Versículos:</h2>
-        <div style="display: flex; justify-content: flex-start; flex-wrap: wrap; margin-top: 15px;">
+
+        <div id="versesLayout">
           @for (verse of verses; track $index) {
             <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
               <span>{{verse}}</span>

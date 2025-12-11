@@ -20,17 +20,21 @@ ion-card {
     right: 0;
     margin: auto;
     border-radius: 20px;
-}
+    margin-bottom: 5px;
 
-#msg-detail-div {
-    display: flex; justify-content: flex-end; padding-top: 7px;
-    color: white;
+    padding-bottom: var(--ion-safe-area-bottom);
+    // padding-bottom: env(safe-area-inset-bottom)
 }
 
 @media (width < 550px) {
     #audio-player {
         width: 100%;
     }
+}
+
+#msg-detail-div {
+    display: flex; justify-content: flex-end; padding-top: 7px;
+    color: white;
 }
 
 

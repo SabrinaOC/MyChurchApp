@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AlertController, LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
-import jsonBible from '../../assets/bible.json';
+import { AlertController, AnimationController, LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
 import { ApiService } from './api.service';
 import { Book, MessageType, Speaker } from './api/models';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AudioService } from './audio.service';
+import { BibleService } from './bible.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +15,22 @@ export class CoreProvider {
   messageTypeList: MessageType[] = [];
   speakerList: Speaker[] = [];
   bookList: Book[] = [];
-  private bibleRVR1960: any;
+
+  isAuthUser: boolean = false;
 
   constructor(
-    private http: HttpClient,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
     public popoverCtrl: PopoverController,
     public api: ApiService,
     public audio: AudioService,
+    public bible: BibleService,
     public router: Router,
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController
-  ) {
-    this.loadBibleRVR1960()
-  }
+    public alertCtrl: AlertController,
+    public animationCtrl: AnimationController
+  ) { }
 
   public detectPrefersTheme() {
     let currentTheme: string | null = localStorage.getItem("theme");
@@ -53,6 +52,22 @@ export class CoreProvider {
         } else {
           this.setLightTheme();
         }
+        break;
+    }
+  }
+
+  public detectPrefersShowBibleTitles() {
+    let prefersBibleTitles: string | null = localStorage.getItem("bibleTitles")
+
+    switch (prefersBibleTitles) {
+      case 'true':
+        this.bible.showBibleTittles = true;
+        break;
+      case 'false':
+        this.bible.showBibleTittles = false;
+        break;
+      case null:
+        this.bible.showBibleTittles = true;
         break;
     }
   }
@@ -79,125 +94,16 @@ export class CoreProvider {
     }
   }
 
-  public getAllBibleBooks(): string[] {
-    let books: string[] = Object.keys(jsonBible['Antiguo Testamento']).concat(Object.keys(jsonBible['Nuevo Testamento']))
-
-    return books;
+  public toggleBibleTitles() {
+    this.bible.showBibleTittles = !this.bible.showBibleTittles;
+    localStorage.setItem("bibleTitles", this.bible.showBibleTittles + "");
   }
-
-  public getChapterCount(bookName: string): number | null {
-    for (const testament of Object.values(jsonBible)) {
-      if (bookName in testament) {
-        const chapters = Object.keys((testament as any)[bookName]);
-        return chapters.length;
-      }
-    }
-    return null; // Not found book
-  }
-
-  public getVerses(bookName: string, chapter: number): number | null {
-    for (const testament of Object.values(jsonBible)) {
-      if (bookName in testament) {
-        const book = (testament as any)[bookName];
-        const verses = book[chapter];
-        return verses ?? null;
-      }
-    }
-    return null; // Book or chapter not found
-  }
-
-  public verseExists(ref: string): boolean {
-    const match = ref.trim().match(/^([\w\sáéíóúÁÉÍÓÚñÑ]+)\s+(\d+):(\d+)(?:-(\d+))?$/);
-  
-    if (!match) return false;
-  
-    const [, book, chapterStr, startVerseStr, endVerseStr] = match;
-    const chapter = parseInt(chapterStr, 10);
-    const startVerse = parseInt(startVerseStr, 10);
-    const endVerse = endVerseStr ? parseInt(endVerseStr, 10) : startVerse;
-  
-    for (const testament of Object.values(jsonBible)) {
-      if (book in testament) {
-        const bookData = (testament as any)[book];
-        const totalVerses = bookData[chapter];
-  
-        return (
-          totalVerses !== undefined &&
-          startVerse >= 1 &&
-          endVerse >= startVerse &&
-          endVerse <= totalVerses
-        );
-      }
-    }
-  
-    return false;
-  }
-
-  private loadBibleRVR1960() {
-    this.http.get('../../assets/RVR1960 - Spanish.json').subscribe(data => {
-      console.log("Loaded Bible RVR1960");
-      this.bibleRVR1960 = data;
-    });
-  }
-
-public getBibleText(verseReference: string): string {
-  if (!this.bibleRVR1960) return 'The Bible is not loaded yet';
-
-  //Declare Regular Expresions
-  const versRegex: RegExp = /^([\dA-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+)\s+(\d+):(\d+)(?:-(\d+))?$/;
-  const capRegex: RegExp = /^([\dA-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+)\s+(\d+)$/;
-
-  let book = ''; //Deserved book
-  let chapter = ''; //Deserved chapter
-  let fromVerse = 0; //First verse
-  let toVerse = 0; //Last verse
-
-  let match: RegExpMatchArray | null;
-
-  //Check if the verses requested are are the whole chapter or an interval
-  if (match = verseReference.match(versRegex)) { //Verses
-    //Split elements by match
-    book = match[1];
-    chapter = match[2];
-    fromVerse = parseInt(match[3]);
-    toVerse = match[4] ? parseInt(match[4]) : fromVerse;
-
-  } else if (match = verseReference.match(capRegex)) { //Chapter
-    //Split elements by match
-    book = match[1];
-    chapter = match[2];
-    fromVerse = 1;
-
-    const verses = this.bibleRVR1960[book.trim()]?.[chapter];
-    if (!verses) return `Not found ${book} ${chapter}`;
-
-    toVerse = Math.max(...Object.keys(verses).map(Number));
-
-  } else {
-    return 'Invalid reference';
-  }
-
-  const bookName = book.trim();
-  const cap = this.bibleRVR1960[bookName]?.[chapter]; //Place chapter from Bible
-  if (!cap) return `Not found ${bookName} ${chapter}`;
-
-  let result = '';
-  //Fetch verses from Book and Chapter
-  for (let i = fromVerse; i <= toVerse; i++) { 
-    const texto = cap[i.toString()];
-    if (texto) {
-      result += `[${i}] ${texto}\n`;
-    }
-  }
-
-  return result.trim();
-}
 
   normalizeText(text: string): string {
     let normalized: string = ''
     if(text) {
-      let formTitle = text.toLowerCase()
-      normalized = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+      let formTitle = text.toLowerCase().normalize("NFD");
+      normalized = formTitle.replace(/[\u0300-\u036f]/g, "");;
     }
     return normalized;
   }
@@ -243,4 +149,33 @@ public getBibleText(verseReference: string): string {
       alert.present();
     });
   }
+
+
+    enterShowVersesAnimation = (baseEl: HTMLElement) => {
+      const root = baseEl.shadowRoot;
+  
+      const backdropAnimation = this.animationCtrl
+        .create()
+        .addElement(root!.querySelector('ion-backdrop')!)
+        .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+  
+      const wrapperAnimation = this.animationCtrl
+        .create()
+        .addElement(root!.querySelector('.modal-wrapper')!)
+        .keyframes([
+          { offset: 0, opacity: '0', transform: 'scale(0)' },
+          { offset: 1, opacity: '0.99', transform: 'scale(1)' },
+        ]);
+  
+      return this.animationCtrl
+        .create()
+        .addElement(baseEl)
+        .easing('ease-out')
+        .duration(500)
+        .addAnimation([backdropAnimation, wrapperAnimation]);
+    };
+  
+    leaveShowVersesAnimation = (baseEl: HTMLElement) => {
+      return this.enterShowVersesAnimation(baseEl).direction('reverse');
+    };
 }

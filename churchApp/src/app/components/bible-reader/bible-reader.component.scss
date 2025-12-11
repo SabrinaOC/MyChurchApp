@@ -1,0 +1,17 @@
+#text {
+    margin: 20px;
+    user-select: text;
+
+    &::selection {
+        background-color: var(--ion-color-primary);
+    }
+}
+
+
+#bibleInfo {
+    text-align: center;
+    color: rgb(155, 155, 155);
+    font-size: 12px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}

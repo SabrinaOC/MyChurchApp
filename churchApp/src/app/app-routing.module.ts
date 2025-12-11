@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'message-detail',
     loadChildren: () => import('./pages/message-detail/message-detail.module').then( m => m.MessageDetailPageModule)
+  },  {
+    path: 'bible-reference',
+    loadChildren: () => import('./pages/bible-reference/bible-reference.module').then( m => m.BibleReferencePageModule)
   }
+
 
 ];
 

@@ -24,13 +24,17 @@ export class AppComponent {
       ionicIcon: 'lock-closed-outline',
     },
     {
+      title: 'Concordancias',
+      url: '/bible-reference',
+      ionicIcon: '../assets/icons/book-search.png', //src\assets\icons\book-search.png
+    },
+    {
       title: 'Configuración',
       url: '/settings',
       ionicIcon: 'settings-outline',
     },
   ];
 
-  isAuthorized!: boolean;
   version!: string;
 
   constructor(private platform: Platform,
@@ -61,12 +65,13 @@ export class AppComponent {
     this.initialize();
 
     this.core.detectPrefersTheme();
+    this.core.detectPrefersShowBibleTitles();
 
     App.getInfo().then(res => {
       this.version = res.version
     })
 
-    this.isAuthorized = localStorage.getItem('USER_CREDENTIALS') ? true : false;
+    this.core.isAuthUser = localStorage.getItem('USER_CREDENTIALS') ? true : false;
   }
 
   initialize() {
