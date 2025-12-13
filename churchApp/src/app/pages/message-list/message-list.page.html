@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-toggle>
         <ion-img src="../assets/icon/favicon.png" style="width: 35px; margin-left: 10px;"></ion-img>
       </ion-menu-toggle>
@@ -29,19 +29,36 @@
 
   <!-- filtros -->
   <div class="divFiltros">
-    <div style="padding-left: 8px; font-size: small; margin-top: 7px; display: flex; justify-content: space-around; margin-bottom: 7px; color: white;">
+    <!-- <div style="padding-left: 8px; font-size: small; margin-top: 7px; display: flex; justify-content: space-around; margin-bottom: 7px; color: white;">
         <ion-radio-group [value]="rbSelected" class="custom-radio-button-group" (ionFocus)="rbSelection($event)">
           <ion-radio value="listened" labelPlacement="end">Escuchadas</ion-radio><br>
           <ion-radio value="pending" labelPlacement="end">Pendientes</ion-radio><br>
           <ion-radio value="all" labelPlacement="end">Todas</ion-radio><br>
         </ion-radio-group>
-    </div>
-    <div class="filtros">
-      <div class="action" style="color: white;" (click)="showFilterModal($event)">
-        <span>Filtros</span>
-        <ion-icon name="options-outline" size="large"></ion-icon>
+      </div> -->
+      <div class="contenedorFiltros">
+        <div class="pills">
+          <!-- contenedor del pill para poder subrayar borde inferior cuando esta selected -->
+          <div [ngClass]="{'borderSelected': rbSelected === 'all'}">
+            <div class="btnFiltros" [ngClass]="{'btnFiltroSelected': rbSelected === 'all', 'btnFiltroNoSelected': rbSelected !== 'all'}" button (click)="rbSelection('all')">Todas</div>
+          </div>
+
+          <div [ngClass]="{'borderSelected': rbSelected === 'pending'}">
+            <div class="btnFiltros" [ngClass]="{'btnFiltroSelected': rbSelected === 'pending', 'btnFiltroNoSelected': rbSelected !== 'pending'}" button (click)="rbSelection('pending')">Pendientes</div>
+          </div>
+
+          <div [ngClass]="{'borderSelected': rbSelected === 'listened'}">
+            <div class="btnFiltros" [ngClass]="{'btnFiltroSelected': rbSelected === 'listened', 'btnFiltroNoSelected': rbSelected !== 'listened'}" button (click)="rbSelection('listened')">Escuchadas</div>
+          </div>
+        </div>
+
+        <div class="filtros">
+          <div class="action" style="color: white;" (click)="showFilterModal($event)">
+            <!-- <span>Filtros</span> -->
+            <ion-icon name="options-outline" size="medium"></ion-icon>
+          </div>
+        </div>
       </div>
-    </div>
   </div>
   <!-- fin filtros  -->
 

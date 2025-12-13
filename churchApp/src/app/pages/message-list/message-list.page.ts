@@ -250,8 +250,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  rbSelection(event: any) {
-    this.rbSelected = event.target.value
+  rbSelection(selection: string) {
+    this.rbSelected = selection;
 
     this.updateListRdBtn()
   }

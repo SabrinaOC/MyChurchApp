@@ -12,6 +12,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  padding-inline: 6px;
 }
 
 .filtros {
@@ -24,7 +25,49 @@
     align-items: center;
     gap: 10px;
   }
+
 }
+
+.contenedorFiltros {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #323C48;
+  .pills {
+    display: flex;
+    padding-left: 8px;
+    margin-top: 7px;
+    color: white;
+    gap: 8px;
+    .borderSelected {
+      border-bottom: 2px solid var(--ion-color-primary);
+      padding-bottom: 8px;
+    }
+  }
+  .btnFiltros {
+    border-radius: 25px;
+    padding-inline: 12px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btnFiltroSelected {
+    color: var(--ion-color-primary);
+    background-color: var(--ion-card-background);
+    font-weight: bold;
+    border: 2px solid var(--ion-card-background);;
+  }
+  
+  .btnFiltroNoSelected {
+    border: 2px solid #323C48;
+    opacity: 0.8;
+  }
+}
+
+
 
 .btnResetFilters {
   display: flex;
