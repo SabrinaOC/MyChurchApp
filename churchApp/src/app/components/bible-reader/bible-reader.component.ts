@@ -21,8 +21,9 @@ export class BibleReaderComponent {
     return this._verse;
   }
 
-  text: string = "";
+  @Input() public asPage: boolean = false;
 
+  text: string = "";
   chapter: string = "";
 
   constructor(public core: CoreProvider) { }

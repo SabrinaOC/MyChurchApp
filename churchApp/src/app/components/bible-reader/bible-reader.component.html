@@ -1,11 +1,17 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="core.modalCtrl.dismiss()">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-button>
+      @if (asPage) {
+        <ion-menu-toggle>
+          <ion-img src="../assets/icon/favicon.png" style="width: 35px; margin-left: 10px;"></ion-img>
+        </ion-menu-toggle>
+      } @else {
+        <ion-button (click)="core.modalCtrl.dismiss()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      }
     </ion-buttons>
-    <ion-title>{{chapter}}</ion-title>
+    <ion-title>Lectura</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,3 +20,25 @@
 
   <p id="bibleInfo">Texto bíblico Reina-Valera 1960</p>
 </ion-content>
+
+<ion-footer mode="ios" [translucent]="true">
+  <!-- <ion-toolbar> -->
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2" style="display: flex; justify-content: end;">
+          <ion-icon name="chevron-back-outline" size="large"></ion-icon>
+        </ion-col>
+
+        <ion-col size="8">
+          <div class="badgeLayout">
+            <ion-badge>{{chapter}}</ion-badge>
+          </div>
+        </ion-col>
+
+        <ion-col size="2" class="ion-justify-content-start">
+          <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  <!-- </ion-toolbar> -->
+</ion-footer>

@@ -15,3 +15,19 @@
     margin-top: 20px;
     margin-bottom: 30px;
 }
+
+
+.badgeLayout {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    
+    ion-badge {
+        color: white;
+        font-size: 20px;
+        border-radius: 25px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
