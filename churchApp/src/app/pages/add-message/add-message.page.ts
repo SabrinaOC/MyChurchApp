@@ -152,15 +152,10 @@ export class AddMessagePage implements OnInit {
     let title: string = ''
     if(normalized.title) {
       let formTitle = normalized?.title.toLowerCase()
-      normalized.normalizedTitle = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+      normalized.normalizedTitle = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u');
+      title = normalized.normalizedTitle;
     }
-    return title
-    // let normalized: Message = this.form.value
-    // if(normalized.title) {
-    //   let formTitle = normalized?.title.toLowerCase()
-    //   normalized.normalizedTitle = formTitle.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
-    // }
-    // return normalized
+    return title;
   }
 
   async checkPass(): Promise<void> {
