@@ -25,17 +25,17 @@
   <!-- <ion-toolbar> -->
     <ion-grid>
       <ion-row class="ion-align-items-center">
-        <ion-col size="2" style="display: flex; justify-content: end;">
+        <ion-col size="2" style="display: flex; justify-content: end;" (click)="getAdjacentChapter('prev')">
           <ion-icon name="chevron-back-outline" size="large"></ion-icon>
         </ion-col>
 
         <ion-col size="8">
-          <div class="badgeLayout">
+          <div class="badgeLayout" (click)="showSimpleVerseSelector($event)">
             <ion-badge>{{chapter}}</ion-badge>
           </div>
         </ion-col>
 
-        <ion-col size="2" class="ion-justify-content-start">
+        <ion-col size="2" class="ion-justify-content-start" (click)="getAdjacentChapter('next')">
           <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
         </ion-col>
       </ion-row>

@@ -11,6 +11,7 @@ import { CoreProvider } from 'src/app/services/core';
 export class SimpleVerseSelectorComponent {
 
   @Input() public justBook: boolean = false;
+  @Input() public justChapter: boolean = false;
   
   filteredBooks: Book[] = [...this.core.bookList]; // Filtered list
   searchTerm: string = '';
@@ -46,7 +47,11 @@ export class SimpleVerseSelectorComponent {
   selectChapter(chapter: number) {
     this.selectedChapter = chapter;
 
-    this.chapterVerses = this.core.bible.getVerses(this.selectedBook!.name!, this.selectedChapter) ?? 0;
+    if (this.justChapter) {
+      this.chooseVerse();
+    } else {
+      this.chapterVerses = this.core.bible.getVerses(this.selectedBook!.name!, this.selectedChapter) ?? 0;
+    }
   }
 
   selectVerse(verse: number) {
@@ -73,6 +78,8 @@ export class SimpleVerseSelectorComponent {
     
     if (this.justBook) {
       verse = this.selectedBook!;
+    } else if (this.justChapter) {      
+      verse = `${this.selectedBook?.name} ${this.selectedChapter}`;
     } else {
       verse = `${this.selectedBook?.name} ${this.selectedChapter}:${this.selectedVerse}${this.selectedRange === 0 ? "" : "-" + this.selectedRange}`;
     }

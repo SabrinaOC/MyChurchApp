@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CoreProvider } from 'src/app/services/core';
+import { SimpleVerseSelectorComponent } from '../simple-verse-selector/simple-verse-selector.component';
 
 @Component({
   selector: 'app-bible-reader',
@@ -38,10 +39,10 @@ export class BibleReaderComponent {
 
 
   parseVerseReference(ref: string) {
-    const regex = /^(\d?\s?[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:\s[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*)\s+(\d+):(\d+)(?:-(\d+))?$/;
+    const regex = /^(\d?\s?[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:\s[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*)\s+(\d+)(?::(\d+)(?:-(\d+))?)?$/;
 
     const match = ref.match(regex);
-
+    
     if (!match) {
       throw new Error("Referencia bíblica inválida: " + ref);
     }
@@ -52,5 +53,33 @@ export class BibleReaderComponent {
       verseStart: match[3],
       verseEnd: match[4] ?? match[3]
     };
+  }
+
+  async showSimpleVerseSelector(e: any) {
+    const popover = await this.core.popoverCtrl.create({
+      component: SimpleVerseSelectorComponent,
+      translucent: true,
+      cssClass: 'verse-selector-popover',
+      event: e,
+      alignment: 'center',
+      side: 'top',
+      componentProps: {justChapter: true}
+    });
+
+    await popover.present();
+
+    const { data } = await popover.onDidDismiss();
+    if (data) {      
+      this.verse = data;
+    }
+
+  }
+
+  getAdjacentChapter(direction: 'next' | 'prev' = 'next') {
+    const splitIndex = this.verse?.search(/\s\d/);
+
+    const verse = this.core.bible.getAdjacentChapter(this.verse?.substring(0, splitIndex)!, parseInt(this.verse?.substring(splitIndex!, this.verse.length)!), direction); 
+    
+    if (verse) this.verse = verse;
   }
 }

@@ -13,6 +13,8 @@ export interface VerseObject {
 })
 export class BibleService {
 
+  private bibleStructure: any = jsonBible;
+
   private bibleRVR1960: any;
   private bibleTitles: any;
 
@@ -24,13 +26,13 @@ export class BibleService {
 
 
   public getAllBibleBooks(): string[] {
-    let books: string[] = Object.keys(jsonBible['Antiguo Testamento']).concat(Object.keys(jsonBible['Nuevo Testamento']))
+    let books: string[] = Object.keys(this.bibleStructure['Antiguo Testamento']).concat(Object.keys(this.bibleStructure['Nuevo Testamento']))
 
     return books;
   }
 
   public getChapterCount(bookName: string): number | null {
-    for (const testament of Object.values(jsonBible)) {
+    for (const testament of Object.values(this.bibleStructure) as any) {
       if (bookName in testament) {
         const chapters = Object.keys((testament as any)[bookName]);
         return chapters.length;
@@ -40,7 +42,7 @@ export class BibleService {
   }
 
   public getVerses(bookName: string, chapter: number): number | null {
-    for (const testament of Object.values(jsonBible)) {
+    for (const testament of Object.values(this.bibleStructure) as any) {
       if (bookName in testament) {
         const book = (testament as any)[bookName];
         const verses = book[chapter];
@@ -60,7 +62,7 @@ export class BibleService {
     const startVerse = parseInt(startVerseStr, 10);
     const endVerse = endVerseStr ? parseInt(endVerseStr, 10) : startVerse;
 
-    for (const testament of Object.values(jsonBible)) {
+    for (const testament of Object.values(this.bibleStructure) as any) {
       if (book in testament) {
         const bookData = (testament as any)[book];
         const totalVerses = bookData[chapter];
@@ -188,11 +190,11 @@ export class BibleService {
     let books: string[] = [];
 
     if (includeAT) {
-      books = books.concat(Object.keys(jsonBible["Antiguo Testamento"]));
+      books = books.concat(Object.keys(this.bibleStructure["Antiguo Testamento"]));
     }
 
     if (includeNT) {
-      books = books.concat(Object.keys(jsonBible["Nuevo Testamento"]));
+      books = books.concat(Object.keys(this.bibleStructure["Nuevo Testamento"]));
     }
 
     return books;
@@ -237,5 +239,55 @@ export class BibleService {
     }
 
     return result.join(" ");
+  }
+
+
+  getAdjacentChapter(currentBook: string, currentChapter: number, direction: 'next' | 'prev' = 'next'): string {
+    // Array of all Bible books
+    let allBooks: string[] = this.getAllBibleBooks();
+
+    const currentIndex = allBooks.indexOf(currentBook);
+    if (currentIndex === -1) return "Book not found";
+
+    // NEXT BOOK
+    if (direction === 'next') {
+      const bookData = this.getBookData(currentBook);
+      const totalChapters = Object.keys(bookData).length;
+
+      if (currentChapter < totalChapters) { //Try to find on the next chapter
+        return `${currentBook} ${currentChapter + 1}`;
+
+      } else if (currentIndex < allBooks.length - 1) { //Try to find on the next book
+        return `${allBooks[currentIndex + 1]} 1`;
+      }
+
+      return "";
+
+      //PREVIOUS BOOK
+    } else {
+      if (currentChapter > 1) { //Try to find on the next chapter
+        return `${currentBook} ${currentChapter - 1}`;
+
+      } else if (currentIndex > 0) { //Try to find on the next chapter
+        const prevBook = allBooks[currentIndex - 1];
+        const prevBookData = this.getBookData(prevBook);
+        const lastCapOfPrevBook = Object.keys(prevBookData).length;
+
+        return `${prevBook} ${lastCapOfPrevBook}`;
+      }
+
+      return "";
+    }
+  }
+
+  // Get all book Data
+  private getBookData(bookName: string): any {
+    const data = this.bibleStructure as any;
+
+    for (const t in data) {
+      if (data[t][bookName]) return data[t][bookName];
+    }
+
+    return {};
   }
 }
