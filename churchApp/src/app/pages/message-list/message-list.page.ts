@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Book, Message } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { IonContent, LoadingController } from '@ionic/angular';
+import { IonContent, LoadingController, PopoverController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
@@ -9,6 +9,7 @@ import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-p
 import { NavigationExtras, Router } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
+import { CardOptionsPopoverComponent } from 'src/app/components/card-options-popover/card-options-popover.component';
 
 @Component({
   selector: 'app-message-list',
@@ -40,6 +41,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
               public restService: RestService,
               private loadingController: LoadingController,
               private router: Router,
+              private popoverController: PopoverController
   ) { }
 
   ngOnInit(): void {
@@ -292,4 +294,50 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     this.navigationExtra.queryParams = message;
     this.router.navigate(['message-detail'], this.navigationExtra)
   }
+
+  async openOptionsMenu(event: any, message: any) {
+    event.stopPropagation();
+
+    const popover = await this.popoverController.create({
+      component: CardOptionsPopoverComponent,
+      event: event,
+      translucent: true,
+      side: 'bottom', // Controla dónde aparece (puede ser 'start', 'end', etc.)
+      alignment: 'end', // Alinea con el borde del icono
+      componentProps: {
+        // Pasar los datos necesarios al popover
+        data: {
+          message: message,
+          listened: message.listened,
+          isAuthUser: this.core.isAuthUser // Asumiendo que 'core' es accesible aquí
+        }
+      }
+    });
+
+    await popover.present();
+    const { data } = await popover.onDidDismiss();
+
+    if (data && data.action) {
+      switch (data.action) {
+        case 'edit':
+          this.editMessage(message, event); 
+          break;
+        case 'openDetail':
+          this.openMsgDetail(message, event);
+          break;
+        case 'markAsListened':
+          this.core.audio.markAsListened(message, event);
+          break;
+        case 'removeFromListened':
+          this.removeFromListened(message, event);
+          break;
+        case 'share':
+          this.shareMessage(message, event);
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
 }

@@ -1,0 +1,30 @@
+<ion-list lines="none">
+  @if (data.isAuthUser) {
+    <ion-item button (click)="action('edit')" detail="false">
+      <ion-icon slot="start" name="pencil-outline" color="primary"></ion-icon>
+      <ion-label>Editar Mensaje</ion-label>
+    </ion-item>
+  }
+  
+  <ion-item button (click)="action('openDetail')" detail="false">
+    <ion-icon slot="start" name="open-outline" style="color: #cbb04c;"></ion-icon>
+    <ion-label>Ver Detalle</ion-label>
+  </ion-item>
+
+  @if(data.listened) {
+    <ion-item button (click)="action('removeFromListened')" detail="false">
+      <ion-icon slot="start" name="remove-circle-outline" style="color: #cbb04c;"></ion-icon>
+      <ion-label>Marcar como No Escuchado</ion-label>
+    </ion-item>
+  } @else {
+    <ion-item button (click)="action('markAsListened')" detail="false">
+      <ion-icon slot="start" name="play-circle-outline" style="color: #339f51;"></ion-icon>
+      <ion-label>Marcar como Escuchado</ion-label>
+    </ion-item>
+  }
+
+  <ion-item button (click)="action('share')" detail="false">
+    <ion-icon slot="start" name="share-social-outline" style="color: #4d8dff;"></ion-icon>
+    <ion-label>Compartir</ion-label>
+  </ion-item>
+</ion-list>
