@@ -33,7 +33,7 @@ export class BibleReaderComponent implements AfterViewInit {
 
   constructor(public core: CoreProvider) { }
 
-  ngAfterViewInit() {
+  ngAfterViewInit() {    
     this.content = this.contents.last;
   }
 
@@ -44,6 +44,10 @@ export class BibleReaderComponent implements AfterViewInit {
     this.text = this.core.bible.getFullChapterText(book, chapter, parseInt(verseStart), parseInt(verseEnd))!;
 
     this.chapter = `${book} ${chapter}`;
+    //If the component is opened as page, save chapter
+    if (this.asPage) {
+      this.core.bible.lastChapterRead = this.chapter;
+    }
 
     // If there is a verseStart, we'll navigate to find if easily
     if (verseStart) {
@@ -53,7 +57,11 @@ export class BibleReaderComponent implements AfterViewInit {
         
         this.content.scrollToPoint(domRect.x, domRect.y - document.body.scrollHeight / 2 + 50, 500);
       }, 500);
-    }    
+    } else {
+      if (this.content) {
+        this.content.scrollToTop(500);
+      }
+    }
   }
 
 

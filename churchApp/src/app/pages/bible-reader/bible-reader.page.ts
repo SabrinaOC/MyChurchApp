@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CoreProvider } from 'src/app/services/core';
 
 @Component({
   selector: 'app-bible-reader-page',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BibleReaderPage implements OnInit {
 
-  constructor() { }
+  constructor(public core: CoreProvider) { }
 
   ngOnInit() {
   }
