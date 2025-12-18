@@ -1,13 +1,17 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, QueryList, ViewChildren } from '@angular/core';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from '../simple-verse-selector/simple-verse-selector.component';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-bible-reader',
   templateUrl: './bible-reader.component.html',
   styleUrls: ['./bible-reader.component.scss'],
 })
-export class BibleReaderComponent {
+export class BibleReaderComponent implements AfterViewInit {
+
+  @ViewChildren(IonContent) contents!: QueryList<IonContent>;
+  content!: IonContent;
 
   private _verse: string | undefined;
 
@@ -29,12 +33,27 @@ export class BibleReaderComponent {
 
   constructor(public core: CoreProvider) { }
 
+  ngAfterViewInit() {
+    this.content = this.contents.last;
+  }
+
+
   setText(verse: string) {
     const { book, chapter, verseStart, verseEnd } = this.parseVerseReference(verse);
 
     this.text = this.core.bible.getFullChapterText(book, chapter, parseInt(verseStart), parseInt(verseEnd))!;
 
     this.chapter = `${book} ${chapter}`;
+
+    // If there is a verseStart, we'll navigate to find if easily
+    if (verseStart) {
+      setTimeout(() => {
+        const elements = document.getElementsByClassName("underlineVerse");
+        const domRect: DOMRect = elements[0].getBoundingClientRect();
+        
+        this.content.scrollToPoint(domRect.x, domRect.y - document.body.scrollHeight / 2 + 50, 500);
+      }, 500);
+    }    
   }
 
 
