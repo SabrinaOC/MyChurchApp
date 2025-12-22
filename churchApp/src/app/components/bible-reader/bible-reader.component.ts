@@ -17,6 +17,12 @@ export class BibleReaderComponent implements AfterViewInit {
 
   @Input()
   set verse(value: string | undefined) {
+    if (this._verse && this._verse.includes(':') && value === this.chapter) {
+      if (value && !value.includes(':')) {
+        return; 
+      }
+    }
+    
     this._verse = value;
     if (value) {
       this.setText(value);
@@ -40,22 +46,26 @@ export class BibleReaderComponent implements AfterViewInit {
 
   setText(verse: string) {
     const { book, chapter, verseStart, verseEnd } = this.parseVerseReference(verse);
-
+    // console.log(book, chapter, verseStart, verseEnd);
+    
     this.text = this.core.bible.getFullChapterText(book, chapter, parseInt(verseStart), parseInt(verseEnd))!;
 
     this.chapter = `${book} ${chapter}`;
     //If the component is opened as page, save chapter
-    if (this.asPage) {
+    if (this.asPage) {      
       this.core.bible.lastChapterRead = this.chapter;
     }
 
-    // If there is a verseStart, we'll navigate to find if easily
+    // If there is a verseStart, we'll navigate to find it easily
     if (verseStart) {
       setTimeout(() => {
         const elements = document.getElementsByClassName("underlineVerse");
-        const domRect: DOMRect = elements[0].getBoundingClientRect();
-        
-        this.content.scrollToPoint(domRect.x, domRect.y - document.body.scrollHeight / 2 + 50, 500);
+
+        if (elements.length > 0) {
+          const domRect: DOMRect = elements[0].getBoundingClientRect();
+          
+          this.content.scrollToPoint(domRect.x, domRect.y - document.body.scrollHeight / 2 + 50, 500);
+        }
       }, 500);
     } else {
       if (this.content) {
@@ -90,13 +100,13 @@ export class BibleReaderComponent implements AfterViewInit {
       event: e,
       alignment: 'center',
       side: 'top',
-      componentProps: {justChapter: true}
+      componentProps: {justVerse: true}
     });
 
     await popover.present();
 
     const { data } = await popover.onDidDismiss();
-    if (data) {      
+    if (data) {
       this.verse = data;
     }
 
