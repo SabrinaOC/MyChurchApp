@@ -58,17 +58,25 @@ export class BibleReaderComponent implements AfterViewInit {
 
     // If there is a verseStart, we'll navigate to find it easily
     if (verseStart) {
-      setTimeout(() => {
+      setTimeout(async () => {
         const elements = document.getElementsByClassName("underlineVerse");
 
         if (elements.length > 0) {
-          const domRect: DOMRect = elements[0].getBoundingClientRect();
+          const element = elements[0];
+          const domRect = element.getBoundingClientRect();
           
-          this.content.scrollToPoint(domRect.x, domRect.y - document.body.scrollHeight / 2 + 50, 500);
+          // Get the native scroll element
+          const scrollElement = await this.content.getScrollElement();          
+          // Calc the absolute Y position
+          const absoluteY = scrollElement.scrollTop + domRect.y;
+          // Calc offset to center it on the screen
+          const centerOffset = window.innerHeight / 2;
+          
+          this.content.scrollToPoint(0, absoluteY - centerOffset + 50, 500);
         }
       }, 500);
     } else {
-      if (this.content) {
+      if (this.content) {        
         this.content.scrollToTop(500);
       }
     }
