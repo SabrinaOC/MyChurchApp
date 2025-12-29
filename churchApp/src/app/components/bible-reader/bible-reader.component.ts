@@ -54,6 +54,7 @@ export class BibleReaderComponent implements AfterViewInit {
     //If the component is opened as page, save chapter
     if (this.asPage) {      
       this.core.bible.lastChapterRead = this.chapter;
+      localStorage.setItem("lastChapterRead", this.core.bible.lastChapterRead);
     }
 
     // If there is a verseStart, we'll navigate to find it easily

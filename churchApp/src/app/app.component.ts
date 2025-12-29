@@ -77,6 +77,8 @@ export class AppComponent {
     })
 
     this.core.isAuthUser = localStorage.getItem('USER_CREDENTIALS') ? true : false;
+
+    this.core.bible.lastChapterRead = localStorage.getItem('lastChapterRead') || "Génesis 1";
   }
 
   initialize() {

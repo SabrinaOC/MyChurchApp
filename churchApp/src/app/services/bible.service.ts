@@ -20,7 +20,7 @@ export class BibleService {
 
   public showBibleTittles: boolean = true;
 
-  public lastChapterRead: string = "Génesis 1"
+  public lastChapterRead: string = "";
 
   constructor(private http: HttpClient) {
     this.loadBibleRVR1960();
