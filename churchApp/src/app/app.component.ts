@@ -69,8 +69,7 @@ export class AppComponent {
     initializeApp(environment.firebaseConfig);
     this.initialize();
 
-    this.core.detectPrefersTheme();
-    this.core.detectPrefersShowBibleTitles();
+    this.core.settings.loadSettings();
 
     App.getInfo().then(res => {
       this.version = res.version

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import jsonBible from '../../assets/bible.json';
+import { SettingsService } from './settings.service';
 
 export interface VerseObject {
     book: string
@@ -18,11 +19,9 @@ export class BibleService {
   private bibleRVR1960: any;
   private bibleTitles: any;
 
-  public showBibleTittles: boolean = true;
-
   public lastChapterRead: string = "";
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private settings: SettingsService) {
     this.loadBibleRVR1960();
   }
 
@@ -224,7 +223,7 @@ export class BibleService {
     let result: string[] = [];
 
     for (let verseNum of verseNumbers) {      
-      if (this.showBibleTittles) {
+      if (this.settings.showBibleTittles) {
         // Check if there is any version that starts with that verse
         const section = chapterSections?.find((s: { desde: number; }) => s.desde === verseNum);
         if (section) {

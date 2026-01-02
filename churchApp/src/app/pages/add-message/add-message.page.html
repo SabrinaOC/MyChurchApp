@@ -79,7 +79,7 @@
       <ion-list>
         <ion-item>
           <ion-label>Versículos</ion-label>
-          <ion-button [color]="core.theme" (click)="expandedInput['expanded'] = !expandedInput['expanded']" fill="clear">
+          <ion-button [color]="core.settings.theme" (click)="expandedInput['expanded'] = !expandedInput['expanded']" fill="clear">
             <ion-icon [name]="expandedInput['expanded'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
           </ion-button>
           <ion-button (click)="showSimpleVerseSelector()">

@@ -15,13 +15,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [ngClass]="{'plainBibleBackground': !core.settings.showBibleBackgroundColor}">
   <p id="text" class="bibleText" [innerHTML]="text"></p>
 
   <p id="bibleInfo">Texto bíblico Reina-Valera 1960</p>
 </ion-content>
 
-<ion-footer mode="ios" [translucent]="true" [ngClass]="{'lightFooter': core.theme === 'light'}">
+<ion-footer mode="ios" [translucent]="true" [ngClass]="{'lightFooter': core.settings.theme === 'light'}">
   <!-- <ion-toolbar> -->
     <ion-grid>
       <ion-row class="ion-align-items-center">

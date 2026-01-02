@@ -234,3 +234,14 @@ body.light-theme {
 .ios #audio-player {
     margin-bottom: -18px !important;
 }
+
+
+.light-theme .plainBibleBackground {
+    --background: white;
+    --color: black;
+}
+
+.dark-theme .plainBibleBackground {
+    --background: black;
+    --color: white;
+}
