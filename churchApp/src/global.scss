@@ -236,9 +236,15 @@ body.light-theme {
 }
 
 
-.light-theme .plainBibleBackground {
-    --background: white;
-    --color: black;
+.light-theme {
+    .plainBibleBackground {
+        --background: white;
+        --color: #494949;
+    }
+
+    .sectionTitle {
+        color: var(--ion-color-medium)
+    }
 }
 
 .dark-theme .plainBibleBackground {

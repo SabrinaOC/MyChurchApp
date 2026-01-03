@@ -109,7 +109,8 @@ export class BibleReaderComponent implements AfterViewInit {
       event: e,
       alignment: 'center',
       side: 'top',
-      componentProps: {justVerse: true}
+      componentProps: {justVerse: true},
+      arrow: false
     });
 
     await popover.present();
