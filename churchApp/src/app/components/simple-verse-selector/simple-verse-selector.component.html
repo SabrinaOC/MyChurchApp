@@ -5,18 +5,22 @@
     <ion-title>Libro:</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterOptions()" placeholder="Buscar libro..."></ion-searchbar>
+    <ion-searchbar class="ion-align-self-center" mode="ios" show-clear-button="always" clear-icon="close-outline" animated="true" placeholder="Buscar libro..."
+                    [color]="core.settings.theme === 'light' ? 'dark' : 'dark'"
+                    [(ngModel)]="searchTerm" (ionInput)="filterOptions()"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    @for (book of filteredBooks; track book) {
-    <ion-item (click)="selectBook(book)">
-      {{book.name}}
-    </ion-item>
-    }
-  </ion-list>
+  @if (filteredBooks.length) {
+    <ion-list>
+      @for (book of filteredBooks; track book) {
+      <ion-item (click)="selectBook(book)">
+        {{book.name}}
+      </ion-item>
+      }
+    </ion-list>
+  }
 </ion-content>
 
 } @else {
