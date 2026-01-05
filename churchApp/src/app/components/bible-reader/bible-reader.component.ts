@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from '../simple-verse-selector/simple-verse-selector.component';
 import { IonContent } from '@ionic/angular';
@@ -10,6 +10,7 @@ import { IonContent } from '@ionic/angular';
 })
 export class BibleReaderComponent implements AfterViewInit {
 
+  @ViewChild("chapterBadge") chapterBadge!: ElementRef<HTMLElement>;
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
   content!: IonContent;
 
@@ -81,6 +82,8 @@ export class BibleReaderComponent implements AfterViewInit {
         this.content.scrollToTop(500);
       }
     }
+
+    this.badgeAnimation();
   }
 
 
@@ -129,4 +132,15 @@ export class BibleReaderComponent implements AfterViewInit {
     
     if (verse) this.verse = verse;
   }
+
+  badgeAnimation() {
+    if (this.chapterBadge) {
+      this.chapterBadge.nativeElement?.classList.add("zoomInOutElement");
+  
+      setTimeout(() => {
+        this.chapterBadge.nativeElement?.classList.remove("zoomInOutElement");
+      }, 800);
+    }    
+  }
+  
 }

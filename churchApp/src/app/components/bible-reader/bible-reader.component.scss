@@ -1,4 +1,5 @@
 #text {
+    font-size: 17px;
     margin: 20px;
     user-select: text;
 
@@ -22,13 +23,13 @@
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
-    
+
     ion-badge {
         color: white;
         font-size: 20px;
         border-radius: 25px;
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 
@@ -39,4 +40,22 @@ ion-toolbar {
 .lightFooter {
     background-color: rgba($color: #1E2631, $alpha: 0.4);
     // 3D4C61
+}
+
+.zoomInOutElement {
+    animation: zoom-in-zoom-out 0.8s ease normal;
+}
+
+@keyframes zoom-in-zoom-out {
+    0% {
+        scale: 100%;
+    }
+
+    50% {
+        scale: 120%;
+    }
+
+    100% {
+        scale: 100%;
+    }
 }
