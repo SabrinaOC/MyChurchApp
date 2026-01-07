@@ -37,11 +37,11 @@
     @if (core.audio.selectedMessage) {
       <div style="touch-action: none;">
         <app-mini-audio-player [message]="core.audio.selectedMessage" 
-        (closing)="closeAudioPlayer()"
-        (finish)="markAsListenedMessage($event)"
-        [ngClass]="{'hidden': router.url !== '/message-list'}">
-      </app-mini-audio-player>
-    </div>
+          (closing)="closeAudioPlayer()"
+          (finish)="markAsListenedMessage($event)"
+          [ngClass]="{'hidden': router.url !== '/message-list'}">
+        </app-mini-audio-player>
+      </div>
     }
   </ion-split-pane>
 </ion-app>

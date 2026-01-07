@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from '../simple-verse-selector/simple-verse-selector.component';
 import { IonContent } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bible-reader',
@@ -38,7 +39,7 @@ export class BibleReaderComponent implements AfterViewInit {
   text: string = "";
   chapter: string = "";
 
-  constructor(public core: CoreProvider) { }
+  constructor(public core: CoreProvider, private cdRef: ChangeDetectorRef, public router: Router) { }
 
   ngAfterViewInit() {    
     this.content = this.contents.last;
@@ -143,4 +144,13 @@ export class BibleReaderComponent implements AfterViewInit {
     }    
   }
   
+  closeAudioPlayer() {
+    this.core.audio.selectMessage(null);
+    this.cdRef.detectChanges(); //Force detecting changes
+  }
+
+  markAsListenedMessage(event: any) {
+    event.preventDefault();
+    this.core.audio.markAsListened(this.core.audio.selectedMessage!, event);
+  }
 }

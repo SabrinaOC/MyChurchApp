@@ -14,7 +14,7 @@ ion-card {
 
 #audio-player {
     position: fixed;
-    bottom: 0;
+    bottom: var(--audio-player-bottom, 0);
     width: 70%;
     left: 0;
     right: 0;

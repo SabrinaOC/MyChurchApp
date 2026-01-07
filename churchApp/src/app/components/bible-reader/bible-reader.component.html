@@ -19,6 +19,15 @@
   <p id="text" class="bibleText" [innerHTML]="text"></p>
 
   <p id="bibleInfo">Texto bíblico Reina-Valera 1960</p>
+  
+  @if (core.audio.selectedMessage) {
+    <div style="touch-action: none; margin-bottom: 100px;">
+      <app-mini-audio-player [message]="core.audio.selectedMessage" style="--audio-player-bottom: 60px;"
+        (closing)="closeAudioPlayer()"
+        (finish)="markAsListenedMessage($event)">
+      </app-mini-audio-player>
+    </div>
+  }
 </ion-content>
 
 <ion-footer mode="ios" [translucent]="true" [ngClass]="{'lightFooter': core.settings.theme === 'light'}">
