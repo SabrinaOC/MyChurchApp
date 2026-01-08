@@ -75,7 +75,7 @@ export class BibleReaderComponent implements AfterViewInit {
           // Calc offset to center it on the screen
           const centerOffset = window.innerHeight / 2;
           
-          this.content.scrollToPoint(0, absoluteY - centerOffset + 50, 500);
+          this.content.scrollToPoint(0, absoluteY - centerOffset + 120, 500);
         }
       }, 500);
     } else {

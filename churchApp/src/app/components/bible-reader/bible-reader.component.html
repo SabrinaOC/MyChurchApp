@@ -24,7 +24,8 @@
     <div style="touch-action: none; margin-bottom: 100px;">
       <app-mini-audio-player [message]="core.audio.selectedMessage" style="--audio-player-bottom: 60px;"
         (closing)="closeAudioPlayer()"
-        (finish)="markAsListenedMessage($event)">
+        (finish)="markAsListenedMessage($event)"
+        [ignoreGesture]="true">
       </app-mini-audio-player>
     </div>
   }

@@ -295,11 +295,11 @@ export class AddMessagePage implements OnInit {
     if (this.form.dirty) {
       this.core.openAlert("Ha realizado cambios. ¿Desea salir?", "Salir", "Cancelar").then(async (accepted) => {
         if (accepted) {
-          this.core.navCtrl.navigateBack('');
+          this.core.navCtrl.pop();
         }
       });
     } else {
-      this.core.navCtrl.navigateBack('');
+      this.core.navCtrl.pop();
     }
   }
 

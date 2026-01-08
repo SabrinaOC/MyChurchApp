@@ -43,10 +43,10 @@ ion-toolbar {
 }
 
 .zoomInOutElement {
-    animation: zoom-in-zoom-out 0.8s ease normal;
+    animation: zoomInZoomOutAnimation 0.8s ease normal;
 }
 
-@keyframes zoom-in-zoom-out {
+@keyframes zoomInZoomOutAnimation {
     0% {
         scale: 100%;
     }
