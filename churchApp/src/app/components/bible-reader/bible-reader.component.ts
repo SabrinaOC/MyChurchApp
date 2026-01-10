@@ -37,7 +37,9 @@ export class BibleReaderComponent implements AfterViewInit {
   @Input() public asPage: boolean = false;
 
   text: string = "";
+  book: string = "";
   chapter: string = "";
+  chapterNumber: string = "";
 
   constructor(public core: CoreProvider, private cdRef: ChangeDetectorRef, public router: Router) { }
 
@@ -53,6 +55,8 @@ export class BibleReaderComponent implements AfterViewInit {
     this.text = this.core.bible.getFullChapterText(book, chapter, parseInt(verseStart), parseInt(verseEnd))!;
 
     this.chapter = `${book} ${chapter}`;
+    this.chapterNumber = chapter;
+    this.book = book;
     //If the component is opened as page, save chapter
     if (this.asPage) {      
       this.core.bible.lastChapterRead = this.chapter;

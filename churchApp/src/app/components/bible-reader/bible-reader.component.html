@@ -16,6 +16,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" [ngClass]="{'plainBibleBackground': !core.settings.showBibleBackgroundColor}">
+  <p id="bookLabel">{{book}}</p>
+  <p id="chapterNumberLabel">{{chapterNumber}}</p>
+
   <p id="text" class="bibleText" [innerHTML]="text"></p>
 
   <p id="bibleInfo">Texto bíblico Reina-Valera 1960</p>
