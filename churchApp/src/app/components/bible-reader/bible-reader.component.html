@@ -28,7 +28,7 @@
       <app-mini-audio-player [message]="core.audio.selectedMessage" style="--audio-player-bottom: 60px;"
         (closing)="closeAudioPlayer()"
         (finish)="markAsListenedMessage($event)"
-        [ignoreGesture]="true">
+        [ignoreGesture]="!asPage">
       </app-mini-audio-player>
     </div>
   }
