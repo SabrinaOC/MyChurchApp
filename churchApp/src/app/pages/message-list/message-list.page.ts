@@ -10,6 +10,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
 import { CardOptionsPopoverComponent } from 'src/app/components/card-options-popover/card-options-popover.component';
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-message-list',
@@ -33,6 +34,10 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   navigationExtra: NavigationExtras = {};
 
   showScroller = false;
+  isPlaying: boolean = false;
+  progress: number = 0;
+  duration: number = 0;
+  isLoading: boolean = false;
 
   private subscription: Subscription = new Subscription();
 
@@ -41,13 +46,18 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
               public restService: RestService,
               private loadingController: LoadingController,
               private router: Router,
-              private popoverController: PopoverController
+              private popoverController: PopoverController,
+              public audioService: AudioService
   ) { }
 
   ngOnInit(): void {
     const sub = this.core.audio.listened.subscribe(value => {
       this.updateMessageList(this.messageList);
     });
+    const subPlaying = this.core.audio.isPlaying$.subscribe(v => this.isPlaying = v);
+    const subProgress =this.core.audio.progress$.subscribe(v => this.progress = v);
+    const subDuration = this.core.audio.duration$.subscribe(v => this.duration = v);
+    const subLoading= this.core.audio.isLoading$.subscribe(v => this.isLoading = v);
     this.subscription.add(sub) 
   }
 
@@ -197,6 +207,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    */
   updateMessageList(lista: any) {
     this.messageList = lista;
+    this.mapMessageListImages();
     this.checkIfAlreadyListened();
     this.checkIfIsNewMessage();
   }
@@ -338,6 +349,36 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
           break;
       }
     }
+  }
+
+  /**
+   * 
+   */
+  mapMessageListImages() {
+    this.messageList.forEach((msg: Message, index: number) => {
+      let imgBase64: string = ''
+      if(msg.image) {
+        imgBase64 = 'data:image/jpeg;base64,' + msg.image
+      } else {
+        const randomNum = Math.floor(Math.random() * 6);
+        imgBase64 = `../../../assets/images/thumbnail-${randomNum}.jpg`;
+      }
+      msg.image = imgBase64;
+    })
+  }
+
+  checkIfMessagePlaying(msg: Message): Boolean {
+    if (this.audioService.selectedMessage?.id === msg.id && this.isPlaying && !this.isLoading){
+      return true;
+    } 
+    return false;
+  }
+
+  checkIfMessageLoading(msg: Message): Boolean {
+    if (this.audioService.selectedMessage?.id === msg.id && this.isLoading){
+      return true;
+    } 
+    return false;
   }
 
 }
