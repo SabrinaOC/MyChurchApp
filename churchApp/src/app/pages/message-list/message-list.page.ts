@@ -83,7 +83,12 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   selectMessage(message: Message | null) {
-    this.core.audio.selectMessage(message);
+    if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage.id !== message?.id) {
+      this.core.audio.selectMessage(message);
+    } else {
+      if (this.isPlaying) this.core.audio.pause();
+      else this.core.audio.play();
+    }
   }
 
   async searchInput(event: any) {
@@ -298,10 +303,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['add-message'], this.navigationExtra)
   }
 
-    openMsgDetail(message: Message, event: any) {
-    event.preventDefault();
-    event.stopPropagation();
-    
+  openMsgDetail(message: Message) {
     this.navigationExtra.queryParams = message;
     this.router.navigate(['message-detail'], this.navigationExtra)
   }
@@ -333,9 +335,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
         case 'edit':
           this.editMessage(message, event); 
           break;
-        case 'openDetail':
-          this.openMsgDetail(message, event);
-          break;
+        // case 'openDetail':
+        //   this.openMsgDetail(message, event);
+        //   break;
         case 'markAsListened':
           this.core.audio.markAsListened(message, event);
           break;
@@ -384,11 +386,19 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    * @param msg 
    * @returns 
    */
+  cehckIfMsgSelected(msg: Message) {
+    return this.audioService.selectedMessage?.id === msg.id
+  }
+
+  /**
+   * 
+   * @param msg 
+   * @returns 
+   */
   checkIfMessageLoading(msg: Message): Boolean {
     if (this.audioService.selectedMessage?.id === msg.id && this.isLoading){
       return true;
     } 
     return false;
   }
-
 }

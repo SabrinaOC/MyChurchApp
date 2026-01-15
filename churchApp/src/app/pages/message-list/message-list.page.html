@@ -97,13 +97,13 @@
     }
     <ion-card
       mode="ios"
-      (click)="selectMessage(message)"
+      
       [class.highlightedCard]="message.isNew && !message.listened"
     >
       <!-- Div principal para dividir cuerpo card en dos -->
       <div class="distribucion">
         <!-- Imagen -->
-        <div class="imgDiv">
+        <div class="imgDiv" (click)="selectMessage(message)">
           <img [src]="message.image" class="img" />
           @if (!this.audioService.selectedMessage ||
           this.audioService.selectedMessage.id !== message.id || !isPlaying) {
@@ -124,7 +124,7 @@
           }
         </div>
         <!-- Informacion -->
-        <div class="infoDiv">
+        <div class="infoDiv" (click)="openMsgDetail(message)">
           <div>
             <div
               class="row-1"
@@ -156,14 +156,23 @@
           </div>
 
           <div>
-            @if(!checkIfMessagePlaying(message)) {
+            @if(!checkIfMessagePlaying(message) && message.listened) {
+              <!-- mensaje reproduciendo en pausa -->
             <ion-progress-bar
-              [value]="message.listened ? 100 : 0"
+              [value]="message.listened ? 100 : !message.listened && duration === 0 ? 0 : (progress / duration)"
               class="my-progress-bar animate-progress"
             ></ion-progress-bar>
-          } @else {
+          } @else if(cehckIfMsgSelected(message)) {
+            <!-- mensaje reproduciend -->
+            <ion-progress-bar
+              [value]="progress / duration"
+              class="my-progress-bar animate-progress"
+            ></ion-progress-bar>
+
+          } @else if(!checkIfMessagePlaying(message) && !message.listened){
+            <!-- mensaje no escuchado y no reproduciendo -->
               <ion-progress-bar style="margin-top: 14px;"
-                [value]="(duration > 0) ? (progress / duration) : 0"
+                [value]="0"
                 min="0"
                 class="my-progress-bar"
               ></ion-progress-bar>
