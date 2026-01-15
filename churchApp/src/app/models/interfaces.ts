@@ -29,7 +29,8 @@ export interface Message {
     messageType: MessageType,
     mimetype: string,
     questions: string,
-    verses: string
+    verses: string,
+    image: string,
 }
 
 export type NewMessage = Omit<Message, 'id'>
