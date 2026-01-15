@@ -124,11 +124,25 @@
           }
         </div>
         <!-- Informacion -->
-        <div style="flex-grow: 1">
-          <ion-card-header style="margin-bottom: -5px">
+        <div class="infoDiv">
+          <div>
+            <div
+              class="row-1"
+            >
+              <div color="dark" mode="md" style="font-weight: bold;"
+                >{{ message.title }}</div>
+
+              <ion-icon
+                name="ellipsis-vertical-sharp"
+                size="small"
+                color="dark"
+                (click)="openOptionsMenu($event, message)"
+                
+              ></ion-icon>
+            </div>
             <div class="flexSB">
-              <div>
-                <span class="libroTitulo"> {{ message.book.name}} </span>
+              <div class="divLibroAutor">
+                <span > {{ message.book.name}} </span>
                 <span class="punto">·</span>
                 @if (message.speaker.id === 5) {
                 <div>{{ message.note }}</div>
@@ -136,49 +150,28 @@
                 <div>{{ message.speaker.name}}</div>
                 }
               </div>
-              <div></div>
             </div>
 
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                align-items: flex-start;
-              "
-            >
-              <ion-card-title color="dark" mode="md" class="ion-margin-bottom"
-                >{{ message.title }}</ion-card-title
-              >
+            
+          </div>
 
-              <ion-icon
-                name="ellipsis-vertical-sharp"
-                size="small"
-                color="dark"
-                (click)="openOptionsMenu($event, message)"
-                style="padding-top: 5px"
-              ></ion-icon>
-            </div>
-          </ion-card-header>
-
-          <ion-card-content>
+          <div>
             @if(!checkIfMessagePlaying(message)) {
             <ion-progress-bar
               [value]="message.listened ? 100 : 0"
               class="my-progress-bar animate-progress"
             ></ion-progress-bar>
           } @else {
-              <ion-progress-bar
-                [value]="progress * 100 / duration"
+              <ion-progress-bar style="margin-top: 14px;"
+                [value]="(duration > 0) ? (progress / duration) : 0"
                 min="0"
-                class="my-progress-bar animate-progress"
+                class="my-progress-bar"
               ></ion-progress-bar>
-              <!-- <ion-range [disabled]="isLoading" id="audioProgress" [value]="progress" min="0" [max]="duration"
-                step="0.1"></ion-range> -->
             }
             <div style="margin-top: 9px">
               {{ message.date | date:'dd/MM/yyyy' }}
             </div>
-          </ion-card-content>
+          </div>
         </div>
       </div>
     </ion-card>

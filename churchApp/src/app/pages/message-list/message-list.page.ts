@@ -356,8 +356,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    */
   mapMessageListImages() {
     this.messageList.forEach((msg: Message, index: number) => {
-      let imgBase64: string = ''
-      if(msg.image) {
+      let imgBase64: string = '';
+      if(msg.image && (!msg.image.includes('data:image/jpeg;base64') && !msg.image.includes('../../../assets/images/thumbnail-'))) {
         imgBase64 = 'data:image/jpeg;base64,' + msg.image
       } else {
         const randomNum = Math.floor(Math.random() * 6);
@@ -367,6 +367,11 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
+  /**
+   * 
+   * @param msg 
+   * @returns 
+   */
   checkIfMessagePlaying(msg: Message): Boolean {
     if (this.audioService.selectedMessage?.id === msg.id && this.isPlaying && !this.isLoading){
       return true;
@@ -374,6 +379,11 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     return false;
   }
 
+  /**
+   * 
+   * @param msg 
+   * @returns 
+   */
   checkIfMessageLoading(msg: Message): Boolean {
     if (this.audioService.selectedMessage?.id === msg.id && this.isLoading){
       return true;
