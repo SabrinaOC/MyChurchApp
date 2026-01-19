@@ -137,6 +137,26 @@
                 "tags": [
                     "Message"
                 ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": 1
+                        }
+                    }
+                ],
                 "operationId": "getAllMessages",
                 "responses": {
                     "200": {
@@ -472,6 +492,74 @@
                 }
             }
         },
+        "/messages/{id}": {
+            "get": {
+                "summary": "Get message by Id",
+                "tags": [
+                    "Message"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 0
+                        }
+                    }
+                ],
+                "operationId": "findById",
+                "responses": {
+                    "200": {
+                        "description": "Get message by Id",
+                        "content": {
+                            "application/json": {
+                                "properties": {
+                                    "message": {
+                                        "type": "#/components/schemas/Message",
+                                        "example": {
+                                            "id": 70,
+                                            "speaker": {
+                                                "id": 1,
+                                                "name": "Eduardo de la Piedra"
+                                            },
+                                            "book": {
+                                                "id": 51,
+                                                "name": "Colosenses"
+                                            },
+                                            "title": "Lucha por el tesoro",
+                                            "normalizedTitle": "lucha por el tesoro",
+                                            "date": "2025-01-26",
+                                            "url": "https://drive.google.com/file/d/1_7l19YHv5RIhPBtAGGqkcv9Bzgk67mOY/view?usp=drivesdk",
+                                            "note": null,
+                                            "createdAt": "2025-01-29T14:19:33.907Z",
+                                            "messageType": {
+                                                "id": 1,
+                                                "description": "Predicación"
+                                            },
+                                            "verses": "Colosenses 2:1-7;2 Corintios 11:24-28;Hechos 20:27-30;2 Corintios 4:2-6",
+                                            "questions": "1. Corazones animados\n2. Corazones advertidos\n3. Corazones afirmados\n\n- ¿Quieres luchar por el verdadero tesoro?\n- ¿Por qué nos cuesta tanto disfrutar de ese tesoro y miramos lo que el mundo nos ofrece?\n- ¿Cuáles son tus luchas?\n- ¿Eres consciente de que tienes el consuelo dentro de ti? Cristo es la verdadera plenitud.\n- ¿Intentas llenar los vacíos de tu corazón con otras cosas aparte de Cristo? ¿Cómo está tu alma hoy?\n- ¿Qué enseñanza o discurso te ha podido seducir y desviar del camino? Necesitamos escuchar todo el consejo de Dios, aunque no endulce nuestros oídos y sea duro.\n- ¿Vives conforme a la palabra de Dios? ¿Es tu fe acorde con lo que vives?\n\nLa lucha cristiana siempre tiene un propósito. Sigue luchando, Dios no ha terminado contigo.",
+                                            "mimetype": ".mp3"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "5XX": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorsSchema"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/messageTypes": {
             "get": {
                 "summary": "Get a list of all message types",
@@ -620,6 +708,10 @@
                     "mimetype": {
                         "type": "string",
                         "example": ".mp3"
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "Bvklsdkeecx.."
                     }
                 }
             },

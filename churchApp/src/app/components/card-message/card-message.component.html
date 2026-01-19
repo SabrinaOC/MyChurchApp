@@ -1,0 +1,89 @@
+@if (message()) {
+<ion-card
+      mode="ios"
+      [class.highlightedCard]="message()?.isNew && !message()?.listened">
+      <!-- Div principal para dividir cuerpo card en dos -->
+      <div class="distribucion">
+        <!-- Imagen -->
+        <div class="imgDiv" (click)="selectMessage()">
+          <img [src]="message()?.image" class="img" />
+          @if (!this.audioService.selectedMessage ||
+          this.audioService.selectedMessage.id !== message()?.id || !isPlaying) {
+          <ion-icon
+            name="play-circle-outline"
+            class="play-watermark"
+          ></ion-icon>
+          } @else if (checkIfMessagePlaying()) {
+          <div class="equalizer-container">
+            <span class="bar bar-1"></span>
+            <span class="bar bar-2"></span>
+            <span class="bar bar-3"></span>
+            <span class="bar bar-4"></span>
+            <span class="bar bar-5"></span>
+          </div>
+          } @else if (checkIfMessageLoading()) {
+            <ion-spinner name="dots" color="dark" class="loading-watermark"></ion-spinner>
+          }
+        </div>
+        <!-- Informacion -->
+        <div class="infoDiv" (click)="openMsgDetail()">
+          <div>
+            <div
+              class="row-1"
+            >
+              <div color="dark" mode="md" style="font-weight: bold;"
+                >{{ message()?.title }}</div>
+
+              <ion-icon
+                name="ellipsis-vertical-sharp"
+                size="small"
+                color="dark"
+                (click)="openOptionsMenu($event, message)"
+                
+              ></ion-icon>
+            </div>
+            <div class="flexSB">
+              <div class="divLibroAutor">
+                <span > {{ message()?.book?.name}} </span>
+                <span class="punto">·</span>
+                @if (message()?.speaker?.id === 5) {
+                <div>{{ message()?.note }}</div>
+                } @else {
+                <div>{{ message()?.speaker?.name}}</div>
+                }
+              </div>
+            </div>
+
+            
+          </div>
+
+          <div>
+            @if(!checkIfMessagePlaying() && message()?.listened) {
+              <!-- mensaje reproduciendo en pausa -->
+            <ion-progress-bar
+              [value]="message()?.listened ? 100 : !message()?.listened && duration === 0 ? 0 : (progress / duration)"
+              class="my-progress-bar animate-progress"
+            ></ion-progress-bar>
+          } @else if(cehckIfMsgSelected()) {
+            <!-- mensaje reproduciend -->
+            <ion-progress-bar
+              [value]="progress / duration"
+              class="my-progress-bar animate-progress"
+            ></ion-progress-bar>
+
+          } @else if(!checkIfMessagePlaying() && !message()?.listened){
+            <!-- mensaje no escuchado y no reproduciendo -->
+              <ion-progress-bar style="margin-top: 14px;"
+                [value]="0"
+                min="0"
+                class="my-progress-bar"
+              ></ion-progress-bar>
+            }
+            <div style="margin-top: 9px">
+              {{ message()?.date | date:'dd/MM/yyyy' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+}

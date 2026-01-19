@@ -38,6 +38,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   progress: number = 0;
   duration: number = 0;
   isLoading: boolean = false;
+  limit: number = 10;
+  offset: number = 1;
 
   private subscription: Subscription = new Subscription();
 
@@ -46,7 +48,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
               public restService: RestService,
               private loadingController: LoadingController,
               private router: Router,
-              private popoverController: PopoverController,
+              
               public audioService: AudioService
   ) { }
 
@@ -54,10 +56,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     const sub = this.core.audio.listened.subscribe(value => {
       this.updateMessageList(this.messageList);
     });
-    const subPlaying = this.core.audio.isPlaying$.subscribe(v => this.isPlaying = v);
-    const subProgress =this.core.audio.progress$.subscribe(v => this.progress = v);
-    const subDuration = this.core.audio.duration$.subscribe(v => this.duration = v);
-    const subLoading= this.core.audio.isLoading$.subscribe(v => this.isLoading = v);
+
     this.subscription.add(sub) 
   }
 
@@ -80,15 +79,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   scrollToTop() {
     this.content.scrollToTop(500);
-  }
-
-  selectMessage(message: Message | null) {
-    if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage.id !== message?.id) {
-      this.core.audio.selectMessage(message);
-    } else {
-      if (this.isPlaying) this.core.audio.pause();
-      else this.core.audio.play();
-    }
   }
 
   async searchInput(event: any) {
@@ -127,7 +117,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
       spinner: null,
     })
     loading.present();
-    this.core.api.message.getAllMessages()
+    this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
     .subscribe({
       next: (data: any) => {
         if(data) {
@@ -144,7 +134,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   refresh(event: any) {
-    this.core.api.message.getAllMessages()
+    this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
     .subscribe((data: any) => {
       if(data) {
         this.updateMessageList(data.messageListMapped)
@@ -153,8 +143,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
-  removeFromListened(message: Message, event: any) {
-    event.stopPropagation()
+  removeFromListened(message: Message) {
+    // event.stopPropagation()
     let listened = localStorage.getItem('listened');
     let arr1 = listened?.split(',')
     let arr = [...new Set(arr1)]
@@ -240,8 +230,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     await modal.present();
   }
 
-  async shareMessage(message: Message, event: any) {
-    event.stopPropagation()
+  async shareMessage(message: Message) {
+    // event.stopPropagation()
 
     if (message.questions != null) {
       const modal = await this.core.modalCtrl.create({
@@ -293,112 +283,18 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   /**
    * 
-   * @param message 
-   */
-  editMessage(message: Message, event: any) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    this.navigationExtra.queryParams = message;
-    this.router.navigate(['add-message'], this.navigationExtra)
-  }
-
-  openMsgDetail(message: Message) {
-    this.navigationExtra.queryParams = message;
-    this.router.navigate(['message-detail'], this.navigationExtra)
-  }
-
-  async openOptionsMenu(event: any, message: any) {
-    event.stopPropagation();
-
-    const popover = await this.popoverController.create({
-      component: CardOptionsPopoverComponent,
-      event: event,
-      translucent: true,
-      side: 'bottom', // Controla dónde aparece (puede ser 'start', 'end', etc.)
-      alignment: 'end', // Alinea con el borde del icono
-      componentProps: {
-        // Pasar los datos necesarios al popover
-        data: {
-          message: message,
-          listened: message.listened,
-          isAuthUser: this.core.isAuthUser // Asumiendo que 'core' es accesible aquí
-        }
-      }
-    });
-
-    await popover.present();
-    const { data } = await popover.onDidDismiss();
-
-    if (data && data.action) {
-      switch (data.action) {
-        case 'edit':
-          this.editMessage(message, event); 
-          break;
-        // case 'openDetail':
-        //   this.openMsgDetail(message, event);
-        //   break;
-        case 'markAsListened':
-          this.core.audio.markAsListened(message, event);
-          break;
-        case 'removeFromListened':
-          this.removeFromListened(message, event);
-          break;
-        case 'share':
-          this.shareMessage(message, event);
-          break;
-        default:
-          break;
-      }
-    }
-  }
-
-  /**
-   * 
    */
   mapMessageListImages() {
-    this.messageList.forEach((msg: Message, index: number) => {
+    this.messageList.forEach((msg: Message) => {
       let imgBase64: string = '';
       if(msg.image && (!msg.image.includes('data:image/jpeg;base64') && !msg.image.includes('../../../assets/images/thumbnail-'))) {
         imgBase64 = 'data:image/jpeg;base64,' + msg.image
-      } else {
+      } else if(!msg.image) {
         const randomNum = Math.floor(Math.random() * 6);
         imgBase64 = `../../../assets/images/thumbnail-${randomNum}.jpg`;
       }
-      msg.image = imgBase64;
+      msg.image = imgBase64 != '' ? imgBase64 : msg.image;
     })
   }
 
-  /**
-   * 
-   * @param msg 
-   * @returns 
-   */
-  checkIfMessagePlaying(msg: Message): Boolean {
-    if (this.audioService.selectedMessage?.id === msg.id && this.isPlaying && !this.isLoading){
-      return true;
-    } 
-    return false;
-  }
-
-  /**
-   * 
-   * @param msg 
-   * @returns 
-   */
-  cehckIfMsgSelected(msg: Message) {
-    return this.audioService.selectedMessage?.id === msg.id
-  }
-
-  /**
-   * 
-   * @param msg 
-   * @returns 
-   */
-  checkIfMessageLoading(msg: Message): Boolean {
-    if (this.audioService.selectedMessage?.id === msg.id && this.isLoading){
-      return true;
-    } 
-    return false;
-  }
 }
