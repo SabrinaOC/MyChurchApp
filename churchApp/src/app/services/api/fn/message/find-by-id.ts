@@ -8,20 +8,15 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { Message } from '../../models/message';
 
-export interface GetAllMessages$Params {
-  limit: number;
-  offset: number;
+export interface FindById$Params {
+  id: number;
 }
 
-export function getAllMessages(http: HttpClient, rootUrl: string, params: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-'messageListMapped'?: Array<Message>;
-}>> {
-  const rb = new RequestBuilder(rootUrl, getAllMessages.PATH, 'get');
+export function findById(http: HttpClient, rootUrl: string, params: FindById$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  const rb = new RequestBuilder(rootUrl, findById.PATH, 'get');
   if (params) {
-    rb.query('limit', params.limit, {});
-    rb.query('offset', params.offset, {});
+    rb.path('id', params.id, {});
   }
 
   return http.request(
@@ -29,11 +24,9 @@ export function getAllMessages(http: HttpClient, rootUrl: string, params: GetAll
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<{
-      'messageListMapped'?: Array<Message>;
-      }>;
+      return r as StrictHttpResponse<any>;
     })
   );
 }
 
-getAllMessages.PATH = '/messages';
+findById.PATH = '/messages/{id}';

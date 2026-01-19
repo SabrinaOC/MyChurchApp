@@ -1,15 +1,23 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons slot="end">
       <ion-menu-toggle>
-        <ion-img src="../assets/icon/favicon.png" style="width: 35px; margin-left: 10px;"></ion-img>
+        <ion-img
+          src="../assets/icon/favicon.png"
+          style="width: 35px; margin-left: 10px"
+        ></ion-img>
       </ion-menu-toggle>
     </ion-buttons>
     <ion-title>Predicaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" id="messages" (ionScroll)="onScroll($event)" scrollEvents="true">
+<ion-content
+  [fullscreen]="true"
+  id="messages"
+  (ionScroll)="onScroll($event)"
+  scrollEvents="true"
+>
   <ion-searchbar
     mode="ios"
     animated="true"
@@ -23,87 +31,83 @@
   ></ion-searchbar>
 
   <!-- refresher -->
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''">
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''"
+  >
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <!-- filtros -->
   <div class="divFiltros">
-    <div style="padding-left: 8px; font-size: small; margin-top: 7px; display: flex; justify-content: space-around; margin-bottom: 7px; color: white;">
-        <ion-radio-group [value]="rbSelected" class="custom-radio-button-group" (ionFocus)="rbSelection($event)">
-          <ion-radio value="listened" labelPlacement="end">Escuchadas</ion-radio><br>
-          <ion-radio value="pending" labelPlacement="end">Pendientes</ion-radio><br>
-          <ion-radio value="all" labelPlacement="end">Todas</ion-radio><br>
-        </ion-radio-group>
-    </div>
-    <div class="filtros">
-      <div class="action" style="color: white;" (click)="showFilterModal($event)">
-        <span>Filtros</span>
-        <ion-icon name="options-outline" size="large"></ion-icon>
+    <div class="contenedorFiltros">
+      <div class="pills">
+        <!-- contenedor del pill para poder subrayar borde inferior cuando esta selected -->
+        <div [ngClass]="{'borderSelected': rbSelected === 'all'}">
+          <div
+            class="btnFiltros"
+            [ngClass]="{'btnFiltroSelected': rbSelected === 'all', 'btnFiltroNoSelected': rbSelected !== 'all'}"
+            button
+            (click)="rbSelection('all')"
+          >
+            Todas
+          </div>
+        </div>
+
+        <div [ngClass]="{'borderSelected': rbSelected === 'pending'}">
+          <div
+            class="btnFiltros"
+            [ngClass]="{'btnFiltroSelected': rbSelected === 'pending', 'btnFiltroNoSelected': rbSelected !== 'pending'}"
+            button
+            (click)="rbSelection('pending')"
+          >
+            Pendientes
+          </div>
+        </div>
+
+        <div [ngClass]="{'borderSelected': rbSelected === 'listened'}">
+          <div
+            class="btnFiltros"
+            [ngClass]="{'btnFiltroSelected': rbSelected === 'listened', 'btnFiltroNoSelected': rbSelected !== 'listened'}"
+            button
+            (click)="rbSelection('listened')"
+          >
+            Escuchadas
+          </div>
+        </div>
+      </div>
+
+      <div class="filtros">
+        <div
+          class="action"
+          style="color: white"
+          (click)="showFilterModal($event)"
+        >
+          <ion-icon name="options-outline" size="medium"></ion-icon>
+        </div>
       </div>
     </div>
   </div>
   <!-- fin filtros  -->
 
   <div>
-    @for (message of messageList; track $index) {
-        @if (message.isNew && !message.listened) {
-          <h3 class="heartBeatLetters">¡Nueva!</h3>
-        }
-        <ion-card mode="ios" (click)="selectMessage(message)" [class.highlightedCard]="message.isNew && !message.listened">
-          <ion-card-header style="margin-bottom: -5px;">
-            <ion-card-subtitle>
-              <div class="flexSB">
-                <div>{{ message.book.name}}</div>
-                <div>{{ message.date| date:'dd/MM/yyyy' }}</div>
-              </div>
-            </ion-card-subtitle>
-
-            <div style="display: flex; justify-content: space-between;">
-              <ion-card-title color="dark" mode="md" class="ion-margin-bottom">{{ message.title }}</ion-card-title>
-              @if (core.isAuthUser) {
-                <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(message, $event)"></ion-icon>
-              }
-            </div>
-          </ion-card-header>
-
-          <ion-card-content>
-            <div class="flexSB">
-              @if (message.speaker.id === 5) {
-              <ion-text>{{ message.note }}</ion-text>
-              } @else {
-              <ion-text>{{ message.speaker.name }}</ion-text>
-              }
-              <div>
-                <!-- <a [href]="message.url"
-                      ><ion-icon name="headset-outline"></ion-icon
-                    ></a> -->
-                <ion-icon name="open-outline" style="color: #cbb04c; padding: 3px;" (click)="openMsgDetail(message, $event)"></ion-icon>
-                @if(message.listened) {
-                  <ion-icon name="remove-circle-outline" style="color: #cbb04c; padding: 3px;"
-                    (click)="removeFromListened(message, $event)"></ion-icon>
-                } @else {
-                  <ion-icon name="play-circle-outline" style="color: #339f51; padding: 3px;"
-                    (click)="this.core.audio.markAsListened(message, $event)"></ion-icon>
-                }
-                <ion-icon name="share-social-outline" style="color: #4d8dff; padding: 3px;"
-                  (click)="shareMessage(message, $event)"></ion-icon>
-              </div>
-            </div>
-          </ion-card-content>
-          @if(message.listened) {
-          <!-- style="background: #b26123 !important;" -->
-          <ion-progress-bar value="100" class="my-progress-bar animate-progress"></ion-progress-bar>
-        }
-      </ion-card>
-    } @if (messageList && messageList.length < 1) { <div class="noResult">No se han encontrado resultados
-  </div>
-  <div div class="refresh">(Desliza para recargar)</div>
-  }
+    @for (message of messageList; track $index) { @if (message.isNew &&
+    !message.listened) {
+    <h3 class="heartBeatLetters">¡Nueva!</h3>
+    }
+      <app-card-message [message]="message" (removeFromListened)="removeFromListened($event)" (shareMessage)="shareMessage($event)"></app-card-message> 
+    } 
+    @if (messageList && messageList.length < 1) {
+    <div class="noResult">No se han encontrado resultados</div>
+    <div div class="refresh">(Desliza para recargar)</div>
+    }
   </div>
 
-  <div class="topScroller" [class.visible]="showScroller" (click)="scrollToTop()">
+  <div
+    class="topScroller"
+    [class.visible]="showScroller"
+    (click)="scrollToTop()"
+  >
     <ion-icon name="chevron-up-circle-outline"></ion-icon>
   </div>
-
 </ion-content>

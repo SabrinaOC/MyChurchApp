@@ -1,17 +1,10 @@
-.flexSB {
-  display: flex;
-  justify-content: space-between;
 
-  div {
-    display: flex;
-    gap: 12px;
-  }
-}
 
 .divFiltros {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  padding-inline: 6px;
 }
 
 .filtros {
@@ -23,6 +16,72 @@
     display: flex;
     align-items: center;
     gap: 10px;
+  }
+}
+
+.contenedorFiltros {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #323c48;
+  .pills {
+    display: flex;
+    padding-left: 8px;
+    margin-top: 7px;
+    color: white;
+    gap: 8px;
+    
+    // Contenedor individual del botón
+    > div {
+      position: relative;
+      padding-bottom: 8px;
+      
+      // Creamos la línea invisible
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px; // Grosor del borde
+        background-color: var(--ion-color-primary);
+        
+        // Estado inicial: invisible y escala 0 (comprimido al centro)
+        opacity: 0;
+        transform: scaleX(0); 
+        transform-origin: center;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+    }
+
+    .borderSelected {
+      // Cuando está seleccionado, expandimos y mostramos
+      &::after {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+}
+  .btnFiltros {
+    border-radius: 25px;
+    padding-inline: 12px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btnFiltroSelected {
+    color: var(--ion-color-primary);
+    background-color: var(--ion-card-background);
+    font-weight: bold;
+    border: 2px solid var(--ion-card-background);
+  }
+
+  .btnFiltroNoSelected {
+    border: 2px solid #323c48;
+    opacity: 0.8;
   }
 }
 
@@ -45,61 +104,10 @@
   margin-top: 7px;
 }
 
-.my-progress-bar {
-  --progress-background: var(--ion-color-primary);
-}
 
-.animate-progress {
-  animation-duration: 2.5s;
-  animation-name: fillPB;
-}
-
-@keyframes fillPB {
-  from {
-    transform: scaleX(0);
-  }
-
-  to {
-    transform: scaleX(1);
-  }
-}
 
 ion-icon {
   cursor: pointer;
-}
-
-.highlightedCard {
-  margin-bottom: 10px;
-  outline-width: 1px;
-  outline-offset: 0;
-  outline-color: var(--ion-color-primary);
-  outline-style: solid;
-  animation: animateOutline 2s ease infinite;
-}
-
-@keyframes animateOutline {
-  0% {
-    outline-width: 1px;
-    outline-offset: 0;
-    outline-color: rgba(0, 130, 206, 0);
-  }
-
-  10% {
-    outline-color: var(--ion-color-primary);
-  }
-
-  /* The animation finishes at 50% */
-  50% {
-    outline-width: 7px;
-    outline-offset: 4px;
-    outline-color: rgba(0, 130, 206, 0);
-  }
-
-  100% {
-    outline-width: 7px;
-    outline-offset: 4px;
-    outline-color: rgba(102, 102, 102, 0);
-  }
 }
 
 .heartBeatLetters {
@@ -109,7 +117,7 @@ ion-icon {
   right: 50px;
   z-index: 999;
   text-align: right;
-  font-family: 'IndieFlower', sans-serif;
+  font-family: "IndieFlower", sans-serif;
   font-weight: 800;
   color: var(--ion-color-primary);
   position: relative;
