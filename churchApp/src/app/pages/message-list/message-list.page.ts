@@ -281,6 +281,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     event.preventDefault();
     event.stopPropagation();
     
+    // this.navigationExtra.queryParams = { title: message.title };
     this.navigationExtra.queryParams = message;
     this.router.navigate(['add-message'], this.navigationExtra)
   }
@@ -289,7 +290,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     event.preventDefault();
     event.stopPropagation();
     
-    this.navigationExtra.queryParams = message;
+    this.navigationExtra.queryParams = { id: message.id };
+    // this.navigationExtra.queryParams = message;
     this.router.navigate(['message-detail'], this.navigationExtra)
   }
 }

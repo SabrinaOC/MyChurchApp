@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="navCtrl.pop()">
+      <ion-button (click)="core.navCtrl.pop()">
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -11,78 +11,80 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <ion-card-header>
-      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; cursor: pointer;">
-        <ion-badge class="badge-verse">
-          <span class="ion-padding-start ion-padding-end">{{msgSelected.book.name}}</span>
-        </ion-badge>
+      @if (msgSelected) {
+      <ion-card-header>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; cursor: pointer;">
+          <ion-badge class="badge-verse">
+            <span class="ion-padding-start ion-padding-end">{{msgSelected.book!.name}}</span>
+          </ion-badge>
 
-        @if (core.isAuthUser) {
-          <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(msgSelected, $event)"></ion-icon>
-        }
-      </div>
-
-      <ion-card-title color="dark" class="boldText">{{ msgSelected.title }}</ion-card-title> 
-
-      @if (msgSelected.speaker.id === 5) {
-        <ion-card-subtitle>{{ msgSelected.note }}</ion-card-subtitle>
-      } @else {
-        <ion-card-subtitle>{{ msgSelected.speaker.name }}</ion-card-subtitle>
-      }
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-row id="iconCenteredLayout" class="ion-margin-top">
-        <div style="z-index: 999;">
-          <ion-button class="ion-margin-end" fill="clear" disabled>
-            <ion-icon name="heart-outline" color="danger"></ion-icon>
-          </ion-button>
-  
-          <ion-button size="large" shape="round" (click)="togglePlay()">
-            @if (isLoading) {
-              <ion-spinner slot="icon-only" name="lines-small" style="color: white;"></ion-spinner>
-            } @else {
-              <ion-icon slot="icon-only" [name]="isPlaying && core.audio.selectedMessage?.id === msgSelected.id ? 'pause' : 'play'">
-              </ion-icon>
-            }
-          </ion-button>
-  
-          <ion-button class="ion-margin-start" fill="clear" (click)="shareMessage($event)">
-            <ion-icon name="share-social-outline" style="color: #4d8dff;"></ion-icon>
-          </ion-button>
-        </div>
-      </ion-row>
-
-      <ion-row id="seconds" class="ion-justify-content-between">
-        <ion-col class="ion-text-start">{{progress * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
-        <ion-col class="ion-text-end">{{duration * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
-      </ion-row>
-
-      <ion-row class="ion-margin-bottom">
-        @if (this.core.audio.selectedMessage?.id !== this.msgSelected.id) {
-          <ion-range id="audioProgress" disabled></ion-range>
-        } @else {
-          <ion-range id="audioProgress" [value]="progress" (ionChange)="onSeek($event)" min="0" [max]="duration"
-            step="0.1" ></ion-range>
-        }
-      </ion-row>
-
-      @if (msgSelected.questions) {
-        <h2 class="boldText" style="margin-top: 30px;">Reflexion:</h2>
-        <div id="questionsDiv" class="markdown-content" [innerHTML]="msgSelected.questions | formatQuestionText"></div>
-      }
-      
-      @if (verses && verses.length) {
-        <h2 class="boldText">Versículos:</h2>
-
-        <div id="versesLayout">
-          @for (verse of verses; track $index) {
-            <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
-              <span>{{verse}}</span>
-            </ion-badge>
+          @if (core.isAuthUser) {
+            <ion-icon slot="end" name="pencil-outline" size="small" color="primary" (click)="editMessage(msgSelected, $event)"></ion-icon>
           }
         </div>
-      }
-    </ion-card-content>
+
+        <ion-card-title color="dark" class="boldText">{{ msgSelected.title }}</ion-card-title> 
+
+        @if (msgSelected.speaker!.id === 5) {
+          <ion-card-subtitle>{{ msgSelected.note }}</ion-card-subtitle>
+        } @else {
+          <ion-card-subtitle>{{ msgSelected.speaker!.name }}</ion-card-subtitle>
+        }
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-row id="iconCenteredLayout" class="ion-margin-top">
+          <div style="z-index: 999;">
+            <ion-button class="ion-margin-end" fill="clear" disabled>
+              <ion-icon name="heart-outline" color="danger"></ion-icon>
+            </ion-button>
+    
+            <ion-button size="large" shape="round" (click)="togglePlay()">
+              @if (isLoading) {
+                <ion-spinner slot="icon-only" name="lines-small" style="color: white;"></ion-spinner>
+              } @else {
+                <ion-icon slot="icon-only" [name]="isPlaying && core.audio.selectedMessage?.id === msgSelected.id ? 'pause' : 'play'">
+                </ion-icon>
+              }
+            </ion-button>
+    
+            <ion-button class="ion-margin-start" fill="clear" (click)="shareMessage($event)">
+              <ion-icon name="share-social-outline" style="color: #4d8dff;"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-row>
+
+        <ion-row id="seconds" class="ion-justify-content-between">
+          <ion-col class="ion-text-start">{{progress * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
+          <ion-col class="ion-text-end">{{duration * (this.core.audio.selectedMessage?.id !== this.msgSelected.id ? 0 : 1000) | date:'mm:ss':'UTC'}}</ion-col>
+        </ion-row>
+
+        <ion-row class="ion-margin-bottom">
+          @if (this.core.audio.selectedMessage?.id !== this.msgSelected.id) {
+            <ion-range id="audioProgress" disabled></ion-range>
+          } @else {
+            <ion-range id="audioProgress" [value]="progress" (ionChange)="onSeek($event)" min="0" [max]="duration"
+              step="0.1" ></ion-range>
+          }
+        </ion-row>
+
+        @if (msgSelected.questions) {
+          <h2 class="boldText" style="margin-top: 30px;">Reflexion:</h2>
+          <div id="questionsDiv" class="markdown-content" [innerHTML]="msgSelected.questions | formatQuestionText"></div>
+        }
+        
+        @if (verses && verses.length) {
+          <h2 class="boldText">Versículos:</h2>
+
+          <div id="versesLayout">
+            @for (verse of verses; track $index) {
+              <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
+                <span>{{verse}}</span>
+              </ion-badge>
+            }
+          </div>
+        }
+      </ion-card-content>
+    }
   </ion-card>
 </ion-content>
