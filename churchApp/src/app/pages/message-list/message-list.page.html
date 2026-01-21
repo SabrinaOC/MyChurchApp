@@ -97,7 +97,12 @@
     }
       <app-card-message [message]="message" (removeFromListened)="removeFromListened($event)" (shareMessage)="shareMessage($event)"></app-card-message> 
     } 
-    @if (messageList && messageList.length < 1) {
+
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    @if (fullListRetrieved && messageList.length < 1) {
     <div class="noResult">No se han encontrado resultados</div>
     <div div class="refresh">(Desliza para recargar)</div>
     }

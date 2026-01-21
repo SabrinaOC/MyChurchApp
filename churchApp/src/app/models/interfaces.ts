@@ -26,10 +26,10 @@ export interface Message {
     note: string,
     isNew: Boolean,
     createdAt: Date,
-    messageType: MessageType,
+    messageType?: MessageType,
     mimetype: string,
     questions: string,
-    verses: string,
+    verses?: string,
     image: string,
 }
 

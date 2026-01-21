@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Book, Message } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { IonContent, LoadingController, PopoverController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, IonContent, LoadingController, PopoverController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
@@ -23,7 +23,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
   content!: IonContent;
 
-  messageList!: Message[]
+  messageList: Message[] = []
   isDesktop: boolean = false;
   datetime!: Date;
   rbSelected: string = 'all';
@@ -38,8 +38,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   progress: number = 0;
   duration: number = 0;
   isLoading: boolean = false;
-  limit: number = 10;
-  offset: number = 1;
+  limit: number = 50;
+  offset: number = 0;
+  fullListRetrieved: boolean = false;
 
   private subscription: Subscription = new Subscription();
 
@@ -109,31 +110,48 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  async getAllMessages() {
-    let loading = await this.loadingController.create({
-      message: 'Recuperando predicaciones...',
-      cssClass: 'custom-loading',
-      mode: 'md',
-      spinner: null,
-    })
-    loading.present();
+  async getAllMessages(event?: InfiniteScrollCustomEvent) {
+    let loading: any;
+    if(this.offset < 1) {
+      loading = await this.loadingController.create({
+        message: 'Recuperando predicaciones...',
+        cssClass: 'custom-loading',
+        mode: 'md',
+        spinner: null,
+      })
+      loading.present();
+    }
     this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
     .subscribe({
       next: (data: any) => {
-        if(data) {
+        console.log('Lista msgs => ', data.messageListMapped.length)
+        if(data.messageListMapped.length > 0) {
+          this.offset++;
           this.updateMessageList(data.messageListMapped)
+        } else {
+          //no hay mas datos que recuperar
+          this.fullListRetrieved = true;
         }
         
-        loading.dismiss()
+        if(loading) {
+          loading.dismiss()
+        }
+        if(event) {
+          event.target.complete()
+        }
       },
       error: (err: any) => {
         console.error(err)
-        loading.dismiss()
+        if(loading) {
+          loading.dismiss()
+        }
       }
     })
   }
 
   refresh(event: any) {
+    this.offset = 0;
+    this.fullListRetrieved = false;
     this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
     .subscribe((data: any) => {
       if(data) {
@@ -201,7 +219,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    * Función centralizada para gestionar actualización de la lista de predicaciones mostradas
    */
   updateMessageList(lista: any) {
-    this.messageList = lista;
+    // !this.messageList ? this.messageList = lista : this.messageList.concat(lista)
+    this.messageList = [...this.messageList, ...lista]
     this.mapMessageListImages();
     this.checkIfAlreadyListened();
     this.checkIfIsNewMessage();
@@ -295,6 +314,14 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
       }
       msg.image = imgBase64 != '' ? imgBase64 : msg.image;
     })
+  }
+
+  onIonInfinite(event: InfiniteScrollCustomEvent) {
+    if(!this.fullListRetrieved) {
+      this.getAllMessages(event);
+    } else {
+      event.target.complete();
+    }
   }
 
 }

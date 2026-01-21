@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, input, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -11,6 +11,7 @@ import { CardOptionsPopoverComponent } from '../card-options-popover/card-option
   selector: 'app-card-message',
   templateUrl: './card-message.component.html',
   styleUrls: ['./card-message.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardMessageComponent  implements OnInit {
 
