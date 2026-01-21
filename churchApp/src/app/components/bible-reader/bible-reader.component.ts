@@ -95,7 +95,7 @@ export class BibleReaderComponent implements AfterViewInit {
   parseVerseReference(ref: string) {
     const regex = /^(\d?\s?[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:\s[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*)\s+(\d+)(?::(\d+)(?:-(\d+))?)?$/;
 
-    const match = ref.match(regex);
+    const match = ref.trim().match(regex);
     
     if (!match) {
       throw new Error("Referencia bíblica inválida: " + ref);
