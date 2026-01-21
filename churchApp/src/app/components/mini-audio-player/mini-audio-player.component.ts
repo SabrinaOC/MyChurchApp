@@ -12,6 +12,7 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
   @Input() public message!: Message | null;
+  @Input() public ignoreGesture: boolean = false;
   @Output() public closing: EventEmitter<any> = new EventEmitter();
   @Output() public finish: EventEmitter<any> = new EventEmitter();
   @ViewChild("audioPlayer") audioPlayer!: ElementRef<HTMLElement>;
@@ -107,6 +108,9 @@ export class MiniAudioPlayerComponent implements OnInit, AfterViewInit {
   openMsgDetail(event: any) {
     // event.preventDefault();
     // event.stopPropagation();
+    if (this.ignoreGesture) {
+      return;
+    }
     
     this.navigationExtra.queryParams = this.message;
     this.router.navigate(['message-detail'], this.navigationExtra)

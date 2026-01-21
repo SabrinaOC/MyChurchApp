@@ -91,8 +91,8 @@ export class AddMessagePage implements OnInit {
           next: (res: any) => {
             this.form.reset();
             load.dismiss();
-            this.presentSnakbar('Predicación actualizada con éxito')
-            this.router.navigate(['message-list']);
+            this.presentSnakbar('Predicación actualizada con éxito');
+            this.core.navCtrl.pop();
           },
           error: (err: Error) => {
             load.dismiss();
@@ -295,11 +295,11 @@ export class AddMessagePage implements OnInit {
     if (this.form.dirty) {
       this.core.openAlert("Ha realizado cambios. ¿Desea salir?", "Salir", "Cancelar").then(async (accepted) => {
         if (accepted) {
-          this.core.navCtrl.navigateBack('');
+          this.core.navCtrl.pop();
         }
       });
     } else {
-      this.core.navCtrl.navigateBack('');
+      this.core.navCtrl.pop();
     }
   }
 

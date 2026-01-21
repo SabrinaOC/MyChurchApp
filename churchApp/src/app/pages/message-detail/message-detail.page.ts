@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-import { AnimationController, NavController } from '@ionic/angular';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { IonRouterOutlet, NavController, ViewWillEnter } from '@ionic/angular';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { Share } from '@capacitor/share';
@@ -12,7 +12,7 @@ import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.
   templateUrl: './message-detail.page.html',
   styleUrls: ['./message-detail.page.scss'],
 })
-export class MessageDetailPage implements OnInit {
+export class MessageDetailPage implements OnInit, ViewWillEnter {
 
   msgSelected!: Message;
   verses: string[] = [];
@@ -26,9 +26,13 @@ export class MessageDetailPage implements OnInit {
 
   constructor(
     public core: CoreProvider,
-    public navCtrl: NavController,
-    private router: Router
+    private route: ActivatedRoute,
+    private router: Router,
+    private routerOutlet: IonRouterOutlet
   ) {
+  }
+
+  ionViewWillEnter(): void {
     this.getMessageDetail();
   }
 
@@ -40,12 +44,19 @@ export class MessageDetailPage implements OnInit {
   }
 
   getMessageDetail() {
-    this.msgSelected = this.router.getCurrentNavigation()?.extras.queryParams as Message;
+    const searchedId: number = this.route.snapshot.queryParams["id"];
 
-    if (!this.msgSelected) {
-      this.navCtrl.navigateForward('message-list')
-    }
-    this.versesToList();
+    this.core.api.message.findById({id: searchedId}).subscribe({
+      next: (res: any) => {
+        if (res) {
+          this.msgSelected = res.messageMapped[0];
+          this.versesToList();
+        }
+      },
+      error: (e) => {
+        console.log('ERROR ', e)
+      },
+    });
   }
 
   versesToList() {    
@@ -118,5 +129,9 @@ export class MessageDetailPage implements OnInit {
   onSeek(event: any) {
     const value = event.detail.value;
     this.core.audio.seekTo(value);
+  }
+
+  navigateBack() {
+    this.routerOutlet.canGoBack() ? this.core.navCtrl.pop() : this.core.navCtrl.navigateBack("/message-list");
   }
 }

@@ -11,6 +11,8 @@ import { CoreProvider } from 'src/app/services/core';
 export class SimpleVerseSelectorComponent {
 
   @Input() public justBook: boolean = false;
+  @Input() public justChapter: boolean = false;
+  @Input() public justVerse: boolean = false;
   
   filteredBooks: Book[] = [...this.core.bookList]; // Filtered list
   searchTerm: string = '';
@@ -46,14 +48,18 @@ export class SimpleVerseSelectorComponent {
   selectChapter(chapter: number) {
     this.selectedChapter = chapter;
 
-    this.chapterVerses = this.core.bible.getVerses(this.selectedBook!.name!, this.selectedChapter) ?? 0;
+    if (this.justChapter) {
+      this.chooseVerse();
+    } else {
+      this.chapterVerses = this.core.bible.getVerses(this.selectedBook!.name!, this.selectedChapter) ?? 0;
+    }
   }
 
   selectVerse(verse: number) {
     this.selectedVerse = verse;
 
     //If the selectedVerse is the last of the chapter, exit
-    if (verse == this.chapterVerses) {
+    if (verse == this.chapterVerses || this.justVerse) {
       this.chooseVerse();
     }
   }
@@ -67,12 +73,17 @@ export class SimpleVerseSelectorComponent {
     return Array.from({ length: end - start }, (_, i) => i + start + 1);
   }
 
-
-  chooseVerse() {
+  /**
+   * 
+   * @param justChapter To choose direcly a chapter from HTML event skip
+   */
+  chooseVerse(justChapter: boolean = false) {
     let verse: string | Book = "";
     
     if (this.justBook) {
       verse = this.selectedBook!;
+    } else if (this.justChapter || justChapter) {      
+      verse = `${this.selectedBook?.name} ${this.selectedChapter}`;
     } else {
       verse = `${this.selectedBook?.name} ${this.selectedChapter}:${this.selectedVerse}${this.selectedRange === 0 ? "" : "-" + this.selectedRange}`;
     }

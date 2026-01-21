@@ -1,16 +1,57 @@
-<ion-header [translucent]="true" mode="ios">
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="core.modalCtrl.dismiss()">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-button>
+      @if (asPage) {
+        <ion-menu-toggle>
+          <ion-img src="../assets/icon/favicon.png" style="width: 35px; margin-left: 10px;"></ion-img>
+        </ion-menu-toggle>
+      } @else {
+        <ion-button (click)="core.modalCtrl.dismiss()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      }
     </ion-buttons>
-    <ion-title>{{chapter}}</ion-title>
+    <ion-title>Lectura</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [ngClass]="{'plainBibleBackground': !core.settings.showBibleBackgroundColor}">
+  <p id="bookLabel">{{book}}</p>
+  <p id="chapterNumberLabel">{{chapterNumber}}</p>
+
   <p id="text" class="bibleText" [innerHTML]="text"></p>
 
   <p id="bibleInfo">Texto bíblico Reina-Valera 1960</p>
+  
+  @if (core.audio.selectedMessage) {
+    <div style="touch-action: none; margin-bottom: 100px;">
+      <app-mini-audio-player [message]="core.audio.selectedMessage" style="--audio-player-bottom: 60px;"
+        (closing)="closeAudioPlayer()"
+        (finish)="markAsListenedMessage($event)"
+        [ignoreGesture]="!asPage">
+      </app-mini-audio-player>
+    </div>
+  }
 </ion-content>
+
+<ion-footer mode="ios" [translucent]="true" [ngClass]="{'lightFooter': core.settings.theme === 'light'}">
+  <!-- <ion-toolbar> -->
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="2" style="display: flex; justify-content: end;" (click)="getAdjacentChapter('prev')">
+          <ion-icon name="chevron-back-outline" size="large"></ion-icon>
+        </ion-col>
+
+        <ion-col size="8">
+          <div #chapterBadge class="badgeLayout">
+            <ion-badge (click)="showSimpleVerseSelector($event)">{{chapter}}</ion-badge>
+          </div>
+        </ion-col>
+
+        <ion-col size="2" class="ion-justify-content-start" (click)="getAdjacentChapter('next')">
+          <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  <!-- </ion-toolbar> -->
+</ion-footer>

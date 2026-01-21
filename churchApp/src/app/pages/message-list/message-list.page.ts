@@ -284,6 +284,23 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   /**
    * 
    */
+  editMessage(message: Message, event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // this.navigationExtra.queryParams = { title: message.title };
+    this.navigationExtra.queryParams = message;
+    this.router.navigate(['add-message'], this.navigationExtra)
+  }
+
+    openMsgDetail(message: Message, event: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    this.navigationExtra.queryParams = { id: message.id };
+    // this.navigationExtra.queryParams = message;
+    this.router.navigate(['message-detail'], this.navigationExtra)
+  }
   mapMessageListImages() {
     this.messageList.forEach((msg: Message) => {
       let imgBase64: string = '';

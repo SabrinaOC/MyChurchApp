@@ -62,6 +62,7 @@ ion-label {
 ion-icon {
     font-size: 22px;
     color: white;
+    cursor: pointer;
 }
 
 ion-datetime {
@@ -116,6 +117,10 @@ body.light-theme {
     --width: 80vw;
     --height: 80vh;
     bottom: 0;
+
+    &::part(content) {
+        --background: #1d2935;
+    }
 }
 
 .versesPopover {
@@ -156,7 +161,7 @@ body.light-theme {
 
 .bibleText {
     font-family: "NotoSerif", sans-serif;
-    line-height: 28px;
+    line-height: 35px;
 }
 
 
@@ -228,4 +233,21 @@ body.light-theme {
 
 .ios #audio-player {
     margin-bottom: -18px !important;
+}
+
+
+.light-theme {
+    .plainBibleBackground {
+        --background: white;
+        --color: #494949;
+    }
+
+    .sectionTitle {
+        color: var(--ion-color-medium)
+    }
+}
+
+.dark-theme .plainBibleBackground {
+    --background: black;
+    --color: white;
 }
