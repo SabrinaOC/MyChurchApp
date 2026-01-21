@@ -11,13 +11,17 @@ import { RequestBuilder } from '../../request-builder';
 import { Message } from '../../models/message';
 
 export interface GetAllMessages$Params {
+  limit: number;
+  offset: number;
 }
 
-export function getAllMessages(http: HttpClient, rootUrl: string, params?: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+export function getAllMessages(http: HttpClient, rootUrl: string, params: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'messageListMapped'?: Array<Message>;
 }>> {
   const rb = new RequestBuilder(rootUrl, getAllMessages.PATH, 'get');
   if (params) {
+    rb.query('limit', params.limit, {});
+    rb.query('offset', params.offset, {});
   }
 
   return http.request(

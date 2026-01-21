@@ -46,7 +46,7 @@ export class MessageService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllMessages$Response(params?: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
+  getAllMessages$Response(params: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
 'messageListMapped'?: Array<Message>;
 }>> {
     return getAllMessages(this.http, this.rootUrl, params, context);
@@ -62,7 +62,7 @@ export class MessageService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllMessages(params?: GetAllMessages$Params, context?: HttpContext): Observable<{
+  getAllMessages(params: GetAllMessages$Params, context?: HttpContext): Observable<{
 'messageListMapped'?: Array<Message>;
 }> {
     return this.getAllMessages$Response(params, context).pipe(

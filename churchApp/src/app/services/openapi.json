@@ -137,6 +137,26 @@
                 "tags": [
                     "Message"
                 ],
+                "parameters": [
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": 1
+                        }
+                    }
+                ],
                 "operationId": "getAllMessages",
                 "responses": {
                     "200": {
@@ -688,6 +708,10 @@
                     "mimetype": {
                         "type": "string",
                         "example": ".mp3"
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "Bvklsdkeecx.."
                     }
                 }
             },

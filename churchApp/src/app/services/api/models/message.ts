@@ -9,6 +9,7 @@ export interface Message {
   book?: Book;
   date?: Date;
   id?: number;
+  image?: string;
   messageType?: MessageType;
   mimetype?: string;
   normalizedTitle?: string;

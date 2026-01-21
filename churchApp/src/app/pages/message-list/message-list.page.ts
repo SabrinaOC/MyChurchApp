@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Book, Message } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { IonContent, LoadingController } from '@ionic/angular';
+import { IonContent, LoadingController, PopoverController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
@@ -9,6 +9,8 @@ import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-p
 import { NavigationExtras, Router } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
+import { CardOptionsPopoverComponent } from 'src/app/components/card-options-popover/card-options-popover.component';
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-message-list',
@@ -32,6 +34,12 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   navigationExtra: NavigationExtras = {};
 
   showScroller = false;
+  isPlaying: boolean = false;
+  progress: number = 0;
+  duration: number = 0;
+  isLoading: boolean = false;
+  limit: number = 10;
+  offset: number = 1;
 
   private subscription: Subscription = new Subscription();
 
@@ -40,12 +48,15 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
               public restService: RestService,
               private loadingController: LoadingController,
               private router: Router,
+              
+              public audioService: AudioService
   ) { }
 
   ngOnInit(): void {
     const sub = this.core.audio.listened.subscribe(value => {
       this.updateMessageList(this.messageList);
     });
+
     this.subscription.add(sub) 
   }
 
@@ -68,10 +79,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   scrollToTop() {
     this.content.scrollToTop(500);
-  }
-
-  selectMessage(message: Message | null) {
-    this.core.audio.selectMessage(message);
   }
 
   async searchInput(event: any) {
@@ -110,7 +117,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
       spinner: null,
     })
     loading.present();
-    this.core.api.message.getAllMessages()
+    this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
     .subscribe({
       next: (data: any) => {
         if(data) {
@@ -127,7 +134,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   refresh(event: any) {
-    this.core.api.message.getAllMessages()
+    this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
     .subscribe((data: any) => {
       if(data) {
         this.updateMessageList(data.messageListMapped)
@@ -136,8 +143,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
-  removeFromListened(message: Message, event: any) {
-    event.stopPropagation()
+  removeFromListened(message: Message) {
+    // event.stopPropagation()
     let listened = localStorage.getItem('listened');
     let arr1 = listened?.split(',')
     let arr = [...new Set(arr1)]
@@ -195,6 +202,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    */
   updateMessageList(lista: any) {
     this.messageList = lista;
+    this.mapMessageListImages();
     this.checkIfAlreadyListened();
     this.checkIfIsNewMessage();
   }
@@ -222,8 +230,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     await modal.present();
   }
 
-  async shareMessage(message: Message, event: any) {
-    event.stopPropagation()
+  async shareMessage(message: Message) {
+    // event.stopPropagation()
 
     if (message.questions != null) {
       const modal = await this.core.modalCtrl.create({
@@ -250,8 +258,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  rbSelection(event: any) {
-    this.rbSelected = event.target.value
+  rbSelection(selection: string) {
+    this.rbSelected = selection;
 
     this.updateListRdBtn()
   }
@@ -275,7 +283,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   /**
    * 
-   * @param message 
    */
   editMessage(message: Message, event: any) {
     event.preventDefault();
@@ -294,4 +301,17 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     // this.navigationExtra.queryParams = message;
     this.router.navigate(['message-detail'], this.navigationExtra)
   }
+  mapMessageListImages() {
+    this.messageList.forEach((msg: Message) => {
+      let imgBase64: string = '';
+      if(msg.image && (!msg.image.includes('data:image/jpeg;base64') && !msg.image.includes('../../../assets/images/thumbnail-'))) {
+        imgBase64 = 'data:image/jpeg;base64,' + msg.image
+      } else if(!msg.image) {
+        const randomNum = Math.floor(Math.random() * 6);
+        imgBase64 = `../../../assets/images/thumbnail-${randomNum}.jpg`;
+      }
+      msg.image = imgBase64 != '' ? imgBase64 : msg.image;
+    })
+  }
+
 }
