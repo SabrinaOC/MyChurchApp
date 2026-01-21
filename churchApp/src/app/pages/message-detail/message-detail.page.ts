@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
-import { NavController, ViewWillEnter } from '@ionic/angular';
+import { IonRouterOutlet, NavController, ViewWillEnter } from '@ionic/angular';
 import { Message } from 'src/app/models/interfaces';
 import { CoreProvider } from 'src/app/services/core';
 import { Share } from '@capacitor/share';
@@ -27,7 +27,8 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
   constructor(
     public core: CoreProvider,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private routerOutlet: IonRouterOutlet
   ) {
   }
 
@@ -128,5 +129,9 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
   onSeek(event: any) {
     const value = event.detail.value;
     this.core.audio.seekTo(value);
+  }
+
+  navigateBack() {
+    this.routerOutlet.canGoBack() ? this.core.navCtrl.pop() : this.core.navCtrl.navigateBack("/message-list");
   }
 }
