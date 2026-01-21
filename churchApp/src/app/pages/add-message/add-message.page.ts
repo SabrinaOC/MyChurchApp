@@ -91,8 +91,8 @@ export class AddMessagePage implements OnInit {
           next: (res: any) => {
             this.form.reset();
             load.dismiss();
-            this.presentSnakbar('Predicación actualizada con éxito')
-            this.router.navigate(['message-list']);
+            this.presentSnakbar('Predicación actualizada con éxito');
+            this.core.navCtrl.pop();
           },
           error: (err: Error) => {
             load.dismiss();
