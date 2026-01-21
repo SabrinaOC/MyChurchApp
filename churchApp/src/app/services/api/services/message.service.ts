@@ -17,6 +17,8 @@ import { deleteMessage } from '../fn/message/delete-message';
 import { DeleteMessage$Params } from '../fn/message/delete-message';
 import { findByFilter } from '../fn/message/find-by-filter';
 import { FindByFilter$Params } from '../fn/message/find-by-filter';
+import { findById } from '../fn/message/find-by-id';
+import { FindById$Params } from '../fn/message/find-by-id';
 import { findByTitle } from '../fn/message/find-by-title';
 import { FindByTitle$Params } from '../fn/message/find-by-title';
 import { getAllMessages } from '../fn/message/get-all-messages';
@@ -257,6 +259,39 @@ export class MessageService extends BaseService {
    */
   findByFilter(params?: FindByFilter$Params, context?: HttpContext): Observable<any> {
     return this.findByFilter$Response(params, context).pipe(
+      map((r: StrictHttpResponse<any>): any => r.body)
+    );
+  }
+
+  /** Path part for operation `findById()` */
+  static readonly FindByIdPath = '/messages/{id}';
+
+  /**
+   * Get message by Id.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findById()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findById$Response(params: FindById$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+    return findById(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Get message by Id.
+   *
+   *
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `findById$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findById(params: FindById$Params, context?: HttpContext): Observable<any> {
+    return this.findById$Response(params, context).pipe(
       map((r: StrictHttpResponse<any>): any => r.body)
     );
   }
