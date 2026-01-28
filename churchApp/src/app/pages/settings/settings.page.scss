@@ -4,9 +4,21 @@
 }
 
 .fontTypeButton {
-    --padding-end: 3px;
-    --padding-start: 3px;
+    --padding-end: 7px;
+    --padding-start: 7px;
     --padding-top: 0px;
     --padding-bottom: 0px;
     --color: white;
+}
+
+.aestheticTypeButton {
+    font-family: "NotoSerif", sans-serif;
+    text-transform: none;
+    font-size: 15px;
+}
+
+.simpleTypeButton {
+    font-family: "Roboto-Regular", sans-serif;
+    text-transform: none;
+    font-size: 15px;
 }
