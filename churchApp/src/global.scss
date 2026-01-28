@@ -159,8 +159,14 @@ body.light-theme {
     }
 }
 
-.bibleText {
+.bibleAestheticText {
     font-family: "NotoSerif", sans-serif;
+    line-height: 35px;
+}
+
+.bibleSimpleText {
+    font-family: "Roboto-Regular", sans-serif;
+    // font-family: "NotoSans", sans-serif;
     line-height: 35px;
 }
 
