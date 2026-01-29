@@ -45,11 +45,13 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(public core: CoreProvider, private cdRef: ChangeDetectorRef, public router: Router) { }
 
   async ngOnInit() {
-    try {
-      await KeepAwake.keepAwake();
-    } catch(e) {
-      console.log("Error al intentar mantener la pantalla encendida", e);
-      
+    if (this.core.settings.awakeScreenOnBible) {
+      try {
+        await KeepAwake.keepAwake();
+      } catch(e) {
+        console.log("Error al intentar mantener la pantalla encendida", e);
+        
+      }
     }
   }
 
