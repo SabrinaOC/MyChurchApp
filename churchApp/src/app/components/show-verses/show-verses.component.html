@@ -9,7 +9,7 @@
   <ion-content>
     <ion-list id="reader">
       <ion-item>
-        <p [class]="core.settings.bibleFont === 'simple' ? 'bibleSimpleText' : 'bibleAestheticText'" [innerHTML]="getBibleText()"></p>
+        <p [class]="core.settings.bibleFont === 'sans-serif' ? 'bibleSimpleText' : 'bibleAestheticText'" [innerHTML]="getBibleText()"></p>
       </ion-item>
 
       <h4 (click)="readChapter()" style="text-align: center; margin-top: -5px; margin-bottom: 15px; color: var(--ion-color-primary);">Leer capítulo</h4>

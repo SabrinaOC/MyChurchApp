@@ -7,7 +7,7 @@ export class SettingsService {
   public theme: 'dark' | 'light' = 'dark';
   public showBibleTittles: boolean = true;
   public showBibleBackgroundColor: boolean = true;
-  public bibleFont: 'simple' | 'aesthetic' = 'aesthetic';
+  public bibleFont: 'sans-serif' | 'serif' = 'serif';
 
   constructor() { }
 
@@ -53,12 +53,8 @@ export class SettingsService {
     localStorage.setItem("bibleBackgroundColor", this.showBibleBackgroundColor + "");
   }
 
-    public toggleBibleFont() {
-      if (this.bibleFont === 'simple') {
-        this.bibleFont = 'aesthetic';
-      } else {
-        this.bibleFont = 'simple';
-      }
+  public toggleBibleFont(font: 'sans-serif' | 'serif') {
+    this.bibleFont = font;
     localStorage.setItem("bibleFont", this.bibleFont);
   }
 
@@ -122,14 +118,14 @@ export class SettingsService {
     let prefersBibleFont: string | null = localStorage.getItem("bibleFont")
 
     switch (prefersBibleFont) {
-      case 'simple':
-        this.bibleFont = 'simple';
+      case 'sans-serif':
+        this.bibleFont = 'sans-serif';
         break;
-      case 'false':
-        this.bibleFont = 'aesthetic';
+      case 'serif':
+        this.bibleFont = 'serif';
         break;
       case null:
-        this.bibleFont = 'aesthetic';
+        this.bibleFont = 'serif';
         break;
     }
   }

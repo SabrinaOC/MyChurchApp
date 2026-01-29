@@ -3,6 +3,10 @@
     align-items: center;
 }
 
+ion-accordion {
+    margin-bottom: 15px;
+}
+
 .fontTypeButton {
     --padding-end: 7px;
     --padding-start: 7px;
@@ -18,7 +22,7 @@
 }
 
 .simpleTypeButton {
-    font-family: "Roboto-Regular", sans-serif;
+    font-family: "NotoSans", sans-serif;
     text-transform: none;
     font-size: 15px;
 }
