@@ -8,6 +8,7 @@ export class SettingsService {
   public showBibleTittles: boolean = true;
   public showBibleBackgroundColor: boolean = true;
   public bibleFont: 'sans-serif' | 'serif' = 'serif';
+  public awakeScreenOnBible: boolean = true;
 
   constructor() { }
 
@@ -19,6 +20,7 @@ export class SettingsService {
     this.detectPrefersShowBibleTitles();
     this.detectPrefersShowBibleBackgroundColor();
     this.detectPrefersBibleFont();
+    this.detectPrefersAwakeScreenOnBible();
   }
 
   private setLightTheme() {
@@ -57,6 +59,12 @@ export class SettingsService {
     this.bibleFont = font;
     localStorage.setItem("bibleFont", this.bibleFont);
   }
+
+  public toggleAwakeScreenOnBible() {
+    this.awakeScreenOnBible = !this.awakeScreenOnBible;
+    localStorage.setItem("awakeScreenOnBible", this.awakeScreenOnBible + "");
+  }
+
 
   private detectPrefersTheme() {
     let currentTheme: string | null = localStorage.getItem("theme");
@@ -129,4 +137,21 @@ export class SettingsService {
         break;
     }
   }
+
+  private detectPrefersAwakeScreenOnBible() {
+    let prefersAwakeScreenOnBible: string | null = localStorage.getItem("awakeScreenOnBible")
+
+    switch (prefersAwakeScreenOnBible) {
+      case 'true':
+        this.awakeScreenOnBible = true;
+        break;
+      case 'false':
+        this.awakeScreenOnBible = false;
+        break;
+      case null:
+        this.awakeScreenOnBible = true;
+        break;
+    }
+  }
+
 }

@@ -11,6 +11,11 @@ platforms:
     versionName: 1.4.0
     versionCode: 100400
 
+    manifest:
+      - entries:
+          - uses-permission:
+              android:name: android.permission.WAKE_LOCK
+
     res:
       - path: drawable
         file: icon.png

@@ -64,8 +64,19 @@
                 </ion-col>
               </ion-row>
 
+              <!-- Mantener pantalla encendida en la Biblia -->
+              <ion-row (click)="core.settings.toggleAwakeScreenOnBible()" class="ion-margin-top">
+                <ion-col size="10" sizeMd="11" class="align-center">
+                  <ion-icon name="desktop-outline" size="medium"></ion-icon>
+                  <ion-label class="ion-margin-start"> Mantener pantalla encendida en la Biblia</ion-label>
+                </ion-col>
+                <ion-col size="2" sizeMd="1" class="align-center ion-justify-content-end">
+                  <ion-toggle [checked]="this.core.settings.awakeScreenOnBible"></ion-toggle>
+                </ion-col>
+              </ion-row>
+
               <!-- Estilo de letra -->
-              <ion-row  style="margin-top: 8px;">
+              <ion-row style="margin-top: 4px;">
                 <ion-col size="6" sizeMd="9" class="align-center">
                   <ion-icon name="text-outline" size="medium"></ion-icon>
                   <ion-label class="ion-margin-start" style="margin-top: 5px;"> Estilo de letra</ion-label>
@@ -83,6 +94,7 @@
                   </ion-button>
                 </ion-col>
               </ion-row>
+
             </div>
 
           </ion-accordion>
