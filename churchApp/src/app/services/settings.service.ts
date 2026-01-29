@@ -7,6 +7,7 @@ export class SettingsService {
   public theme: 'dark' | 'light' = 'dark';
   public showBibleTittles: boolean = true;
   public showBibleBackgroundColor: boolean = true;
+  public bibleFont: 'sans-serif' | 'serif' = 'serif';
 
   constructor() { }
 
@@ -17,6 +18,7 @@ export class SettingsService {
     this.detectPrefersTheme();
     this.detectPrefersShowBibleTitles();
     this.detectPrefersShowBibleBackgroundColor();
+    this.detectPrefersBibleFont();
   }
 
   private setLightTheme() {
@@ -49,6 +51,11 @@ export class SettingsService {
   public toggleBibleBackgroundColor() {
     this.showBibleBackgroundColor = !this.showBibleBackgroundColor;
     localStorage.setItem("bibleBackgroundColor", this.showBibleBackgroundColor + "");
+  }
+
+  public toggleBibleFont(font: 'sans-serif' | 'serif') {
+    this.bibleFont = font;
+    localStorage.setItem("bibleFont", this.bibleFont);
   }
 
   private detectPrefersTheme() {
@@ -103,6 +110,22 @@ export class SettingsService {
         break;
       case null:
         this.showBibleBackgroundColor = true;
+        break;
+    }
+  }
+
+  private detectPrefersBibleFont() {
+    let prefersBibleFont: string | null = localStorage.getItem("bibleFont")
+
+    switch (prefersBibleFont) {
+      case 'sans-serif':
+        this.bibleFont = 'sans-serif';
+        break;
+      case 'serif':
+        this.bibleFont = 'serif';
+        break;
+      case null:
+        this.bibleFont = 'serif';
         break;
     }
   }

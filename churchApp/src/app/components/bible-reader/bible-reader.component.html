@@ -19,7 +19,7 @@
   <p id="bookLabel">{{book}}</p>
   <p id="chapterNumberLabel">{{chapterNumber}}</p>
 
-  <p id="text" class="bibleText" [innerHTML]="text"></p>
+  <p id="text" [class]="core.settings.bibleFont === 'sans-serif' ? 'bibleSimpleText' : 'bibleAestheticText'" [innerHTML]="text"></p>
 
   <p id="bibleInfo">Texto bíblico Reina-Valera 1960</p>
   

@@ -64,7 +64,7 @@
                     </div>
                   </ion-card-header>
                   <ion-card-content>
-                    <p class="bibleText">{{res.text}}</p>
+                    <p [class]="core.settings.bibleFont === 'sans-serif' ? 'bibleSimpleText' : 'bibleAestheticText'">{{res.text}}</p>
                   </ion-card-content>
                 </ion-card>
               }
