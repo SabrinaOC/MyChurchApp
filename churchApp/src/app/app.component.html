@@ -6,22 +6,24 @@
           <ion-img src="../assets/icons/icon-96.webp"></ion-img>
           <ion-label>Fernán Núñez<br> Comunidad Cristiana</ion-label>
         </ion-list-header>
+
         <ion-menu-toggle autoHide="false" *ngFor="let p of accountPages; let i = index">
           @if (p.url !== '/add-message' || p.url === '/add-message' && core.isAuthUser) {
-          <ion-item [routerLink]="p.url" class="icon-container">
-            @if (!p.ionicIcon.includes("assets")) {
-              <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''"
-                [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
-            } @else {
-              <ion-img slot="start" [src]="p.ionicIcon" class="img-menu"></ion-img>
-            }
-            <ion-label>
-              {{p.title}}
-            </ion-label>
-          </ion-item>
+            <ion-item [routerLink]="p.url" class="icon-container">
+              @if (!p.ionicIcon.includes("assets")) {
+                <ion-icon slot="start" color="primary" [name]="p.ionicIcon? p.ionicIcon: ''"
+                  [src]="p.ionicIcon? p.ionicIcon: ''"></ion-icon>
+              } @else {
+                <ion-img slot="start" [src]="p.ionicIcon" class="img-menu"></ion-img>
+              }
+              <ion-label>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
           }
         </ion-menu-toggle>
       </ion-list>
+
       <ion-footer>
         <div style="padding-left: 4px; font-size: small;" (click)="checkIfPermissionNeeded();">
           <!-- <ion-icon slot="start" color="light" name="lock-closed-outline" style="font-size: 10px;"></ion-icon> -->
@@ -32,16 +34,34 @@
         </div>
       </ion-footer>
     </ion-menu>
-    <ion-router-outlet id="main-content"></ion-router-outlet>
 
-    @if (core.audio.selectedMessage) {
-      <div style="touch-action: none;">
-        <app-mini-audio-player [message]="core.audio.selectedMessage" 
-          (closing)="closeAudioPlayer()"
-          (finish)="markAsListenedMessage($event)"
-          [ngClass]="{'hidden': router.url !== '/message-list'}">
-        </app-mini-audio-player>
-      </div>
-    }
+    <div class="ion-page" id="main-content">
+      <ion-router-outlet></ion-router-outlet>
+
+      @if (core.audio.selectedMessage) {
+        <div style="touch-action: none;">
+          <app-mini-audio-player [message]="core.audio.selectedMessage" 
+            (closing)="closeAudioPlayer()"
+            (finish)="markAsListenedMessage($event)"
+            [ngClass]="{'hidden': router.url !== '/message-list'}">
+          </app-mini-audio-player>
+        </div>
+      }
+      
+      <ion-tabs>
+        <ion-tab-bar slot="bottom" [translucent]="true">
+          <ion-tab-button routerLink="/message-list">
+            <ion-icon name="home-outline" [color]="router.url === '/message-list' ? 'primary' : ''"></ion-icon>
+          </ion-tab-button>
+          <ion-tab-button routerLink="/bible-reader">
+            <ion-icon name="book-outline" [color]="router.url === '/bible-reader' ? 'primary' : ''"></ion-icon>
+          </ion-tab-button>
+          <ion-tab-button routerLink="/bible-reference">
+            <ion-icon name="search-outline" [color]="router.url === '/bible-reference' ? 'primary' : ''"></ion-icon>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </div>
+
   </ion-split-pane>
 </ion-app>

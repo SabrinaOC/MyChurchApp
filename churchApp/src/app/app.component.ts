@@ -13,26 +13,26 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   accountPages = [
-    {
-      title: 'Predicaciones',
-      url: '/message-list',
-      ionicIcon: 'list-outline',
-    },
+    // {
+    //   title: 'Predicaciones',
+    //   url: '/message-list',
+    //   ionicIcon: 'list-outline',
+    // },
     {
       title: 'Gestión contenido',
       url: '/add-message',
       ionicIcon: 'lock-closed-outline',
     },
-    {
-      title: 'Biblia',
-      url: '/bible-reader',
-      ionicIcon: 'book-outline',
-    },
-    {
-      title: 'Concordancias',
-      url: '/bible-reference',
-      ionicIcon: '../assets/icons/book-search.png', //src\assets\icons\book-search.png
-    },
+    // {
+    //   title: 'Biblia',
+    //   url: '/bible-reader',
+    //   ionicIcon: 'book-outline',
+    // },
+    // {
+    //   title: 'Concordancias',
+    //   url: '/bible-reference',
+    //   ionicIcon: '../assets/icons/book-search.png', //src\assets\icons\book-search.png
+    // },
     {
       title: 'Configuración',
       url: '/settings',
