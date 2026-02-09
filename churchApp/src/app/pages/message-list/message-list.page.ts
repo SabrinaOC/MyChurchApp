@@ -9,8 +9,6 @@ import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-p
 import { NavigationExtras, Router } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
-import { CardOptionsPopoverComponent } from 'src/app/components/card-options-popover/card-options-popover.component';
-import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-message-list',
@@ -47,9 +45,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
               public core: CoreProvider,
               public restService: RestService,
               private loadingController: LoadingController,
-              private router: Router,
-              
-              public audioService: AudioService
+              private router: Router
   ) { }
 
   ngOnInit(): void {
