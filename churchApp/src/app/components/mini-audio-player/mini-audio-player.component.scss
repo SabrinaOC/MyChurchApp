@@ -1,6 +1,6 @@
 ion-card {
     border-radius: 15px;
-    background: rgba($color: var(--ion-color-primary-rgb), $alpha: 0.85);
+    background: rgba($color: var(--ion-color-primary-rgb), $alpha: 0.9);
     opacity: 1;
 
     ion-card-header {
@@ -14,7 +14,7 @@ ion-card {
 
 #audio-player {
     position: fixed;
-    bottom: 0;
+    bottom: var(--audio-player-bottom, 0);
     width: 70%;
     left: 0;
     right: 0;
@@ -73,6 +73,12 @@ ion-card {
 .title {
     color: white;
     font-size: 17px;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden;
 }
 
 .speaker {

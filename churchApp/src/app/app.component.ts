@@ -24,6 +24,11 @@ export class AppComponent {
       ionicIcon: 'lock-closed-outline',
     },
     {
+      title: 'Biblia',
+      url: '/bible-reader',
+      ionicIcon: 'book-outline',
+    },
+    {
       title: 'Concordancias',
       url: '/bible-reference',
       ionicIcon: '../assets/icons/book-search.png', //src\assets\icons\book-search.png
@@ -64,14 +69,15 @@ export class AppComponent {
     initializeApp(environment.firebaseConfig);
     this.initialize();
 
-    this.core.detectPrefersTheme();
-    this.core.detectPrefersShowBibleTitles();
+    this.core.settings.loadSettings();
 
     App.getInfo().then(res => {
       this.version = res.version
     })
 
     this.core.isAuthUser = localStorage.getItem('USER_CREDENTIALS') ? true : false;
+
+    this.core.bible.lastChapterRead = localStorage.getItem('lastChapterRead') || "Génesis 1";
   }
 
   initialize() {

@@ -44,6 +44,16 @@ body {
     src: url('./assets/fonts/NotoSerif-VariableFont_wdth.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'NotoSans';
+    src: url('./assets/fonts/NotoSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
 ion-content {
     --ion-background-color: var(--ion-color-tertiary) !important;
     --ion-background-color: linear-gradient(28deg, var(--ion-color-tertiary) 0%, rgba(37, 61, 92, 1) 100%) !important;
@@ -62,6 +72,7 @@ ion-label {
 ion-icon {
     font-size: 22px;
     color: white;
+    cursor: pointer;
 }
 
 ion-datetime {
@@ -116,6 +127,10 @@ body.light-theme {
     --width: 80vw;
     --height: 80vh;
     bottom: 0;
+
+    &::part(content) {
+        --background: #1d2935;
+    }
 }
 
 .versesPopover {
@@ -154,9 +169,14 @@ body.light-theme {
     }
 }
 
-.bibleText {
-    font-family: "NotoSerif", sans-serif;
-    line-height: 28px;
+.bibleAestheticText {
+    font-family: "NotoSerif";
+    line-height: 35px;
+}
+
+.bibleSimpleText {
+    font-family: "NotoSans";
+    line-height: 35px;
 }
 
 
@@ -228,4 +248,21 @@ body.light-theme {
 
 .ios #audio-player {
     margin-bottom: -18px !important;
+}
+
+
+.light-theme {
+    .plainBibleBackground {
+        --background: white;
+        --color: #494949;
+    }
+
+    .sectionTitle {
+        color: var(--ion-color-medium)
+    }
+}
+
+.dark-theme .plainBibleBackground {
+    --background: black;
+    --color: white;
 }

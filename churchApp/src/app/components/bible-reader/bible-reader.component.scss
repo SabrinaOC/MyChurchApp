@@ -1,4 +1,23 @@
+#bookLabel {
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 35px;
+    margin-bottom: -45px;
+    color: lightgrey;
+}
+
+#chapterNumberLabel {
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 900;
+    font-size: 45px;
+    margin-bottom: 30px;
+}
+
 #text {
+    font-size: 17px;
     margin: 20px;
     user-select: text;
 
@@ -12,6 +31,49 @@
     text-align: center;
     color: rgb(155, 155, 155);
     font-size: 12px;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-bottom: 30px;
+}
+
+
+.badgeLayout {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+
+    ion-badge {
+        color: white;
+        font-size: 20px;
+        border-radius: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+ion-toolbar {
+    --background: #1E2631;
+}
+
+.lightFooter {
+    background-color: rgba($color: #1E2631, $alpha: 0.4);
+    // 3D4C61
+}
+
+.zoomInOutElement {
+    animation: zoomInZoomOutAnimation 0.8s ease normal;
+}
+
+@keyframes zoomInZoomOutAnimation {
+    0% {
+        scale: 100%;
+    }
+
+    50% {
+        scale: 120%;
+    }
+
+    100% {
+        scale: 100%;
+    }
 }

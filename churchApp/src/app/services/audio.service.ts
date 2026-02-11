@@ -269,7 +269,7 @@ export class AudioService implements OnDestroy {
    * @param message 
    * @param event 
    */
-  markAsListened(message: Message, event: any) {
+  markAsListened(message: Message, event?: any) {
     event?.stopPropagation();
     //localStorage to track lilstened messages
     let listened = localStorage.getItem('listened');

@@ -66,6 +66,8 @@
     --ion-item-background: #29333F;
     --ion-toolbar-background: #1f1f1f;
     --ion-card-background: #29333F;
+
+    --audio-player-bottom: 0;
 }
 
 // Dark theme
@@ -122,6 +124,20 @@ body.dark-theme {
     --ion-toolbar-background: #1f1f1f;
     --ion-tab-bar-background: #1f1f1f;
     --ion-card-background: #29333F;
+
+    // To enable those styles, check all the app styles
+    // --ion-color-dark: #222428;
+    // --ion-color-dark-rgb: 34, 36, 40;
+    // --ion-color-dark-contrast: #fff;
+    // --ion-color-dark-contrast-rgb: 255, 255, 255;
+    // --ion-color-dark-shade: #1e2023;
+    // --ion-color-dark-tint: #383a3e;
+    // --ion-color-light: #f4f5f8;
+    // --ion-color-light-rgb: 244, 245, 248;
+    // --ion-color-light-contrast: #000;
+    // --ion-color-light-contrast-rgb: 0, 0, 0;
+    // --ion-color-light-shade: #d7d8da;
+    // --ion-color-light-tint: #f5f6f9;
 }
 
 

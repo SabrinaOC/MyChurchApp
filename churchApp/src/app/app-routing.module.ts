@@ -25,6 +25,10 @@ const routes: Routes = [
   },  {
     path: 'bible-reference',
     loadChildren: () => import('./pages/bible-reference/bible-reference.module').then( m => m.BibleReferencePageModule)
+  },
+  {
+    path: 'bible-reader',
+    loadChildren: () => import('./pages/bible-reader/bible-reader.module').then( m => m.BibleReaderPageModule)
   }
 
 

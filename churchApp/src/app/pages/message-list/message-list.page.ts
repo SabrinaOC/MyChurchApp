@@ -47,14 +47,12 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
               public core: CoreProvider,
               public restService: RestService,
               private loadingController: LoadingController,
-              private router: Router,
-              
               public audioService: AudioService
   ) { }
 
   ngOnInit(): void {
     const sub = this.core.audio.listened.subscribe(value => {
-      this.updateMessageList(this.messageList);
+        this.updateMessageList(this.messageList);
     });
 
     this.subscription.add(sub) 
@@ -69,7 +67,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async ionViewWillEnter() {
+    if(!this.messageList) {
     this.getAllMessages();
+    }
   }
 
   onScroll(event: any) {
@@ -202,6 +202,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    */
   updateMessageList(lista: any) {
     this.messageList = lista;
+    this.core.messageList = lista;
     this.mapMessageListImages();
     this.checkIfAlreadyListened();
     this.checkIfIsNewMessage();
@@ -228,34 +229,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     });
 
     await modal.present();
-  }
-
-  async shareMessage(message: Message) {
-    // event.stopPropagation()
-
-    if (message.questions != null) {
-      const modal = await this.core.modalCtrl.create({
-        component: ShareOptionsPopoverComponent,
-        componentProps: {
-          message: message
-        }
-      });
-      modal.onDidDismiss().then(d => {
-        if (d.data) {
-          // console.log(d.data);
-          Share.share(d.data);
-        }
-      });
-      await modal.present();
-      
-    } else {
-      await Share.share({
-        title: `${message.title}`,
-        text: `*${message.title}*. \nTe invito a escuchar esta predicación.`,
-        url: `${message.url}`,
-        // dialogTitle: `${message.title}`,
-      });
-    }
   }
 
   rbSelection(selection: string) {

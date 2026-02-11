@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-menu-toggle>
         <ion-img
           src="../assets/icon/favicon.png"
@@ -95,7 +95,7 @@
     !message.listened) {
     <h3 class="heartBeatLetters">¡Nueva!</h3>
     }
-      <app-card-message [message]="message" (removeFromListened)="removeFromListened($event)" (shareMessage)="shareMessage($event)"></app-card-message> 
+      <app-card-message [message]="message"></app-card-message> 
     } 
     @if (messageList && messageList.length < 1) {
     <div class="noResult">No se han encontrado resultados</div>
