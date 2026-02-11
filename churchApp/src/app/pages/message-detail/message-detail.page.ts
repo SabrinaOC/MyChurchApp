@@ -56,6 +56,7 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
       //si se encuentra el mensaje pero no se viene desde una edicion, se carga de local, 
       // si no, llamamos a servicio
       this.msgSelected = msgFromList;
+      this.versesToList();
     } else {
       //si no, llamamos a servicio
       this.core.api.message.findById({id: searchedId}).subscribe({
