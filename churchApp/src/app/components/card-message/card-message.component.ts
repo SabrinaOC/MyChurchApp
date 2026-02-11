@@ -139,29 +139,6 @@ export class CardMessageComponent  implements OnInit {
     });
 
     await popover.present();
-    const { data } = await popover.onDidDismiss();
-
-    if (data && data.action) {
-      switch (data.action) {
-        case 'edit':
-          this.editMessage(message, event); 
-          break;
-        // case 'openDetail':
-        //   this.openMsgDetail(message, event);
-        //   break;
-        case 'markAsListened':
-          this.core.audio.markAsListened(message, event);
-          break;
-        case 'removeFromListened':
-          this.removeFromListened.emit(message);
-          break;
-        case 'share':
-          this.shareMessage.emit(message);
-          break;
-        default:
-          break;
-      }
-    }
   }
 
 }

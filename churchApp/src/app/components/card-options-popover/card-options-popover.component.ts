@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Share } from '@capacitor/share';
 import { PopoverController } from '@ionic/angular';
+import { Message } from 'src/app/models/interfaces';
+import { ShareOptionsPopoverComponent } from '../share-options-popover/share-options-popover.component';
+import { CoreProvider } from 'src/app/services/core';
 
 @Component({
   selector: 'app-card-options-popover',
@@ -10,15 +14,57 @@ export class CardOptionsPopoverComponent  implements OnInit {
 
   // Recibe los datos necesarios del mensaje y el estado de autenticación
   @Input() data: any; 
+  @Input() message!: Message;
+  @Input() listened!: boolean;
+  @Input() isAuthUser!: boolean;
 
-  constructor(private popoverController: PopoverController) {}
+  constructor(private popoverController: PopoverController,
+              private core: CoreProvider
+  ) {}
 
   ngOnInit() {
-    // La propiedad 'data' contendrá el mensaje y el estado de core.isAuthUser
+    // La propiedad 'data' contendrá el mensaje y el estado de core.isAuthUser'
   }
 
   // Función para devolver la acción seleccionada y cerrar el popover
   action(actionName: string) {
+    console.log('actionName => ', actionName)
+    switch(actionName) {
+      case 'share':
+        this.shareMessage();
+        break;
+      case 'markAsListened':
+        // this.core.audio.markAsListened(this.data.message());
+        break;
+    }
     this.popoverController.dismiss({ action: actionName });
+  }
+
+  async shareMessage() {
+    // event.stopPropagation()
+    const message: Message = this.data.message();
+    if (message.questions != null) {
+      const modal = await this.core.modalCtrl.create({
+        component: ShareOptionsPopoverComponent,
+        componentProps: {
+          message: message
+        }
+      });
+      modal.onDidDismiss().then(d => {
+        if (d.data) {
+          // console.log(d.data);
+          Share.share(d.data);
+        }
+      });
+      await modal.present();
+      
+    } else {
+      await Share.share({
+        title: `${message.title}`,
+        text: `*${message.title}*. \nTe invito a escuchar esta predicación.`,
+        url: `${message.url}`,
+        // dialogTitle: `${message.title}`,
+      });
+    }
   }
 }

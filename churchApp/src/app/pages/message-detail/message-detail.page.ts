@@ -51,6 +51,7 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
         if (res) {
           this.msgSelected = res.messageMapped[0];
           this.versesToList();
+          this.mapMessageImages();
         }
       },
       error: (e) => {
@@ -133,5 +134,16 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
 
   navigateBack() {
     this.routerOutlet.canGoBack() ? this.core.navCtrl.pop() : this.core.navCtrl.navigateBack("/message-list");
+  }
+
+   mapMessageImages() {
+      let imgBase64: string = '';
+      if(this.msgSelected.image && (!this.msgSelected.image.includes('data:image/jpeg;base64') && !this.msgSelected.image.includes('../../../assets/images/thumbnail-'))) {
+        imgBase64 = 'data:image/jpeg;base64,' + this.msgSelected.image
+      } else if(!this.msgSelected.image) {
+        const randomNum = Math.floor(Math.random() * 6);
+        imgBase64 = `../../../assets/images/thumbnail-${randomNum}.jpg`;
+      }
+      this.msgSelected.image = imgBase64 != '' ? imgBase64 : this.msgSelected.image;
   }
 }
