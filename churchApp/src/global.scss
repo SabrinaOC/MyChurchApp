@@ -56,8 +56,15 @@ ion-content {
     // --ion-background-color: linear-gradient(28deg, rgb(101, 102, 104) 0%, rgba(37, 61, 92, 1) 100%) !important;
 }
 
+ion-tab-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+}
+
 ion-card {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 ion-label {

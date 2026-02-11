@@ -15,7 +15,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" [ngClass]="{'plainBibleBackground': !core.settings.showBibleBackgroundColor}">
+<ion-content [ngClass]="{'plainBibleBackground': !core.settings.showBibleBackgroundColor}">
   <p id="bookLabel">{{book}}</p>
   <p id="chapterNumberLabel">{{chapterNumber}}</p>
 
@@ -25,7 +25,7 @@
   
   @if (core.audio.selectedMessage) {
     <div style="touch-action: none; margin-bottom: 100px;">
-      <app-mini-audio-player [message]="core.audio.selectedMessage" style="--audio-player-bottom: 60px;"
+      <app-mini-audio-player [message]="core.audio.selectedMessage" style="--audio-player-bottom: 115px;"
         (closing)="closeAudioPlayer()"
         (finish)="markAsListenedMessage($event)"
         [ignoreGesture]="!asPage">
@@ -35,7 +35,6 @@
 </ion-content>
 
 <ion-footer mode="ios" [translucent]="true" [ngClass]="{'lightFooter': core.settings.theme === 'light'}">
-  <!-- <ion-toolbar> -->
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="2" style="display: flex; justify-content: end;" (click)="getAdjacentChapter('prev')">
@@ -53,5 +52,4 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  <!-- </ion-toolbar> -->
 </ion-footer>
