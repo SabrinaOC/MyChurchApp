@@ -23,7 +23,6 @@ export class ShareOptionsPopoverComponent  implements OnInit {
       title: "@Title",
       text: "*@Title*. \nTe invito a escuchar esta predicación.\n",
       url: "@Url",
-      // dialogTitle: `${message.title}`,
     },
     {
       format: "Formato de preguntas",
@@ -68,7 +67,7 @@ export class ShareOptionsPopoverComponent  implements OnInit {
       this.shareOptions[i].title = element.title?.replace("@Title", this.message.title);
 
       this.shareOptions[i].text = element.text?.replace("@Title", this.message.title)
-        .replace("@Questions", this.message.questions.replaceAll("**", "*").replaceAll("##", "").replaceAll("<br>", ""));
+        .replace("@Questions", this.message.questions.replaceAll("**", "*").replaceAll("##", "").replaceAll("<br>", "").replaceAll("---", ""));
 
       this.shareOptions[i].url = element.url?.replace("@Url", this.message.url);
 

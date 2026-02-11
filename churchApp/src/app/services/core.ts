@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AudioService } from './audio.service';
 import { BibleService } from './bible.service';
 import { SettingsService } from './settings.service';
+import { Message } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class CoreProvider {
   messageTypeList: MessageType[] = [];
   speakerList: Speaker[] = [];
   bookList: Book[] = [];
+  messageList: Message[] = [];
 
   isAuthUser: boolean = false;
 

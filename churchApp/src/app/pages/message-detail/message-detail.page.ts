@@ -6,6 +6,7 @@ import { CoreProvider } from 'src/app/services/core';
 import { Share } from '@capacitor/share';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-message-detail',
@@ -28,7 +29,8 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
     public core: CoreProvider,
     private route: ActivatedRoute,
     private router: Router,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private navigationService: NavigationService
   ) {
   }
 
@@ -45,18 +47,36 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
 
   getMessageDetail() {
     const searchedId: number = this.route.snapshot.queryParams["id"];
+    const previousUrl = this.navigationService.getPreviousUrl();
+    
+    let msgFromList;
+    //buscamos primero en lista local
+    msgFromList = this.core.messageList?.find(msg => msg.id == searchedId);
+    if(msgFromList && !previousUrl.includes('add-message')) {
+      //si se encuentra el mensaje pero no se viene desde una edicion, se carga de local, 
+      // si no, llamamos a servicio
+      this.msgSelected = msgFromList;
+      this.versesToList();
+    } else {
+      //si no, llamamos a servicio
+      this.core.api.message.findById({id: searchedId}).subscribe({
+        next: (res: any) => {
+          if (res) {
+            this.msgSelected = res.messageMapped[0];
+            this.versesToList();
+            this.mapMessageImages();
+            //como hemos actualizado datos de la predicacion, la buscamos en nuestra lista local y actualizamos
+            this.core.messageList = this.core.messageList.map(msg => 
+              msg.id === this.msgSelected.id ? this.msgSelected : msg
+            );
+          }
+        },
+        error: (e) => {
+          console.log('ERROR ', e)
+        },
+      });
+    }
 
-    this.core.api.message.findById({id: searchedId}).subscribe({
-      next: (res: any) => {
-        if (res) {
-          this.msgSelected = res.messageMapped[0];
-          this.versesToList();
-        }
-      },
-      error: (e) => {
-        console.log('ERROR ', e)
-      },
-    });
   }
 
   versesToList() {    
@@ -133,5 +153,16 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
 
   navigateBack() {
     this.routerOutlet.canGoBack() ? this.core.navCtrl.pop() : this.core.navCtrl.navigateBack("/message-list");
+  }
+
+  mapMessageImages() {
+      let imgBase64: string = '';
+      if(this.msgSelected.image && (!this.msgSelected.image.includes('data:image/jpeg;base64') && !this.msgSelected.image.includes('../../../assets/images/thumbnail-'))) {
+        imgBase64 = 'data:image/jpeg;base64,' + this.msgSelected.image
+      } else if(!this.msgSelected.image) {
+        const randomNum = Math.floor(Math.random() * 6);
+        imgBase64 = `../../../assets/images/thumbnail-${randomNum}.jpg`;
+      }
+      this.msgSelected.image = imgBase64 != '' ? imgBase64 : this.msgSelected.image;
   }
 }

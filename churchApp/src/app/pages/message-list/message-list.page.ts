@@ -1,11 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Book, Message } from '../../models/interfaces';
+import { Message } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { IonContent, LoadingController, PopoverController } from '@ionic/angular';
-import { Share } from '@capacitor/share';
+import { IonContent, LoadingController } from '@ionic/angular';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
-import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
@@ -50,7 +48,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     const sub = this.core.audio.listened.subscribe(value => {
-      this.updateMessageList(this.messageList);
+        this.updateMessageList(this.messageList);
     });
 
     this.subscription.add(sub) 
@@ -65,7 +63,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async ionViewWillEnter() {
+    if(!this.messageList) {
     this.getAllMessages();
+    }
   }
 
   onScroll(event: any) {
@@ -198,6 +198,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    */
   updateMessageList(lista: any) {
     this.messageList = lista;
+    this.core.messageList = lista;
     this.mapMessageListImages();
     this.checkIfAlreadyListened();
     this.checkIfIsNewMessage();
@@ -226,34 +227,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     await modal.present();
   }
 
-  async shareMessage(message: Message) {
-    // event.stopPropagation()
-
-    if (message.questions != null) {
-      const modal = await this.core.modalCtrl.create({
-        component: ShareOptionsPopoverComponent,
-        componentProps: {
-          message: message
-        }
-      });
-      modal.onDidDismiss().then(d => {
-        if (d.data) {
-          // console.log(d.data);
-          Share.share(d.data);
-        }
-      });
-      await modal.present();
-      
-    } else {
-      await Share.share({
-        title: `${message.title}`,
-        text: `*${message.title}*. \nTe invito a escuchar esta predicación.`,
-        url: `${message.url}`,
-        // dialogTitle: `${message.title}`,
-      });
-    }
-  }
-
   rbSelection(selection: string) {
     this.rbSelected = selection;
 
@@ -280,23 +253,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   /**
    * 
    */
-  editMessage(message: Message, event: any) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    // this.navigationExtra.queryParams = { title: message.title };
-    this.navigationExtra.queryParams = message;
-    this.router.navigate(['add-message'], this.navigationExtra)
-  }
-
-    openMsgDetail(message: Message, event: any) {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    this.navigationExtra.queryParams = { id: message.id };
-    // this.navigationExtra.queryParams = message;
-    this.router.navigate(['message-detail'], this.navigationExtra)
-  }
   mapMessageListImages() {
     this.messageList.forEach((msg: Message) => {
       let imgBase64: string = '';
