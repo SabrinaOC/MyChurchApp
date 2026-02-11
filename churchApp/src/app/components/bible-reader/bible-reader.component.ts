@@ -1,15 +1,16 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from '../simple-verse-selector/simple-verse-selector.component';
 import { IonContent } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { KeepAwake } from '@capacitor-community/keep-awake';
 
 @Component({
   selector: 'app-bible-reader',
   templateUrl: './bible-reader.component.html',
   styleUrls: ['./bible-reader.component.scss'],
 })
-export class BibleReaderComponent implements AfterViewInit {
+export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
 
   @ViewChild("chapterBadge") chapterBadge!: ElementRef<HTMLElement>;
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
@@ -42,6 +43,25 @@ export class BibleReaderComponent implements AfterViewInit {
   chapterNumber: string = "";
 
   constructor(public core: CoreProvider, private cdRef: ChangeDetectorRef, public router: Router) { }
+
+  async ngOnInit() {
+    if (this.core.settings.awakeScreenOnBible) {
+      try {
+        await KeepAwake.keepAwake();
+      } catch(e) {
+        console.log("Error al intentar mantener la pantalla encendida", e);
+        
+      }
+    }
+  }
+
+  async ngOnDestroy() {
+    try {
+      await KeepAwake.allowSleep();
+    } catch (e) {
+      console.error("Error al desactivar KeepAwake", e);
+    }
+  }
 
   ngAfterViewInit() {    
     this.content = this.contents.last;
