@@ -47,8 +47,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
               public core: CoreProvider,
               public restService: RestService,
               private loadingController: LoadingController,
-              private router: Router,
-              
               public audioService: AudioService
   ) { }
 
@@ -204,6 +202,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    */
   updateMessageList(lista: any) {
     this.messageList = lista;
+    this.core.messageList = lista;
     this.mapMessageListImages();
     this.checkIfAlreadyListened();
     this.checkIfIsNewMessage();
