@@ -4,6 +4,7 @@ import { PopoverController } from '@ionic/angular';
 import { Message } from 'src/app/models/interfaces';
 import { ShareOptionsPopoverComponent } from '../share-options-popover/share-options-popover.component';
 import { CoreProvider } from 'src/app/services/core';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-options-popover',
@@ -18,8 +19,11 @@ export class CardOptionsPopoverComponent  implements OnInit {
   @Input() listened!: boolean;
   @Input() isAuthUser!: boolean;
 
+  navigationExtra: NavigationExtras = {};
+
   constructor(private popoverController: PopoverController,
-              private core: CoreProvider
+              private core: CoreProvider,
+              private router: Router
   ) {}
 
   ngOnInit() {
@@ -28,10 +32,12 @@ export class CardOptionsPopoverComponent  implements OnInit {
 
   // Función para devolver la acción seleccionada y cerrar el popover
   action(actionName: string) {
-    console.log('actionName => ', actionName)
     switch(actionName) {
       case 'share':
         this.shareMessage();
+        break;
+      case 'edit':
+      this.editMessage();
         break;
       case 'markAsListened':
         // this.core.audio.markAsListened(this.data.message());
@@ -66,5 +72,12 @@ export class CardOptionsPopoverComponent  implements OnInit {
         // dialogTitle: `${message.title}`,
       });
     }
+  }
+
+  editMessage() {
+    let id;
+    const message: Message = this.data.message();
+    this.navigationExtra.queryParams = message;
+    this.router.navigate(['add-message'], this.navigationExtra)
   }
 }

@@ -136,7 +136,7 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
     this.routerOutlet.canGoBack() ? this.core.navCtrl.pop() : this.core.navCtrl.navigateBack("/message-list");
   }
 
-   mapMessageImages() {
+  mapMessageImages() {
       let imgBase64: string = '';
       if(this.msgSelected.image && (!this.msgSelected.image.includes('data:image/jpeg;base64') && !this.msgSelected.image.includes('../../../assets/images/thumbnail-'))) {
         imgBase64 = 'data:image/jpeg;base64,' + this.msgSelected.image

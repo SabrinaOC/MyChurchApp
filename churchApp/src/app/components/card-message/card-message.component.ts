@@ -103,8 +103,12 @@ export class CardMessageComponent  implements OnInit {
    * 
    */
   openMsgDetail() {
-    this.navigationExtra.queryParams = this.message();
-    this.router.navigate(['message-detail'], this.navigationExtra)
+    let id;
+    if (this.message()?.id) {
+      // this.navigationExtra.queryParams["id"] = this.message()?.id ?? "";
+      id = this.message()?.id
+    }
+    this.router.navigate(['message-detail'], {queryParams: { id }})//
   }
 
   /**
