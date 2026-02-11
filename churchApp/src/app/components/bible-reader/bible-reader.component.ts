@@ -177,4 +177,37 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
     event.preventDefault();
     this.core.audio.markAsListened(this.core.audio.selectedMessage!, event);
   }
+
+  // Direction variables
+lastY = 0;
+scrollThreshold = 10; // Little margin to avoid tremors
+
+onScroll(event: any) {
+  // Get vertical position
+  const currentY = event.detail.scrollTop;
+
+  // At the top, always show tab bar
+  if (currentY < 50) {
+    this.core.setTabsVisibility(true);
+    this.lastY = currentY;
+    return;
+  }
+
+  // Ingnore scroll rebounds on IOS
+  if (currentY < 0) return;
+
+  // Direction login
+  const diff = currentY - this.lastY;
+
+  if (Math.abs(diff) > this.scrollThreshold) {
+    if (diff > 0) {
+      // SCROLL DOWN - Hide
+      this.core.setTabsVisibility(false);
+    } else {
+      // SCROLL UP - Show
+      this.core.setTabsVisibility(true);
+    }
+    this.lastY = currentY;
+  }
+}
 }

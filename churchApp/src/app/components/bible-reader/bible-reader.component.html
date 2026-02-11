@@ -15,7 +15,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [ngClass]="{'plainBibleBackground': !core.settings.showBibleBackgroundColor}">
+<ion-content [ngClass]="{'plainBibleBackground': !core.settings.showBibleBackgroundColor}"
+    [scrollEvents]="true" (ionScroll)="onScroll($event)">
   <p id="bookLabel">{{book}}</p>
   <p id="chapterNumberLabel">{{chapterNumber}}</p>
 
@@ -28,13 +29,16 @@
       <app-mini-audio-player [message]="core.audio.selectedMessage" style="--audio-player-bottom: 115px;"
         (closing)="closeAudioPlayer()"
         (finish)="markAsListenedMessage($event)"
-        [ignoreGesture]="!asPage">
+        [ignoreGesture]="!asPage"
+        [class.player-down]="(core.showTabBar$ | async) === false">
       </app-mini-audio-player>
     </div>
   }
 </ion-content>
 
-<ion-footer mode="ios" [translucent]="true" [ngClass]="{'lightFooter': core.settings.theme === 'light'}">
+<ion-footer mode="ios" [translucent]="true" 
+      [ngClass]="{'lightFooter': core.settings.theme === 'light'}"
+      [class.footer-down]="(core.showTabBar$ | async) === false">
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="2" style="display: flex; justify-content: end;" (click)="getAdjacentChapter('prev')">

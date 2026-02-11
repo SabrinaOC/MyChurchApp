@@ -1,17 +1,16 @@
-/* 1. Elevamos el footer para que se asiente ENCIMA de la tab-bar */
 ion-footer {
     position: absolute;
-    /* Aseguramos control total de posición */
-
-    /* 56px es la altura estándar del tab-bar + el área segura (notch/isla dinámica) */
     bottom: calc(56px + var(--ion-safe-area-bottom, 0px));
 
     width: 100%;
     z-index: 10;
-    /* Nos aseguramos que flote sobre el contenido pero debajo de alertas/modales */
-
-    /* Opcional: Si quieres que se vea una sombra sutil para separarlo del texto */
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.05);
+
+    transition: bottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+ion-footer.footer-down {
+    bottom: var(--ion-safe-area-bottom, 0px);
 }
 
 /* 2. Compensamos el contenido para que el texto final no se quede escondido detrás de este footer elevado */

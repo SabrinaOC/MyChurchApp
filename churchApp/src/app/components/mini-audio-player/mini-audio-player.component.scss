@@ -21,9 +21,17 @@ ion-card {
     margin: auto;
     border-radius: 20px;
     margin-bottom: 5px;
-
     padding-bottom: var(--ion-safe-area-bottom);
-    // padding-bottom: env(safe-area-inset-bottom)
+    z-index: 20;
+
+    transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform: translateY(0);
+}
+
+:host(.player-down) {
+    #audio-player {
+        transform: translateY(56px); 
+    }
 }
 
 @media (width < 550px) {

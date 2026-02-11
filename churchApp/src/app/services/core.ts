@@ -7,6 +7,7 @@ import { AudioService } from './audio.service';
 import { BibleService } from './bible.service';
 import { SettingsService } from './settings.service';
 import { Message } from '../models/interfaces';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,8 @@ export class CoreProvider {
   messageList: Message[] = [];
 
   isAuthUser: boolean = false;
+
+  public showTabBar$ = new BehaviorSubject<boolean>(true);
 
   constructor(
     public modalCtrl: ModalController,
@@ -113,4 +116,11 @@ export class CoreProvider {
     leaveShowVersesAnimation = (baseEl: HTMLElement) => {
       return this.enterShowVersesAnimation(baseEl).direction('reverse');
     };
+
+    setTabsVisibility(visible: boolean) {
+    // Evitamos emitir el mismo valor repetidamente para no saturar
+    if (this.showTabBar$.value !== visible) {
+      this.showTabBar$.next(visible);
+    }
+  }
 }

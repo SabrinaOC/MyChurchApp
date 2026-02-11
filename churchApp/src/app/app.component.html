@@ -47,17 +47,15 @@
           </app-mini-audio-player>
         </div>
       }
-
     </div>
-    
   </ion-split-pane>
 
-    <ion-tab-bar slot="bottom" [translucent]="true">
-      <ion-tab-button routerLink="/message-list">
-        <ion-icon name="home-outline" [color]="router.url === '/message-list' ? 'primary' : ''"></ion-icon>
-      </ion-tab-button>
+    <ion-tab-bar slot="bottom" [translucent]="true" [class.tabs-hidden]="(core.showTabBar$ | async) === false">
       <ion-tab-button routerLink="/bible-reader">
         <ion-icon name="book-outline" [color]="router.url === '/bible-reader' ? 'primary' : ''"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button routerLink="/message-list">
+        <ion-icon name="home-outline" [color]="router.url === '/message-list' ? 'primary' : ''"></ion-icon>
       </ion-tab-button>
       <ion-tab-button routerLink="/bible-reference">
         <ion-icon name="search-outline" [color]="router.url === '/bible-reference' ? 'primary' : ''"></ion-icon>
