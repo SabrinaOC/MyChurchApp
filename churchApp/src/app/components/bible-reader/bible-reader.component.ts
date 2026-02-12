@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from '../simple-verse-selector/simple-verse-selector.component';
-import { IonContent } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { IonContent, ViewDidEnter, ViewDidLeave, ViewWillLeave } from '@ionic/angular';
+import { NavigationEnd, Router } from '@angular/router';
 import { KeepAwake } from '@capacitor-community/keep-awake';
 
 @Component({
@@ -10,7 +10,7 @@ import { KeepAwake } from '@capacitor-community/keep-awake';
   templateUrl: './bible-reader.component.html',
   styleUrls: ['./bible-reader.component.scss'],
 })
-export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
+export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, ViewDidLeave {
 
   @ViewChild("chapterBadge") chapterBadge!: ElementRef<HTMLElement>;
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
@@ -44,6 +44,12 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
 
   constructor(public core: CoreProvider, private cdRef: ChangeDetectorRef, public router: Router) { }
 
+  ionViewDidLeave(): void {
+    console.log("Aaaa");
+    
+  }
+  
+
   async ngOnInit() {
     if (this.core.settings.awakeScreenOnBible) {
       try {
@@ -53,6 +59,13 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
         
       }
     }
+
+    //Subscribe router events to detect when navigating to showTabBar back
+    this.router.events.subscribe((e) => {
+      if (!this.core.showTabBar$.value) {
+        this.core.showTabBar$.next(true);
+      }
+    })
   }
 
   async ngOnDestroy() {
