@@ -1,6 +1,6 @@
 ion-footer {
     position: absolute;
-    bottom: calc(56px + var(--ion-safe-area-bottom, 0px));
+    bottom: calc(49px + var(--ion-safe-area-bottom, 0px));
 
     width: 100%;
     z-index: 10;
@@ -13,10 +13,9 @@ ion-footer.footer-down {
     bottom: var(--ion-safe-area-bottom, 0px);
 }
 
-/* 2. Compensamos el contenido para que el texto final no se quede escondido detrás de este footer elevado */
 ion-content {
     /* Sumamos la altura del footer + la altura del tab-bar + un respiro */
-    --padding-bottom: calc(60px + 56px + var(--ion-safe-area-bottom, 0px));
+    --padding-bottom: calc(60px + 49px + var(--ion-safe-area-bottom, 0px));
 }
 
 #bookLabel {
