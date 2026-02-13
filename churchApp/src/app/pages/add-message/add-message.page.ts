@@ -300,7 +300,8 @@ export class AddMessagePage implements OnInit {
   }
 
   goBack() {
-    this.core.navCtrl.navigateBack('/message-list');
+    this.core.navCtrl.pop();
+    // this.core.navCtrl.navigateBack('/message-list');
   }
 
   async showSimpleBookSelector(event: any) {
