@@ -45,10 +45,10 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
   constructor(public core: CoreProvider, private cdRef: ChangeDetectorRef, public router: Router) { }
 
   ionViewDidLeave(): void {
-    console.log("Aaaa");
-    
+    if (!this.core.showTabBar$.value) {
+      this.core.showTabBar$.next(true);
+    }
   }
-  
 
   async ngOnInit() {
     if (this.core.settings.awakeScreenOnBible) {

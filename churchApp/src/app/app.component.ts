@@ -187,6 +187,6 @@ export class AppComponent {
       this.core.menuCtrl.close();
     }
     
-    this.router.navigateByUrl(url);
+    this.router.navigate([url]);
   }
 }
