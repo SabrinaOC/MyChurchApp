@@ -40,6 +40,8 @@ export class AppComponent {
     },
   ];
 
+  miniAudioPlayerPages: string[] = ["/message-list", "/bible-reference"]
+
   version!: string;
 
   constructor(private platform: Platform,

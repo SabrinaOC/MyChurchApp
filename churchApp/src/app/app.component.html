@@ -41,7 +41,7 @@
       @if (core.audio.selectedMessage) {
       <div style="touch-action: none;">
         <app-mini-audio-player [message]="core.audio.selectedMessage" (closing)="closeAudioPlayer()"
-          (finish)="markAsListenedMessage($event)" [ngClass]="{'hidden': router.url !== '/message-list'}">
+          (finish)="markAsListenedMessage($event)" [ngClass]="{'hidden': !miniAudioPlayerPages.includes(router.url)}">
         </app-mini-audio-player>
       </div>
       }
