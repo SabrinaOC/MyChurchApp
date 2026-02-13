@@ -12,9 +12,35 @@ platforms:
     versionCode: 100400
 
     manifest:
-      - entries:
+      # Permiso 1: Internet
+      - file: app/src/main/AndroidManifest.xml
+        entries:
+          - uses-permission:
+              android:name: android.permission.INTERNET
+      
+      # Permiso 2: Wake Lock
+      - file: app/src/main/AndroidManifest.xml
+        entries:
           - uses-permission:
               android:name: android.permission.WAKE_LOCK
+
+      # Permiso 3: Foreground Service
+      - file: app/src/main/AndroidManifest.xml
+        entries:
+          - uses-permission:
+              android:name: android.permission.FOREGROUND_SERVICE
+
+      # Permiso 4: Media Playback
+      - file: app/src/main/AndroidManifest.xml
+        entries:
+          - uses-permission:
+              android:name: android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK
+
+      # Permiso 5: Notifications
+      - file: app/src/main/AndroidManifest.xml
+        entries:
+          - uses-permission:
+              android:name: android.permission.POST_NOTIFICATIONS
 
     res:
       - path: drawable

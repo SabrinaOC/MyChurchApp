@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from '../simple-verse-selector/simple-verse-selector.component';
-import { IonContent } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { IonContent, ViewDidEnter, ViewDidLeave, ViewWillLeave } from '@ionic/angular';
+import { NavigationEnd, Router } from '@angular/router';
 import { KeepAwake } from '@capacitor-community/keep-awake';
 
 @Component({
@@ -10,7 +10,7 @@ import { KeepAwake } from '@capacitor-community/keep-awake';
   templateUrl: './bible-reader.component.html',
   styleUrls: ['./bible-reader.component.scss'],
 })
-export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
+export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, ViewDidLeave {
 
   @ViewChild("chapterBadge") chapterBadge!: ElementRef<HTMLElement>;
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
@@ -44,6 +44,12 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
 
   constructor(public core: CoreProvider, private cdRef: ChangeDetectorRef, public router: Router) { }
 
+  ionViewDidLeave(): void {
+    if (!this.core.showTabBar$.value) {
+      this.core.showTabBar$.next(true);
+    }
+  }
+
   async ngOnInit() {
     if (this.core.settings.awakeScreenOnBible) {
       try {
@@ -53,6 +59,13 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
         
       }
     }
+
+    //Subscribe router events to detect when navigating to showTabBar back
+    this.router.events.subscribe((e) => {
+      if (!this.core.showTabBar$.value) {
+        this.core.showTabBar$.next(true);
+      }
+    })
   }
 
   async ngOnDestroy() {
@@ -177,4 +190,37 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy {
     event.preventDefault();
     this.core.audio.markAsListened(this.core.audio.selectedMessage!, event);
   }
+
+  // Direction variables
+lastY = 0;
+scrollThreshold = 10; // Little margin to avoid tremors
+
+onScroll(event: any) {
+  // Get vertical position
+  const currentY = event.detail.scrollTop;
+
+  // At the top, always show tab bar
+  if (currentY < 50) {
+    this.core.setTabsVisibility(true);
+    this.lastY = currentY;
+    return;
+  }
+
+  // Ingnore scroll rebounds on IOS
+  if (currentY < 0) return;
+
+  // Direction login
+  const diff = currentY - this.lastY;
+
+  if (Math.abs(diff) > this.scrollThreshold) {
+    if (diff > 0) {
+      // SCROLL DOWN - Hide
+      this.core.setTabsVisibility(false);
+    } else {
+      // SCROLL UP - Show
+      this.core.setTabsVisibility(true);
+    }
+    this.lastY = currentY;
+  }
+}
 }
