@@ -1,6 +1,6 @@
 ion-footer {
     position: absolute;
-    bottom: calc(49px + var(--ion-safe-area-bottom, 0px));
+    bottom: calc(var(--bible-reader-footer-bottom, 49px) + var(--ion-safe-area-bottom, 0px));
 
     width: 100%;
     z-index: 10;

@@ -26,11 +26,11 @@
   
   @if (core.audio.selectedMessage) {
     <div style="touch-action: none; margin-bottom: 100px;">
-      <app-mini-audio-player [message]="core.audio.selectedMessage" style="--audio-player-bottom: 115px;"
+      <app-mini-audio-player [message]="core.audio.selectedMessage" [style.--audio-player-bottom]="asPage ? '115px' : '60px'"
         (closing)="closeAudioPlayer()"
         (finish)="markAsListenedMessage($event)"
         [ignoreGesture]="!asPage"
-        [class.player-down]="(core.showTabBar$ | async) === false">
+        [class.player-down]="(core.showTabBar$ | async) === false && asPage">
       </app-mini-audio-player>
     </div>
   }
@@ -38,7 +38,8 @@
 
 <ion-footer mode="ios" [translucent]="true" 
       [ngClass]="{'lightFooter': core.settings.theme === 'light'}"
-      [class.footer-down]="(core.showTabBar$ | async) === false">
+      [class.footer-down]="(core.showTabBar$ | async) === false && asPage"
+      [style.--bible-reader-footer-bottom]="asPage ? '' : '0px'">
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="2" style="display: flex; justify-content: end;" (click)="getAdjacentChapter('prev')">
