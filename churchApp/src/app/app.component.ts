@@ -179,4 +179,12 @@ export class AppComponent {
     event.preventDefault();
     this.core.audio.markAsListened(this.core.audio.selectedMessage!, event);
   }
+
+  async tabBarNavigate(url: string) {
+    if (await this.core.menuCtrl.isOpen()) {
+      this.core.menuCtrl.close();
+    }
+    
+    this.router.navigateByUrl(url);
+  }
 }

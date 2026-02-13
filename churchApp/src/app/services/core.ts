@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, AnimationController, LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
+import { AlertController, AnimationController, LoadingController, ModalController, NavController, PopoverController, ToastController, MenuController } from '@ionic/angular';
 import { ApiService } from './api.service';
 import { Book, MessageType, Speaker } from './api/models';
 import { Router } from '@angular/router';
@@ -34,7 +34,8 @@ export class CoreProvider {
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public animationCtrl: AnimationController
+    public animationCtrl: AnimationController,
+    public menuCtrl: MenuController
   ) { }
 
   normalizeText(text: string): string {

@@ -49,13 +49,13 @@
   </ion-split-pane>
 
   <ion-tab-bar slot="bottom" mode="ios" [translucent]="true" [class.tabs-hidden]="(core.showTabBar$ | async) === false">
-    <ion-tab-button (click)="router.navigateByUrl('/bible-reader')">
+    <ion-tab-button (click)="tabBarNavigate('/bible-reader')">
       <ion-icon name="book-outline" [color]="router.url === '/bible-reader' ? 'primary' : ''"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button (click)="router.navigateByUrl('/message-list')">
+    <ion-tab-button (click)="tabBarNavigate('/message-list')">
       <ion-icon name="home-outline" [color]="router.url === '/message-list' ? 'primary' : ''"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button (click)="router.navigateByUrl('/bible-reference')">
+    <ion-tab-button (click)="tabBarNavigate('/bible-reference')">
       <ion-icon name="search-outline" [color]="router.url === '/bible-reference' ? 'primary' : ''"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
