@@ -49,20 +49,34 @@ body {
     src: url('./assets/fonts/NotoSans-Regular.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'Roboto';
-    src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
-}
-
 ion-content {
+    --padding-bottom: 50px;
     --ion-background-color: var(--ion-color-tertiary) !important;
     --ion-background-color: linear-gradient(28deg, var(--ion-color-tertiary) 0%, rgba(37, 61, 92, 1) 100%) !important;
     // --ion-background-color: rgb(101, 102, 104) !important;
     // --ion-background-color: linear-gradient(28deg, rgb(101, 102, 104) 0%, rgba(37, 61, 92, 1) 100%) !important;
 }
 
+ion-tab-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    transition: transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform: translateY(0);
+    will-change: transform;
+
+    border-top: none;
+    --background: rgba(41, 51, 63, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); // Para Safari/iOS
+}
+
+ion-tab-bar.tabs-hidden {
+    transform: translateY(100%);
+}
 ion-card {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 ion-label {
@@ -225,7 +239,7 @@ body.light-theme {
     z-index: 999;
     position: fixed;
     max-width: 45px;
-    bottom: 80px;
+    bottom: 120px;
     right: 20px;
     border-radius: 20px;
     cursor: pointer;

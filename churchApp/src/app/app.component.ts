@@ -13,32 +13,34 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   accountPages = [
-    {
-      title: 'Predicaciones',
-      url: '/message-list',
-      ionicIcon: 'list-outline',
-    },
+    // {
+    //   title: 'Predicaciones',
+    //   url: '/message-list',
+    //   ionicIcon: 'list-outline',
+    // },
     {
       title: 'Gestión contenido',
       url: '/add-message',
       ionicIcon: 'lock-closed-outline',
     },
-    {
-      title: 'Biblia',
-      url: '/bible-reader',
-      ionicIcon: 'book-outline',
-    },
-    {
-      title: 'Concordancias',
-      url: '/bible-reference',
-      ionicIcon: '../assets/icons/book-search.png', //src\assets\icons\book-search.png
-    },
+    // {
+    //   title: 'Biblia',
+    //   url: '/bible-reader',
+    //   ionicIcon: 'book-outline',
+    // },
+    // {
+    //   title: 'Concordancias',
+    //   url: '/bible-reference',
+    //   ionicIcon: '../assets/icons/book-search.png', //src\assets\icons\book-search.png
+    // },
     {
       title: 'Configuración',
       url: '/settings',
       ionicIcon: 'settings-outline',
     },
   ];
+
+  miniAudioPlayerPages: string[] = ["/message-list", "/bible-reference"]
 
   version!: string;
 
@@ -178,5 +180,13 @@ export class AppComponent {
   markAsListenedMessage(event: any) {
     event.preventDefault();
     this.core.audio.markAsListened(this.core.audio.selectedMessage!, event);
+  }
+
+  async tabBarNavigate(url: string) {
+    if (await this.core.menuCtrl.isOpen()) {
+      this.core.menuCtrl.close();
+    }
+    
+    this.router.navigate([url]);
   }
 }

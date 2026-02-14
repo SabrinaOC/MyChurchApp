@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, AnimationController, LoadingController, ModalController, NavController, PopoverController, ToastController } from '@ionic/angular';
+import { AlertController, AnimationController, LoadingController, ModalController, NavController, PopoverController, ToastController, MenuController } from '@ionic/angular';
 import { ApiService } from './api.service';
 import { Book, MessageType, Speaker } from './api/models';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { AudioService } from './audio.service';
 import { BibleService } from './bible.service';
 import { SettingsService } from './settings.service';
 import { Message } from '../models/interfaces';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,8 @@ export class CoreProvider {
   messageList: Message[] = [];
 
   isAuthUser: boolean = false;
+
+  public showTabBar$ = new BehaviorSubject<boolean>(true);
 
   constructor(
     public modalCtrl: ModalController,
@@ -31,7 +34,8 @@ export class CoreProvider {
     public navCtrl: NavController,
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
-    public animationCtrl: AnimationController
+    public animationCtrl: AnimationController,
+    public menuCtrl: MenuController
   ) { }
 
   normalizeText(text: string): string {
@@ -113,4 +117,11 @@ export class CoreProvider {
     leaveShowVersesAnimation = (baseEl: HTMLElement) => {
       return this.enterShowVersesAnimation(baseEl).direction('reverse');
     };
+
+    setTabsVisibility(visible: boolean) {
+    // Evitamos emitir el mismo valor repetidamente para no saturar
+    if (this.showTabBar$.value !== visible) {
+      this.showTabBar$.next(visible);
+    }
+  }
 }

@@ -1,11 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AlertController, LoadingController, NavController, PopoverController, ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CoreProvider } from 'src/app/services/core';
 import { SimpleVerseSelectorComponent } from 'src/app/components/simple-verse-selector/simple-verse-selector.component';
-import { Book, Message, MessageType, NewMessage } from 'src/app/services/api/models';
+import { Book, Message, NewMessage } from 'src/app/services/api/models';
 import { RestService } from 'src/app/services/rest.service';
 
 @Component({
@@ -28,10 +28,6 @@ export class AddMessagePage implements OnInit {
   constructor(
     public restService: RestService,
     private loading: LoadingController,
-    private toastCtrl: ToastController,
-    private alrtCtrl: AlertController,
-    public navCtrl: NavController,
-    private popoverCtrl: PopoverController,
     private router: Router,
     public core: CoreProvider
   ) {
@@ -139,7 +135,7 @@ export class AddMessagePage implements OnInit {
   }
 
   async presentSnakbar(msg: string) {
-    let snkbar = await this.toastCtrl.create({
+    let snkbar = await this.core.toastCtrl.create({
       message: msg,
       duration: 2000,
     });
@@ -159,7 +155,7 @@ export class AddMessagePage implements OnInit {
   }
 
   async checkPass(): Promise<void> {
-    let alert = await this.alrtCtrl.create({
+    let alert = await this.core.alertCtrl.create({
       header: 'Autorización',
       inputs: [
         {
@@ -177,7 +173,7 @@ export class AddMessagePage implements OnInit {
         {
           text: 'Salir',
           handler: () => {
-            this.navCtrl.navigateForward('message-list')
+            this.core.navCtrl.navigateForward('message-list')
           }
         },
         {
@@ -209,7 +205,7 @@ export class AddMessagePage implements OnInit {
   }
 
   async incorrectCredentialsModal() {
-    let alert = await this.alrtCtrl.create({
+    let alert = await this.core.alertCtrl.create({
       header: 'No autorizado',
       message: 'Usuario no autorizado. ¿Volver a introducir credenciales?',
       buttons: [
@@ -222,7 +218,7 @@ export class AddMessagePage implements OnInit {
         {
           text: 'Salir',
           handler: () => {
-            this.navCtrl.navigateForward('message-list')
+            this.core.navCtrl.navigateForward('message-list')
           }
         }
       ],
@@ -295,18 +291,23 @@ export class AddMessagePage implements OnInit {
     if (this.form.dirty) {
       this.core.openAlert("Ha realizado cambios. ¿Desea salir?", "Salir", "Cancelar").then(async (accepted) => {
         if (accepted) {
-          this.core.navCtrl.pop();
+          this.goBack();
         }
       });
     } else {
-      this.core.navCtrl.pop();
+      this.goBack();
     }
+  }
+
+  goBack() {
+    this.core.navCtrl.pop();
+    // this.core.navCtrl.navigateBack('/message-list');
   }
 
   async showSimpleBookSelector(event: any) {
     event.preventDefault();
 
-    const popover = await this.popoverCtrl.create({
+    const popover = await this.core.popoverCtrl.create({
       component: SimpleVerseSelectorComponent,
       translucent: true,
       cssClass: 'verse-selector-popover',
@@ -325,7 +326,7 @@ export class AddMessagePage implements OnInit {
   }
 
   async showSimpleVerseSelector() {
-    const popover = await this.popoverCtrl.create({
+    const popover = await this.core.popoverCtrl.create({
       component: SimpleVerseSelectorComponent,
       translucent: true,
       cssClass: 'verse-selector-popover',

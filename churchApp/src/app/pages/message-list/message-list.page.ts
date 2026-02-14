@@ -1,16 +1,12 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { Book, Message } from '../../models/interfaces';
+import { Message } from '../../models/interfaces';
 import { RestService } from '../../services/rest.service';
-import { IonContent, LoadingController, PopoverController } from '@ionic/angular';
-import { Share } from '@capacitor/share';
+import { IonContent, LoadingController } from '@ionic/angular';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
-import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { NavigationExtras, Router } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
-import { CardOptionsPopoverComponent } from 'src/app/components/card-options-popover/card-options-popover.component';
-import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-message-list',
@@ -47,7 +43,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
               public core: CoreProvider,
               public restService: RestService,
               private loadingController: LoadingController,
-              public audioService: AudioService
+              private router: Router
   ) { }
 
   ngOnInit(): void {

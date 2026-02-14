@@ -1,6 +1,6 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons>
       <ion-menu-toggle>
         <ion-img
           src="../assets/icon/favicon.png"
@@ -104,6 +104,7 @@
   </div>
 
   <div
+    slot="fixed"
     class="topScroller"
     [class.visible]="showScroller"
     (click)="scrollToTop()"
