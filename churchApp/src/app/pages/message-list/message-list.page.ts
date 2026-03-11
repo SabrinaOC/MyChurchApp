@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Message } from '../../models/interfaces';
-import { RestService } from '../../services/rest.service';
-import { IonContent, LoadingController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, IonContent, IonSearchbar, LoadingController } from '@ionic/angular';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
 
@@ -16,10 +15,11 @@ import { Subscription } from 'rxjs';
 
 export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild('searchBar', { static: false }) searchBar!: IonSearchbar; 
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
   content!: IonContent;
 
-  messageList!: Message[]
+  messageList: Message[] = [];
   isDesktop: boolean = false;
   datetime!: Date;
   rbSelected: string = 'all';
@@ -34,16 +34,15 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   progress: number = 0;
   duration: number = 0;
   isLoading: boolean = false;
-  limit: number = 10;
-  offset: number = 1;
+
+  limit: number = 5;
+  offset: number = 0;
 
   private subscription: Subscription = new Subscription();
 
   constructor(
               public core: CoreProvider,
-              public restService: RestService,
-              private loadingController: LoadingController,
-              private router: Router
+              private loadingController: LoadingController
   ) { }
 
   ngOnInit(): void {
@@ -63,8 +62,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async ionViewWillEnter() {
-    if(!this.messageList) {
-    this.getAllMessages();
+    if(!this.messageList.length) {
+      this.getAllMessages();
     }
   }
 
@@ -77,20 +76,29 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     this.content.scrollToTop(500);
   }
 
-  async searchInput(event: any) {
+  searchInput(event: any) {
     const query = event.target.value.toLowerCase();
     if(query && query != '' && query.length > 0) {
-      let loading = await this.loadingController.create({
-        message: 'Recuperando predicaciones...',
-        cssClass: 'custom-loading',
-        mode: 'md',
-        spinner: null,
-      })
-      loading.present();
+      this.findMessagesByFilter(query);
+    }
+  }
 
-      this.core.api.message.findByTitle({searchedTitle : query})
+  async findMessagesByFilter(query: string) {
+    // let loading = await this.loadingController.create({
+    //   message: 'Recuperando predicaciones...',
+    //   cssClass: 'custom-loading',
+    //   mode: 'md',
+    //   spinner: null,
+    // })
+    // loading.present();
+
+    this.isLoading = true;
+
+    this.core.api.message.findByTitle({ searchedTitle: query, limit: this.limit, offset: this.offset })
       .subscribe({
         next: (val: any) => {
+          console.log('------------', val.messageListMapped);
+          
           this.updateMessageList(val.messageListMapped)
 
           this.updateListRdBtn()
@@ -99,13 +107,25 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
           console.log('ERROR ', e)
         },
         complete: () => {
-          loading.dismiss()
+          console.log("Finnished searching");
+          this.isLoading = false;
+          // loading.dismiss()
         }
       })
+  }
+  
+  scrollAndSearch(event: InfiniteScrollCustomEvent) {
+    if (!this.isLoading) {
+      this.findMessagesByFilter(this.searchBar.value!);
+      event.target.complete();
     }
   }
 
   async getAllMessages() {
+    this.offset = 0;
+    this.isLoading = true;
+    console.log("Todas las predicaciones");
+    
     let loading = await this.loadingController.create({
       message: 'Recuperando predicaciones...',
       cssClass: 'custom-loading',
@@ -113,11 +133,13 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
       spinner: null,
     })
     loading.present();
+    console.log("Limit: ", this.limit, "Offset: ", this.offset);
+    
     this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
     .subscribe({
       next: (data: any) => {
         if(data) {
-          this.updateMessageList(data.messageListMapped)
+          this.updateMessageList(data.messageListMapped, true)
         }
         
         loading.dismiss()
@@ -125,6 +147,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
       error: (err: any) => {
         console.error(err)
         loading.dismiss()
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     })
   }
@@ -133,7 +158,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
     .subscribe((data: any) => {
       if(data) {
-        this.updateMessageList(data.messageListMapped)
+        this.updateMessageList(data.messageListMapped, true)
       }
       event.target.complete();
     })
@@ -196,9 +221,16 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   /**
    * Función centralizada para gestionar actualización de la lista de predicaciones mostradas
    */
-  updateMessageList(lista: any) {
-    this.messageList = lista;
-    this.core.messageList = lista;
+  updateMessageList(lista: Message[], allMessages: boolean = false) {
+    this.messageList = this.messageList.concat(lista);
+    
+    this.offset = this.messageList.length;
+    console.log(this.messageList);
+    
+    if (allMessages) {
+      this.core.messageList = this.core.messageList.concat(lista);
+    }
+
     this.mapMessageListImages();
     this.checkIfAlreadyListened();
     this.checkIfIsNewMessage();
