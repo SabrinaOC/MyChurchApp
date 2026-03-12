@@ -19,6 +19,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
   content!: IonContent;
 
+  loadedMessages: Message[] = [];
   messageList: Message[] = [];
   isDesktop: boolean = false;
   datetime!: Date;
@@ -35,14 +36,14 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   duration: number = 0;
   isLoading: boolean = false;
 
-  limit: number = 5;
+  limit: number = 10;
   offset: number = 0;
+  hasMoreData: boolean = true
 
   private subscription: Subscription = new Subscription();
 
   constructor(
-              public core: CoreProvider,
-              private loadingController: LoadingController
+              public core: CoreProvider
   ) { }
 
   ngOnInit(): void {
@@ -61,8 +62,15 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     this.content = this.contents.last;
   }
 
-  async ionViewWillEnter() {
-    if(!this.messageList.length) {
+async ionViewWillEnter() {
+    // 1. ¿Hay datos en el servicio core y NO estamos buscando? Usamos la caché.
+    if (!this.searchQuery && this.core.messageList && this.core.messageList.length > 0) {
+      this.loadedMessages = [...this.core.messageList];
+      this.offset = this.loadedMessages.length;
+      this.updateListRdBtn(); // Actualiza messageList para la vista
+    } else if (this.loadedMessages.length === 0) {
+      // 2. Si no hay datos, empezamos de cero
+      this.offset = 0;
       this.getAllMessages();
     }
   }
@@ -77,91 +85,117 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   searchInput(event: any) {
-    const query = event.target.value.toLowerCase();
-    if(query && query != '' && query.length > 0) {
+    const query = event.target.value?.toLowerCase().trim() || '';
+    this.searchQuery = query;
+
+    this.offset = 0; // Reiniciamos paginación al cambiar el buscador
+    this.hasMoreData = true;
+
+    if (query === '') {
+      // Si borramos el buscador, restauramos la lista desde el servicio Core
+      this.loadedMessages = [...this.core.messageList];
+      this.offset = this.loadedMessages.length;
+      this.updateListRdBtn();
+    } else {
+      // Si estamos buscando, vaciamos la lista actual y buscamos en BD
+      this.loadedMessages = [];
       this.findMessagesByFilter(query);
     }
   }
 
-  async findMessagesByFilter(query: string) {
-    // let loading = await this.loadingController.create({
-    //   message: 'Recuperando predicaciones...',
-    //   cssClass: 'custom-loading',
-    //   mode: 'md',
-    //   spinner: null,
-    // })
-    // loading.present();
-
+// Se añade el parámetro opcional event
+  async findMessagesByFilter(query: string, event?: any) {
     this.isLoading = true;
 
     this.core.api.message.findByTitle({ searchedTitle: query, limit: this.limit, offset: this.offset })
       .subscribe({
         next: (val: any) => {
-          console.log('------------', val.messageListMapped);
-          
-          this.updateMessageList(val.messageListMapped)
+          if (val && val.messageListMapped) {
+            const newMessages = val?.messageListMapped || [];
 
-          this.updateListRdBtn()
+            if (newMessages.length < this.limit) {
+              this.hasMoreData = false;
+            }
+
+            this.updateMessageList(newMessages, false);
+          }
+          if (event) event.target.complete();
         },
         error: (e) => {
-          console.log('ERROR ', e)
+          console.error('ERROR ', e);
+          if(event) event.target.complete();
         },
-        complete: () => {
-          console.log("Finnished searching");
-          this.isLoading = false;
-          // loading.dismiss()
-        }
-      })
+        complete: () => this.isLoading = false
+      });
   }
   
   scrollAndSearch(event: InfiniteScrollCustomEvent) {
     if (!this.isLoading) {
-      this.findMessagesByFilter(this.searchBar.value!);
+      // El scroll infinito decide automáticamente qué endpoint llamar
+      if (this.searchQuery !== '') {
+        this.findMessagesByFilter(this.searchQuery, event);
+      } else {
+        this.getAllMessages(event);
+      }
+    } else {
       event.target.complete();
     }
   }
 
-  async getAllMessages() {
-    this.offset = 0;
+// Se añade el parámetro opcional event para manejar el scroll
+  async getAllMessages(event?: any) {
     this.isLoading = true;
-    console.log("Todas las predicaciones");
+
+    let loading: HTMLIonLoadingElement;
     
-    let loading = await this.loadingController.create({
-      message: 'Recuperando predicaciones...',
-      cssClass: 'custom-loading',
-      mode: 'md',
-      spinner: null,
-    })
-    loading.present();
-    console.log("Limit: ", this.limit, "Offset: ", this.offset);
-    
-    this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
-    .subscribe({
-      next: (data: any) => {
-        if(data) {
-          this.updateMessageList(data.messageListMapped, true)
-        }
-        
-        loading.dismiss()
-      },
-      error: (err: any) => {
-        console.error(err)
-        loading.dismiss()
-      },
+    if (this.offset == 0) {
+      loading = await this.core.loadingCtrl.create({
+        message: 'Recuperando predicaciones...',
+        cssClass: 'custom-loading',
+        mode: 'md',
+        spinner: null,
+      })
+      loading.present();
+    }
+
+    this.core.api.message.getAllMessages({ limit: this.limit, offset: this.offset })
+      .subscribe({
+        next: (data: any) => {
+          if (data && data.messageListMapped) {
+            const newMessages = data?.messageListMapped || [];
+
+            if (newMessages.length < this.limit) {
+              this.hasMoreData = false;
+            }
+
+            // true = Le decimos que SÍ agregue estos datos a this.core.messageList
+            this.updateMessageList(newMessages, true);
+          }
+
+          if (event) event.target.complete();
+        },
+        error: (err: any) => {
+          console.error(err);
+          if (event) event.target.complete();
+        },
       complete: () => {
         this.isLoading = false;
+        if (loading) loading.dismiss();
       }
-    })
+    });
   }
 
   refresh(event: any) {
-    this.core.api.message.getAllMessages({limit: this.limit, offset: this.offset})
-    .subscribe((data: any) => {
-      if(data) {
-        this.updateMessageList(data.messageListMapped, true)
-      }
-      event.target.complete();
-    })
+    this.offset = 0;
+    this.loadedMessages = [];
+    this.hasMoreData = true;
+    
+    if (this.searchQuery === '') {
+      this.core.messageList = []; // Vaciamos la caché para forzar datos nuevos
+      this.getAllMessages(event);
+    } else {
+      this.findMessagesByFilter(this.searchQuery, event);
+    }
   }
 
   removeFromListened(message: Message) {
@@ -173,73 +207,52 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
     localStorage.setItem('listened', removed.toString())
 
-    this.resetListenedBeforeMark()
-    this.checkIfAlreadyListened()
+    // this.resetListenedBeforeMark()
+    this.checkIfAlreadyListened(this.loadedMessages);
+
+    this.updateListRdBtn();
   }
 
-  checkIfAlreadyListened() {
+  checkIfAlreadyListened(lista: Message[]) {
     let listened = localStorage.getItem('listened');
-    
-    let arr1 = listened?.split(',')
-    let arr = [...new Set(arr1)]
-    this.messageList.forEach((message: Message )=> {
-        arr?.forEach(element => {
-          if(parseInt(element) === message.id) {
-            message.listened = true;
-          }
-        })
-    })
+    if (!listened) return;
 
-    if(this.rbSelected === 'all') {
-      this.backupListForRbFilter = _.cloneDeep(this.messageList);
-    }
+    let arr = [...new Set(listened.split(','))];
+    lista.forEach((message: Message) => {
+      message.listened = arr.includes(message.id.toString());
+    });
   }
 
-  checkIfIsNewMessage() {
-    let newMessage: boolean = false;
+  checkIfIsNewMessage(lista: Message[]) {
+    let currentDate: number = new Date().getTime();
 
-    this.messageList.forEach((message: Message) => {      
-      // Get the current date and the creation date of the message
-      let currentDate: number = new Date().getTime(); //Time in unix
-      // We add days to that date to compare in that range with the current one
+    lista.forEach((message: Message) => {
       let messageDate: number = new Date(message.createdAt).setDate(new Date(message.createdAt).getDate() + 3);
-            
-      if (messageDate > currentDate) {
-        message.isNew = true;
-        newMessage = true;
-      } else {
-        message.isNew = false;
-      }
+      message.isNew = messageDate > currentDate;
     });
-
-    // Order list by isNew property
-    if (newMessage) {
-      this.messageList.sort((a, b) => Number(b.isNew) - Number(a.isNew));
-    }
   }
 
   /**
    * Función centralizada para gestionar actualización de la lista de predicaciones mostradas
    */
-  updateMessageList(lista: Message[], allMessages: boolean = false) {
-    this.messageList = this.messageList.concat(lista);
-    
-    this.offset = this.messageList.length;
-    console.log(this.messageList);
-    
-    if (allMessages) {
+  updateMessageList(lista: Message[], saveToCore: boolean = false) {
+    this.mapMessageListImages(lista); 
+    this.checkIfAlreadyListened(lista);
+    this.checkIfIsNewMessage(lista);
+
+    // 1. Guardamos en nuestra lista íntegra (la que manda en la paginación)
+    this.loadedMessages = this.loadedMessages.concat(lista);
+
+    // 2. Calculamos el offset de forma segura
+    this.offset = this.loadedMessages.length;
+
+    // 3. Si es una carga normal, lo vamos guardando en la caché del core
+    if (saveToCore) {
       this.core.messageList = this.core.messageList.concat(lista);
     }
 
-    this.mapMessageListImages();
-    this.checkIfAlreadyListened();
-    this.checkIfIsNewMessage();
-  }
-
-  resetListenedBeforeMark() {
-    this.messageList.forEach(msg => {
-      msg.listened = false;
-    })
+    // 4. Mostramos en pantalla aplicando filtros de Radio Buttons
+    this.updateListRdBtn();
   }
 
   async showFilterModal(event: any) {
@@ -269,33 +282,29 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
    * 
    */
   updateListRdBtn() {
-    // actualizamos lista con este filtro
-    if(this.rbSelected === 'all') {
-      this.messageList = this.backupListForRbFilter;
+    if (this.rbSelected === 'all') {
+      this.messageList = [...this.loadedMessages];
     } else if (this.rbSelected === 'listened') {
-      this.messageList = this.backupListForRbFilter.filter(msg => msg.listened && msg.listened === true)
+      this.messageList = this.loadedMessages.filter(msg => msg.listened);
     } else if (this.rbSelected === 'pending') {
-      this.messageList = this.backupListForRbFilter.filter(msg => !(msg.listened && msg.listened === true))
+      this.messageList = this.loadedMessages.filter(msg => !msg.listened);
     }
-
-    //actualizamos visualizacion de lista
-    this.updateMessageList(this.messageList)
   }
 
   /**
    * 
    */
-  mapMessageListImages() {
-    this.messageList.forEach((msg: Message) => {
+  mapMessageListImages(lista: Message[]) {
+    lista.forEach((msg: Message) => {
       let imgBase64: string = '';
-      if(msg.image && (!msg.image.includes('data:image/jpeg;base64') && !msg.image.includes('../../../assets/images/thumbnail-'))) {
-        imgBase64 = 'data:image/jpeg;base64,' + msg.image
-      } else if(!msg.image) {
+      if (msg.image && (!msg.image.includes('data:image/jpeg;base64') && !msg.image.includes('../../../assets/images/thumbnail-'))) {
+        imgBase64 = 'data:image/jpeg;base64,' + msg.image;
+      } else if (!msg.image) {
         const randomNum = Math.floor(Math.random() * 6);
         imgBase64 = `../../../assets/images/thumbnail-${randomNum}.jpg`;
       }
-      msg.image = imgBase64 != '' ? imgBase64 : msg.image;
-    })
+      msg.image = imgBase64 !== '' ? imgBase64 : msg.image;
+    });
   }
 
 }

@@ -11,8 +11,9 @@
 
 <ion-content [fullscreen]="true" id="messages" (ionScroll)="onScroll($event)" scrollEvents="true">
   <ion-searchbar #searchBar mode="ios" animated="true" placeholder="Buscar por título, autor o libro" show-clear-button="always"
-    clear-icon="close-outline" [debounce]="1000" (ionInput)="searchInput($event)"
-    (ionClear)="getAllMessages(); rbSelected = 'all'" [(ngModel)]="searchQuery"></ion-searchbar>
+      clear-icon="close-outline" [debounce]="1000" (ionInput)="searchInput($event)"
+      (ionClear)="rbSelected = 'all'" [(ngModel)]="searchQuery">
+  </ion-searchbar>
 
   <!-- refresher -->
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''">
@@ -59,19 +60,19 @@
   <!-- fin filtros  -->
 
   <div>
-    @for (message of messageList; track $index) { @if (message.isNew &&
-    !message.listened) {
-    <h3 class="heartBeatLetters">¡Nueva!</h3>
+    @for (message of messageList; track $index) { 
+      @if (message.isNew && !message.listened) {
+        <h3 class="heartBeatLetters">¡Nueva!</h3>
+      }
+      <app-card-message [message]="message"></app-card-message>
     }
-    <app-card-message [message]="message"></app-card-message>
+    @if (!isLoading && messageList.length === 0) {
+      <div class="noResult">No se han encontrado resultados</div>
+      <div class="refresh">(Desliza para recargar)</div>
     }
-    @if (messageList && messageList.length < 1) { <div class="noResult">No se han encontrado resultados
-  </div>
-  <div div class="refresh">(Desliza para recargar)</div>
-  }
   </div>
 
-  <ion-infinite-scroll (ionInfinite)="scrollAndSearch($event)">
+  <ion-infinite-scroll (ionInfinite)="scrollAndSearch($event)" [disabled]="!hasMoreData">
     <ion-infinite-scroll-content loadingText="Cargando predicaciones" loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
