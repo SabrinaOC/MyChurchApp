@@ -11,12 +11,16 @@ import { RequestBuilder } from '../../request-builder';
 
 export interface FindByTitle$Params {
   searchedTitle: string;
+  limit: number;
+  offset: number;
 }
 
 export function findByTitle(http: HttpClient, rootUrl: string, params: FindByTitle$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
   const rb = new RequestBuilder(rootUrl, findByTitle.PATH, 'get');
   if (params) {
     rb.query('searchedTitle', params.searchedTitle, {});
+    rb.query('limit', params.limit, {});
+    rb.query('offset', params.offset, {});
   }
 
   return http.request(

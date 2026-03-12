@@ -345,6 +345,24 @@
                             "type": "string",
                             "example": "Título buscado"
                         }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": 20
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "number",
+                            "example": 0
+                        }
                     }
                 ],
                 "operationId": "findByTitle",
