@@ -48,7 +48,8 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     const sub = this.core.audio.listened.subscribe(value => {
-        this.updateMessageList(this.messageList);
+        this.checkIfAlreadyListened(this.loadedMessages);
+        this.updateListRdBtn();
     });
 
     this.subscription.add(sub) 
@@ -67,6 +68,9 @@ async ionViewWillEnter() {
     if (!this.searchQuery && this.core.messageList && this.core.messageList.length > 0) {
       this.loadedMessages = [...this.core.messageList];
       this.offset = this.loadedMessages.length;
+
+      this.checkIfAlreadyListened(this.loadedMessages);
+
       this.updateListRdBtn(); // Actualiza messageList para la vista
     } else if (this.loadedMessages.length === 0) {
       // 2. Si no hay datos, empezamos de cero
@@ -215,9 +219,14 @@ async ionViewWillEnter() {
 
   checkIfAlreadyListened(lista: Message[]) {
     let listened = localStorage.getItem('listened');
-    if (!listened) return;
 
-    let arr = [...new Set(listened.split(','))];
+    if (!listened) {
+      lista.forEach(msg => msg.listened = false);
+      return;
+    }
+
+    let arr = [...new Set(listened.split(', '))];
+    
     lista.forEach((message: Message) => {
       message.listened = arr.includes(message.id.toString());
     });
