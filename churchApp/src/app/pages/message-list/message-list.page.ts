@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Message } from '../../models/interfaces';
-import { InfiniteScrollCustomEvent, IonContent, IonSearchbar, LoadingController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, IonContent, IonSearchbar } from '@ionic/angular';
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
 import { NavigationExtras } from '@angular/router';
@@ -63,19 +63,24 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     this.content = this.contents.last;
   }
 
-async ionViewWillEnter() {
-    // 1. ¿Hay datos en el servicio core y NO estamos buscando? Usamos la caché.
-    if (!this.searchQuery && this.core.messageList && this.core.messageList.length > 0) {
+  async ionViewWillEnter() {
+    // Load from cache if we are in "all" and not searching
+    if (this.rbSelected === 'all' && !this.searchQuery && this.core.messageList && this.core.messageList.length > 0) {
       this.loadedMessages = [...this.core.messageList];
       this.offset = this.loadedMessages.length;
 
       this.checkIfAlreadyListened(this.loadedMessages);
+      this.updateListRdBtn();
 
-      this.updateListRdBtn(); // Actualiza messageList para la vista
     } else if (this.loadedMessages.length === 0) {
-      // 2. Si no hay datos, empezamos de cero
+      // If there is no cache, find all messages
       this.offset = 0;
-      this.getAllMessages();
+
+      if (this.searchQuery === '') {
+        this.getAllMessages();
+      } else {
+        this.findMessagesByFilter(this.searchQuery);
+      }
     }
   }
 
@@ -95,7 +100,7 @@ async ionViewWillEnter() {
     this.offset = 0; // Reiniciamos paginación al cambiar el buscador
     this.hasMoreData = true;
 
-    if (query === '') {
+    if (query === '' && this.rbSelected === "all") {
       // Si borramos el buscador, restauramos la lista desde el servicio Core
       this.loadedMessages = [...this.core.messageList];
       this.offset = this.loadedMessages.length;
@@ -111,7 +116,29 @@ async ionViewWillEnter() {
   async findMessagesByFilter(query: string, event?: any) {
     this.isLoading = true;
 
-    this.core.api.message.findByTitle({ searchedTitle: query, limit: this.limit, offset: this.offset })
+    let loading: HTMLIonLoadingElement | undefined;
+
+    if (this.offset == 0 && !event) {
+      loading = await this.core.loadingCtrl.create({
+        message: 'Recuperando predicaciones...',
+        cssClass: 'custom-loading',
+        mode: 'md',
+        spinner: null,
+      })
+      await loading.present();
+    }
+
+    const listenedIdsString = localStorage.getItem('listened') || '';
+
+    this.core.api.message.findByFilter(
+      { 
+        searchedTerm: query,
+        limit: this.limit,
+        offset: this.offset,
+        filterType: this.rbSelected,
+        listenedIds: listenedIdsString
+      }
+    )
       .subscribe({
         next: (val: any) => {
           if (val && val.messageListMapped) {
@@ -129,7 +156,10 @@ async ionViewWillEnter() {
           console.error('ERROR ', e);
           if(event) event.target.complete();
         },
-        complete: () => this.isLoading = false
+        complete: () => {
+          if (loading) loading.dismiss();
+          this.isLoading = false
+        }
       });
   }
   
@@ -150,19 +180,26 @@ async ionViewWillEnter() {
   async getAllMessages(event?: any) {
     this.isLoading = true;
 
-    let loading: HTMLIonLoadingElement;
-    
-    if (this.offset == 0) {
+    let loading: HTMLIonLoadingElement | undefined;
+
+    if (this.offset == 0 && !event) {
       loading = await this.core.loadingCtrl.create({
         message: 'Recuperando predicaciones...',
         cssClass: 'custom-loading',
         mode: 'md',
         spinner: null,
       })
-      loading.present();
+      await loading.present();
     }
 
-    this.core.api.message.getAllMessages({ limit: this.limit, offset: this.offset })
+    const listenedIdsString = localStorage.getItem('listened') || '';
+
+    this.core.api.message.getAllMessages({
+      limit: this.limit,
+      offset: this.offset,
+      filterType: this.rbSelected,
+      listenedIds: listenedIdsString
+    })
       .subscribe({
         next: (data: any) => {
           if (data && data.messageListMapped) {
@@ -172,8 +209,8 @@ async ionViewWillEnter() {
               this.hasMoreData = false;
             }
 
-            // true = Le decimos que SÍ agregue estos datos a this.core.messageList
-            this.updateMessageList(newMessages, true);
+            // If we're listing 'All' messages, we save them to core cache
+            this.updateMessageList(newMessages, this.rbSelected === 'all');
           }
 
           if (event) event.target.complete();
@@ -282,22 +319,39 @@ async ionViewWillEnter() {
   }
 
   rbSelection(selection: string) {
+    if (this.rbSelected === selection) return; 
+
     this.rbSelected = selection;
 
-    this.updateListRdBtn()
+    // If we return to 'All' and there is no search we load cached messages
+    if (this.rbSelected === 'all' && this.searchQuery === '' && this.core.messageList.length > 0) {
+      this.loadedMessages = [...this.core.messageList];
+      this.offset = this.loadedMessages.length;
+      this.hasMoreData = true; // Maybe there is more data to load
+
+      this.checkIfAlreadyListened(this.loadedMessages);
+      this.updateListRdBtn();
+      return;
+    }
+
+    // If we go to "Listened" or "Pending" or we're searching we will request to the server
+    this.offset = 0;
+    this.hasMoreData = true;
+    this.loadedMessages = [];
+    this.messageList = []; 
+
+    if (this.searchQuery === '') {
+      this.getAllMessages();
+    } else {
+      this.findMessagesByFilter(this.searchQuery);
+    }
   }
 
   /**
    * 
    */
   updateListRdBtn() {
-    if (this.rbSelected === 'all') {
-      this.messageList = [...this.loadedMessages];
-    } else if (this.rbSelected === 'listened') {
-      this.messageList = this.loadedMessages.filter(msg => msg.listened);
-    } else if (this.rbSelected === 'pending') {
-      this.messageList = this.loadedMessages.filter(msg => !msg.listened);
-    }
+    this.messageList = [...this.loadedMessages];
   }
 
   /**
