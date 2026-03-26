@@ -13,6 +13,8 @@ import { Message } from '../../models/message';
 export interface GetAllMessages$Params {
   limit: number;
   offset: number;
+  filterType: string;
+  listenedIds: string;
 }
 
 export function getAllMessages(http: HttpClient, rootUrl: string, params: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
@@ -22,6 +24,8 @@ export function getAllMessages(http: HttpClient, rootUrl: string, params: GetAll
   if (params) {
     rb.query('limit', params.limit, {});
     rb.query('offset', params.offset, {});
+    rb.query('filterType', params.filterType, {});
+    rb.query('listenedIds', params.listenedIds, {});
   }
 
   return http.request(
