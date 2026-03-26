@@ -12,7 +12,7 @@
 <ion-content [fullscreen]="true" id="messages" (ionScroll)="onScroll($event)" scrollEvents="true">
   <ion-searchbar #searchBar mode="ios" animated="true" placeholder="Buscar por título, autor o libro" show-clear-button="always"
       clear-icon="close-outline" [debounce]="1000" (ionInput)="searchInput($event)"
-      (ionClear)="rbSelected = 'all'" [(ngModel)]="searchQuery">
+      [(ngModel)]="searchQuery">
   </ion-searchbar>
 
   <!-- refresher -->

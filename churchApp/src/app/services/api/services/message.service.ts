@@ -19,8 +19,6 @@ import { findByFilter } from '../fn/message/find-by-filter';
 import { FindByFilter$Params } from '../fn/message/find-by-filter';
 import { findById } from '../fn/message/find-by-id';
 import { FindById$Params } from '../fn/message/find-by-id';
-import { findByTitle } from '../fn/message/find-by-title';
-import { FindByTitle$Params } from '../fn/message/find-by-title';
 import { getAllMessages } from '../fn/message/get-all-messages';
 import { GetAllMessages$Params } from '../fn/message/get-all-messages';
 import { Message } from '../models/message';
@@ -197,44 +195,11 @@ export class MessageService extends BaseService {
     );
   }
 
-  /** Path part for operation `findByTitle()` */
-  static readonly FindByTitlePath = '/messages/title';
-
-  /**
-   * Filter messages by title.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findByTitle()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findByTitle$Response(params: FindByTitle$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
-    return findByTitle(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * Filter messages by title.
-   *
-   *
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `findByTitle$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findByTitle(params: FindByTitle$Params, context?: HttpContext): Observable<any> {
-    return this.findByTitle$Response(params, context).pipe(
-      map((r: StrictHttpResponse<any>): any => r.body)
-    );
-  }
-
   /** Path part for operation `findByFilter()` */
   static readonly FindByFilterPath = '/messages/filter';
 
   /**
-   * Filter messages by coincidence on any field.
+   * Filter messages by term.
    *
    *
    *
@@ -243,12 +208,12 @@ export class MessageService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByFilter$Response(params?: FindByFilter$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+  findByFilter$Response(params: FindByFilter$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
     return findByFilter(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * Filter messages by coincidence on any field.
+   * Filter messages by term.
    *
    *
    *
@@ -257,7 +222,7 @@ export class MessageService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  findByFilter(params?: FindByFilter$Params, context?: HttpContext): Observable<any> {
+  findByFilter(params: FindByFilter$Params, context?: HttpContext): Observable<any> {
     return this.findByFilter$Response(params, context).pipe(
       map((r: StrictHttpResponse<any>): any => r.body)
     );
