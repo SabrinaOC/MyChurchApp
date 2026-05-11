@@ -43,6 +43,19 @@
       </div>
     }
 
+    @if (!verseCount && !searchedTerm) {
+      <div style="height: 70%; width: 100%; display: flex; align-items: center;">
+        <div style="margin-top: auto; margin-bottom: auto; display: inline-block; padding: 20px;">
+          <ion-text style="text-align: center;">
+            <p>
+              <ion-icon name="search-outline" style="font-size: 90px; text-align: center;"></ion-icon>
+            </p>
+            <h3>Realiza una búsqueda de concordancias por un término</h3>
+          </ion-text>
+        </div>
+      </div>
+    }
+    
     <div>
       <ion-accordion-group #accordionGroup [multiple]="true" [value]="0">
 
