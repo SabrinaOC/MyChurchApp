@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { IonAccordionGroup, IonContent } from '@ionic/angular';
+import { IonAccordionGroup, IonContent, IonSearchbar } from '@ionic/angular';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { VerseObject } from 'src/app/services/bible.service';
 import { CoreProvider } from 'src/app/services/core';
@@ -11,6 +11,7 @@ import { CoreProvider } from 'src/app/services/core';
 })
 export class BibleReferencePage implements AfterViewInit {
 
+  @ViewChild('searchbar', { static: true }) searchbar!: IonSearchbar;
   @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup;
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
   content!: IonContent;
@@ -91,6 +92,10 @@ export class BibleReferencePage implements AfterViewInit {
     } else {
       this.accordionGroup.value = [];
     }
+  }
+
+  focusSearchbar() {
+    this.searchbar.setFocus();
   }
 
   async openShowVerses(e: any, verse: string) {
