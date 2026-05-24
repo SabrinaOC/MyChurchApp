@@ -19,6 +19,7 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
   content!: IonContent;
 
   showScroller = false;
+  currentScroll: number = 0;
 
   searchedTerm: string = ""
   includeNT: boolean = true;
@@ -50,8 +51,34 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
     this.content = this.contents.last;
   }
 
+  ionViewDidEnter() {
+    // Restore accordionGroup
+    if (this.accordionGroup && this.core.bible.lastAccordionValue) {
+      this.accordionGroup.value = this.core.bible.lastAccordionValue;
+    }
+
+    // Restore scroll
+    if (this.core.bible.lastScrollPosition > 0 && this.content) {
+      setTimeout(() => {
+        // 0ms to avoid animation
+        this.content.scrollToPoint(0, this.core.bible.lastScrollPosition, 0);
+      }, 50); 
+    }
+  }
+
+  ionViewWillLeave() {
+    // Save current scroll position
+    this.core.bible.lastScrollPosition = this.currentScroll;
+    
+    // Save opened accordions
+    if (this.accordionGroup) {
+      this.core.bible.lastAccordionValue = this.accordionGroup.value;
+    }
+  }
+
   onScroll(event: any) {
     this.showScroller = event.detail.scrollTop > 100;
+    this.currentScroll = event.detail.scrollTop;
   }
 
   scrollToTop() {
@@ -76,6 +103,9 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
     if (this.verseCount) {
       this.accordionGroup.value = ["0"];
     }
+
+    //Reset lastScrollPosition
+    this.core.bible.lastScrollPosition = 0;
 
     //Save search state
     this.saveStateToService();
