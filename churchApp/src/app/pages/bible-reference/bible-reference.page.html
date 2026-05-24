@@ -24,8 +24,8 @@
 
     <div class="divFiltros">
       <div id="checkBox-layout">
-        <ion-checkbox mode="ios" checked (ionChange)="toggleOldTestament($event)">Antiguo Testamento</ion-checkbox>
-        <ion-checkbox mode="ios" checked (ionChange)="toggleNewTestament($event)">Nuevo Testamento</ion-checkbox>
+        <ion-checkbox #chkOldTestament mode="ios" checked (ionChange)="toggleOldTestament($event)">Antiguo Testamento</ion-checkbox>
+        <ion-checkbox #chkNewTestament mode="ios" checked (ionChange)="toggleNewTestament($event)">Nuevo Testamento</ion-checkbox>
       </div>
     </div>
 

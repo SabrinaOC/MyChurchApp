@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { IonAccordionGroup, IonContent, IonSearchbar } from '@ionic/angular';
+import { IonAccordionGroup, IonCheckbox, IonContent, IonSearchbar } from '@ionic/angular';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { VerseObject } from 'src/app/services/bible.service';
 import { CoreProvider } from 'src/app/services/core';
@@ -12,6 +12,8 @@ import { CoreProvider } from 'src/app/services/core';
 export class BibleReferencePage implements AfterViewInit {
 
   @ViewChild('searchbar', { static: true }) searchbar!: IonSearchbar;
+  @ViewChild('chkOldTestament', { static: true }) chkOldTestament!: IonCheckbox;
+  @ViewChild('chkNewTestament', { static: true }) chkNewTestament!: IonCheckbox;
   @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup;
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
   content!: IonContent;
@@ -66,12 +68,26 @@ export class BibleReferencePage implements AfterViewInit {
     this.searchInput();
   }
 
-  toggleOldTestament(e: any) {    
+  toggleOldTestament(e: any) {
+    //If New Testament is disabled, preventing disabling Old Testament
+    if (!e.detail.checked && !this.includeNT) {
+      this.chkOldTestament.checked = true;
+      e.detail.checked = true;
+      return;
+    } 
+
     this.includeAT = e.detail.checked;
     this.searchInput();
   }
 
   toggleNewTestament(e: any) {
+    //If Old Testament is disabled, preventing disabling New Testament
+    if (!e.detail.checked && !this.includeAT) {
+      this.chkNewTestament.checked = true;
+      e.detail.checked = true;
+      return;
+    } 
+
     this.includeNT = e.detail.checked;
     this.searchInput();
   }
