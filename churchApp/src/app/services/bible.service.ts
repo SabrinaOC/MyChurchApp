@@ -21,6 +21,13 @@ export class BibleService {
 
   public lastChapterRead: string = "";
 
+  // Variables para guardar el estado de la última búsqueda en bible-reference
+  lastSearchTerm: string = "";
+  lastIncludeOT: boolean = true;
+  lastIncludeNT: boolean = true;
+  lastGroupedVerses = new Map<string, Array<VerseObject>>();
+  lastVerseCount: number = 0;
+
   constructor(private http: HttpClient, private settings: SettingsService) {
     this.loadBibleRVR1960();
   }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { IonAccordionGroup, IonCheckbox, IonContent, IonSearchbar } from '@ionic/angular';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { VerseObject } from 'src/app/services/bible.service';
@@ -9,7 +9,7 @@ import { CoreProvider } from 'src/app/services/core';
   templateUrl: './bible-reference.page.html',
   styleUrls: ['./bible-reference.page.scss'],
 })
-export class BibleReferencePage implements AfterViewInit {
+export class BibleReferencePage implements  OnInit, AfterViewInit {
 
   @ViewChild('searchbar', { static: true }) searchbar!: IonSearchbar;
   @ViewChild('chkOldTestament', { static: true }) chkOldTestament!: IonCheckbox;
@@ -30,6 +30,21 @@ export class BibleReferencePage implements AfterViewInit {
   constructor(
     public core: CoreProvider
   ) { }
+
+  ngOnInit() {
+    // Get before search state
+    this.searchedTerm = this.core.bible.lastSearchTerm;
+    this.searchbar.value = this.searchedTerm;
+
+    this.includeAT = this.core.bible.lastIncludeOT;
+    this.chkOldTestament.checked = this.includeAT;
+
+    this.includeNT = this.core.bible.lastIncludeNT;
+    this.chkNewTestament.checked = this.includeNT;
+
+    this.groupedVerses = this.core.bible.lastGroupedVerses;
+    this.verseCount = this.core.bible.lastVerseCount;
+  }
 
   ngAfterViewInit() {
     this.content = this.contents.last;
@@ -61,6 +76,9 @@ export class BibleReferencePage implements AfterViewInit {
     if (this.verseCount) {
       this.accordionGroup.value = ["0"];
     }
+
+    //Save search state
+    this.saveStateToService();
   }
 
   changedSearchBar(e: any) {
@@ -132,5 +150,13 @@ export class BibleReferencePage implements AfterViewInit {
     });
 
     await modal.present()
+  }
+
+  private saveStateToService() {
+    this.core.bible.lastSearchTerm = this.searchedTerm;
+    this.core.bible.lastIncludeOT = this.includeAT;
+    this.core.bible.lastIncludeNT = this.includeNT;
+    this.core.bible.lastGroupedVerses = this.groupedVerses;
+    this.core.bible.lastVerseCount = this.verseCount;
   }
 }
