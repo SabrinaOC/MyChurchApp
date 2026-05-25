@@ -61,7 +61,7 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
     if (this.core.bible.lastScrollPosition > 0 && this.content) {
       setTimeout(() => {
         // 0ms to avoid animation
-        this.content.scrollToPoint(0, this.core.bible.lastScrollPosition, 0);
+        this.content.scrollToPoint(0, this.core.bible.lastScrollPosition, 400);
       }, 50); 
     }
   }
