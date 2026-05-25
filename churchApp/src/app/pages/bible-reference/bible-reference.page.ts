@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { IonAccordionGroup, IonContent } from '@ionic/angular';
+import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { IonAccordionGroup, IonCheckbox, IonContent, IonSearchbar } from '@ionic/angular';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { VerseObject } from 'src/app/services/bible.service';
 import { CoreProvider } from 'src/app/services/core';
@@ -9,13 +9,17 @@ import { CoreProvider } from 'src/app/services/core';
   templateUrl: './bible-reference.page.html',
   styleUrls: ['./bible-reference.page.scss'],
 })
-export class BibleReferencePage implements AfterViewInit {
+export class BibleReferencePage implements  OnInit, AfterViewInit {
 
+  @ViewChild('searchbar', { static: true }) searchbar!: IonSearchbar;
+  @ViewChild('chkOldTestament', { static: true }) chkOldTestament!: IonCheckbox;
+  @ViewChild('chkNewTestament', { static: true }) chkNewTestament!: IonCheckbox;
   @ViewChild('accordionGroup', { static: true }) accordionGroup!: IonAccordionGroup;
   @ViewChildren(IonContent) contents!: QueryList<IonContent>;
   content!: IonContent;
 
   showScroller = false;
+  currentScroll: number = 0;
 
   searchedTerm: string = ""
   includeNT: boolean = true;
@@ -28,12 +32,53 @@ export class BibleReferencePage implements AfterViewInit {
     public core: CoreProvider
   ) { }
 
+  ngOnInit() {
+    // Get before search state
+    this.searchedTerm = this.core.bible.lastSearchTerm;
+    this.searchbar.value = this.searchedTerm;
+
+    this.includeAT = this.core.bible.lastIncludeOT;
+    this.chkOldTestament.checked = this.includeAT;
+
+    this.includeNT = this.core.bible.lastIncludeNT;
+    this.chkNewTestament.checked = this.includeNT;
+
+    this.groupedVerses = this.core.bible.lastGroupedVerses;
+    this.verseCount = this.core.bible.lastVerseCount;
+  }
+
   ngAfterViewInit() {
     this.content = this.contents.last;
   }
 
+  ionViewDidEnter() {
+    // Restore accordionGroup
+    if (this.accordionGroup && this.core.bible.lastAccordionValue) {
+      this.accordionGroup.value = this.core.bible.lastAccordionValue;
+    }
+
+    // Restore scroll
+    if (this.core.bible.lastScrollPosition > 0 && this.content) {
+      setTimeout(() => {
+        // 0ms to avoid animation
+        this.content.scrollToPoint(0, this.core.bible.lastScrollPosition, 400);
+      }, 50); 
+    }
+  }
+
+  ionViewWillLeave() {
+    // Save current scroll position
+    this.core.bible.lastScrollPosition = this.currentScroll;
+    
+    // Save opened accordions
+    if (this.accordionGroup) {
+      this.core.bible.lastAccordionValue = this.accordionGroup.value;
+    }
+  }
+
   onScroll(event: any) {
     this.showScroller = event.detail.scrollTop > 100;
+    this.currentScroll = event.detail.scrollTop;
   }
 
   scrollToTop() {
@@ -58,6 +103,12 @@ export class BibleReferencePage implements AfterViewInit {
     if (this.verseCount) {
       this.accordionGroup.value = ["0"];
     }
+
+    //Reset lastScrollPosition
+    this.core.bible.lastScrollPosition = 0;
+
+    //Save search state
+    this.saveStateToService();
   }
 
   changedSearchBar(e: any) {
@@ -65,12 +116,26 @@ export class BibleReferencePage implements AfterViewInit {
     this.searchInput();
   }
 
-  toggleOldTestament(e: any) {    
+  toggleOldTestament(e: any) {
+    //If New Testament is disabled, preventing disabling Old Testament
+    if (!e.detail.checked && !this.includeNT) {
+      this.chkOldTestament.checked = true;
+      e.detail.checked = true;
+      return;
+    } 
+
     this.includeAT = e.detail.checked;
     this.searchInput();
   }
 
   toggleNewTestament(e: any) {
+    //If Old Testament is disabled, preventing disabling New Testament
+    if (!e.detail.checked && !this.includeAT) {
+      this.chkNewTestament.checked = true;
+      e.detail.checked = true;
+      return;
+    } 
+
     this.includeNT = e.detail.checked;
     this.searchInput();
   }
@@ -93,6 +158,10 @@ export class BibleReferencePage implements AfterViewInit {
     }
   }
 
+  focusSearchbar() {
+    this.searchbar.setFocus();
+  }
+
   async openShowVerses(e: any, verse: string) {
     const modal = await this.core.modalCtrl.create({
       component: ShowVersesComponent,
@@ -111,5 +180,13 @@ export class BibleReferencePage implements AfterViewInit {
     });
 
     await modal.present()
+  }
+
+  private saveStateToService() {
+    this.core.bible.lastSearchTerm = this.searchedTerm;
+    this.core.bible.lastIncludeOT = this.includeAT;
+    this.core.bible.lastIncludeNT = this.includeNT;
+    this.core.bible.lastGroupedVerses = this.groupedVerses;
+    this.core.bible.lastVerseCount = this.verseCount;
   }
 }

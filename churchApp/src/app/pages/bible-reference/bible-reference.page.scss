@@ -19,7 +19,7 @@
     justify-content: space-between;
 
     position: sticky;
-    top: 0; 
+    top: 0;
     z-index: 10;
     margin-top: 10px;
 
@@ -54,10 +54,59 @@ p {
 
 .accordionHeader {
     --ion-item-background: transparent !important;
-    
+
     &::part(native) {
         // border-radius: 10px;
         border: 1px dimgrey;
         border-style: solid none solid none;
     }
+}
+
+
+ion-icon::part(icon-inner) {
+    text-shadow: 1px 1px 20px red;
+    --background: red;
+}
+
+#noSearchDiv {
+    height: 70%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    div {
+        margin-top: auto;
+        margin-bottom: auto;
+        display: inline-block;
+        padding: 20px;
+        width: 100%;
+    }
+}
+
+#noResultsDiv {
+    height: 51.5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    div {
+        margin-top: auto;
+        margin-bottom: auto;
+        display: inline-block;
+        padding: 20px;
+        width: 100%;
+    }
+}
+
+#searchIcon {
+    font-size: 90px;
+    padding: 30px;
+    text-align: center;
+    filter: drop-shadow(1px 15px 25px white);
+}
+
+.infoSign {
+    text-align: center;
+    text-shadow: 1px 1px 20px white;
+    cursor: pointer;
 }
