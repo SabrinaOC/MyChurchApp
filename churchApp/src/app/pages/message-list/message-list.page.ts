@@ -124,8 +124,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
         cssClass: 'custom-loading',
         mode: 'md',
         spinner: null,
+        backdropDismiss: true
       })
-      await loading.present();
+      // await loading.present();
     }
 
     const listenedIdsString = localStorage.getItem('listened') || '';
@@ -188,8 +189,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
         cssClass: 'custom-loading',
         mode: 'md',
         spinner: null,
+        backdropDismiss: true
       })
-      await loading.present();
+      // await loading.present();
     }
 
     const listenedIdsString = localStorage.getItem('listened') || '';
@@ -227,6 +229,11 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   refresh(event: any) {
+    if (this.isLoading) {
+      event.cancel();
+      return;
+    } 
+
     this.offset = 0;
     this.loadedMessages = [];
     this.hasMoreData = true;

@@ -60,12 +60,20 @@
   <!-- fin filtros  -->
 
   <div>
-    @for (message of messageList; track $index) { 
-      @if (message.isNew && !message.listened) {
-        <h3 class="heartBeatLetters">¡Nueva!</h3>
+    @if (isLoading) {
+      @for (i of [1, 2, 3, 4, 5, 6]; track $index) {
+        <app-card-message [skeleton]="true"></app-card-message>
       }
-      <app-card-message [message]="message"></app-card-message>
+
+    } @else {      
+      @for (message of messageList; track $index) { 
+        @if (message.isNew && !message.listened) {
+          <h3 class="heartBeatLetters">¡Nueva!</h3>
+        }
+        <app-card-message [message]="message"></app-card-message>
+      }
     }
+
     @if (!isLoading && messageList.length === 0) {
       <div class="noResult">No se han encontrado resultados</div>
       <div class="refresh">(Desliza para recargar)</div>

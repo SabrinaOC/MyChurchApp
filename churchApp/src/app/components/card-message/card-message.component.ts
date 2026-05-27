@@ -15,9 +15,9 @@ import { CardOptionsPopoverComponent } from '../card-options-popover/card-option
 export class CardMessageComponent  implements OnInit {
 
   message = input<Message>();
+  skeleton = input<boolean>(false);
   @Output() removeFromListened = new EventEmitter<Message>();
   @Output() shareMessage = new EventEmitter<Message>();
-  // @Input() public message!: Message;
 
   isPlaying: boolean = false;
   progress: number = 0;
