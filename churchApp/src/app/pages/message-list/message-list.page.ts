@@ -6,6 +6,7 @@ import { CoreProvider } from 'src/app/services/core';
 import { NavigationExtras } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
+import { Network, ConnectionStatus } from '@capacitor/network';
 
 @Component({
   selector: 'app-message-list',
@@ -38,7 +39,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   limit: number = 10;
   offset: number = 0;
-  hasMoreData: boolean = true
+  hasMoreData: boolean = true;
+
+  networkStatus!: ConnectionStatus;
 
   private subscription: Subscription = new Subscription();
 
@@ -52,7 +55,24 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
         this.updateListRdBtn();
     });
 
-    this.subscription.add(sub) 
+    this.subscription.add(sub);
+
+    if (Network) {
+      Network.getStatus().then((status: ConnectionStatus) => {
+        this.networkStatus = status;
+      });
+    }
+
+    Network.addListener("networkStatusChange", (status: ConnectionStatus) => {
+      this.networkStatus = status;
+      
+      if (status.connected) {
+        this.refresh(event);
+      }
+    });
+
+    console.log("on init");
+    
   }
 
   ngOnDestroy(): void {
@@ -64,6 +84,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
   }
 
   async ionViewWillEnter() {
+    console.log("will enter");
     // Load from cache if we are in "all" and not searching
     if (this.rbSelected === 'all' && !this.searchQuery && this.core.messageList && this.core.messageList.length > 0) {
       this.loadedMessages = [...this.core.messageList];
@@ -114,6 +135,10 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
 // Se añade el parámetro opcional event
   async findMessagesByFilter(query: string, event?: any) {
+    if (!this.networkStatus.connected) {
+      return;
+    }
+
     this.isLoading = true;
 
     let loading: HTMLIonLoadingElement | undefined;
@@ -179,6 +204,10 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
 // Se añade el parámetro opcional event para manejar el scroll
   async getAllMessages(event?: any) {
+    if (!this.networkStatus.connected) {
+      return;
+    }
+
     this.isLoading = true;
 
     let loading: HTMLIonLoadingElement | undefined;
