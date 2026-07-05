@@ -60,7 +60,7 @@
   <!-- fin filtros  -->
 
   <div>
-    @if (isLoading) {
+    @if (isLoading && !offset && !messageList.length) {
       @for (i of [1, 2, 3, 4, 5, 6]; track $index) {
         <app-card-message [skeleton]="true"></app-card-message>
       }
