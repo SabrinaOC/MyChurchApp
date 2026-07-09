@@ -2,10 +2,11 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { environment } from 'src/environments/environment';
 import { AlertController, Platform } from '@ionic/angular';
-import { App, AppInfo } from '@capacitor/app';
+import { App } from '@capacitor/app';
 import { CoreProvider } from './services/core';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Router } from '@angular/router';
+import { Book } from './services/api/models';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -53,6 +54,15 @@ export class AppComponent {
     this.core.api.book.getAllBooks().subscribe({
       next: (books: any) => {
         this.core.bookList = books.bookList;
+      },
+      error: (err: any) => {
+        const books = core.bible.getAllBibleBooks();
+        var bibleBooks: Book[] = [];
+
+        books.forEach(element => {
+          bibleBooks.push({name: element, description: "Libro cargado desde la función sin conexión"})
+        });
+        this.core.bookList = bibleBooks;
       }
     })
     this.core.api.speaker.getAllSpeakers().subscribe({
