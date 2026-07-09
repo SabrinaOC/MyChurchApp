@@ -280,3 +280,28 @@ body.light-theme {
     --background: black;
     --color: white;
 }
+
+
+.errorDisplayLayout {
+    height: 65%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    div {
+        margin-top: auto;
+        margin-bottom: auto;
+        display: inline-block;
+        padding: 20px;
+        width: 100%;
+
+        ion-icon {
+            font-size: 90px;
+            padding: 30px;
+            text-align: center;
+            filter: drop-shadow(1px 15px 25px white);
+        }
+    }
+
+
+}
