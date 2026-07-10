@@ -1,4 +1,4 @@
-import { Component, EventEmitter, input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { CardOptionsPopoverComponent } from '../card-options-popover/card-option
   templateUrl: './card-message.component.html',
   styleUrls: ['./card-message.component.scss'],
 })
-export class CardMessageComponent  implements OnInit {
+export class CardMessageComponent  implements OnInit, OnDestroy {
 
   message = input<Message>();
   skeleton = input<boolean>(false);
