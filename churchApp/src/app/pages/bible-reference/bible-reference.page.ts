@@ -28,11 +28,24 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
   groupedVerses = new Map<string, Array<VerseObject>>();
   verseCount: number = 0;
 
+  loading: HTMLIonLoadingElement | undefined;
+
   constructor(
     public core: CoreProvider
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if (this.core.bible.lastSearchTerm) {
+  
+      this.loading = await this.core.loadingCtrl.create({
+        message: 'Recuperando contenido...',
+        cssClass: 'custom-loading',
+        mode: 'md',
+        spinner: null,
+      })
+      await this.loading.present();
+    }
+
     // Get before search state
     this.searchedTerm = this.core.bible.lastSearchTerm;
     this.searchbar.value = this.searchedTerm;
@@ -51,7 +64,7 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
     this.content = this.contents.last;
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
     // Restore accordionGroup
     if (this.accordionGroup && this.core.bible.lastAccordionValue) {
       this.accordionGroup.value = this.core.bible.lastAccordionValue;
@@ -62,7 +75,12 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
       setTimeout(() => {
         // 0ms to avoid animation
         this.content.scrollToPoint(0, this.core.bible.lastScrollPosition, 400);
+
       }, 50); 
+    }
+    
+    if (this.loading) {
+      this.core.loadingCtrl.dismiss();
     }
   }
 
