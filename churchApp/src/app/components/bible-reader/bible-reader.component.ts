@@ -158,6 +158,7 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
 
     const { data } = await popover.onDidDismiss();
     if (data) {
+      this.content.scrollToTop(0);
       this.verse = data;
     }
 
