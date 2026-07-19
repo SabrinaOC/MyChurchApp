@@ -6,6 +6,10 @@ import { CoreProvider } from 'src/app/services/core';
 import { NavigationExtras } from '@angular/router';
 import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
+import { NgZone } from '@angular/core'
+import { App } from '@capacitor/app';
+import { Network, ConnectionStatus } from '@capacitor/network';
+import { PluginListenerHandle } from '@capacitor/core';
 
 @Component({
   selector: 'app-message-list',
@@ -38,25 +42,101 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
   limit: number = 10;
   offset: number = 0;
-  hasMoreData: boolean = true
+  hasMoreData: boolean = true;
+
+  private networkListener?: PluginListenerHandle;
+  private appListener?: PluginListenerHandle;
+
+  networkStatus!: ConnectionStatus;
+  private wasOffline: boolean = false;
 
   private subscription: Subscription = new Subscription();
 
   constructor(
-              public core: CoreProvider
+    public core: CoreProvider,
+    private ngZone: NgZone,
   ) { }
 
-  ngOnInit(): void {
+  private onOnline = () => {
+    this.ngZone.run(() => {
+      this.checkAndRefresh(true);
+    });
+  };
+
+  private onOffline = () => {
+    this.ngZone.run(() => {
+      this.checkAndRefresh(false);
+    });
+  };
+
+  async ngOnInit() {
     const sub = this.core.audio.listened.subscribe(value => {
         this.checkIfAlreadyListened(this.loadedMessages);
         this.updateListRdBtn();
     });
 
-    this.subscription.add(sub) 
+    this.subscription.add(sub);
+
+    //Get current network status
+    if (Network) {
+      Network.getStatus().then((status: ConnectionStatus) => {
+        this.ngZone.run(() => {
+          this.networkStatus = status;
+          this.wasOffline = !status.connected;
+        });
+      });
+    }
+
+    // Network Status Change listener
+    this.networkListener = await Network.addListener("networkStatusChange", (status: ConnectionStatus) => {
+      this.ngZone.run(() => {
+        this.networkStatus = status;
+        this.checkAndRefresh(status.connected);
+      });
+    });
+
+    // App State Change to check network status
+    this.appListener = await App.addListener('appStateChange', async ({ isActive }) => {
+      if (isActive) {
+        const status = await Network.getStatus();
+
+        this.ngZone.run(() => {
+          this.networkStatus = status;
+          this.checkAndRefresh(status.connected);
+        });
+      }
+    });
+
+    //Add DOM online and offline listeners
+    window.addEventListener('online', this.onOnline);
+    window.addEventListener('offline', this.onOffline);
+  }
+
+  /**
+   * Method to check connection and refresh data when reconnected 
+   * @param isConnected 
+   */
+  private checkAndRefresh(isConnected: boolean) {
+    if (isConnected && this.wasOffline) {
+      this.refresh(); 
+      this.wasOffline = false;
+    } else if (!isConnected) {
+      this.wasOffline = true;
+    }
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+
+    // Remove connection listeners
+    if (this.networkListener) {
+      this.networkListener.remove();
+    }
+    if (this.appListener) {
+      this.appListener.remove();
+    }
+    window.removeEventListener('online', this.onOnline);
+    window.removeEventListener('offline', this.onOffline);
   }
   
   ngAfterViewInit() {
@@ -114,6 +194,10 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
 // Se añade el parámetro opcional event
   async findMessagesByFilter(query: string, event?: any) {
+    if (!this.networkStatus.connected) {
+      return;
+    }
+
     this.isLoading = true;
 
     let loading: HTMLIonLoadingElement | undefined;
@@ -124,8 +208,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
         cssClass: 'custom-loading',
         mode: 'md',
         spinner: null,
+        backdropDismiss: true
       })
-      await loading.present();
+      // await loading.present();
     }
 
     const listenedIdsString = localStorage.getItem('listened') || '';
@@ -150,11 +235,11 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
             this.updateMessageList(newMessages, false);
           }
-          if (event) event.target.complete();
+          if (event) event?.target?.complete?.();
         },
         error: (e) => {
           console.error('ERROR ', e);
-          if(event) event.target.complete();
+          if(event) event?.target?.complete?.();
         },
         complete: () => {
           if (loading) loading.dismiss();
@@ -178,6 +263,10 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
 // Se añade el parámetro opcional event para manejar el scroll
   async getAllMessages(event?: any) {
+    if (!this.networkStatus.connected) {
+      return;
+    }
+
     this.isLoading = true;
 
     let loading: HTMLIonLoadingElement | undefined;
@@ -188,8 +277,9 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
         cssClass: 'custom-loading',
         mode: 'md',
         spinner: null,
+        backdropDismiss: true
       })
-      await loading.present();
+      // await loading.present();
     }
 
     const listenedIdsString = localStorage.getItem('listened') || '';
@@ -213,11 +303,11 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
             this.updateMessageList(newMessages, this.rbSelected === 'all');
           }
 
-          if (event) event.target.complete();
+          if (event) event?.target?.complete?.();
         },
         error: (err: any) => {
           console.error(err);
-          if (event) event.target.complete();
+          if (event) event?.target?.complete?.();
         },
       complete: () => {
         this.isLoading = false;
@@ -226,7 +316,12 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  refresh(event: any) {
+  refresh(event?: any) {
+    if (this.isLoading) {
+      event?.target.complete?.();
+      return;
+    } 
+
     this.offset = 0;
     this.loadedMessages = [];
     this.hasMoreData = true;

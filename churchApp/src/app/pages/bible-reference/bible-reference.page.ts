@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { IonAccordionGroup, IonCheckbox, IonContent, IonSearchbar } from '@ionic/angular';
+import { InfoLayout } from 'src/app/components/info-display-layout/info-display-layout.component';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { VerseObject } from 'src/app/services/bible.service';
 import { CoreProvider } from 'src/app/services/core';
@@ -28,11 +29,26 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
   groupedVerses = new Map<string, Array<VerseObject>>();
   verseCount: number = 0;
 
+  loading: HTMLIonLoadingElement | undefined;
+  loadingLastSeach: boolean = false;
+
   constructor(
     public core: CoreProvider
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if (this.core.bible.lastSearchTerm) {
+      this.loadingLastSeach = true;
+
+      this.loading = await this.core.loadingCtrl.create({
+        message: 'Recuperando contenido...',
+        cssClass: 'custom-loading',
+        mode: 'md',
+        spinner: null,
+      })
+      await this.loading.present();
+    }
+
     // Get before search state
     this.searchedTerm = this.core.bible.lastSearchTerm;
     this.searchbar.value = this.searchedTerm;
@@ -51,7 +67,7 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
     this.content = this.contents.last;
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
     // Restore accordionGroup
     if (this.accordionGroup && this.core.bible.lastAccordionValue) {
       this.accordionGroup.value = this.core.bible.lastAccordionValue;
@@ -62,7 +78,13 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
       setTimeout(() => {
         // 0ms to avoid animation
         this.content.scrollToPoint(0, this.core.bible.lastScrollPosition, 400);
+
       }, 50); 
+    }
+    
+    if (this.loading) {
+      this.loadingLastSeach = false;
+      this.core.loadingCtrl.dismiss();
     }
   }
 
@@ -188,5 +210,15 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
     this.core.bible.lastIncludeNT = this.includeNT;
     this.core.bible.lastGroupedVerses = this.groupedVerses;
     this.core.bible.lastVerseCount = this.verseCount;
+  }
+
+  get currentInfoLayout(): InfoLayout {
+    if (!this.searchedTerm) {
+      return 'FindABibleTerm';
+    } else if (this.searchedTerm.length > 3) {
+      return 'NoResultsFound';
+    } else {
+      return 'WriteAtLeastThreeWords';
+    }
   }
 }

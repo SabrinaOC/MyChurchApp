@@ -44,35 +44,11 @@
       </div>
     }
 
-    @if (!verseCount && searchedTerm) {
-      <div id="noResultsDiv">
-        <div>
-          <ion-text class="infoSign" (click)="focusSearchbar()">
-            <p>
-              <ion-icon id="searchIcon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><path d='M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z' fill='none' stroke='currentColor' stroke-miterlimit='10' stroke-width='32'/><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-miterlimit='10' stroke-width='32' d='M338.29 338.29L448 448'/><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32' d='M176 176l90 90M266 176l-90 90'/></svg>"></ion-icon>
-            </p>
-            @if (searchedTerm.length > 3) {
-              <h3 style="margin-top: -20px;">No se han encontrado resultados</h3>
-            } @else {
-              <h3 style="margin-top: -20px;">Debe escribir al menos tres letras</h3>
-            }
-          </ion-text>
-        </div>
-      </div>
-    }
-
-    @if (!verseCount && !searchedTerm) {
-      <div id="noSearchDiv">
-        <div>
-          <ion-text class="infoSign" (click)="focusSearchbar()">
-            <p>
-              <ion-icon name="search-outline" id="searchIcon"></ion-icon>
-            </p>
-            <h3 style="margin-top: -20px;">Busca un término en la Biblia</h3>
-          </ion-text>
-        </div>
-      </div>
-    }
+    <app-info-display-layout 
+      [hidden]="verseCount > 0 || this.loadingLastSeach"
+      [infoLayout]="currentInfoLayout" 
+      (actionClicked)="focusSearchbar()">
+    </app-info-display-layout>
     
     <div>
       <ion-accordion-group #accordionGroup [multiple]="true" [value]="0">
