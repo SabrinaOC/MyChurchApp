@@ -45,7 +45,7 @@
     }
 
     <app-info-display-layout 
-      [hidden]="verseCount > 0"
+      [hidden]="verseCount > 0 || this.loadingLastSeach"
       [infoLayout]="currentInfoLayout" 
       (actionClicked)="focusSearchbar()">
     </app-info-display-layout>

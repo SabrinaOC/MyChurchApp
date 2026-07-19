@@ -30,6 +30,7 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
   verseCount: number = 0;
 
   loading: HTMLIonLoadingElement | undefined;
+  loadingLastSeach: boolean = false;
 
   constructor(
     public core: CoreProvider
@@ -37,7 +38,8 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
 
   async ngOnInit() {
     if (this.core.bible.lastSearchTerm) {
-  
+      this.loadingLastSeach = true;
+
       this.loading = await this.core.loadingCtrl.create({
         message: 'Recuperando contenido...',
         cssClass: 'custom-loading',
@@ -81,6 +83,7 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
     }
     
     if (this.loading) {
+      this.loadingLastSeach = false;
       this.core.loadingCtrl.dismiss();
     }
   }
