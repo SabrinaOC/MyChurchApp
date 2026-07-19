@@ -67,24 +67,3 @@ ion-icon::part(icon-inner) {
     text-shadow: 1px 1px 20px red;
     --background: red;
 }
-
-#noResultsDiv {
-    height: 51%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-
-    div {
-        margin-top: auto;
-        margin-bottom: auto;
-        display: inline-block;
-        padding: 20px;
-        width: 100%;
-    }
-}
-
-.infoSign {
-    text-align: center;
-    text-shadow: 1px 1px 20px white;
-    cursor: pointer;
-}

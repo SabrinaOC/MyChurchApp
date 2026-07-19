@@ -1,0 +1,46 @@
+:host {
+    display: block;
+}
+
+:host([hidden]) {
+    display: none !important;
+}
+
+.errorDisplayLayout {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    div {
+        pointer-events: auto;
+        display: inline-block;
+        padding: 20px;
+        width: 100%;
+
+        ion-icon {
+            font-size: 90px;
+            padding: 30px;
+            text-align: center;
+            filter: drop-shadow(1px 15px 25px white);
+        }
+    }
+}
+
+.errorDisplayLayout.keyboard-up {
+    top: 60%;
+}
+
+.infoSign {
+    text-align: center;
+    text-shadow: 1px 1px 20px white;
+    cursor: pointer;
+    display: block;
+}

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { IonAccordionGroup, IonCheckbox, IonContent, IonSearchbar } from '@ionic/angular';
+import { InfoLayout } from 'src/app/components/info-display-layout/info-display-layout.component';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { VerseObject } from 'src/app/services/bible.service';
 import { CoreProvider } from 'src/app/services/core';
@@ -206,5 +207,15 @@ export class BibleReferencePage implements  OnInit, AfterViewInit {
     this.core.bible.lastIncludeNT = this.includeNT;
     this.core.bible.lastGroupedVerses = this.groupedVerses;
     this.core.bible.lastVerseCount = this.verseCount;
+  }
+
+  get currentInfoLayout(): InfoLayout {
+    if (!this.searchedTerm) {
+      return 'FindABibleTerm';
+    } else if (this.searchedTerm.length > 3) {
+      return 'NoResultsFound';
+    } else {
+      return 'WriteAtLeastThreeWords';
+    }
   }
 }
