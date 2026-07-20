@@ -21,6 +21,7 @@ export class InfoDisplayLayoutComponent implements OnInit, OnDestroy {
   isKeyboardOpen = signal<boolean>(false);
 
   private initialHeight = window.innerHeight;
+  isNative = Capacitor.isNativePlatform();
 
   constructor() { }
 
@@ -35,7 +36,7 @@ export class InfoDisplayLayoutComponent implements OnInit, OnDestroy {
       Keyboard.addListener('keyboardWillHide', () => {
         this.isKeyboardOpen.set(false);
       });
-      
+
     } else {
       if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', this.handleWebResize);
