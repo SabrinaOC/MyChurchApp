@@ -1,4 +1,6 @@
-<div class="errorDisplayLayout" [class.keyboard-up]="isKeyboardOpen()">
+<div class="errorDisplayLayout"
+    [class.keyboard-up-native]="isKeyboardOpen() && isNative"
+    [class.keyboard-up-web]="isKeyboardOpen() && !isNative">
   <div>
     <ion-text class="infoSign" (click)="actionClicked.emit()">
       @switch (infoLayout()) {

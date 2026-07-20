@@ -34,8 +34,12 @@
     }
 }
 
-.errorDisplayLayout.keyboard-up {
+.errorDisplayLayout.keyboard-up-native {
     top: 60%;
+}
+
+.errorDisplayLayout.keyboard-up-web {
+    top: 25%;
 }
 
 .infoSign {
