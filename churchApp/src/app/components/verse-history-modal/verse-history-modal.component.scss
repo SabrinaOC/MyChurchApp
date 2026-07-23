@@ -1,0 +1,18 @@
+p {
+    margin-top: -15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    color: white;
+}
+
+.cardHeader {
+    width: fit-content;
+
+    ion-badge {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

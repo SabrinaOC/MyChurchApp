@@ -4,6 +4,7 @@ import { SimpleVerseSelectorComponent } from '../simple-verse-selector/simple-ve
 import { IonContent, ViewDidEnter, ViewDidLeave, ViewWillLeave } from '@ionic/angular';
 import { NavigationEnd, Router } from '@angular/router';
 import { KeepAwake } from '@capacitor-community/keep-awake';
+import { VerseHistoryModalComponent } from '../verse-history-modal/verse-history-modal.component';
 
 @Component({
   selector: 'app-bible-reader',
@@ -22,10 +23,10 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
   set verse(value: string | undefined) {
     if (this._verse && this._verse.includes(':') && value === this.chapter) {
       if (value && !value.includes(':')) {
-        return; 
+        return;
       }
     }
-    
+
     this._verse = value;
     if (value) {
       this.setText(value);
@@ -54,9 +55,9 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
     if (this.core.settings.awakeScreenOnBible) {
       try {
         await KeepAwake.keepAwake();
-      } catch(e) {
+      } catch (e) {
         console.log("Error al intentar mantener la pantalla encendida", e);
-        
+
       }
     }
 
@@ -76,7 +77,7 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
     }
   }
 
-  ngAfterViewInit() {    
+  ngAfterViewInit() {
     this.content = this.contents.last;
   }
 
@@ -84,14 +85,14 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
   setText(verse: string) {
     const { book, chapter, verseStart, verseEnd } = this.parseVerseReference(verse);
     // console.log(book, chapter, verseStart, verseEnd);
-    
+
     this.text = this.core.bible.getFullChapterText(book, chapter, parseInt(verseStart), parseInt(verseEnd))!;
 
     this.chapter = `${book} ${chapter}`;
     this.chapterNumber = chapter;
     this.book = book;
     //If the component is opened as page, save chapter
-    if (this.asPage) {      
+    if (this.asPage) {
       this.core.bible.lastChapterRead = this.chapter;
       localStorage.setItem("lastChapterRead", this.core.bible.lastChapterRead);
     }
@@ -104,19 +105,19 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
         if (elements.length > 0) {
           const element = elements[0];
           const domRect = element.getBoundingClientRect();
-          
+
           // Get the native scroll element
-          const scrollElement = await this.content.getScrollElement();          
+          const scrollElement = await this.content.getScrollElement();
           // Calc the absolute Y position
           const absoluteY = scrollElement.scrollTop + domRect.y;
           // Calc offset to center it on the screen
           const centerOffset = window.innerHeight / 2;
-          
+
           this.content.scrollToPoint(0, absoluteY - centerOffset + 120, 500);
         }
       }, 500);
     } else {
-      if (this.content) {        
+      if (this.content) {
         this.content.scrollToTop(500);
       }
     }
@@ -129,7 +130,7 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
     const regex = /^(\d?\s?[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:\s[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*)\s+(\d+)(?::(\d+)(?:-(\d+))?)?$/;
 
     const match = ref.trim().match(regex);
-    
+
     if (!match) {
       throw new Error("Referencia bíblica inválida: " + ref);
     }
@@ -150,7 +151,7 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
       event: e,
       alignment: 'center',
       side: 'top',
-      componentProps: {justVerse: true},
+      componentProps: { justVerse: true },
       arrow: false
     });
 
@@ -160,6 +161,7 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
     if (data) {
       this.content.scrollToTop(0);
       this.verse = data;
+      this.core.bible.addNewSearchedVerse(data);
     }
 
   }
@@ -167,21 +169,21 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
   getAdjacentChapter(direction: 'next' | 'prev' = 'next') {
     const splitIndex = this.verse?.search(/\s\d/);
 
-    const verse = this.core.bible.getAdjacentChapter(this.verse?.substring(0, splitIndex)!, parseInt(this.verse?.substring(splitIndex!, this.verse.length)!), direction); 
-    
+    const verse = this.core.bible.getAdjacentChapter(this.verse?.substring(0, splitIndex)!, parseInt(this.verse?.substring(splitIndex!, this.verse.length)!), direction);
+
     if (verse) this.verse = verse;
   }
 
   badgeAnimation() {
     if (this.chapterBadge) {
       this.chapterBadge.nativeElement?.classList.add("zoomInOutElement");
-  
+
       setTimeout(() => {
         this.chapterBadge.nativeElement?.classList.remove("zoomInOutElement");
       }, 800);
-    }    
+    }
   }
-  
+
   closeAudioPlayer() {
     this.core.audio.selectMessage(null);
     this.cdRef.detectChanges(); //Force detecting changes
@@ -193,35 +195,55 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
   }
 
   // Direction variables
-lastY = 0;
-scrollThreshold = 10; // Little margin to avoid tremors
+  lastY = 0;
+  scrollThreshold = 10; // Little margin to avoid tremors
 
-onScroll(event: any) {
-  // Get vertical position
-  const currentY = event.detail.scrollTop;
+  onScroll(event: any) {
+    // Get vertical position
+    const currentY = event.detail.scrollTop;
 
-  // At the top, always show tab bar
-  if (currentY < 50) {
-    this.core.setTabsVisibility(true);
-    this.lastY = currentY;
-    return;
-  }
-
-  // Ingnore scroll rebounds on IOS
-  if (currentY < 0) return;
-
-  // Direction login
-  const diff = currentY - this.lastY;
-
-  if (Math.abs(diff) > this.scrollThreshold) {
-    if (diff > 0) {
-      // SCROLL DOWN - Hide
-      this.core.setTabsVisibility(false);
-    } else {
-      // SCROLL UP - Show
+    // At the top, always show tab bar
+    if (currentY < 50) {
       this.core.setTabsVisibility(true);
+      this.lastY = currentY;
+      return;
     }
-    this.lastY = currentY;
+
+    // Ingnore scroll rebounds on IOS
+    if (currentY < 0) return;
+
+    // Direction login
+    const diff = currentY - this.lastY;
+
+    if (Math.abs(diff) > this.scrollThreshold) {
+      if (diff > 0) {
+        // SCROLL DOWN - Hide
+        this.core.setTabsVisibility(false);
+      } else {
+        // SCROLL UP - Show
+        this.core.setTabsVisibility(true);
+      }
+      this.lastY = currentY;
+    }
   }
-}
+
+  async openVerseHistoryModal() {
+    const modal = await this.core.modalCtrl.create({
+      component: VerseHistoryModalComponent,
+      componentProps: { }
+    });
+    modal.onDidDismiss().then(d => {
+      // if (d.data) { }
+    });
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    if (data) {
+      console.log(data);
+      
+      this.content.scrollToTop(0);
+      this.verse = data;
+      this.core.bible.addNewSearchedVerse(data);
+    }
+  }
 }
