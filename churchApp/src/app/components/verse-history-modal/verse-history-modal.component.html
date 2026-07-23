@@ -24,7 +24,7 @@
         <ion-card-content>
           <p (click)="confirm(verse)"
             [class]="core.settings.bibleFont === 'sans-serif' ? 'bibleSimpleText' : 'bibleAestheticText'"
-            [innerHTML]="this.core.bible.normalizeText(this.core.bible.getBibleText(verse, false))">
+            [innerHTML]="this.core.bible.getBibleText(verse, false)">
           </p>
         </ion-card-content>
       </ion-card>
