@@ -239,7 +239,7 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
 
     const { data } = await modal.onDidDismiss();
     if (data) {
-      console.log(data);
+      if (this.verse === data) return;
       
       this.content.scrollToTop(0);
       this.verse = data;
