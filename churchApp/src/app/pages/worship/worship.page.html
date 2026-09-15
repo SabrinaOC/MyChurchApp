@@ -1,0 +1,23 @@
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()"> <!-- (click)="navigateBack()" -->
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Alabanza</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">worship</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+  <ion-searchbar #searchBar mode="ios" animated="true" placeholder="Buscar por título" show-clear-button="always"
+      clear-icon="close-outline" [debounce]="1000">
+      <!--  (ionInput)="searchInput($event)"
+      [(ngModel)]="searchQuery" -->
+  </ion-searchbar>
+</ion-content>

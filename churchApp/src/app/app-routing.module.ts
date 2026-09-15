@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'bible-reader',
     loadChildren: () => import('./pages/bible-reader/bible-reader.module').then( m => m.BibleReaderPageModule)
+  },
+  {
+    path: 'worship',
+    loadChildren: () => import('./pages/worship/worship.module').then( m => m.WorshipPageModule)
   }
 
 

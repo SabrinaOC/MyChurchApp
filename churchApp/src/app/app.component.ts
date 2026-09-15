@@ -38,6 +38,11 @@ export class AppComponent {
       url: '/settings',
       ionicIcon: 'settings-outline',
     },
+    {
+      title: 'Alabanza',
+      url: '/worship',
+      ionicIcon: 'musical-note-outline',
+    },
   ];
 
   miniAudioPlayerPages: string[] = ["/message-list", "/bible-reference"]
