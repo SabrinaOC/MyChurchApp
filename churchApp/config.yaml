@@ -7,9 +7,10 @@ vars:
 
 platforms:
   android:
+    # Nota: Si vuelve a salir el error de rutas, comenta la siguiente linea:
     packageName: $PACKAGE_NAME
-    versionName: 1.4.0
-    versionCode: 100400
+    versionName: 1.0.0
+    versionCode: 100000
 
     manifest:
       # Permiso 1: Internet

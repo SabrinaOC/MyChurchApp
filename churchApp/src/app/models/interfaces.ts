@@ -47,3 +47,7 @@ export interface MessageType {
     id: number,
     description: string
 }
+
+export enum CONSTANTES {
+    PREDICADOR_INVITADO = 5
+}

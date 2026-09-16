@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, NgZone } from '@angular/core';
-import { Message } from '../models/interfaces';
+import { CONSTANTES, Message } from '../models/interfaces';
 import * as Constants from 'src/app/constants';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -8,7 +8,7 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AudioService implements OnDestroy {
   private listenedObs = new Subject<string | null>();
@@ -31,16 +31,20 @@ export class AudioService implements OnDestroy {
 
   // Array para gestionar la limpieza de listeners nativos manualmente
   private controlListeners: any[] = [];
+  private controlsNotificationBound: any;
 
   // INYECCIÓN DE NGZONE AQUÍ
   constructor(private ngZone: NgZone) {
-    
     // Listeners del Audio HTML5
     this.audio.addEventListener('timeupdate', () => {
       this.progressSubject.next(this.audio.currentTime);
     });
     this.audio.addEventListener('loadedmetadata', () => {
       this.durationSubject.next(this.audio.duration);
+
+      if (Capacitor.isNativePlatform()) {
+        this.createMusicControls();
+      }
     });
 
     // Actualizamos subjects al cambiar estado
@@ -62,10 +66,12 @@ export class AudioService implements OnDestroy {
 
     // Ejecutar la limpieza al inicio
     if (Capacitor.isNativePlatform()) {
-        setTimeout(() => {
-            this.cleanupCache();
-        }, 5000);
+      setTimeout(() => {
+        this.cleanupCache();
+      }, 5000);
     }
+
+    this.controlsNotificationBound = this.onControlsNotification.bind(this);
   }
 
   ngOnDestroy(): void {
@@ -149,15 +155,15 @@ export class AudioService implements OnDestroy {
 
     // Descomentar para mostrar this.controlListeners, aparentemente el plugin tiene errores en la gestion de eventos a partir de android 13
     // if (Capacitor.isNativePlatform()) {
-    //     this.createMusicControls();
+    //   this.createMusicControls();
     // }
   }
 
   /**
    * Descarga de audio
-   * @param url 
-   * @param fileName 
-   * @returns 
+   * @param url
+   * @param fileName
+   * @returns
    */
   private async downloadAndSaveAudio(
     url: string,
@@ -178,8 +184,8 @@ export class AudioService implements OnDestroy {
 
   /**
    * Conversor a base64
-   * @param blob 
-   * @returns 
+   * @param blob
+   * @returns
    */
   private convertBlobToBase64 = (blob: Blob) =>
     new Promise((resolve, reject) => {
@@ -189,10 +195,10 @@ export class AudioService implements OnDestroy {
       reader.readAsDataURL(blob);
     });
 
-    /**
-     * Metodo para limpiar archivos de audio abiertos por ultima vez hace mas de 30 dias
-     * @returns
-     */
+  /**
+   * Metodo para limpiar archivos de audio abiertos por ultima vez hace mas de 30 dias
+   * @returns
+   */
   public async cleanupCache() {
     if (!Capacitor.isNativePlatform()) return;
 
@@ -217,7 +223,6 @@ export class AudioService implements OnDestroy {
 
           // 3. Comprobación de antigüedad
           if (usageTime === 0 || usageTime < cutoffTime) {
-
             // 4. ELIMINACIÓN
             await Filesystem.deleteFile({
               path: fileName,
@@ -236,9 +241,9 @@ export class AudioService implements OnDestroy {
   }
 
   /**
-   * 
-   * @param message 
-   * @returns 
+   *
+   * @param message
+   * @returns
    */
   selectMessage(message: Message | null) {
     if (message?.id === this.selectedMessage?.id) return;
@@ -266,8 +271,8 @@ export class AudioService implements OnDestroy {
 
   /**
    * Marcar como escuchado en localStorage
-   * @param message 
-   * @param event 
+   * @param message
+   * @param event
    */
   markAsListened(message: Message, event?: any) {
     event?.stopPropagation();
@@ -284,36 +289,48 @@ export class AudioService implements OnDestroy {
   }
 
   /**
-   * 
+   *
    */
   play() {
     this.audio.play();
     if (Capacitor.isNativePlatform()) {
-      CapacitorMusicControls.updateIsPlaying({ isPlaying: true });
+      CapacitorMusicControls.updateIsPlaying({ 
+        isPlaying: true, 
+        elapsed: this.audio.currentTime 
+      } as any);
     }
   }
 
   /**
-   * 
+   *
    */
   pause() {
     this.audio.pause();
     if (Capacitor.isNativePlatform()) {
-      CapacitorMusicControls.updateIsPlaying({ isPlaying: false });
+      CapacitorMusicControls.updateIsPlaying({ 
+        isPlaying: false, 
+        elapsed: this.audio.currentTime 
+      } as any);
     }
   }
 
   /**
-   * 
-   * @param seconds 
+   *
+   * @param seconds
    */
   seekTo(seconds: number) {
     this.audio.currentTime = seconds;
+    if (Capacitor.isNativePlatform()) {
+      CapacitorMusicControls.updateIsPlaying({ 
+        isPlaying: !this.audio.paused, 
+        elapsed: seconds 
+      } as any);
+    }
   }
 
   /**
    * Pendiente de fix en plugin para controld e eventos. De momento no se esta usando pero esta todo el codigo preparado
-   * @returns 
+   * @returns
    */
   async createMusicControls() {
     if (!Capacitor.isNativePlatform()) return;
@@ -327,22 +344,74 @@ export class AudioService implements OnDestroy {
     // 2. CREAR NUEVOS CONTROLES (Solo si hay mensaje)
     if (!this.selectedMessage) return;
 
+    const coverPath = await this.getCoverImage();
+    
+
     await CapacitorMusicControls.create({
       track: this.selectedMessage?.title,
-      artist: this.selectedMessage?.speaker.name,
-      cover: 'assets/icon/favicon.png',
-      isPlaying: true,
+      artist: this.selectedMessage?.speaker.id != CONSTANTES.PREDICADOR_INVITADO ? this.selectedMessage?.speaker.name : this.selectedMessage?.note,
+
+      cover: coverPath,
+      isPlaying: !this.audio.paused,
       dismissable: true,
       hasClose: true,
       hasPrev: false,
       hasNext: false,
 
+      // NUEVO: Propiedades para la barra de progreso
+      hasScrubbing: true, // Activa la barra de progreso visible
+      duration: this.audio.duration > 0 ? this.audio.duration : 0, // Duración total en segundos
+      elapsed: this.audio.currentTime, // Tiempo actual en segundos
+
       notificationIcon: 'notification',
-      // playIcon: 'play_icon',
-      // pauseIcon: 'pause_icon',
     });
 
     this.registerControlEvents();
+  }
+
+  async getCoverImage(): Promise<string> {
+  //   // --- INICIO LÓGICA DE LA IMAGEN ---
+  return new Promise(async (resolve) => {
+
+  
+    let coverPath = 'assets/icon/favicon.png'; // Imagen por defecto
+
+    if (this.selectedMessage?.image) {
+      const imageStr = this.selectedMessage.image;
+
+      // CASO 1: Es una imagen Base64
+      if (imageStr.includes('data:image/jpeg;base64,')) {
+        try {
+          // El Filesystem necesita el código puro, así que le quitamos la cabecera que le añadiste
+          const cleanBase64 = imageStr.replace('data:image/jpeg;base64,', '');
+
+          const fileName = `cover_${this.selectedMessage.id}.jpg`;
+          const savedFile = await Filesystem.writeFile({
+            path: fileName,
+            data: cleanBase64,
+            directory: Directory.Cache
+          });
+          
+          coverPath = savedFile.uri; // Ruta nativa (file://...)
+        } catch (e) {
+          console.error('Error guardando cover en cache', e);
+        }
+      } 
+      // CASO 2: Es un thumbnail aleatorio de los assets
+      else if (imageStr.includes('assets/images/thumbnail-')) {
+        // Capacitor nativo no entiende "../../../", requiere la ruta limpia desde la raíz web
+        // Cortamos el string para que empiece exactamente desde 'assets/...'
+        const cleanAssetPath = imageStr.substring(imageStr.indexOf('assets/'));
+        coverPath = cleanAssetPath; 
+      } 
+      // CASO 3: Cualquier otra ruta no prevista
+      else {
+        coverPath = imageStr;
+      }
+    }
+    // --- FIN LÓGICA DE LA IMAGEN ---
+    resolve(coverPath);
+    })
   }
 
   /**
@@ -359,7 +428,7 @@ export class AudioService implements OnDestroy {
 
   /**
    * Control de eventos plugin
-   * @returns 
+   * @returns
    */
   private async registerControlEvents() {
     if (!Capacitor.isNativePlatform()) return;
@@ -368,12 +437,30 @@ export class AudioService implements OnDestroy {
     await this.unregisterControlEvents();
 
     // ANDROID (13 bug)
-    document.addEventListener('controlsNotification', (event: any) => {
-      console.log('controlsNotification was fired');
-      console.log(event);
-      const info = { message: event.message, position: 0 };
-      this.handleControlsEvent(info);
-    });
+
+    // document.addEventListener('controlsNotification', (event: any) => {
+
+    //   console.log('controlsNotification was fired');
+
+    //   console.log(event);
+
+    //   const info = { message: event.message, position: 0 };
+
+    //   this.handleControlsEvent(info);
+
+    // });
+
+    // 2. EVITAMOS DUPLICADOS: Limpiamos y volvemos a registrar el listener global
+
+    document.removeEventListener(
+      'controlsNotification',
+      this.controlsNotificationBound,
+    );
+
+    document.addEventListener(
+      'controlsNotification',
+      this.controlsNotificationBound,
+    );
 
     // 2. Registramos los nuevos envolviendo la lógica en NgZone.run
 
@@ -445,7 +532,7 @@ export class AudioService implements OnDestroy {
 
   /**
    * Controles transitorios por bug android 13
-   * @param action 
+   * @param action
    */
   handleControlsEvent(action: { message: any }) {
     const message = action.message;
@@ -473,7 +560,13 @@ export class AudioService implements OnDestroy {
         break;
       case 'music-controls-toggle-play-pause':
         // controls were destroyed
-        console.log('toggle');
+
+        if (this.isPlayingSubject.getValue()) {
+          this.pause();
+        } else {
+          this.play();
+        }
+
         break;
 
       // External controls (iOS only)
@@ -505,5 +598,17 @@ export class AudioService implements OnDestroy {
       default:
         break;
     }
+  }
+
+  private onControlsNotification(event: any) {
+    this.ngZone.run(() => {
+      // Soporte para distintos formatos de evento según la versión del plugin
+
+      const message = event.message || event.detail?.message;
+
+      if (message) {
+        this.handleControlsEvent({ message: message });
+      }
+    });
   }
 }
