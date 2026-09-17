@@ -321,10 +321,10 @@ export class AudioService implements OnDestroy {
   seekTo(seconds: number) {
     this.audio.currentTime = seconds;
     if (Capacitor.isNativePlatform()) {
-      CapacitorMusicControls.updateIsPlaying({ 
-        isPlaying: !this.audio.paused, 
-        elapsed: seconds 
-      } as any);
+      CapacitorMusicControls.updateElapsed({
+        isPlaying: !this.audio.paused,
+        elapsed: seconds
+      });
     }
   }
 
