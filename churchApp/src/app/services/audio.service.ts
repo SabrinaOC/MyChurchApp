@@ -433,182 +433,79 @@ export class AudioService implements OnDestroy {
   private async registerControlEvents() {
     if (!Capacitor.isNativePlatform()) return;
 
-    // 1. Limpiamos los anteriores
-    await this.unregisterControlEvents();
+    if (Capacitor.getPlatform() === 'ios') {
+      // iOS usa el listener moderno de Capacitor v8
+      await CapacitorMusicControls.addListener('controlsNotification', (info: any) => {
+        this.handleControlsEvent(info);
+      });
+    } else {
+      // ANDROID 13+ usa el workaround del DOM
+      document.removeEventListener('controlsNotification', this.controlsNotificationBound);
+      document.addEventListener('controlsNotification', this.controlsNotificationBound);
+    }
+  }
 
-    // ANDROID (13 bug)
+  // Intermediario exclusivo para extraer los datos del evento del DOM de Android
+  private onControlsNotification(event: any) {
+    this.ngZone.run(() => {
+      // En Android webview, los CustomEvents meten su payload dentro de 'detail'
+      const message = event.message || event.detail?.message;
+      const position = event.position !== undefined ? event.position : event.detail?.position;
 
-    // document.addEventListener('controlsNotification', (event: any) => {
-
-    //   console.log('controlsNotification was fired');
-
-    //   console.log(event);
-
-    //   const info = { message: event.message, position: 0 };
-
-    //   this.handleControlsEvent(info);
-
-    // });
-
-    // 2. EVITAMOS DUPLICADOS: Limpiamos y volvemos a registrar el listener global
-
-    document.removeEventListener(
-      'controlsNotification',
-      this.controlsNotificationBound,
-    );
-
-    document.addEventListener(
-      'controlsNotification',
-      this.controlsNotificationBound,
-    );
-
-    // 2. Registramos los nuevos envolviendo la lógica en NgZone.run
-
-    const pauseListener = await CapacitorMusicControls.addListener(
-      'music-controls-pause',
-      () => {
-        this.ngZone.run(() => {
-          // console.log('Pause nativo recibido');
-          this.controlListeners.push(pauseListener);
-          this.pause();
-        });
-      },
-    );
-
-    const playListener = await CapacitorMusicControls.addListener(
-      'music-controls-play',
-      () => {
-        this.ngZone.run(() => {
-          // console.log('Play nativo recibido');
-          this.play();
-        });
-      },
-    );
-
-    // Listener para TOGGLE (El más común en Lock Screen/Auriculares)
-    const toggleListener = await CapacitorMusicControls.addListener(
-      'music-controls-toggle-play-pause',
-      () => {
-        this.ngZone.run(() => {
-          // Ejecutamos la acción que revierte el estado actual
-          if (this.isPlayingSubject.getValue()) {
-            this.pause(); // Llama a this.audio.pause()
-          } else {
-            this.play(); // Llama a this.audio.play()
-          }
-        });
-      },
-    );
-
-    const destroyListener = await CapacitorMusicControls.addListener(
-      'music-controls-destroy',
-      () => {
-        this.ngZone.run(() => {
-          this.audio.pause();
-          this.isPlayingSubject.next(false);
-        });
-      },
-    );
-
-    const stopListener = await CapacitorMusicControls.addListener(
-      'music-controls-stop',
-      () => {
-        this.ngZone.run(() => {
-          this.audio.pause();
-          this.isPlayingSubject.next(false);
-        });
-      },
-    );
-
-    // 3. Guardamos referencias para poder limpiar después
-    this.controlListeners.push(
-      pauseListener,
-      playListener,
-      toggleListener,
-      destroyListener,
-      stopListener,
-    );
+      if (message) {
+        // Ahora SÍ le pasamos el objeto completo con la posición al manejador
+        this.handleControlsEvent({ message, position });
+      }
+    });
   }
 
   /**
-   * Controles transitorios por bug android 13
-   * @param action
+   * El cerebro central (lo usan tanto iOS como Android)
+   * @param action 
    */
-  handleControlsEvent(action: { message: any }) {
+  handleControlsEvent(action: any) {
     const message = action.message;
-
-    // console.log('message: ' + message);
+    const position = action.position || 0;
 
     switch (message) {
-      case 'music-controls-next':
-        // next
-        break;
-      case 'music-controls-previous':
-        // previous
-        break;
-      case 'music-controls-pause':
-        this.pause();
-        // paused
-        break;
       case 'music-controls-play':
         this.play();
-        // resumed
         break;
+        
+      case 'music-controls-pause':
+        this.pause();
+        break;
+        
+      case 'music-controls-toggle-play-pause':
+        this.isPlayingSubject.getValue() ? this.pause() : this.play();
+        break;
+        
+      case 'music-controls-seek-to':
+        // 1. Movemos el audio real al segundo exacto
+        this.audio.currentTime = position;
+        
+        // 2. Sincronizamos la barra de la notificación
+        this.syncNativeProgress(!this.audio.paused);
+        break;
+        
       case 'music-controls-destroy':
-        // controls were destroyed
-        this.pause();
-        break;
-      case 'music-controls-toggle-play-pause':
-        // controls were destroyed
-
-        if (this.isPlayingSubject.getValue()) {
-          this.pause();
-        } else {
-          this.play();
-        }
-
-        break;
-
-      // External controls (iOS only)
-      case 'music-controls-toggle-play-pause':
-        // do something
-        break;
-      case 'music-controls-skip-to':
-        // do something
-        break;
-      case 'music-controls-skip-forward':
-        // Do something
-        break;
-      case 'music-controls-skip-backward':
-        // Do something
-        break;
-
-      // Headset events (Android only)
-      // All media button events are listed below
-      case 'music-controls-media-button':
-        // Do something
-        break;
       case 'music-controls-headset-unplugged':
-        // Do something
         this.pause();
         break;
-      case 'music-controls-headset-plugged':
-        // Do something
-        break;
+        
       default:
+        console.log('Evento nativo ignorado:', message);
         break;
     }
   }
 
-  private onControlsNotification(event: any) {
-    this.ngZone.run(() => {
-      // Soporte para distintos formatos de evento según la versión del plugin
+  private syncNativeProgress(isPlaying: boolean) {
+    if (!Capacitor.isNativePlatform()) return;
 
-      const message = event.message || event.detail?.message;
-
-      if (message) {
-        this.handleControlsEvent({ message: message });
-      }
-    });
+    CapacitorMusicControls.updateElapsed({
+      isPlaying: isPlaying,
+      elapsed: this.audio.currentTime
+    })
   }
+
 }
