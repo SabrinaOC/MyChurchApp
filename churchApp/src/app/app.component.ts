@@ -105,6 +105,7 @@ export class AppComponent {
         
         if (this.router.url === '/message-list') {
           var alert = await this.alrtCtrl.create({
+            header: "Confirmación",
             message: "¿Desea salir de la aplicación?",
             buttons: [
               {
