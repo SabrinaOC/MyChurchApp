@@ -7,6 +7,8 @@ import { CoreProvider } from './services/core';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Router } from '@angular/router';
 import { Book } from './services/api/models';
+import { App as CapacitorApp } from '@capacitor/app'
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -45,12 +47,15 @@ export class AppComponent {
 
   version!: string;
 
-  constructor(private platform: Platform,
+  constructor(
+    private platform: Platform,
     public core: CoreProvider,
     private alrtCtrl: AlertController,
     private cdRef: ChangeDetectorRef,
     public router: Router
   ) {
+    this.initBackButton();
+
     this.core.api.book.getAllBooks().subscribe({
       next: (books: any) => {
         this.core.bookList = books.bookList;
@@ -76,10 +81,8 @@ export class AppComponent {
       }
     })
 
-
     // Initialize Firebase
     initializeApp(environment.firebaseConfig);
-    this.initialize();
 
     this.core.settings.loadSettings();
 
@@ -92,17 +95,38 @@ export class AppComponent {
     this.core.bible.lastChapterRead = localStorage.getItem('lastChapterRead') || "Génesis 1";
   }
 
-  initialize() {
-    this.platform.ready().then(() => {
-      this.handleBackButton();
-    });
-  }
+  initBackButton() {
+      this.platform.backButton.subscribeWithPriority(10, async () => {
+        
+        const unAlertAbierto = await this.alrtCtrl.getTop();
+        if (unAlertAbierto) {
+          return;
+        }
+        
+        if (this.router.url === '/message-list') {
+          var alert = await this.alrtCtrl.create({
+            message: "¿Desea salir de la aplicación?",
+            buttons: [
+              {
+                text: "No",
+                role: "cancel",
+                handler: () => { }
+              },
+              {
+                text: "Sí",
+                role: 'confirm',
+                handler: () => {
+                  CapacitorApp.exitApp();
+                }
+              },
+            ]
+          });
+        
+        await alert.present();
 
-  handleBackButton() {
-    document.addEventListener('ionBackButton', (ev: any) => {
-      ev.detail.register(10, () => {
-        App.exitApp(); // Cierra la aplicación
-      });
+      } else {
+        window.history.back();
+      }
     });
   }
 
