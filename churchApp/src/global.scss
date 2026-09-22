@@ -94,10 +94,23 @@ ion-datetime {
 }
 
 ion-alert {
-    // --border-width: 0px !important;
-
     .alert-wrapper {
+        --background: var(--ion-item-background);
         outline: none !important;
+    }
+
+    .alert-input {
+        color: #ffffff !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    }
+    .alert-input:focus {
+        color: #ffffff !important;
+        border-bottom: 1px solid var(--ion-color-primary) !important;
+    }
+
+    .alert-input::placeholder {
+        color: #e0e0e0 !important;
+        opacity: 1;
     }
 }
 
