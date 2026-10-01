@@ -21,6 +21,17 @@ export class BibleService {
 
   public lastChapterRead: string = "";
 
+  // Variables para guardar el estado de la última búsqueda en bible-reference
+  lastSearchTerm: string = "";
+  lastIncludeOT: boolean = true;
+  lastIncludeNT: boolean = true;
+  lastGroupedVerses = new Map<string, Array<VerseObject>>();
+  lastVerseCount: number = 0;
+  lastAccordionValue: any = ['0']; // Puede ser un string o un array de strings
+  lastScrollPosition: number = 0;
+
+  lastSearchedVerses: string[] = [];
+
   constructor(private http: HttpClient, private settings: SettingsService) {
     this.loadBibleRVR1960();
   }
@@ -91,7 +102,7 @@ export class BibleService {
     });
   }
 
-  public getBibleText(verseReference: string): string {
+  public getBibleText(verseReference: string, includeVerseNumber: boolean = true): string {
     if (!this.bibleRVR1960) return 'The Bible is not loaded yet';
 
     //Declare Regular Expresions
@@ -137,7 +148,11 @@ export class BibleService {
     for (let i = fromVerse; i <= toVerse; i++) {
       const texto = cap[i.toString()];
       if (texto) {
-        result += `<span class="verseNumber">${i}</span> ${texto}\n`;
+        if (includeVerseNumber) {
+          result += `<span class="verseNumber">${i}</span> ${texto}\n`;
+        } else {
+          result += `${texto}\n`;
+        }
       }
     }
 
@@ -290,5 +305,18 @@ export class BibleService {
     }
 
     return {};
+  }
+
+
+  addNewSearchedVerse(verse: string) {
+    if (this.lastSearchedVerses.includes(verse)) {
+      return;
+    }
+    
+    if (this.lastSearchedVerses.length === 10) {
+      this.lastSearchedVerses.pop();
+    }
+
+    this.lastSearchedVerses.unshift(verse);
   }
 }

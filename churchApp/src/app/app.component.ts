@@ -2,10 +2,13 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { environment } from 'src/environments/environment';
 import { AlertController, Platform } from '@ionic/angular';
-import { App, AppInfo } from '@capacitor/app';
+import { App } from '@capacitor/app';
 import { CoreProvider } from './services/core';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Router } from '@angular/router';
+import { Book } from './services/api/models';
+import { App as CapacitorApp } from '@capacitor/app'
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -49,15 +52,27 @@ export class AppComponent {
 
   version!: string;
 
-  constructor(private platform: Platform,
+  constructor(
+    private platform: Platform,
     public core: CoreProvider,
     private alrtCtrl: AlertController,
     private cdRef: ChangeDetectorRef,
     public router: Router
   ) {
+    this.initBackButton();
+
     this.core.api.book.getAllBooks().subscribe({
       next: (books: any) => {
         this.core.bookList = books.bookList;
+      },
+      error: (err: any) => {
+        const books = core.bible.getAllBibleBooks();
+        var bibleBooks: Book[] = [];
+
+        books.forEach(element => {
+          bibleBooks.push({name: element, description: "Libro cargado desde la función sin conexión"})
+        });
+        this.core.bookList = bibleBooks;
       }
     })
     this.core.api.speaker.getAllSpeakers().subscribe({
@@ -71,10 +86,8 @@ export class AppComponent {
       }
     })
 
-
     // Initialize Firebase
     initializeApp(environment.firebaseConfig);
-    this.initialize();
 
     this.core.settings.loadSettings();
 
@@ -87,17 +100,38 @@ export class AppComponent {
     this.core.bible.lastChapterRead = localStorage.getItem('lastChapterRead') || "Génesis 1";
   }
 
-  initialize() {
-    this.platform.ready().then(() => {
-      this.handleBackButton();
-    });
-  }
+  initBackButton() {
+      this.platform.backButton.subscribeWithPriority(10, async () => {
+        
+        const unAlertAbierto = await this.alrtCtrl.getTop();
+        if (unAlertAbierto) {
+          return;
+        }
+        
+        if (this.router.url === '/message-list') {
+          var alert = await this.alrtCtrl.create({
+            message: "¿Desea salir de la aplicación?",
+            buttons: [
+              {
+                text: "No",
+                role: "cancel",
+                handler: () => { }
+              },
+              {
+                text: "Sí",
+                role: 'confirm',
+                handler: () => {
+                  CapacitorApp.exitApp();
+                }
+              },
+            ]
+          });
+        
+        await alert.present();
 
-  handleBackButton() {
-    document.addEventListener('ionBackButton', (ev: any) => {
-      ev.detail.register(10, () => {
-        App.exitApp(); // Cierra la aplicación
-      });
+      } else {
+        window.history.back();
+      }
     });
   }
 

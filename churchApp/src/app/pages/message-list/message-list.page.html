@@ -16,7 +16,7 @@
   </ion-searchbar>
 
   <!-- refresher -->
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''">
+  <ion-refresher slot="fixed" [disabled]="!networkStatus || !networkStatus.connected" (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
@@ -59,20 +59,31 @@
   </div>
   <!-- fin filtros  -->
 
-  <div>
-    @for (message of messageList; track $index) { 
-      @if (message.isNew && !message.listened) {
-        <h3 class="heartBeatLetters">¡Nueva!</h3>
-      }
-      <app-card-message [message]="message"></app-card-message>
-    }
-    @if (!isLoading && messageList.length === 0) {
-      <div class="noResult">No se han encontrado resultados</div>
-      <div class="refresh">(Desliza para recargar)</div>
-    }
-  </div>
+  @if ((networkStatus && networkStatus!.connected) || core.messageList.length) {
 
-  <ion-infinite-scroll (ionInfinite)="scrollAndSearch($event)" [disabled]="!hasMoreData">
+      @if (isLoading && !offset && !messageList.length) {
+        @for (i of [1, 2, 3, 4, 5, 6]; track $index) {
+          <app-card-message [skeleton]="true"></app-card-message>
+        }
+  
+      } @else {      
+        @for (message of messageList; track $index) { 
+          @if (message.isNew && !message.listened) {
+            <h3 class="heartBeatLetters">¡Nueva!</h3>
+          }
+          <app-card-message [message]="message"></app-card-message>
+        }
+      }
+  
+      @if (!isLoading && messageList.length === 0) {
+        <app-info-display-layout [infoLayout]="'NoResultsFound'"></app-info-display-layout>
+      }
+    
+  } @else {
+    <app-info-display-layout [infoLayout]="'NoInternetConnection'"></app-info-display-layout>
+  }
+
+  <ion-infinite-scroll (ionInfinite)="scrollAndSearch($event)" [disabled]="!hasMoreData || (!networkStatus || !networkStatus.connected)">
     <ion-infinite-scroll-content loadingText="Cargando predicaciones" loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 

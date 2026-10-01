@@ -93,6 +93,14 @@ ion-datetime {
     --background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
 
+ion-alert {
+    // --border-width: 0px !important;
+
+    .alert-wrapper {
+        outline: none !important;
+    }
+}
+
 .customSelect {
     --background: var(--ion-item-background);
 
