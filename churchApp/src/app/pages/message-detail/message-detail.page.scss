@@ -12,6 +12,10 @@ h3 {
     margin-top: -5px;
 }
 
+#messageCard {
+    margin-bottom: calc(15px + env(safe-area-inset-bottom));
+}
+
 #playButton {
     border-radius: 25px;
 }
@@ -55,4 +59,8 @@ ion-card-title {
     justify-content: flex-start;
     flex-wrap: wrap;
     margin-top: 15px;
+}
+
+ion-infinite-scroll {
+    margin-bottom: calc(40px + env(safe-area-inset-bottom))
 }

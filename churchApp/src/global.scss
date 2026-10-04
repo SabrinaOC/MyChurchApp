@@ -260,7 +260,7 @@ body.light-theme {
     z-index: 999;
     position: fixed;
     max-width: 45px;
-    bottom: 120px;
+    bottom: calc(130px + env(safe-area-inset-bottom));
     right: 20px;
     border-radius: 20px;
     cursor: pointer;
