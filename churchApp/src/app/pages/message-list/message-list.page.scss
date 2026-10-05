@@ -1,4 +1,10 @@
+.contentBottomPadding {
+  --padding-bottom: 120px;
+}
 
+.contentNormalPadding {
+  --padding-bottom: calc(35px + env(safe-area-inset-bottom));
+}
 
 .divFiltros {
   display: flex;

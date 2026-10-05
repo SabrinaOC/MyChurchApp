@@ -6,7 +6,8 @@ ion-footer {
     z-index: 10;
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.05);
 
-    transition: bottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    // transition: bottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: bottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), padding-bottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 ion-footer.footer-down {
@@ -14,8 +15,8 @@ ion-footer.footer-down {
 }
 
 ion-content {
-    /* Sumamos la altura del footer + la altura del tab-bar + un respiro */
-    --padding-bottom: calc(60px + 49px + var(--ion-safe-area-bottom, 0px));
+    bottom: 0px;
+    padding-bottom: var(--ion-safe-area-bottom, 0px);
 }
 
 #bookLabel {
@@ -52,9 +53,8 @@ ion-content {
     color: rgb(155, 155, 155);
     font-size: 12px;
     margin-top: 40px;
-    margin-bottom: 30px;
+    margin-bottom: calc(110px + env(safe-area-inset-bottom));
 }
-
 
 .badgeLayout {
     margin-top: 10px;

@@ -9,10 +9,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" id="messages" (ionScroll)="onScroll($event)" scrollEvents="true">
-  <ion-searchbar #searchBar mode="ios" animated="true" placeholder="Buscar por título, autor o libro" show-clear-button="always"
-      clear-icon="close-outline" [debounce]="1000" (ionInput)="searchInput($event)"
-      [(ngModel)]="searchQuery">
+<ion-content [fullscreen]="true" id="messages" (ionScroll)="onScroll($event)" scrollEvents="true"
+  [class.contentBottomPadding]="core.audio.selectedMessage" [class.contentNormalPadding]="!core.audio.selectedMessage">
+
+  <ion-searchbar #searchBar mode="ios" animated="true" placeholder="Buscar por título, autor o libro"
+    show-clear-button="always" clear-icon="close-outline" [debounce]="1000" (ionInput)="searchInput($event)"
+    [(ngModel)]="searchQuery">
   </ion-searchbar>
 
   <!-- refresher -->
@@ -83,7 +85,7 @@
     <app-info-display-layout [infoLayout]="'NoInternetConnection'"></app-info-display-layout>
   }
 
-  <ion-infinite-scroll (ionInfinite)="scrollAndSearch($event)" [disabled]="!hasMoreData || (!networkStatus || !networkStatus.connected)">
+  <ion-infinite-scroll (ionInfinite)="scrollAndSearch($event)" [disabled]="!hasMoreData || (!networkStatus || !networkStatus.connected)" threshold="100px">
     <ion-infinite-scroll-content loadingText="Cargando predicaciones" loadingSpinner="bubbles"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
