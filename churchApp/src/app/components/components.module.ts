@@ -11,6 +11,8 @@ import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { BibleReaderComponent } from './bible-reader/bible-reader.component';
 import { CardOptionsPopoverComponent } from './card-options-popover/card-options-popover.component';
 import { CardMessageComponent } from './card-message/card-message.component';
+import { InfoDisplayLayoutComponent } from './info-display-layout/info-display-layout.component';
+import { VerseHistoryModalComponent } from './verse-history-modal/verse-history-modal.component';
 
 const COMPONENTS = [
   MiniAudioPlayerComponent,
@@ -20,7 +22,9 @@ const COMPONENTS = [
   FilterModalComponent,
   BibleReaderComponent,
   CardOptionsPopoverComponent,
-  CardMessageComponent
+  CardMessageComponent,
+  InfoDisplayLayoutComponent,
+  VerseHistoryModalComponent,
 ];
 
 @NgModule({

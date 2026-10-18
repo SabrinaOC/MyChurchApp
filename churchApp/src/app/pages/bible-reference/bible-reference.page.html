@@ -12,6 +12,7 @@
 
 <ion-content [fullscreen]="true" (ionScroll)="onScroll($event)" scrollEvents="true">
     <ion-searchbar
+    #searchbar
     mode="ios"
     animated="true"
     placeholder="Buscar un término"
@@ -23,8 +24,8 @@
 
     <div class="divFiltros">
       <div id="checkBox-layout">
-        <ion-checkbox mode="ios" checked (ionChange)="toggleOldTestament($event)">Antiguo Testamento</ion-checkbox>
-        <ion-checkbox mode="ios" checked (ionChange)="toggleNewTestament($event)">Nuevo Testamento</ion-checkbox>
+        <ion-checkbox #chkOldTestament mode="ios" checked (ionChange)="toggleOldTestament($event)">Antiguo Testamento</ion-checkbox>
+        <ion-checkbox #chkNewTestament mode="ios" checked (ionChange)="toggleNewTestament($event)">Nuevo Testamento</ion-checkbox>
       </div>
     </div>
 
@@ -43,6 +44,12 @@
       </div>
     }
 
+    <app-info-display-layout 
+      [hidden]="verseCount > 0 || this.loadingLastSeach"
+      [infoLayout]="currentInfoLayout" 
+      (actionClicked)="focusSearchbar()">
+    </app-info-display-layout>
+    
     <div>
       <ion-accordion-group #accordionGroup [multiple]="true" [value]="0">
 

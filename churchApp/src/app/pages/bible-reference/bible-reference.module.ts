@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { BibleReferencePageRoutingModule } from './bible-reference-routing.module';
 
 import { BibleReferencePage } from './bible-reference.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BibleReferencePageRoutingModule
+    BibleReferencePageRoutingModule,
+    ComponentsModule
   ],
   declarations: [BibleReferencePage]
 })

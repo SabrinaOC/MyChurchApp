@@ -10,17 +10,21 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface FindByFilter$Params {
-  speaker?: number;
-  book?: number;
-  dateFrom?: Date;
+  searchedTerm: string;
+  limit: number;
+  offset: number;
+  filterType: string;
+  listenedIds: string;
 }
 
-export function findByFilter(http: HttpClient, rootUrl: string, params?: FindByFilter$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
+export function findByFilter(http: HttpClient, rootUrl: string, params: FindByFilter$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
   const rb = new RequestBuilder(rootUrl, findByFilter.PATH, 'get');
   if (params) {
-    rb.query('speaker', params.speaker, {});
-    rb.query('book', params.book, {});
-    rb.query('dateFrom', params.dateFrom, {});
+    rb.query('searchedTerm', params.searchedTerm, {});
+    rb.query('limit', params.limit, {});
+    rb.query('offset', params.offset, {});
+    rb.query('filterType', params.filterType, {});
+    rb.query('listenedIds', params.listenedIds, {});
   }
 
   return http.request(

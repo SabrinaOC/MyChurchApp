@@ -2,39 +2,21 @@
   <ion-toolbar>
     <ion-buttons>
       <ion-menu-toggle>
-        <ion-img
-          src="../assets/icon/favicon.png"
-          style="width: 35px; margin-left: 10px"
-        ></ion-img>
+        <ion-img src="../assets/icon/favicon.png" style="width: 35px; margin-left: 10px"></ion-img>
       </ion-menu-toggle>
     </ion-buttons>
     <ion-title>Predicaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content
-  [fullscreen]="true"
-  id="messages"
-  (ionScroll)="onScroll($event)"
-  scrollEvents="true"
->
-  <ion-searchbar
-    mode="ios"
-    animated="true"
-    placeholder="Buscar por título"
-    show-clear-button="always"
-    clear-icon="close-outline"
-    [debounce]="1000"
-    (ionInput)="searchInput($event)"
-    (ionClear)="getAllMessages(); rbSelected = 'all'"
-    [(ngModel)]="searchQuery"
-  ></ion-searchbar>
+<ion-content [fullscreen]="true" id="messages" (ionScroll)="onScroll($event)" scrollEvents="true">
+  <ion-searchbar #searchBar mode="ios" animated="true" placeholder="Buscar por título, autor o libro" show-clear-button="always"
+      clear-icon="close-outline" [debounce]="1000" (ionInput)="searchInput($event)"
+      [(ngModel)]="searchQuery">
+  </ion-searchbar>
 
   <!-- refresher -->
-  <ion-refresher
-    slot="fixed"
-    (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''"
-  >
+  <ion-refresher slot="fixed" [disabled]="!networkStatus || !networkStatus.connected" (ionRefresh)="refresh($event); rbSelected = 'all'; searchQuery = ''">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
@@ -44,45 +26,32 @@
       <div class="pills">
         <!-- contenedor del pill para poder subrayar borde inferior cuando esta selected -->
         <div [ngClass]="{'borderSelected': rbSelected === 'all'}">
-          <div
-            class="btnFiltros"
-            [ngClass]="{'btnFiltroSelected': rbSelected === 'all', 'btnFiltroNoSelected': rbSelected !== 'all'}"
-            button
-            (click)="rbSelection('all')"
-          >
+          <div class="btnFiltros"
+            [ngClass]="{'btnFiltroSelected': rbSelected === 'all', 'btnFiltroNoSelected': rbSelected !== 'all'}" button
+            (click)="rbSelection('all')">
             Todas
           </div>
         </div>
 
         <div [ngClass]="{'borderSelected': rbSelected === 'pending'}">
-          <div
-            class="btnFiltros"
+          <div class="btnFiltros"
             [ngClass]="{'btnFiltroSelected': rbSelected === 'pending', 'btnFiltroNoSelected': rbSelected !== 'pending'}"
-            button
-            (click)="rbSelection('pending')"
-          >
+            button (click)="rbSelection('pending')">
             Pendientes
           </div>
         </div>
 
         <div [ngClass]="{'borderSelected': rbSelected === 'listened'}">
-          <div
-            class="btnFiltros"
+          <div class="btnFiltros"
             [ngClass]="{'btnFiltroSelected': rbSelected === 'listened', 'btnFiltroNoSelected': rbSelected !== 'listened'}"
-            button
-            (click)="rbSelection('listened')"
-          >
+            button (click)="rbSelection('listened')">
             Escuchadas
           </div>
         </div>
       </div>
 
       <div class="filtros">
-        <div
-          class="action"
-          style="color: white"
-          (click)="showFilterModal($event)"
-        >
+        <div class="action" style="color: white" (click)="showFilterModal($event)">
           <ion-icon name="options-outline" size="medium"></ion-icon>
         </div>
       </div>
@@ -90,25 +59,35 @@
   </div>
   <!-- fin filtros  -->
 
-  <div>
-    @for (message of messageList; track $index) { @if (message.isNew &&
-    !message.listened) {
-    <h3 class="heartBeatLetters">¡Nueva!</h3>
-    }
-      <app-card-message [message]="message"></app-card-message> 
-    } 
-    @if (messageList && messageList.length < 1) {
-    <div class="noResult">No se han encontrado resultados</div>
-    <div div class="refresh">(Desliza para recargar)</div>
-    }
-  </div>
+  @if ((networkStatus && networkStatus!.connected) || core.messageList.length) {
 
-  <div
-    slot="fixed"
-    class="topScroller"
-    [class.visible]="showScroller"
-    (click)="scrollToTop()"
-  >
+      @if (isLoading && !offset && !messageList.length) {
+        @for (i of [1, 2, 3, 4, 5, 6]; track $index) {
+          <app-card-message [skeleton]="true"></app-card-message>
+        }
+  
+      } @else {      
+        @for (message of messageList; track $index) { 
+          @if (message.isNew && !message.listened) {
+            <h3 class="heartBeatLetters">¡Nueva!</h3>
+          }
+          <app-card-message [message]="message"></app-card-message>
+        }
+      }
+  
+      @if (!isLoading && messageList.length === 0) {
+        <app-info-display-layout [infoLayout]="'NoResultsFound'"></app-info-display-layout>
+      }
+    
+  } @else {
+    <app-info-display-layout [infoLayout]="'NoInternetConnection'"></app-info-display-layout>
+  }
+
+  <ion-infinite-scroll (ionInfinite)="scrollAndSearch($event)" [disabled]="!hasMoreData || (!networkStatus || !networkStatus.connected)">
+    <ion-infinite-scroll-content loadingText="Cargando predicaciones" loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <div slot="fixed" class="topScroller" [class.visible]="showScroller" (click)="scrollToTop()">
     <ion-icon name="chevron-up-circle-outline"></ion-icon>
   </div>
 </ion-content>
