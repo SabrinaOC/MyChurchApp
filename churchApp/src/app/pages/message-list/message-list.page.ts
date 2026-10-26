@@ -192,7 +192,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-// Se añade el parámetro opcional event
+  // Se añade el parámetro opcional event
   async findMessagesByFilter(query: string, event?: any) {
     if (!this.networkStatus.connected) {
       return;
@@ -200,20 +200,15 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
     this.isLoading = true;
 
-    let loading: HTMLIonLoadingElement | undefined;
-
-    if (this.offset == 0 && !event) {
-      loading = await this.core.loadingCtrl.create({
-        message: 'Recuperando predicaciones...',
-        cssClass: 'custom-loading',
-        mode: 'md',
-        spinner: null,
-        backdropDismiss: true
-      })
-      // await loading.present();
+    var filteredIdsString: string = "";
+    switch (this.rbSelected) {
+      case "pending": case "listened":
+        filteredIdsString = localStorage.getItem('listened') || '';
+        break;
+      case "favourite":
+        filteredIdsString = localStorage.getItem('favourite') || '';
+        break;
     }
-
-    const listenedIdsString = localStorage.getItem('listened') || '';
 
     this.core.api.message.findByFilter(
       { 
@@ -221,31 +216,29 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
         limit: this.limit,
         offset: this.offset,
         filterType: this.rbSelected,
-        listenedIds: listenedIdsString
+        listenedIds: filteredIdsString
       }
-    )
-      .subscribe({
-        next: (val: any) => {
-          if (val && val.messageListMapped) {
-            const newMessages = val?.messageListMapped || [];
+    ).subscribe({
+      next: (val: any) => {
+        if (val && val.messageListMapped) {
+          const newMessages = val?.messageListMapped || [];
 
-            if (newMessages.length < this.limit) {
-              this.hasMoreData = false;
-            }
-
-            this.updateMessageList(newMessages, false);
+          if (newMessages.length < this.limit) {
+            this.hasMoreData = false;
           }
-          if (event) event?.target?.complete?.();
-        },
-        error: (e) => {
-          console.error('ERROR ', e);
-          if(event) event?.target?.complete?.();
-        },
-        complete: () => {
-          if (loading) loading.dismiss();
-          this.isLoading = false
+
+          this.updateMessageList(newMessages, false);
         }
-      });
+        if (event) event?.target?.complete?.();
+      },
+      error: (e) => {
+        console.error('ERROR ', e);
+        if(event) event?.target?.complete?.();
+      },
+      complete: () => {
+        this.isLoading = false
+      }
+    });
   }
   
   scrollAndSearch(event: InfiniteScrollCustomEvent) {
@@ -269,19 +262,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
     this.isLoading = true;
 
-    let loading: HTMLIonLoadingElement | undefined;
-
-    if (this.offset == 0 && !event) {
-      loading = await this.core.loadingCtrl.create({
-        message: 'Recuperando predicaciones...',
-        cssClass: 'custom-loading',
-        mode: 'md',
-        spinner: null,
-        backdropDismiss: true
-      })
-      // await loading.present();
-    }
-
     const listenedIdsString = localStorage.getItem('listened') || '';
 
     this.core.api.message.getAllMessages({
@@ -289,29 +269,27 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
       offset: this.offset,
       filterType: this.rbSelected,
       listenedIds: listenedIdsString
-    })
-      .subscribe({
-        next: (data: any) => {
-          if (data && data.messageListMapped) {
-            const newMessages = data?.messageListMapped || [];
+    }).subscribe({
+      next: (data: any) => {
+        if (data && data.messageListMapped) {
+          const newMessages = data?.messageListMapped || [];
 
-            if (newMessages.length < this.limit) {
-              this.hasMoreData = false;
-            }
-
-            // If we're listing 'All' messages, we save them to core cache
-            this.updateMessageList(newMessages, this.rbSelected === 'all');
+          if (newMessages.length < this.limit) {
+            this.hasMoreData = false;
           }
 
-          if (event) event?.target?.complete?.();
-        },
-        error: (err: any) => {
-          console.error(err);
-          if (event) event?.target?.complete?.();
-        },
+          // If we're listing 'All' messages, we save them to core cache
+          this.updateMessageList(newMessages, this.rbSelected === 'all');
+        }
+
+        if (event) event?.target?.complete?.();
+      },
+      error: (err: any) => {
+        console.error(err);
+        if (event) event?.target?.complete?.();
+      },
       complete: () => {
         this.isLoading = false;
-        if (loading) loading.dismiss();
       }
     });
   }

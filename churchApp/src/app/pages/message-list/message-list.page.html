@@ -50,13 +50,21 @@
             Escuchadas
           </div>
         </div>
+
+        <div [ngClass]="{'borderSelected': rbSelected === 'favourite'}">
+          <div class="btnFiltros"
+            [ngClass]="{'btnFiltroSelected': rbSelected === 'favourite', 'btnFiltroNoSelected': rbSelected !== 'favourite'}"
+            button (click)="rbSelection('favourite')">
+            Favoritas
+          </div>
+        </div>
       </div>
 
-      <div class="filtros">
+      <!-- <div class="filtros">
         <div class="action" style="color: white" (click)="showFilterModal($event)">
           <ion-icon name="options-outline" size="medium"></ion-icon>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- fin filtros  -->
