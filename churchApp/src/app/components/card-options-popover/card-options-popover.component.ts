@@ -22,7 +22,7 @@ export class CardOptionsPopoverComponent  implements OnInit {
   navigationExtra: NavigationExtras = {};
 
   constructor(private popoverController: PopoverController,
-              private core: CoreProvider,
+              public core: CoreProvider,
               private router: Router
   ) {}
 
@@ -41,6 +41,12 @@ export class CardOptionsPopoverComponent  implements OnInit {
         break;
       case 'markAsListened':
         // this.core.audio.markAsListened(this.data.message());
+        break;
+      case 'removeFromFavourites':
+        this.core.audio.toggleFavourite(this.data.message.id);
+        break;
+      case 'markAsFavourite':
+        this.core.audio.toggleFavourite(this.data.message.id);
         break;
     }
     this.popoverController.dismiss({ action: actionName });
