@@ -48,7 +48,7 @@
                 <div class="divLibroAutor">
                   <span > {{ message()?.book?.name}} </span>
                   <span class="punto">·</span>
-                  @if (message()?.speaker?.id === 5) {
+                  @if (message()?.speaker?.id === invitedSpeaker) {
                   <div>{{ message()?.note }}</div>
                   } @else {
                   <div>{{ message()?.speaker?.name}}</div>
