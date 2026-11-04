@@ -328,6 +328,24 @@ export class AudioService implements OnDestroy {
     }
   }
 
+  forward() {
+    const newTime = Math.min(
+    this.audio.currentTime + Constants.FORWARD_BACKWARD_TIME, 
+    this.audio.duration || Infinity
+    );
+
+    this.seekTo(newTime);
+  }
+
+  backward() {
+    const newTime = Math.max(this.audio.currentTime - Constants.FORWARD_BACKWARD_TIME, 0);
+    this.seekTo(newTime);
+  }
+
+  playbackRate(rate: number) {
+    this.audio.playbackRate = rate;
+  }
+
   /**
    * Pendiente de fix en plugin para controld e eventos. De momento no se esta usando pero esta todo el codigo preparado
    * @returns

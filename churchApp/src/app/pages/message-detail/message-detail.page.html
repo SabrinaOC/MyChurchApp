@@ -10,11 +10,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content
+<ion-content class="background-overlay"
   [fullscreen]="true"
   [style.--background]="'url(' + msgSelected.image + ') no-repeat center center / cover'"
 >
-  <ion-card>
+  <ion-card class="audio-player-card">
     @if (msgSelected) {
     <ion-card-header>
       <div
@@ -46,7 +46,7 @@
         >{{ msgSelected.title }}</ion-card-title
       >
 
-      @if (msgSelected.speaker!.id === 5) {
+      @if (msgSelected.speaker!.id === invitedSpeaker) {
       <ion-card-subtitle>{{ msgSelected.note }}</ion-card-subtitle>
       } @else {
       <ion-card-subtitle>{{ msgSelected.speaker!.name }}</ion-card-subtitle>
@@ -56,8 +56,9 @@
     <ion-card-content>
       <ion-row id="iconCenteredLayout" class="ion-margin-top">
         <div style="z-index: 999">
-          <ion-button class="ion-margin-end" fill="clear" disabled>
-            <ion-icon name="heart-outline" color="danger"></ion-icon>
+          <ion-button class="ion-margin-end" fill="clear" (click)="backward()" [disabled]="!isPlaying">
+            <ion-icon src="./../../../assets/icons/backward_30.svg"
+            style="color: white;"></ion-icon>
           </ion-button>
 
           <ion-button size="large" shape="round" (click)="togglePlay()">
@@ -79,11 +80,11 @@
           <ion-button
             class="ion-margin-start"
             fill="clear"
-            (click)="shareMessage($event)"
+            (click)="forward()"
+            [disabled]="!isPlaying"
           >
             <ion-icon
-              name="share-social-outline"
-              style="color: #4d8dff"
+              src="./../../../assets/icons/forward_30.svg"
             ></ion-icon>
           </ion-button>
         </div>
@@ -115,30 +116,41 @@
         }
       </ion-row>
 
-      @if (msgSelected.questions) {
-      <h2 class="boldText" style="margin-top: 30px">Reflexion:</h2>
-      <div
-        id="questionsDiv"
-        class="markdown-content"
-        [innerHTML]="msgSelected.questions | formatQuestionText"
-      ></div>
-      } @if (verses && verses.length) {
-      <h2 class="boldText">Versículos:</h2>
-
-      <div id="versesLayout">
-        @for (verse of verses; track $index) {
-        <ion-badge
-          id="versesPopover{{$index}}"
-          class="badge-verse"
-          (click)="openShowVerses(verse)"
-        >
-          <span>{{verse}}</span>
-        </ion-badge>
+      <ion-row class="ion-justify-content-between">
+        @if (playingRate === 1) {
+            <ion-icon button (click)="playbackRate(1.5)"
+              src="./../../../assets/icons/speed_1_0x.svg" 
+            ></ion-icon>
+        } @else if (playingRate === 1.5) {
+            <ion-icon button (click)="playbackRate(1)" 
+              src="./../../../assets/icons/speed_1_5x.svg"
+            ></ion-icon>
         }
-      </div>
-      }
+        
+          <ion-icon button (click)="shareMessage($event)"
+            name="share-social-outline"
+            style="font-size: 18px;"
+          ></ion-icon>
+      </ion-row>
+      
     </ion-card-content>
     }
   </ion-card>
+  <div style="margin: 5px 20px;">
+    @if (msgSelected.questions) {
+    <h2 class="boldText" style="margin-top: 30px">Mensaje:</h2>
+     <div class="markdown-content" [innerHTML]="htmlContent"></div>
+    } @if (verses && verses.length) {
+    <h2 class="boldText">Versículos:</h2>
+  
+    <div id="versesLayout">
+      @for (verse of verses; track $index) {
+      <ion-badge id="versesPopover{{$index}}" class="badge-verse" (click)="openShowVerses(verse)">
+        <span>{{verse}}</span>
+      </ion-badge>
+      }
+    </div>
+    }
+  </div>
 </ion-content>
 }

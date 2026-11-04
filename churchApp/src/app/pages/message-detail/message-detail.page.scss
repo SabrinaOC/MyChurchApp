@@ -1,3 +1,31 @@
+ion-content.background-overlay {
+    // Evita que el escalado del blur genere scroll horizontal fantasma
+    overflow: hidden;
+
+    &::part(background) {
+        background:
+            linear-gradient(180deg,
+                rgba(15, 23, 34, 0.45) 0%,
+                rgba(15, 23, 34, 0.85) 35%,
+                rgba(15, 23, 34, 0.96) 100%),
+            var(--background); // Aquí ya viene tu 'url(...) no-repeat center center / cover'
+
+        filter: blur(2px);
+        transform: scale(1.02); // Evita los bordes transparentes del blur
+    }
+}
+
+.audio-player-card {
+    background: rgba(15, 23, 34, 0.65); // Fondo semitransparente oscuro
+    backdrop-filter: blur(16px); // Efecto cristal esmerilado
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
 #iconCenteredLayout {
     display: flex;
     justify-content: center;
@@ -6,6 +34,7 @@
 h2 {
     color: var(--ion-color-primary);
     margin-top: 15px;
+    font-size: 1.1rem;
 }
 
 h3 {
@@ -17,15 +46,33 @@ h3 {
 }
 
 #questionsDiv {
-color: white;
+    color: white;
 }
 
 .boldText {
     font-weight: 700;
 }
 
+ion-card {
+    padding: 16px 20px 6px;
+}
+
 ion-card-title {
-    font-size: 25px;
+    font-size: 21px;
+}
+
+ion-card-header {
+    padding: 0;
+}
+
+ion-card-content {
+    padding: 0 !important;
+
+    // Por si el componente interno de Ionic mantiene algún margen heredado
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
 }
 
 .badge-verse {
@@ -33,17 +80,23 @@ ion-card-title {
 }
 
 #audioProgress {
-    // --bar-background: #333;
-    // --bar-background-active: #1db954;
     --bar-height: 5px;
-    // --knob-background: #1db954;
-    --knob-size: 14px;
-    // --pin-background: #1db954;
-    --pin-color: #fff;
+    --knob-size: 9px;
+    --knob-background: #75421c;
 
     --height: 5px;
     padding: 0;
-    margin: 6px 10px 0 10px;
+    margin: 6px 0px 0 0px;
+    overflow: hidden;
+    border-radius: 8px;
+
+    ::part(bar) {
+        border-radius: 10px !important;
+    }
+
+    ::part(pin) {
+        border-radius: 4px;
+    }
 }
 
 #seconds {
@@ -55,4 +108,85 @@ ion-card-title {
     justify-content: flex-start;
     flex-wrap: wrap;
     margin-top: 15px;
+}
+
+// TEXT MARKDOWN FORMAT
+.markdown-content {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+
+    ::ng-deep {
+        h2 {
+            font-size: 1.1rem !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            margin-top: 1.6rem !important;
+            margin-bottom: 0.5rem !important;
+            display: block !important;
+            position: relative;
+
+            .title-emoji {
+                display: inline; // Permite que el emoji mantenga sus proporciones nativas
+                font-size: 0.9em !important;
+                margin-right: 8px; // Separación elegante entre el icono y el texto
+            }
+        }
+
+        h3 {
+            font-size: 1rem !important;
+            font-weight: 600 !important;
+            color: #f97316 !important;
+            margin-top: 1.2rem !important;
+            margin-bottom: 0.4rem !important;
+        }
+
+        ul,
+        ol {
+            padding-left: 1.2rem !important;
+            margin-bottom: 1rem !important;
+
+            li {
+                margin-bottom: 0.4rem !important;
+
+                strong {
+                    color: #ffffff !important;
+                }
+            }
+        }
+
+        // Párrafos generales del cuerpo
+        p {
+            margin-bottom: 0.9rem;
+
+            // Usamos :not(blockquote p) para que el salto de línea en bloque 
+            // NUNCA afecte a las citas
+            &:not(blockquote p) {
+                strong:first-child {
+                    color: #ffffff;
+                    display: block;
+                    margin-top: 0.8rem;
+                }
+            }
+        }
+
+        // Estilo limpio y protegido para los bloques de cita (blockquote)
+        blockquote {
+            border-left: 3px solid #f97316 !important;
+            margin: 1.2rem 0 !important;
+            padding: 0.6rem 1rem !important;
+            background: rgba(249, 115, 22, 0.08) !important;
+            border-radius: 0 8px 8px 0 !important;
+            font-style: italic !important;
+            color: #f1f5f9 !important;
+
+            p {
+                margin-bottom: 0 !important; // Evita espacios extra dentro de la cita
+
+                strong {
+                    display: inline !important; // Fuerza a que el texto y el emoji vayan fluidos
+                }
+            }
+        }
+    }
 }
