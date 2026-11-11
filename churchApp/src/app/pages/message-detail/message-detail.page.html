@@ -58,7 +58,7 @@
         <div style="z-index: 999">
           <ion-button class="ion-margin-end" fill="clear" (click)="backward()" [disabled]="!isPlaying">
             <ion-icon src="./../../../assets/icons/backward_30.svg"
-            style="color: white;"></ion-icon>
+            ></ion-icon>
           </ion-button>
 
           <ion-button size="large" shape="round" (click)="togglePlay()">
@@ -72,6 +72,7 @@
             <ion-icon
               slot="icon-only"
               [name]="isPlaying && core.audio.selectedMessage?.id === msgSelected.id ? 'pause' : 'play'"
+              style="color: white"
             >
             </ion-icon>
             }

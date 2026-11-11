@@ -15,16 +15,53 @@ ion-content.background-overlay {
     }
 }
 
-.audio-player-card {
-    background: rgba(15, 23, 34, 0.65); // Fondo semitransparente oscuro
-    backdrop-filter: blur(16px); // Efecto cristal esmerilado
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+:host-context(.light-theme) {
+    ion-content.background-overlay {
+        // Evita que el escalado del blur genere scroll horizontal fantasma
+        overflow: hidden;
+    
+        &::part(background) {
+            background: linear-gradient(180deg, 
+            rgba(15, 23, 34, 0.15) 0%,   // Muy ligero arriba (deja ver casi toda la foto)
+            rgba(15, 23, 34, 0.45) 35%,  // Transición suave en la zona media
+            rgba(15, 23, 34, 0.75) 100%  // Oscuridad moderada abajo para proteger la lectura
+        ),
+                var(--background);
+    
+            filter: blur(2px);
+            transform: scale(1.02);
+        }
+    }
+    .audio-player-card {
+        background: rgb(198 195 186 / 65%);
+        color: #796c5d;
+        
+        
+        ion-card-title, ion-row, ion-icon {
+            color: rgb(31, 31, 31);
+        }
+
+        ion-card-subtitle {
+            color: rgb(63 64 76);
+        }
+    }
+    
 }
+
+:host-context(.dark-theme) {
+    .audio-player-card {
+        background: rgba(15, 23, 34, 0.65); // Fondo semitransparente oscuro
+        backdrop-filter: blur(16px); // Efecto cristal esmerilado
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+}
+
+
 
 #iconCenteredLayout {
     display: flex;
@@ -136,7 +173,7 @@ ion-card-content {
         h3 {
             font-size: 1rem !important;
             font-weight: 600 !important;
-            color: #f97316 !important;
+            color: var(--ion-color-primary) !important;
             margin-top: 1.2rem !important;
             margin-bottom: 0.4rem !important;
         }
@@ -172,7 +209,7 @@ ion-card-content {
 
         // Estilo limpio y protegido para los bloques de cita (blockquote)
         blockquote {
-            border-left: 3px solid #f97316 !important;
+            border-left: 3px solid var(--ion-color-primary) !important;
             margin: 1.2rem 0 !important;
             padding: 0.6rem 1rem !important;
             background: rgba(249, 115, 22, 0.08) !important;
