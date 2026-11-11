@@ -26,12 +26,12 @@
   @if (core.audio.favouriteMessages.has(data.message.id)) {
     <ion-item button (click)="action('removeFromFavourites')" detail="false">
       <ion-icon slot="start" name="heart" color="danger"></ion-icon>
-      <ion-label>Desmarcar Favorita</ion-label>
+      <ion-label>Eliminar Favorita</ion-label>
     </ion-item>
   } @else {
     <ion-item button (click)="action('markAsFavourite')" detail="false">
       <ion-icon slot="start" name="heart-outline" color="danger"></ion-icon>
-      <ion-label>Marcar como Favorita</ion-label>
+      <ion-label>Añadir Favorita</ion-label>
     </ion-item>
   }
 

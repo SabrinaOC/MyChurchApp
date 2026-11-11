@@ -4,7 +4,6 @@ import { InfiniteScrollCustomEvent, IonContent, IonSearchbar } from '@ionic/angu
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
 import { NavigationExtras } from '@angular/router';
-import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
 import { NgZone } from '@angular/core'
 import { App } from '@capacitor/app';
@@ -200,23 +199,13 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
     this.isLoading = true;
 
-    var filteredIdsString: string = "";
-    switch (this.rbSelected) {
-      case "pending": case "listened":
-        filteredIdsString = localStorage.getItem('listened') || '';
-        break;
-      case "favourite":
-        filteredIdsString = localStorage.getItem('favourite') || '';
-        break;
-    }
-
     this.core.api.message.findByFilter(
       { 
         searchedTerm: query,
         limit: this.limit,
         offset: this.offset,
         filterType: this.rbSelected,
-        listenedIds: filteredIdsString
+        filteredIds: this.getFilteredIds()
       }
     ).subscribe({
       next: (val: any) => {
@@ -261,14 +250,12 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.isLoading = true;
-
-    const listenedIdsString = localStorage.getItem('listened') || '';
-
+    
     this.core.api.message.getAllMessages({
       limit: this.limit,
       offset: this.offset,
       filterType: this.rbSelected,
-      listenedIds: listenedIdsString
+      filteredIds: this.getFilteredIds()
     }).subscribe({
       next: (data: any) => {
         if (data && data.messageListMapped) {
@@ -327,6 +314,21 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     this.updateListRdBtn();
   }
 
+  getFilteredIds(): string {
+    var filteredIdsString: string = "";
+
+    switch (this.rbSelected) {
+      case "pending": case "listened":
+        filteredIdsString = localStorage.getItem('listened') || '';
+        break;
+      case "favourite":
+        filteredIdsString = localStorage.getItem('favourite') || '';
+        break;
+    }
+
+    return filteredIdsString.replace("[", "").replace("]", "");
+  }
+
   checkIfAlreadyListened(lista: Message[]) {
     let listened = localStorage.getItem('listened');
 
@@ -372,23 +374,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
     // 4. Mostramos en pantalla aplicando filtros de Radio Buttons
     this.updateListRdBtn();
-  }
-
-  async showFilterModal(event: any) {
-    event?.stopPropagation();
-
-    const modal = await this.core.modalCtrl.create({
-      component: FilterModalComponent,
-      componentProps: {}
-    });
-
-    modal.onDidDismiss().then(data => {
-      if (data.data) {
-        this.updateMessageList(data.data)
-      }
-    });
-
-    await modal.present();
   }
 
   rbSelection(selection: string) {

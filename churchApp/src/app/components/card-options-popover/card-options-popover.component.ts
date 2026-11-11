@@ -32,6 +32,8 @@ export class CardOptionsPopoverComponent  implements OnInit {
 
   // Función para devolver la acción seleccionada y cerrar el popover
   action(actionName: string) {
+    let dismissPopover: boolean = true;
+
     switch(actionName) {
       case 'share':
         this.shareMessage();
@@ -44,12 +46,17 @@ export class CardOptionsPopoverComponent  implements OnInit {
         break;
       case 'removeFromFavourites':
         this.core.audio.toggleFavourite(this.data.message.id);
+        dismissPopover = false;
         break;
       case 'markAsFavourite':
         this.core.audio.toggleFavourite(this.data.message.id);
+        dismissPopover = false;
         break;
     }
-    this.popoverController.dismiss({ action: actionName });
+
+    if (dismissPopover) {
+      this.popoverController.dismiss({ action: actionName });
+    }
   }
 
   async shareMessage() {
