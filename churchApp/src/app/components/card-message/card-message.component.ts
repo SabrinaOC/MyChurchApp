@@ -6,6 +6,7 @@ import { Message } from 'src/app/models/interfaces';
 import { AudioService } from 'src/app/services/audio.service';
 import { CoreProvider } from 'src/app/services/core';
 import { CardOptionsPopoverComponent } from '../card-options-popover/card-options-popover.component';
+import { INVITED_SPEAKER } from 'src/app/constants';
 
 @Component({
   selector: 'app-card-message',
@@ -23,6 +24,7 @@ export class CardMessageComponent  implements OnInit, OnDestroy {
   progress: number = 0;
   duration: number = 0;
   isLoading: boolean = false;
+  invitedSpeaker: number = INVITED_SPEAKER;
 
   navigationExtra: NavigationExtras = {};
 

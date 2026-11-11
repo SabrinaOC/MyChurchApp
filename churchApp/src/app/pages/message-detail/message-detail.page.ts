@@ -7,6 +7,8 @@ import { Share } from '@capacitor/share';
 import { ShareOptionsPopoverComponent } from 'src/app/components/share-options-popover/share-options-popover.component';
 import { ShowVersesComponent } from 'src/app/components/show-verses/show-verses.component';
 import { NavigationService } from 'src/app/services/navigation.service';
+import { INVITED_SPEAKER } from 'src/app/constants';
+import { marked } from 'marked';
 
 @Component({
   selector: 'app-message-detail',
@@ -14,7 +16,6 @@ import { NavigationService } from 'src/app/services/navigation.service';
   styleUrls: ['./message-detail.page.scss'],
 })
 export class MessageDetailPage implements OnInit, ViewWillEnter {
-
   msgSelected!: Message;
   verses: string[] = [];
 
@@ -24,6 +25,9 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
   isLoading: boolean = false;
 
   navigationExtra: NavigationExtras = {};
+  invitedSpeaker: number = INVITED_SPEAKER;
+  htmlContent: string = '';
+  playingRate: number = 1;
 
   constructor(
     public core: CoreProvider,
@@ -31,88 +35,89 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
     private router: Router,
     private routerOutlet: IonRouterOutlet,
     private navigationService: NavigationService
-  ) {
-  }
+  ) {}
 
   ionViewWillEnter(): void {
     this.getMessageDetail();
   }
 
   ngOnInit(): void {
-    this.core.audio.isPlaying$.subscribe(v => this.isPlaying = v);
-    this.core.audio.progress$.subscribe(v => this.progress = v);
-    this.core.audio.duration$.subscribe(v => this.duration = v);
-    this.core.audio.isLoading$.subscribe(v => { this.isLoading = v; });
+    this.core.audio.isPlaying$.subscribe((v) => (this.isPlaying = v));
+    this.core.audio.progress$.subscribe((v) => (this.progress = v));
+    this.core.audio.duration$.subscribe((v) => (this.duration = v));
+    this.core.audio.isLoading$.subscribe((v) => {
+      this.isLoading = v;
+    });
   }
 
   getMessageDetail() {
-    const searchedId: number = this.route.snapshot.queryParams["id"];
+    const searchedId: number = this.route.snapshot.queryParams['id'];
     const previousUrl = this.navigationService.getPreviousUrl();
-    
+
     let msgFromList;
     //buscamos primero en lista local
-    msgFromList = this.core.messageList?.find(msg => msg.id == searchedId);
-    if(msgFromList && !previousUrl.includes('add-message')) {
-      //si se encuentra el mensaje pero no se viene desde una edicion, se carga de local, 
+    msgFromList = this.core.messageList?.find((msg) => msg.id == searchedId);
+    if (msgFromList && !previousUrl.includes('add-message')) {
+      //si se encuentra el mensaje pero no se viene desde una edicion, se carga de local,
       // si no, llamamos a servicio
       this.msgSelected = msgFromList;
+      this.safeHTMLText();
       this.versesToList();
     } else {
       //si no, llamamos a servicio
-      this.core.api.message.findById({id: searchedId}).subscribe({
+      this.core.api.message.findById({ id: searchedId }).subscribe({
         next: (res: any) => {
           if (res) {
             this.msgSelected = res.messageMapped[0];
+            this.safeHTMLText();
             this.versesToList();
             this.mapMessageImages();
             //como hemos actualizado datos de la predicacion, la buscamos en nuestra lista local y actualizamos
-            this.core.messageList = this.core.messageList.map(msg => 
+            this.core.messageList = this.core.messageList.map((msg) =>
               msg.id === this.msgSelected.id ? this.msgSelected : msg
             );
           }
         },
         error: (e) => {
-          console.log('ERROR ', e)
+          console.log('ERROR ', e);
         },
       });
     }
-
   }
 
-  versesToList() {    
+  versesToList() {
     if (this.msgSelected.verses) {
-      this.verses = this.msgSelected.verses.split(";");
+      this.verses = this.msgSelected.verses.split(';');
     }
   }
 
   /**
-   * 
-   * @param message 
+   *
+   * @param message
    */
   editMessage(message: Message, event: any) {
     event.preventDefault();
     event.stopPropagation();
-    
+
     this.navigationExtra.queryParams = message;
-    this.router.navigate(['add-message'], this.navigationExtra)
+    this.router.navigate(['add-message'], this.navigationExtra);
   }
 
   async shareMessage(event: any) {
-    event.stopPropagation()
+    event.stopPropagation();
     if (this.msgSelected.questions != null) {
       const modal = await this.core.modalCtrl.create({
         component: ShareOptionsPopoverComponent,
         componentProps: {
-          message: this.msgSelected
-        }
+          message: this.msgSelected,
+        },
       });
-      modal.onDidDismiss().then(d => {
+      modal.onDidDismiss().then((d) => {
         if (d.data) {
           Share.share(d.data);
         }
       });
       await modal.present();
-      
     } else {
       await Share.share({
         title: `${this.msgSelected.title}`,
@@ -134,11 +139,14 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
       leaveAnimation: this.core.leaveShowVersesAnimation,
     });
 
-    modal.present()
+    modal.present();
   }
 
-  togglePlay() {    
-    if (!this.core.audio.selectedMessage || this.core.audio.selectedMessage.id !== this.msgSelected.id) {
+  togglePlay() {
+    if (
+      !this.core.audio.selectedMessage ||
+      this.core.audio.selectedMessage.id !== this.msgSelected.id
+    ) {
       this.core.audio.selectMessage(this.msgSelected);
     } else {
       if (this.isPlaying) this.core.audio.pause();
@@ -151,18 +159,73 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
     this.core.audio.seekTo(value);
   }
 
+  forward() {
+    this.core.audio.forward();
+  }
+
+  backward() {
+    this.core.audio.backward();
+  }
+
+  playbackRate(rate: number) {
+    this.playingRate = rate;
+     this.core.audio.playbackRate(this.playingRate)
+  }
+
   navigateBack() {
-    this.routerOutlet.canGoBack() ? this.core.navCtrl.pop() : this.core.navCtrl.navigateBack("/message-list");
+    this.routerOutlet.canGoBack()
+      ? this.core.navCtrl.pop()
+      : this.core.navCtrl.navigateBack('/message-list');
   }
 
   mapMessageImages() {
-      let imgBase64: string = '';
-      if(this.msgSelected.image && (!this.msgSelected.image.includes('data:image/jpeg;base64') && !this.msgSelected.image.includes('../../../assets/images/thumbnail-'))) {
-        imgBase64 = 'data:image/jpeg;base64,' + this.msgSelected.image
-      } else if(!this.msgSelected.image) {
-        const randomNum = Math.floor(Math.random() * 6);
-        imgBase64 = `../../../assets/images/thumbnail-${randomNum}.jpg`;
+    let imgBase64: string = '';
+    if (
+      this.msgSelected.image &&
+      !this.msgSelected.image.includes('data:image/jpeg;base64') &&
+      !this.msgSelected.image.includes('../../../assets/images/thumbnail-')
+    ) {
+      imgBase64 = 'data:image/jpeg;base64,' + this.msgSelected.image;
+    } else if (!this.msgSelected.image) {
+      const randomNum = Math.floor(Math.random() * 6);
+      imgBase64 = `../../../assets/images/thumbnail-${randomNum}.jpg`;
+    }
+    this.msgSelected.image =
+      imgBase64 != '' ? imgBase64 : this.msgSelected.image;
+  }
+
+  safeHTMLText() {
+    const rawMarkdown = this.msgSelected.questions;
+
+    // 1. Dividimos el contenido por secciones usando los títulos (##)
+    const secciones = rawMarkdown.split(/(?=^##\s)/gm);
+
+    const seccionesProcesadas = secciones.map(seccion => {
+      // Si la sección es la de preguntas o reflexión final, dejamos las listas intactas
+      if (seccion.includes('Preguntas') || seccion.includes('Reflexión')) {
+        return seccion;
       }
-      this.msgSelected.image = imgBase64 != '' ? imgBase64 : this.msgSelected.image;
+
+      // Para las secciones doctrinales:
+      // Si la línea empieza por viñeta y tiene negrita al inicio (- **Concepto:**), 
+      // la transformamos en un párrafo destacado con un salto de línea limpio.
+      let seccionLimpia = seccion.replace(/^[-\*]\s+(\*\*.*?\*\*[:]?)/gm, '\n\n$1');
+      
+      // Para el resto de viñetas normales que no tengan negrita, simplemente quitamos el guion
+      seccionLimpia = seccionLimpia.replace(/^[-\*]\s+/gm, '');
+
+      return seccionLimpia;
+    });
+
+    const markdownSinViñetas = seccionesProcesadas.join('\n\n');
+
+    // 2. Aplicamos tu tratamiento de emojis y iconos en los títulos
+    const processedMarkdown = markdownSinViñetas.replace(
+      /^(#+\s*)([\p{Emoji_Presentation}\p{Extended_Pictographic}]+\s*)/gimu,
+      '$1<span class="title-emoji">$2</span>'
+    );
+
+    // 3. Lo convertimos a HTML seguro con marked
+    this.htmlContent = marked.parse(processedMarkdown) as string;
   }
 }
