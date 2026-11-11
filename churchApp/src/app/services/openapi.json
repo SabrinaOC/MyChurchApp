@@ -18,7 +18,7 @@
     },
     "servers": [
         {
-            "url": "https://sabriojea-mychurch-api.k8s.arsahosting.net"
+            "url": "http://localhost:3000"
         }
     ],
     "paths": {
@@ -166,7 +166,7 @@
                         }
                     },
                     {
-                        "name": "listenedIds",
+                        "name": "filteredIds",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -392,7 +392,7 @@
                         }
                     },
                     {
-                        "name": "listenedIds",
+                        "name": "filteredIds",
                         "in": "query",
                         "required": true,
                         "schema": {

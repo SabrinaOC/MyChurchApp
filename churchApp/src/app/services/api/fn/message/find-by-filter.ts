@@ -14,7 +14,7 @@ export interface FindByFilter$Params {
   limit: number;
   offset: number;
   filterType: string;
-  listenedIds: string;
+  filteredIds: string;
 }
 
 export function findByFilter(http: HttpClient, rootUrl: string, params: FindByFilter$Params, context?: HttpContext): Observable<StrictHttpResponse<any>> {
@@ -24,7 +24,7 @@ export function findByFilter(http: HttpClient, rootUrl: string, params: FindByFi
     rb.query('limit', params.limit, {});
     rb.query('offset', params.offset, {});
     rb.query('filterType', params.filterType, {});
-    rb.query('listenedIds', params.listenedIds, {});
+    rb.query('filteredIds', params.filteredIds, {});
   }
 
   return http.request(
