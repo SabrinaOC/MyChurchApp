@@ -23,6 +23,18 @@
     </ion-item>
   }
 
+  @if (core.audio.favouriteMessages.has(data.message.id)) {
+    <ion-item button (click)="action('removeFromFavourites')" detail="false">
+      <ion-icon slot="start" name="heart" color="danger"></ion-icon>
+      <ion-label>Eliminar Favorita</ion-label>
+    </ion-item>
+  } @else {
+    <ion-item button (click)="action('markAsFavourite')" detail="false">
+      <ion-icon slot="start" name="heart-outline" color="danger"></ion-icon>
+      <ion-label>Añadir Favorita</ion-label>
+    </ion-item>
+  }
+
   <ion-item button (click)="action('share')" detail="false">
     <ion-icon slot="start" name="share-social-outline" style="color: #4d8dff;"></ion-icon>
     <ion-label>Compartir</ion-label>

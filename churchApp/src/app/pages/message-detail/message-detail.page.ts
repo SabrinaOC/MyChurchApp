@@ -168,8 +168,12 @@ export class MessageDetailPage implements OnInit, ViewWillEnter {
   }
 
   playbackRate(rate: number) {
+    if (!this.isPlaying) {
+      return;
+    }
+
     this.playingRate = rate;
-     this.core.audio.playbackRate(this.playingRate)
+    this.core.audio.playbackRate(this.playingRate)
   }
 
   navigateBack() {

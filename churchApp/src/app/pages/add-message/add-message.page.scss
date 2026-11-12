@@ -1,3 +1,7 @@
+#mainCard {
+    margin-bottom: calc(20px + env(safe-area-inset-bottom));
+}
+
 ion-textarea {
     max-height: 240px;
     overflow-y: auto;

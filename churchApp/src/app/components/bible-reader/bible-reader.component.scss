@@ -1,6 +1,6 @@
 ion-footer {
     position: absolute;
-    bottom: calc(var(--bible-reader-footer-bottom, 49px) + var(--ion-safe-area-bottom, 0px));
+    bottom: calc(var(--bible-reader-footer-bottom, 49px) + var(--ion-safe-area-bottom, 25px));
 
     width: 100%;
     z-index: 10;
@@ -9,13 +9,23 @@ ion-footer {
     transition: bottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
-ion-footer.footer-down {
-    bottom: var(--ion-safe-area-bottom, 0px);
+ion-footer ion-grid {
+    transition: padding-bottom 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+ion-footer.footer-down,
+ion-footer.footer-always {
+    bottom: 0px !important;
+}
+
+ion-footer.footer-down ion-grid,
+ion-footer.footer-always ion-grid {
+    padding-bottom: env(safe-area-inset-bottom, 24px);
 }
 
 ion-content {
-    /* Sumamos la altura del footer + la altura del tab-bar + un respiro */
-    --padding-bottom: calc(60px + 49px + var(--ion-safe-area-bottom, 0px));
+    bottom: 0px;
+    padding-bottom: var(--ion-safe-area-bottom, 0px);
 }
 
 #bookLabel {
@@ -52,9 +62,8 @@ ion-content {
     color: rgb(155, 155, 155);
     font-size: 12px;
     margin-top: 40px;
-    margin-bottom: 30px;
+    margin-bottom: calc(110px + env(safe-area-inset-bottom));
 }
-
 
 .badgeLayout {
     margin-top: 10px;

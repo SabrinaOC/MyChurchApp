@@ -31,7 +31,7 @@ export class SimpleVerseSelectorComponent {
 
   filterOptions() {
     this.filteredBooks = this.core.bookList.filter(book =>
-      book.name?.toLowerCase().includes(this.searchTerm.toLowerCase())
+      this.core.normalizeText(book.name!).includes(this.core.normalizeText(this.searchTerm))
     );
   }
 

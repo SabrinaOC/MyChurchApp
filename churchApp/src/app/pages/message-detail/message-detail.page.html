@@ -14,7 +14,7 @@
   [fullscreen]="true"
   [style.--background]="'url(' + msgSelected.image + ') no-repeat center center / cover'"
 >
-  <ion-card class="audio-player-card">
+  <ion-card class="audio-player-card" mode="ios">
     @if (msgSelected) {
     <ion-card-header>
       <div
@@ -128,10 +128,16 @@
             ></ion-icon>
         }
         
+        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+          <ion-icon button (click)="this.core.audio.toggleFavourite(msgSelected.id)"
+            [name]="core.audio.favouriteMessages.has(msgSelected.id) ? 'heart' : 'heart-outline'"
+            style="font-size: 22px; margin-right: 10px;" color="primary"
+          ></ion-icon>
           <ion-icon button (click)="shareMessage($event)"
             name="share-social-outline"
             style="font-size: 18px;"
           ></ion-icon>
+        </div>
       </ion-row>
       
     </ion-card-content>

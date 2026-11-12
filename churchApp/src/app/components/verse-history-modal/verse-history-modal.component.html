@@ -13,7 +13,7 @@
     <app-info-display-layout [infoLayout]="'NoResultsFound'"></app-info-display-layout>
   } @else {
     @for (verse of this.core.bible.lastSearchedVerses; track $index) {
-      <ion-card button="true">
+      <ion-card button="true" (click)="confirm(verse)">
         <ion-card-header>
           <div class="cardHeader">
             <ion-badge id="versesPopover{{$index}}" class="badge-verse">
@@ -22,8 +22,7 @@
           </div>
         </ion-card-header>
         <ion-card-content>
-          <p (click)="confirm(verse)"
-            [class]="core.settings.bibleFont === 'sans-serif' ? 'bibleSimpleText' : 'bibleAestheticText'"
+          <p [class]="core.settings.bibleFont === 'sans-serif' ? 'bibleSimpleText' : 'bibleAestheticText'"
             [innerHTML]="this.core.bible.getBibleText(verse, false)">
           </p>
         </ion-card-content>

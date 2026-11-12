@@ -14,6 +14,8 @@ export class AudioService implements OnDestroy {
   private listenedObs = new Subject<string | null>();
   listened = this.listenedObs.asObservable();
 
+  public favouriteMessages: Set<number> = new Set();
+
   selectedMessage: Message | null = null;
 
   private isPlayingSubject = new BehaviorSubject<boolean>(false);
@@ -72,6 +74,9 @@ export class AudioService implements OnDestroy {
     }
 
     this.controlsNotificationBound = this.onControlsNotification.bind(this);
+
+    // Load favouriteMessages variable
+    this.loadFavouriteMessages();
   }
 
   ngOnDestroy(): void {
@@ -286,6 +291,63 @@ export class AudioService implements OnDestroy {
     }
 
     this.listenedObs.next(listened);
+  }
+
+  /**
+   * Mark as favourite in localStorage
+   * @param messageId
+   * @param event
+   */
+  toggleFavourite(messageId: number, event?: any) {
+    event?.stopPropagation();
+
+    // Add or remove from the Set
+    if (this.favouriteMessages.has(messageId)) {
+      this.favouriteMessages.delete(messageId);
+    } else {
+      this.favouriteMessages.add(messageId);
+    }
+
+    // Convert Set to array and save it as JSON
+    localStorage.setItem('favourite', JSON.stringify(Array.from(this.favouriteMessages)));
+  }
+
+  /**
+   * Remove from listened a message in localStorage
+   * @param message
+   * @param event
+   */
+  removeFromListened(message: Message, event?: any) {
+    event?.stopPropagation();
+    
+    let listened = localStorage.getItem('listened');
+    
+    if (listened) {
+      // Split string by commas
+      let arr = listened.split(',').map(id => id.trim());
+      
+      // Filter array to remove the message id
+      let arrFiltrado = arr.filter(id => id !== message.id.toString());
+      let newListened = arrFiltrado.join(', ');
+      
+      localStorage.setItem('listened', newListened);
+      
+      this.listenedObs.next(newListened);
+    }
+  }
+
+  private loadFavouriteMessages() {
+    const favourite = localStorage.getItem('favourite');
+
+    if (favourite) {
+      try {
+        // Parse JSON and conver it to Set
+        const parsedArray = JSON.parse(favourite);
+        this.favouriteMessages = new Set(parsedArray);
+      } catch (e) {
+        console.error('Error parseando favoritos', e);
+      }
+    }
   }
 
   /**

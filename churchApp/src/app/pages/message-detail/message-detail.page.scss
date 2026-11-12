@@ -78,6 +78,10 @@ h3 {
     margin-top: -5px;
 }
 
+#messageCard {
+    margin-bottom: calc(15px + env(safe-area-inset-bottom));
+}
+
 #playButton {
     border-radius: 25px;
 }

@@ -14,7 +14,7 @@ export interface GetAllMessages$Params {
   limit: number;
   offset: number;
   filterType: string;
-  listenedIds: string;
+  filteredIds: string;
 }
 
 export function getAllMessages(http: HttpClient, rootUrl: string, params: GetAllMessages$Params, context?: HttpContext): Observable<StrictHttpResponse<{
@@ -25,7 +25,7 @@ export function getAllMessages(http: HttpClient, rootUrl: string, params: GetAll
     rb.query('limit', params.limit, {});
     rb.query('offset', params.offset, {});
     rb.query('filterType', params.filterType, {});
-    rb.query('listenedIds', params.listenedIds, {});
+    rb.query('filteredIds', params.filteredIds, {});
   }
 
   return http.request(

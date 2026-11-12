@@ -1,7 +1,7 @@
 <ion-app>
   <ion-split-pane contentId="main-content" when="lg">
     <ion-menu menuId="first-menu" contentId="main-content">
-      <ion-list>
+      <ion-list style="">
         <ion-list-header>
           <ion-img src="../assets/icons/icon-96.webp"></ion-img>
           <ion-label>Fernán Núñez<br> Comunidad Cristiana</ion-label>
@@ -25,7 +25,7 @@
       </ion-list>
 
       <ion-footer>
-        <div style="padding-left: 4px; font-size: small;" (click)="checkIfPermissionNeeded();">
+        <div style="padding-left: 4px; font-size: small; margin-bottom: 60px; margin-top: 10px;" (click)="checkIfPermissionNeeded();">
           <!-- <ion-icon slot="start" color="light" name="lock-closed-outline" style="font-size: 10px;"></ion-icon> -->
           <ion-text>
             {{ version }}

@@ -52,6 +52,10 @@ p {
     color: white;
 }
 
+ion-accordion-group {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
 .accordionHeader {
     --ion-item-background: transparent !important;
 

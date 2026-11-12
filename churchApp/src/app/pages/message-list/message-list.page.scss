@@ -1,4 +1,10 @@
+.contentBottomPadding {
+  --padding-bottom: 120px;
+}
 
+.contentNormalPadding {
+  --padding-bottom: calc(35px + env(safe-area-inset-bottom));
+}
 
 .divFiltros {
   display: flex;
@@ -23,12 +29,14 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #323c48;
+
   .pills {
     display: flex;
     padding-left: 8px;
     margin-top: 7px;
     color: white;
     gap: 8px;
+    overflow-x: auto;
     
     // Contenedor individual del botón
     > div {

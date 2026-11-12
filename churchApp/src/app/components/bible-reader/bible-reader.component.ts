@@ -36,6 +36,10 @@ export class BibleReaderComponent implements AfterViewInit, OnInit, OnDestroy, V
     return this._verse;
   }
 
+  /**
+   * AsPage means that the component will be open navigating with ion-tab-bar. 
+   * If it's false, we are just consulting a verse from ShowVersesComponent
+   */
   @Input() public asPage: boolean = false;
 
   text: string = "";

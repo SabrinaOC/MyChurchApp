@@ -22,7 +22,7 @@ export class CardOptionsPopoverComponent  implements OnInit {
   navigationExtra: NavigationExtras = {};
 
   constructor(private popoverController: PopoverController,
-              private core: CoreProvider,
+              public core: CoreProvider,
               private router: Router
   ) {}
 
@@ -32,18 +32,34 @@ export class CardOptionsPopoverComponent  implements OnInit {
 
   // Función para devolver la acción seleccionada y cerrar el popover
   action(actionName: string) {
+    let dismissPopover: boolean = true;
+
     switch(actionName) {
       case 'share':
         this.shareMessage();
         break;
       case 'edit':
-      this.editMessage();
+        this.editMessage();
         break;
       case 'markAsListened':
-        // this.core.audio.markAsListened(this.data.message());
+        this.core.audio.markAsListened(this.data.message);
+        break;
+      case 'removeFromListened':
+        this.core.audio.removeFromListened(this.data.message);
+        break;
+      case 'removeFromFavourites':
+        this.core.audio.toggleFavourite(this.data.message.id);
+        dismissPopover = false;
+        break;
+      case 'markAsFavourite':
+        this.core.audio.toggleFavourite(this.data.message.id);
+        dismissPopover = false;
         break;
     }
-    this.popoverController.dismiss({ action: actionName });
+
+    if (dismissPopover) {
+      this.popoverController.dismiss({ action: actionName });
+    }
   }
 
   async shareMessage() {

@@ -4,7 +4,6 @@ import { InfiniteScrollCustomEvent, IonContent, IonSearchbar } from '@ionic/angu
 import * as _ from 'lodash';
 import { CoreProvider } from 'src/app/services/core';
 import { NavigationExtras } from '@angular/router';
-import { FilterModalComponent } from 'src/app/components/filter-modal/filter-modal.component';
 import { Subscription } from 'rxjs';
 import { NgZone } from '@angular/core'
 import { App } from '@capacitor/app';
@@ -192,7 +191,7 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-// Se añade el parámetro opcional event
+  // Se añade el parámetro opcional event
   async findMessagesByFilter(query: string, event?: any) {
     if (!this.networkStatus.connected) {
       return;
@@ -200,52 +199,35 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
     this.isLoading = true;
 
-    let loading: HTMLIonLoadingElement | undefined;
-
-    if (this.offset == 0 && !event) {
-      loading = await this.core.loadingCtrl.create({
-        message: 'Recuperando predicaciones...',
-        cssClass: 'custom-loading',
-        mode: 'md',
-        spinner: null,
-        backdropDismiss: true
-      })
-      // await loading.present();
-    }
-
-    const listenedIdsString = localStorage.getItem('listened') || '';
-
     this.core.api.message.findByFilter(
       { 
         searchedTerm: query,
         limit: this.limit,
         offset: this.offset,
         filterType: this.rbSelected,
-        listenedIds: listenedIdsString
+        filteredIds: this.getFilteredIds()
       }
-    )
-      .subscribe({
-        next: (val: any) => {
-          if (val && val.messageListMapped) {
-            const newMessages = val?.messageListMapped || [];
+    ).subscribe({
+      next: (val: any) => {
+        if (val && val.messageListMapped) {
+          const newMessages = val?.messageListMapped || [];
 
-            if (newMessages.length < this.limit) {
-              this.hasMoreData = false;
-            }
-
-            this.updateMessageList(newMessages, false);
+          if (newMessages.length < this.limit) {
+            this.hasMoreData = false;
           }
-          if (event) event?.target?.complete?.();
-        },
-        error: (e) => {
-          console.error('ERROR ', e);
-          if(event) event?.target?.complete?.();
-        },
-        complete: () => {
-          if (loading) loading.dismiss();
-          this.isLoading = false
+
+          this.updateMessageList(newMessages, false);
         }
-      });
+        if (event) event?.target?.complete?.();
+      },
+      error: (e) => {
+        console.error('ERROR ', e);
+        if(event) event?.target?.complete?.();
+      },
+      complete: () => {
+        this.isLoading = false
+      }
+    });
   }
   
   scrollAndSearch(event: InfiniteScrollCustomEvent) {
@@ -268,50 +250,33 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.isLoading = true;
-
-    let loading: HTMLIonLoadingElement | undefined;
-
-    if (this.offset == 0 && !event) {
-      loading = await this.core.loadingCtrl.create({
-        message: 'Recuperando predicaciones...',
-        cssClass: 'custom-loading',
-        mode: 'md',
-        spinner: null,
-        backdropDismiss: true
-      })
-      // await loading.present();
-    }
-
-    const listenedIdsString = localStorage.getItem('listened') || '';
-
+    
     this.core.api.message.getAllMessages({
       limit: this.limit,
       offset: this.offset,
       filterType: this.rbSelected,
-      listenedIds: listenedIdsString
-    })
-      .subscribe({
-        next: (data: any) => {
-          if (data && data.messageListMapped) {
-            const newMessages = data?.messageListMapped || [];
+      filteredIds: this.getFilteredIds()
+    }).subscribe({
+      next: (data: any) => {
+        if (data && data.messageListMapped) {
+          const newMessages = data?.messageListMapped || [];
 
-            if (newMessages.length < this.limit) {
-              this.hasMoreData = false;
-            }
-
-            // If we're listing 'All' messages, we save them to core cache
-            this.updateMessageList(newMessages, this.rbSelected === 'all');
+          if (newMessages.length < this.limit) {
+            this.hasMoreData = false;
           }
 
-          if (event) event?.target?.complete?.();
-        },
-        error: (err: any) => {
-          console.error(err);
-          if (event) event?.target?.complete?.();
-        },
+          // If we're listing 'All' messages, we save them to core cache
+          this.updateMessageList(newMessages, this.rbSelected === 'all');
+        }
+
+        if (event) event?.target?.complete?.();
+      },
+      error: (err: any) => {
+        console.error(err);
+        if (event) event?.target?.complete?.();
+      },
       complete: () => {
         this.isLoading = false;
-        if (loading) loading.dismiss();
       }
     });
   }
@@ -347,6 +312,21 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
     this.checkIfAlreadyListened(this.loadedMessages);
 
     this.updateListRdBtn();
+  }
+
+  getFilteredIds(): string {
+    var filteredIdsString: string = "";
+
+    switch (this.rbSelected) {
+      case "pending": case "listened":
+        filteredIdsString = localStorage.getItem('listened') || '';
+        break;
+      case "favourite":
+        filteredIdsString = localStorage.getItem('favourite') || '';
+        break;
+    }
+
+    return filteredIdsString.replace("[", "").replace("]", "");
   }
 
   checkIfAlreadyListened(lista: Message[]) {
@@ -394,23 +374,6 @@ export class MessageListPage implements OnInit, OnDestroy, AfterViewInit {
 
     // 4. Mostramos en pantalla aplicando filtros de Radio Buttons
     this.updateListRdBtn();
-  }
-
-  async showFilterModal(event: any) {
-    event?.stopPropagation();
-
-    const modal = await this.core.modalCtrl.create({
-      component: FilterModalComponent,
-      componentProps: {}
-    });
-
-    modal.onDidDismiss().then(data => {
-      if (data.data) {
-        this.updateMessageList(data.data)
-      }
-    });
-
-    await modal.present();
   }
 
   rbSelection(selection: string) {
