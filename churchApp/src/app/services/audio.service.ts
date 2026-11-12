@@ -312,6 +312,30 @@ export class AudioService implements OnDestroy {
     localStorage.setItem('favourite', JSON.stringify(Array.from(this.favouriteMessages)));
   }
 
+  /**
+   * Remove from listened a message in localStorage
+   * @param message
+   * @param event
+   */
+  removeFromListened(message: Message, event?: any) {
+    event?.stopPropagation();
+    
+    let listened = localStorage.getItem('listened');
+    
+    if (listened) {
+      // Split string by commas
+      let arr = listened.split(',').map(id => id.trim());
+      
+      // Filter array to remove the message id
+      let arrFiltrado = arr.filter(id => id !== message.id.toString());
+      let newListened = arrFiltrado.join(', ');
+      
+      localStorage.setItem('listened', newListened);
+      
+      this.listenedObs.next(newListened);
+    }
+  }
+
   private loadFavouriteMessages() {
     const favourite = localStorage.getItem('favourite');
 

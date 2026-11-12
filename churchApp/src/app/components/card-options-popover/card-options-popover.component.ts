@@ -39,10 +39,13 @@ export class CardOptionsPopoverComponent  implements OnInit {
         this.shareMessage();
         break;
       case 'edit':
-      this.editMessage();
+        this.editMessage();
         break;
       case 'markAsListened':
-        // this.core.audio.markAsListened(this.data.message());
+        this.core.audio.markAsListened(this.data.message);
+        break;
+      case 'removeFromListened':
+        this.core.audio.removeFromListened(this.data.message);
         break;
       case 'removeFromFavourites':
         this.core.audio.toggleFavourite(this.data.message.id);
